@@ -1,12 +1,8 @@
-/* =========================================
-   SHAKILSTIC PORTFOLIO — MAIN JAVASCRIPT
-========================================= */
-
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =========================================
+    /* ==============================
        YEAR
-    ========================================= */
+    ============================== */
 
     const year = document.getElementById("year");
 
@@ -15,40 +11,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       THEME SYSTEM
+    /* ==============================
+       THEME
        AUTO → LIGHT → DARK → AUTO
-    ========================================= */
+    ============================== */
 
     const themeToggle = document.getElementById("themeToggle");
     const themeLabel = document.getElementById("themeLabel");
     const themeIcon = document.querySelector(".theme-icon");
 
-    const savedTheme = localStorage.getItem("shakilstic-theme");
+    let currentTheme =
+        localStorage.getItem("shakilstic-theme") || "auto";
 
-    function getBrowserTheme() {
-        return window.matchMedia &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light";
+
+    function systemTheme() {
+        return window.matchMedia(
+            "(prefers-color-scheme: dark)"
+        ).matches ? "dark" : "light";
     }
+
 
     function applyTheme(mode) {
 
-        let actualTheme = mode;
-
-        if (mode === "auto") {
-            actualTheme = getBrowserTheme();
-        }
+        const actualTheme =
+            mode === "auto" ? systemTheme() : mode;
 
         document.documentElement.setAttribute(
             "data-theme",
             actualTheme
         );
 
+
         if (themeLabel) {
-            themeLabel.textContent = mode.toUpperCase();
+            themeLabel.textContent =
+                mode.toUpperCase();
         }
+
 
         if (themeIcon) {
 
@@ -56,36 +54,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 themeIcon.textContent = "◐";
             }
 
-            if (mode === "light") {
-                themeIcon.textContent = "☼";
+            else if (mode === "light") {
+                themeIcon.textContent = "☀";
             }
 
-            if (mode === "dark") {
+            else {
                 themeIcon.textContent = "☾";
             }
         }
-
-        localStorage.setItem(
-            "shakilstic-theme",
-            mode
-        );
     }
 
 
-    /*
-       Default:
-       AUTO = browser decides
-    */
-
-    let currentTheme = savedTheme || "auto";
-
     applyTheme(currentTheme);
 
-
-    /*
-       Button:
-       AUTO → LIGHT → DARK → AUTO
-    */
 
     if (themeToggle) {
 
@@ -103,7 +84,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 currentTheme = "auto";
             }
 
+
+            localStorage.setItem(
+                "shakilstic-theme",
+                currentTheme
+            );
+
+
             applyTheme(currentTheme);
+
 
             themeToggle.classList.remove("clicked");
 
@@ -114,176 +103,169 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /*
-       If user changes Windows/browser theme
-       while AUTO is selected, update automatically.
-    */
+    /* Browser theme changes while AUTO */
 
-    const systemTheme = window.matchMedia(
+    window.matchMedia(
         "(prefers-color-scheme: dark)"
-    );
+    ).addEventListener("change", () => {
 
-    systemTheme.addEventListener("change", () => {
-
-        const selected =
-            localStorage.getItem("shakilstic-theme");
-
-        if (selected === "auto" || !selected) {
+        if (currentTheme === "auto") {
             applyTheme("auto");
         }
 
     });
 
 
-    /* =========================================
-       SCROLL REVEAL ANIMATION
-    ========================================= */
+    /* ==============================
+       SCROLL REVEAL
+    ============================== */
 
     const revealElements =
         document.querySelectorAll(".reveal");
 
-    const revealObserver =
-        new IntersectionObserver(
-            (entries, observer) => {
 
-                entries.forEach(entry => {
+    if ("IntersectionObserver" in window) {
 
-                    if (!entry.isIntersecting) {
-                        return;
-                    }
+        const revealObserver =
+            new IntersectionObserver(
+                (entries, observer) => {
 
-                    entry.target.classList.add("visible");
+                    entries.forEach(entry => {
 
-                    observer.unobserve(
-                        entry.target
-                    );
-
-                });
-
-            },
-            {
-                threshold: 0.12,
-                rootMargin: "0px 0px -50px 0px"
-            }
-        );
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
 
 
-    revealElements.forEach(element => {
-        revealObserver.observe(element);
-    });
+                        /*
+                           IMPORTANT:
+                           CSS uses .is-visible
+                        */
 
-
-    /* =========================================
-       SHOW MORE / SHOW LESS
-    ========================================= */
-
-    const showMoreButtons =
-        document.querySelectorAll(".show-more");
-
-
-    showMoreButtons.forEach(button => {
-
-        const targetName =
-            button.dataset.target;
-
-        const category =
-            document.querySelector(
-                `[data-category="${targetName}"]`
-            );
-
-        if (!category) {
-            return;
-        }
-
-        const extraProjects =
-            category.querySelectorAll(".project.extra");
-
-
-        /*
-           Initially hide extra projects
-        */
-
-        extraProjects.forEach(project => {
-            project.style.display = "none";
-        });
-
-
-        button.addEventListener("click", () => {
-
-            const isOpen =
-                button.classList.contains("open");
-
-
-            if (!isOpen) {
-
-                extraProjects.forEach(
-                    (project, index) => {
-
-                        project.style.display = "block";
-
-                        project.animate(
-                            [
-                                {
-                                    opacity: 0,
-                                    transform:
-                                        "translateY(25px)"
-                                },
-                                {
-                                    opacity: 1,
-                                    transform:
-                                        "translateY(0)"
-                                }
-                            ],
-                            {
-                                duration: 450,
-                                delay: index * 80,
-                                easing:
-                                    "cubic-bezier(.2,.8,.2,1)",
-                                fill: "both"
-                            }
+                        entry.target.classList.add(
+                            "is-visible"
                         );
 
-                    }
-                );
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    });
+
+                },
+                {
+                    threshold: 0.08,
+                    rootMargin: "0px 0px -40px 0px"
+                }
+            );
 
 
-                button.classList.add("open");
+        revealElements.forEach(element => {
 
-                button.innerHTML =
-                    'Show less <span>−</span>';
-
-            }
-
-            else {
-
-                extraProjects.forEach(
-                    project => {
-                        project.style.display = "none";
-                    }
-                );
-
-
-                button.classList.remove("open");
-
-                button.innerHTML =
-                    'Show more <span>+</span>';
-
-
-                category.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-
-            }
+            revealObserver.observe(element);
 
         });
 
-    });
+    }
+
+    else {
+
+        revealElements.forEach(element => {
+
+            element.classList.add("is-visible");
+
+        });
+
+    }
 
 
-    /* =========================================
+    /* ==============================
+       SHOW MORE / SHOW LESS
+    ============================== */
+
+    document
+        .querySelectorAll(".show-more")
+        .forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const target =
+                    button.dataset.target;
+
+                const grid =
+                    document.getElementById(target);
+
+
+                if (!grid) {
+                    return;
+                }
+
+
+                const expanded =
+                    grid.classList.toggle("expanded");
+
+
+                const buttonText =
+                    button.querySelector(
+                        ".show-more-text"
+                    );
+
+
+                const icon =
+                    button.querySelector("span");
+
+
+                if (expanded) {
+
+                    if (buttonText) {
+                        buttonText.textContent =
+                            "SHOW LESS";
+                    }
+
+                    if (icon) {
+                        icon.textContent = "−";
+                    }
+
+                }
+
+                else {
+
+                    if (buttonText) {
+                        buttonText.textContent =
+                            "SHOW MORE";
+                    }
+
+                    if (icon) {
+                        icon.textContent = "+";
+                    }
+
+
+                    const category =
+                        button.closest(
+                            ".category-block"
+                        );
+
+
+                    if (category) {
+
+                        category.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    }
+
+                }
+
+            });
+
+        });
+
+
+    /* ==============================
        CUSTOM CURSOR
-    ========================================= */
+    ============================== */
 
     const cursorDot =
         document.querySelector(".cursor-dot");
@@ -292,68 +274,119 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector(".cursor-ring");
 
 
-    /*
-       Only enable on devices with a mouse
-    */
-
     if (
         cursorDot &&
         cursorRing &&
         window.matchMedia("(pointer:fine)").matches
     ) {
 
+        let mouseX = 0;
+        let mouseY = 0;
+
+        let ringX = 0;
+        let ringY = 0;
+
+
         document.addEventListener(
             "mousemove",
             event => {
 
+                mouseX = event.clientX;
+                mouseY = event.clientY;
+
+
                 cursorDot.style.left =
-                    `${event.clientX}px`;
+                    `${mouseX}px`;
 
                 cursorDot.style.top =
-                    `${event.clientY}px`;
-
-
-                cursorRing.animate(
-                    {
-                        left: `${event.clientX}px`,
-                        top: `${event.clientY}px`
-                    },
-                    {
-                        duration: 350,
-                        fill: "forwards"
-                    }
-                );
+                    `${mouseY}px`;
 
             }
         );
 
 
-        const interactiveElements =
-            document.querySelectorAll(
-                "a, button, input, textarea, select, .project"
+        function moveRing() {
+
+            ringX +=
+                (mouseX - ringX) * 0.14;
+
+            ringY +=
+                (mouseY - ringY) * 0.14;
+
+
+            cursorRing.style.left =
+                `${ringX}px`;
+
+            cursorRing.style.top =
+                `${ringY}px`;
+
+
+            requestAnimationFrame(
+                moveRing
             );
 
+        }
 
-        interactiveElements.forEach(element => {
 
-            element.addEventListener(
-                "mouseenter",
+        moveRing();
+
+
+        document
+            .querySelectorAll(
+                "a, button, .project, input, textarea, select"
+            )
+            .forEach(element => {
+
+                element.addEventListener(
+                    "mouseenter",
+                    () => {
+
+                        document.body.classList.add(
+                            "cursor-hover"
+                        );
+
+                    }
+                );
+
+
+                element.addEventListener(
+                    "mouseleave",
+                    () => {
+
+                        document.body.classList.remove(
+                            "cursor-hover"
+                        );
+
+                    }
+                );
+
+            });
+
+    }
+
+
+    /* ==============================
+       BUTTON CLICK EFFECT
+    ============================== */
+
+    document
+        .querySelectorAll(
+            ".button, .submit-button, .show-more, .theme-toggle"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
                 () => {
 
-                    document.body.classList.add(
-                        "cursor-hover"
+                    button.classList.remove(
+                        "clicked"
                     );
 
-                }
-            );
+                    void button.offsetWidth;
 
-
-            element.addEventListener(
-                "mouseleave",
-                () => {
-
-                    document.body.classList.remove(
-                        "cursor-hover"
+                    button.classList.add(
+                        "clicked"
                     );
 
                 }
@@ -361,142 +394,153 @@ document.addEventListener("DOMContentLoaded", () => {
 
         });
 
+
+    /* ==============================
+       SMOOTH NAVIGATION
+    ============================== */
+
+    document
+        .querySelectorAll(
+            'a[href^="#"]'
+        )
+        .forEach(link => {
+
+            link.addEventListener(
+                "click",
+                event => {
+
+                    const targetID =
+                        link.getAttribute("href");
+
+
+                    if (
+                        !targetID ||
+                        targetID === "#"
+                    ) {
+                        return;
+                    }
+
+
+                    const target =
+                        document.querySelector(
+                            targetID
+                        );
+
+
+                    if (!target) {
+                        return;
+                    }
+
+
+                    event.preventDefault();
+
+
+                    target.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                }
+            );
+
+        });
+
+
+    /* ==============================
+       ACTIVE NAV
+    ============================== */
+
+    const sections =
+        document.querySelectorAll(
+            "section[id]"
+        );
+
+
+    const navLinks =
+        document.querySelectorAll(
+            "nav a"
+        );
+
+
+    if (
+        sections.length &&
+        navLinks.length &&
+        "IntersectionObserver" in window
+    ) {
+
+        const navObserver =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (
+                            !entry.isIntersecting
+                        ) {
+                            return;
+                        }
+
+
+                        navLinks.forEach(link => {
+
+                            link.classList.remove(
+                                "active"
+                            );
+
+
+                            if (
+                                link.getAttribute(
+                                    "href"
+                                ) ===
+                                `#${entry.target.id}`
+                            ) {
+
+                                link.classList.add(
+                                    "active"
+                                );
+
+                            }
+
+                        });
+
+                    });
+
+                },
+                {
+                    rootMargin:
+                        "-40% 0px -50% 0px"
+                }
+            );
+
+
+        sections.forEach(section => {
+
+            navObserver.observe(section);
+
+        });
+
     }
 
 
-    /* =========================================
-       MAGNETIC BUTTON EFFECT
-    ========================================= */
-
-    const magneticElements =
-        document.querySelectorAll(".magnetic");
-
-
-    magneticElements.forEach(element => {
-
-        element.addEventListener(
-            "mousemove",
-            event => {
-
-                const rect =
-                    element.getBoundingClientRect();
-
-                const x =
-                    event.clientX -
-                    rect.left -
-                    rect.width / 2;
-
-                const y =
-                    event.clientY -
-                    rect.top -
-                    rect.height / 2;
-
-
-                element.style.transform =
-                    `translate(${x * 0.12}px, ${y * 0.12}px)`;
-
-            }
-        );
-
-
-        element.addEventListener(
-            "mouseleave",
-            () => {
-
-                element.style.transform = "";
-
-            }
-        );
-
-    });
-
-
-    /* =========================================
-       BUTTON CLICK EFFECT
-    ========================================= */
-
-    document.querySelectorAll(
-        ".button, .submit-button, .show-more, .theme-toggle"
-    ).forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                button.classList.remove("clicked");
-
-                void button.offsetWidth;
-
-                button.classList.add("clicked");
-
-            }
-        );
-
-    });
-
-
-    /* =========================================
-       SMOOTH ANCHOR NAVIGATION
-    ========================================= */
-
-    document.querySelectorAll(
-        'a[href^="#"]'
-    ).forEach(link => {
-
-        link.addEventListener(
-            "click",
-            event => {
-
-                const targetId =
-                    link.getAttribute("href");
-
-                if (
-                    !targetId ||
-                    targetId === "#"
-                ) {
-                    return;
-                }
-
-                const target =
-                    document.querySelector(targetId);
-
-                if (!target) {
-                    return;
-                }
-
-                event.preventDefault();
-
-                target.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-
-            }
-        );
-
-    });
-
-
-    /* =========================================
+    /* ==============================
        CONTACT FORM
-    ========================================= */
+    ============================== */
 
     const contactForm =
-        document.getElementById("contactForm");
+        document.getElementById(
+            "contactForm"
+        );
+
 
     const formStatus =
-        document.getElementById("formStatus");
+        document.getElementById(
+            "formStatus"
+        );
 
 
     /*
-       IMPORTANT:
-       We will put your Google Apps Script
-       Web App URL here later.
-
-       Example:
-
-       const GOOGLE_SCRIPT_URL =
-       "https://script.google.com/macros/s/XXXXX/exec";
+       GOOGLE APPS SCRIPT URL
+       Will be added later.
     */
 
     const GOOGLE_SCRIPT_URL = "";
@@ -511,10 +555,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 event.preventDefault();
 
 
-                /*
-                   Honeypot spam protection
-                */
-
                 const honeypot =
                     contactForm.querySelector(
                         '[name="website"]'
@@ -523,7 +563,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (
                     honeypot &&
-                    honeypot.value.trim() !== ""
+                    honeypot.value.trim()
                 ) {
 
                     return;
@@ -531,11 +571,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
 
-                /*
-                   Browser validation
-                */
-
-                if (!contactForm.checkValidity()) {
+                if (
+                    !contactForm.checkValidity()
+                ) {
 
                     contactForm.reportValidity();
 
@@ -551,20 +589,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 const originalText =
-                    submitButton.innerHTML;
+                    submitButton
+                        ? submitButton.innerHTML
+                        : "SEND";
 
-
-                /*
-                   If Google Sheet URL isn't
-                   connected yet
-                */
 
                 if (!GOOGLE_SCRIPT_URL) {
 
                     if (formStatus) {
 
                         formStatus.textContent =
-                            "The enquiry form is ready. Google Sheet connection will be added next.";
+                            "The contact form is ready. Google Sheet connection will be added next.";
 
                         formStatus.className =
                             "form-status info";
@@ -572,21 +607,23 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
 
                     return;
-
                 }
 
 
-                submitButton.disabled = true;
-
-                submitButton.innerHTML =
-                    "Sending...";
-
-
-                const formData =
-                    new FormData(contactForm);
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.textContent =
+                        "SENDING...";
+                }
 
 
                 try {
+
+                    const formData =
+                        new FormData(
+                            contactForm
+                        );
+
 
                     await fetch(
                         GOOGLE_SCRIPT_URL,
@@ -604,13 +641,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (formStatus) {
 
                         formStatus.textContent =
-                            "Thank you. Your enquiry has been sent successfully.";
+                            "Thank you. Your message has been sent.";
 
                         formStatus.className =
                             "form-status success";
 
                     }
-
 
                 }
 
@@ -622,7 +658,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (formStatus) {
 
                         formStatus.textContent =
-                            "Something went wrong. Please try again or email me directly.";
+                            "Something went wrong. Please try again.";
 
                         formStatus.className =
                             "form-status error";
@@ -633,11 +669,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 finally {
 
-                    submitButton.disabled =
-                        false;
+                    if (submitButton) {
 
-                    submitButton.innerHTML =
-                        originalText;
+                        submitButton.disabled = false;
+
+                        submitButton.innerHTML =
+                            originalText;
+
+                    }
 
                 }
 
@@ -647,72 +686,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       ACTIVE NAVIGATION
-    ========================================= */
-
-    const sections =
-        document.querySelectorAll(
-            "section[id]"
-        );
-
-    const navLinks =
-        document.querySelectorAll(
-            "nav a"
-        );
-
-
-    const navObserver =
-        new IntersectionObserver(
-            entries => {
-
-                entries.forEach(entry => {
-
-                    if (!entry.isIntersecting) {
-                        return;
-                    }
-
-
-                    navLinks.forEach(link => {
-
-                        link.classList.remove(
-                            "active"
-                        );
-
-                    });
-
-
-                    const activeLink =
-                        document.querySelector(
-                            `nav a[href="#${entry.target.id}"]`
-                        );
-
-
-                    if (activeLink) {
-
-                        activeLink.classList.add(
-                            "active"
-                        );
-
-                    }
-
-                });
-
-            },
-            {
-                threshold: 0.35
-            }
-        );
-
-
-    sections.forEach(section => {
-        navObserver.observe(section);
-    });
-
-
-    /* =========================================
-       PAGE LOADED
-    ========================================= */
+    /* ==============================
+       PAGE READY
+    ============================== */
 
     document.body.classList.add(
         "page-ready"
