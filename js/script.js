@@ -3,13 +3,17 @@ document.addEventListener("DOMContentLoaded", () => {
 "use strict";
 
 
-/* =========================================================
-   BASIC
-========================================================= */
+/* =====================================================
+BASIC
+===================================================== */
 
-const root = document.documentElement;
+const root =
+document.documentElement;
 
-const year = document.getElementById("year");
+
+const year =
+document.getElementById("year");
+
 
 if(year){
 
@@ -19,20 +23,23 @@ new Date().getFullYear();
 }
 
 
-/* =========================================================
-   THEME
-   Browser theme first.
-   Manual button overrides it.
-========================================================= */
+
+/* =====================================================
+THEME
+===================================================== */
 
 const themeToggle =
 document.getElementById("themeToggle");
 
+
 const themeIcon =
 document.getElementById("themeIcon");
 
+
 const savedTheme =
-localStorage.getItem("shakilstic-theme");
+localStorage.getItem(
+"shakilstic-theme"
+);
 
 
 function browserTheme(){
@@ -52,6 +59,7 @@ root.setAttribute(
 "data-theme",
 theme
 );
+
 
 if(themeIcon){
 
@@ -78,14 +86,19 @@ themeToggle?.addEventListener(
 () => {
 
 const current =
-root.getAttribute("data-theme");
+root.getAttribute(
+"data-theme"
+);
+
 
 const next =
 current === "dark"
 ? "light"
 : "dark";
 
+
 applyTheme(next);
+
 
 localStorage.setItem(
 "shakilstic-theme",
@@ -96,15 +109,21 @@ next
 );
 
 
-/* =========================================================
-   MOBILE MENU
-========================================================= */
+
+/* =====================================================
+MOBILE MENU
+===================================================== */
 
 const menuToggle =
-document.getElementById("menuToggle");
+document.getElementById(
+"menuToggle"
+);
+
 
 const mobileMenu =
-document.getElementById("mobileMenu");
+document.getElementById(
+"mobileMenu"
+);
 
 
 menuToggle?.addEventListener(
@@ -112,10 +131,15 @@ menuToggle?.addEventListener(
 () => {
 
 const open =
-mobileMenu.classList.toggle("open");
+mobileMenu.classList.toggle(
+"open"
+);
+
 
 menuToggle.textContent =
-open ? "×" : "☰";
+open
+? "×"
+: "☰";
 
 }
 );
@@ -142,17 +166,23 @@ menuToggle.textContent =
 });
 
 
-/* =========================================================
-   SCROLL REVEAL
-========================================================= */
+
+/* =====================================================
+SCROLL REVEAL
+===================================================== */
 
 const revealElements =
-document.querySelectorAll(".reveal");
+document.querySelectorAll(
+".reveal"
+);
 
 
-if("IntersectionObserver" in window){
+if(
+"IntersectionObserver"
+in window
+){
 
-const revealObserver =
+const observer =
 new IntersectionObserver(
 (entries, observer) => {
 
@@ -161,9 +191,11 @@ entries.forEach(entry => {
 if(!entry.isIntersecting)
 return;
 
+
 entry.target.classList.add(
 "visible"
 );
+
 
 observer.unobserve(
 entry.target
@@ -175,35 +207,43 @@ entry.target
 {
 threshold:.08,
 rootMargin:
-"0px 0px -45px 0px"
+"0px 0px -40px 0px"
 }
 );
 
 
 revealElements.forEach(
 element =>
-revealObserver.observe(element)
+observer.observe(element)
 );
 
 }else{
 
 revealElements.forEach(
 element =>
-element.classList.add("visible")
+element.classList.add(
+"visible"
+)
 );
 
 }
 
 
-/* =========================================================
-   CUSTOM CURSOR
-========================================================= */
+
+/* =====================================================
+CUSTOM CURSOR
+===================================================== */
 
 const cursorDot =
-document.querySelector(".cursor-dot");
+document.querySelector(
+".cursor-dot"
+);
+
 
 const cursorRing =
-document.querySelector(".cursor-ring");
+document.querySelector(
+".cursor-ring"
+);
 
 
 if(
@@ -231,6 +271,7 @@ event.clientX;
 mouseY =
 event.clientY;
 
+
 cursorDot.style.left =
 mouseX + "px";
 
@@ -249,17 +290,20 @@ ringX +=
 ringY +=
 (mouseY - ringY) * .13;
 
+
 cursorRing.style.left =
 ringX + "px";
 
 cursorRing.style.top =
 ringY + "px";
 
+
 requestAnimationFrame(
 animateCursor
 );
 
 }
+
 
 animateCursor();
 
@@ -276,6 +320,7 @@ document.body.classList.add(
 )
 );
 
+
 element.addEventListener(
 "mouseleave",
 () =>
@@ -289,9 +334,10 @@ document.body.classList.remove(
 }
 
 
-/* =========================================================
-   MAGNETIC BUTTON
-========================================================= */
+
+/* =====================================================
+MAGNETIC BUTTON
+===================================================== */
 
 if(
 window.matchMedia(
@@ -303,6 +349,7 @@ document.querySelectorAll(
 ".magnetic"
 ).forEach(button => {
 
+
 button.addEventListener(
 "mousemove",
 event => {
@@ -310,15 +357,18 @@ event => {
 const rect =
 button.getBoundingClientRect();
 
+
 const x =
 event.clientX -
 rect.left -
 rect.width / 2;
 
+
 const y =
 event.clientY -
 rect.top -
 rect.height / 2;
+
 
 button.style.transform =
 `translate(
@@ -345,27 +395,9 @@ button.style.transform =
 }
 
 
-/* =========================================================
-   IMAGE SYSTEM
-=========================================================
 
-FILES:
-
-B1.jpg
-B2.jpg
-B3.jpg
-
-W1.jpg
-W2.jpg
-
-P1.jpg
-P2.jpg
-
-L1.jpg
-L2.jpg
-
-M1.jpg
-M2.jpg
+/* =====================================================
+PORTFOLIO IMAGE SYSTEM
 
 B = Book
 W = Web
@@ -373,9 +405,23 @@ P = Poster
 L = Logo
 M = Print
 
-You can use B1-B100 etc.
-Missing numbers are ignored.
-========================================================= */
+Examples:
+
+B1.jpg
+B2.jpg
+B3.jpg
+
+W1.jpg
+
+P1.jpg
+
+L1.jpg
+
+M1.jpg
+
+Missing numbers stay blank.
+Empty category hides automatically.
+===================================================== */
 
 const GITHUB_API =
 "https://api.github.com/repos/shakilstic/shakilstic.github.io/contents/assets/images";
@@ -388,29 +434,23 @@ const RAW =
 const categories = {
 
 bookGrid:{
-prefix:"B",
-section:"book"
+prefix:"B"
 },
 
 webGrid:{
-prefix:"W",
-section:"web"
+prefix:"W"
 },
 
 posterGrid:{
-prefix:"P",
-section:"poster"
+prefix:"P"
 },
 
 logoGrid:{
-prefix:"L",
-section:"logo"
+prefix:"L"
 },
 
 printGrid:{
-prefix:"M",
-section:"print"
-
+prefix:"M"
 }
 
 };
@@ -431,6 +471,7 @@ M:"Print Media Design"
 };
 
 
+
 function createProject(
 file,
 prefix,
@@ -441,6 +482,7 @@ const card =
 document.createElement(
 "article"
 );
+
 
 card.className =
 "project-card";
@@ -456,7 +498,9 @@ card.classList.add(
 
 
 const image =
-document.createElement("img");
+document.createElement(
+"img"
+);
 
 
 image.src =
@@ -482,10 +526,14 @@ image.decoding =
 
 
 const index =
-document.createElement("span");
+document.createElement(
+"span"
+);
+
 
 index.className =
 "project-number";
+
 
 index.textContent =
 String(number)
@@ -493,10 +541,14 @@ String(number)
 
 
 const label =
-document.createElement("span");
+document.createElement(
+"span"
+);
+
 
 label.className =
 "project-label";
+
 
 label.textContent =
 categoryNames[prefix];
@@ -513,177 +565,6 @@ return card;
 
 }
 
-
-function renderCategory(
-gridId,
-prefix,
-files
-){
-
-const grid =
-document.getElementById(
-gridId
-);
-
-if(!grid)
-return;
-
-
-const section =
-grid.closest(".category");
-
-
-const found =
-files
-
-.map(file => {
-
-const base =
-file.name.replace(
-/\.[^.]+$/,
-""
-);
-
-const match =
-base.match(
-new RegExp(
-`^${prefix}(\\d+)$`,
-"i"
-)
-);
-
-if(!match)
-return null;
-
-
-return {
-
-file:file,
-
-number:
-Number(match[1])
-
-};
-
-})
-
-.filter(Boolean)
-
-.sort(
-(a,b) =>
-a.number -
-b.number
-);
-
-
-grid.innerHTML = "";
-
-
-/* No image = hide entire section */
-
-if(!found.length){
-
-section.style.display =
-"none";
-
-return;
-
-}
-
-
-section.style.display =
-"";
-
-
-found.forEach(item => {
-
-grid.appendChild(
-createProject(
-item.file,
-prefix.toUpperCase(),
-item.number
-)
-);
-
-});
-
-
-setupShowMore(grid);
-
-}
-
-
-async function loadImages(){
-
-try{
-
-const response =
-await fetch(
-GITHUB_API,
-{
-headers:{
-"Accept":
-"application/vnd.github+json"
-}
-}
-);
-
-
-if(!response.ok){
-
-throw new Error(
-"GitHub API unavailable"
-);
-
-}
-
-
-const files =
-await response.json();
-
-
-const images =
-files.filter(
-file =>
-file.type === "file" &&
-/\.(jpg|jpeg|png|webp|gif)$/i
-.test(file.name)
-);
-
-
-Object.entries(
-categories
-).forEach(
-([gridId,data]) => {
-
-renderCategory(
-gridId,
-data.prefix,
-images
-);
-
-}
-);
-
-
-}catch(error){
-
-console.error(error);
-
-document
-.querySelectorAll(
-".category"
-)
-.forEach(section => {
-
-section.style.display =
-"none";
-
-});
-
-}
-
-}
 
 
 function setupShowMore(grid){
@@ -728,78 +609,188 @@ grid.classList.toggle(
 );
 
 
-const text =
-button.childNodes[0];
+button.childNodes[0]
+.textContent =
+expanded
+? "SHOW LESS "
+: "SHOW MORE ";
 
 
-const icon =
 button.querySelector(
 "span"
-);
-
-
-if(expanded){
-
-button.childNodes[0]
-.textContent =
-"SHOW LESS ";
-
-icon.textContent =
-"−";
-
-
-extras.forEach(
-(card,index) => {
-
-card.animate(
-[
-{
-opacity:0,
-transform:
-"translateY(30px) scale(.97)"
-},
-{
-opacity:1,
-transform:
-"translateY(0) scale(1)"
-}
-],
-{
-duration:450,
-delay:index * 60,
-easing:
-"cubic-bezier(.2,.8,.2,1)",
-fill:"both"
-}
-);
+).textContent =
+expanded
+? "−"
+: "+";
 
 }
 );
 
-
-}else{
-
-button.childNodes[0]
-.textContent =
-"SHOW MORE ";
-
-icon.textContent =
-"+";
+}
 
 
+
+function renderCategory(
+gridId,
+prefix,
+files
+){
+
+const grid =
+document.getElementById(
+gridId
+);
+
+
+if(!grid)
+return;
+
+
+const section =
 grid.closest(
 ".category"
-)?.scrollIntoView(
-{
-behavior:"smooth",
-block:"start"
+);
+
+
+const found =
+files
+
+.map(file => {
+
+const base =
+file.name.replace(
+/\.[^.]+$/,
+""
+);
+
+
+const match =
+base.match(
+new RegExp(
+`^${prefix}(\\d+)$`,
+"i"
+)
+);
+
+
+if(!match)
+return null;
+
+
+return {
+
+file:file,
+
+number:
+Number(match[1])
+
+};
+
+})
+
+
+.filter(Boolean)
+
+
+.sort(
+(a,b) =>
+a.number -
+b.number
+);
+
+
+grid.innerHTML =
+"";
+
+
+if(!found.length){
+
+section.style.display =
+"none";
+
+return;
+
 }
+
+
+section.style.display =
+"";
+
+
+found.forEach(item => {
+
+grid.appendChild(
+createProject(
+item.file,
+prefix,
+item.number
+)
+);
+
+});
+
+
+setupShowMore(grid);
+
+}
+
+
+
+async function loadImages(){
+
+try{
+
+const response =
+await fetch(
+GITHUB_API
+);
+
+
+if(!response.ok){
+
+throw new Error(
+"GitHub image request failed"
 );
 
 }
 
+
+const files =
+await response.json();
+
+
+const images =
+files.filter(
+file =>
+file.type === "file" &&
+/\.(jpg|jpeg|png|webp|gif)$/i
+.test(file.name)
+);
+
+
+Object.entries(
+categories
+).forEach(
+([gridId,data]) => {
+
+renderCategory(
+gridId,
+data.prefix,
+images
+);
+
 }
 );
+
+
+}catch(error){
+
+console.error(
+"Image loader:",
+error
+);
+
+}
 
 }
 
@@ -807,22 +798,24 @@ block:"start"
 loadImages();
 
 
-/* =========================================================
-   BLOGGER CONTENT
-========================================================= */
+
+/* =====================================================
+BLOGGER CONTENT
+===================================================== */
 
 const BLOGGER =
 "https://createwithshakil.blogspot.com";
 
 
-let callbackNumber = 0;
+let callbackNumber =
+0;
 
 
-function loadBlogger(
-label
-){
+
+function loadBlogger(label){
 
 return new Promise(resolve => {
+
 
 const callback =
 "portfolioCallback" +
@@ -854,6 +847,7 @@ clearTimeout(timeout);
 
 script.remove();
 
+
 try{
 
 delete window[callback];
@@ -874,7 +868,9 @@ data => {
 const entries =
 data?.feed?.entry || [];
 
+
 cleanup();
+
 
 resolve(entries);
 
@@ -908,26 +904,25 @@ script
 }
 
 
-/* =========================================================
-   HTML CLEANING
-========================================================= */
 
-function cleanText(
-html
-){
+/* =====================================================
+TEXT CLEANING
+===================================================== */
+
+function cleanText(html){
 
 const div =
 document.createElement(
 "div"
 );
 
+
 div.innerHTML =
 html || "";
 
 
 return (
-div.textContent ||
-""
+div.textContent || ""
 )
 .replace(
 /\s+/g,
@@ -938,21 +933,35 @@ div.textContent ||
 }
 
 
-function postURL(entry){
 
-return (
-entry.link || []
-).find(
-link =>
-link.rel === "alternate"
-)?.href || "#";
+function escapeHTML(value){
+
+return String(
+value || ""
+).replace(
+/[&<>"']/g,
+char => ({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+}[char])
+);
 
 }
 
 
-/* =========================================================
-   CLIENT FEEDBACK
-========================================================= */
+
+/* =====================================================
+CLIENT TESTIMONIALS
+
+IMPORTANT:
+No VIEW ORIGINAL button.
+No external Blogger link.
+===================================================== */
 
 async function loadTestimonials(){
 
@@ -961,10 +970,12 @@ document.getElementById(
 "clients"
 );
 
+
 const grid =
 document.getElementById(
 "testimonialGrid"
 );
+
 
 const button =
 document.getElementById(
@@ -995,10 +1006,12 @@ return;
 entries.forEach(
 (entry,index) => {
 
+
 const card =
 document.createElement(
 "article"
 );
+
 
 card.className =
 "testimonial-card";
@@ -1024,24 +1037,6 @@ entry.summary?.$t ||
 );
 
 
-let stars =
-"★★★★★";
-
-
-const starMatch =
-review.match(
-/^[★☆]{3,5}/
-);
-
-
-if(starMatch){
-
-stars =
-starMatch[0];
-
-}
-
-
 const cleanReview =
 review.replace(
 /^[★☆]+\s*/,
@@ -1056,13 +1051,11 @@ card.innerHTML = `
 </div>
 
 <div class="stars">
-${stars}
+★★★★★
 </div>
 
 <p class="review collapsed">
-${escapeHTML(
-cleanReview
-)}
+${escapeHTML(cleanReview)}
 </p>
 
 <button
@@ -1074,23 +1067,13 @@ FULL REVIEW
 </button>
 
 <div class="client-name">
+
 ${escapeHTML(
 entry.title?.$t ||
 "Client"
 )}
+
 </div>
-
-<a
-class="review-toggle"
-href="${escapeAttribute(
-postURL(entry)
-)}"
-target="_blank"
-rel="noopener">
-
-VIEW ORIGINAL ↗
-
-</a>
 
 `;
 
@@ -1119,13 +1102,14 @@ reviewButton.addEventListener(
 "click",
 () => {
 
-const open =
+const collapsed =
 reviewElement.classList.toggle(
 "collapsed"
 );
 
+
 reviewButton.textContent =
-open
+collapsed
 ? "FULL REVIEW"
 : "SHOW LESS";
 
@@ -1137,13 +1121,12 @@ grid.appendChild(
 card
 );
 
-}
-);
+});
 
 
 const extras =
 grid.querySelectorAll(
-".extra"
+".testimonial-card.extra"
 );
 
 
@@ -1157,7 +1140,7 @@ button.addEventListener(
 "click",
 () => {
 
-const open =
+const expanded =
 grid.classList.toggle(
 "expanded"
 );
@@ -1167,7 +1150,7 @@ extras.forEach(
 card => {
 
 card.style.display =
-open
+expanded
 ? "block"
 : "none";
 
@@ -1177,7 +1160,7 @@ open
 
 button.childNodes[0]
 .textContent =
-open
+expanded
 ? "SHOW LESS "
 : "SHOW MORE ";
 
@@ -1185,7 +1168,7 @@ open
 button.querySelector(
 "span"
 ).textContent =
-open
+expanded
 ? "−"
 : "+";
 
@@ -1200,9 +1183,148 @@ open
 loadTestimonials();
 
 
-/* =========================================================
-   CURRENTLY WORKING ON
-========================================================= */
+
+/* =====================================================
+CURRENTLY WORKING
+
+NO MARQUEE.
+NO AUTO SLIDE.
+
+Only:
+← logo →
+===================================================== */
+
+let workingProfiles =
+[];
+
+let workingIndex =
+0;
+
+
+const workingDisplay =
+document.getElementById(
+"workingDisplay"
+);
+
+
+const workingPrev =
+document.getElementById(
+"workingPrev"
+);
+
+
+const workingNext =
+document.getElementById(
+"workingNext"
+);
+
+
+const workingCounter =
+document.getElementById(
+"workingCounter"
+);
+
+
+
+function showWorking(index){
+
+if(!workingDisplay)
+return;
+
+
+if(!workingProfiles.length){
+
+workingDisplay.innerHTML = `
+
+<div class="working-empty">
+
+CURRENTLY UPDATING
+
+</div>
+
+`;
+
+workingCounter.textContent =
+"01 / 01";
+
+return;
+
+}
+
+
+workingIndex =
+(index +
+workingProfiles.length)
+%
+workingProfiles.length;
+
+
+const item =
+workingProfiles[
+workingIndex
+];
+
+
+workingDisplay.innerHTML =
+"";
+
+
+const card =
+document.createElement(
+"a"
+);
+
+
+card.className =
+"working-card";
+
+
+card.href =
+"#";
+
+
+card.target =
+"_blank";
+
+
+card.rel =
+"noopener";
+
+
+const image =
+document.createElement(
+"img"
+);
+
+
+image.src =
+item.image;
+
+
+image.alt =
+item.name;
+
+
+card.appendChild(
+image
+);
+
+
+workingDisplay.appendChild(
+card
+);
+
+
+workingCounter.textContent =
+`${String(
+workingIndex + 1
+).padStart(2,"0")} / ${String(
+workingProfiles.length
+).padStart(2,"0")}`;
+
+}
+
+
 
 async function loadWorking(){
 
@@ -1211,13 +1333,8 @@ document.getElementById(
 "currently-working"
 );
 
-const track =
-document.getElementById(
-"workingTrack"
-);
 
-
-if(!section || !track)
+if(!section)
 return;
 
 
@@ -1227,22 +1344,9 @@ await loadBlogger(
 );
 
 
-if(!entries.length){
-
-section.style.display =
-"none";
-
-return;
-
-}
-
-
-const logos =
-[];
-
-
 entries.forEach(
 entry => {
+
 
 const html =
 entry.content?.$t ||
@@ -1259,266 +1363,62 @@ if(!imageMatch)
 return;
 
 
-const image =
-imageMatch[1];
+workingProfiles.push({
 
+image:
+imageMatch[1],
 
-const linkMatch =
-html.match(
-/https?:\/\/[^\s"'<>]+/i
-);
-
-
-const link =
-linkMatch
-? linkMatch[0]
-: postURL(entry);
-
-
-const item =
-document.createElement(
-"a"
-);
-
-
-item.className =
-"logo-item";
-
-item.href =
-link;
-
-item.target =
-"_blank";
-
-item.rel =
-"noopener noreferrer";
-
-
-const img =
-document.createElement(
-"img"
-);
-
-img.src =
-image;
-
-img.alt =
+name:
 entry.title?.$t ||
-"Currently working";
+"Client"
+
+});
+
+});
 
 
-img.loading =
-"lazy";
+/*
+If Blogger currently has no valid logos,
+we keep the section but show updating state.
+*/
+
+showWorking(0);
+
+}
 
 
-item.appendChild(
-img
-);
 
-logos.push(item);
+workingPrev?.addEventListener(
+"click",
+() => {
 
-track.appendChild(
-item
+showWorking(
+workingIndex - 1
 );
 
 }
 );
 
 
-if(!logos.length){
+workingNext?.addEventListener(
+"click",
+() => {
 
-section.style.display =
-"none";
-
-return;
-
-}
-
-
-/* Duplicate for seamless marquee */
-
-logos.forEach(
-item => {
-
-const clone =
-item.cloneNode(true);
-
-clone.setAttribute(
-"aria-hidden",
-"true"
-);
-
-track.appendChild(
-clone
+showWorking(
+workingIndex + 1
 );
 
 }
 );
-
-}
 
 
 loadWorking();
 
 
-/* =========================================================
-   SOCIAL LINKS
-========================================================= */
 
-async function loadSocials(){
-
-const section =
-document.querySelector(
-".social-section"
-);
-
-const grid =
-document.getElementById(
-"socialGrid"
-);
-
-
-if(!section || !grid)
-return;
-
-
-const entries =
-await loadBlogger(
-"Currently Working"
-);
-
-
-const urls =
-new Set();
-
-
-entries.forEach(
-entry => {
-
-const html =
-entry.content?.$t ||
-"";
-
-
-const matches =
-html.match(
-/https?:\/\/[^\s"'<>]+/gi
-) || [];
-
-
-matches.forEach(
-url => {
-
-url =
-url.replace(
-/[),.;]+$/,
-""
-);
-
-urls.add(
-url
-);
-
-}
-);
-
-}
-);
-
-
-if(!urls.size){
-
-section.style.display =
-"none";
-
-return;
-
-}
-
-
-[...urls].forEach(
-url => {
-
-const item =
-document.createElement(
-"a"
-);
-
-
-item.className =
-"social-link";
-
-item.href =
-url;
-
-item.target =
-"_blank";
-
-item.rel =
-"noopener noreferrer";
-
-
-let name =
-"PROFILE";
-
-
-try{
-
-const host =
-new URL(url).hostname
-.replace(
-"www.",
-""
-);
-
-name =
-host
-.split(".")[0]
-.toUpperCase();
-
-}catch{
-
-}
-
-
-const short =
-name
-.slice(0,2);
-
-
-item.innerHTML = `
-
-<span class="social-icon">
-${escapeHTML(short)}
-</span>
-
-<span class="social-name">
-${escapeHTML(name)}
-</span>
-
-<span class="social-arrow">
-↗
-</span>
-
-`;
-
-
-grid.appendChild(
-item
-);
-
-}
-);
-
-}
-
-
-loadSocials();
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
+/* =====================================================
+NAVIGATION ACTIVE STATE
+===================================================== */
 
 const navLinks =
 document.querySelectorAll(
@@ -1576,36 +1476,55 @@ rootMargin:
 
 sections.forEach(
 section =>
-navObserver.observe(section)
+navObserver.observe(
+section
+)
 );
 
 }
 
 
-/* =========================================================
-   CONTACT FORM
-========================================================= */
 
-/*
-IMPORTANT:
+/* =====================================================
+GO TO TOP
+===================================================== */
 
-After deploying your Google Apps Script,
-paste the Web App URL below.
+const goTop =
+document.getElementById(
+"goTop"
+);
 
-Example:
+
+goTop?.addEventListener(
+"click",
+() => {
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+}
+);
+
+
+
+/* =====================================================
+CONTACT FORM
+===================================================== */
 
 const GOOGLE_SCRIPT_URL =
-"https://script.google.com/macros/s/XXXXXXXX/exec";
-
-*/
-
-const GOOGLE_SCRIPT_URL = "";
+"";
 
 
 const form =
 document.getElementById(
 "contactForm"
 );
+
 
 const status =
 document.getElementById(
@@ -1616,6 +1535,7 @@ document.getElementById(
 form?.addEventListener(
 "submit",
 async event => {
+
 
 event.preventDefault();
 
@@ -1648,41 +1568,48 @@ return;
 if(!GOOGLE_SCRIPT_URL){
 
 status.textContent =
-"Form is ready. Add your Google Apps Script Web App URL in script.js.";
+"Contact form is ready. Google Sheet connection will be added next.";
+
 
 status.className =
 "form-status error";
+
 
 return;
 
 }
 
 
-const button =
+const submitButton =
 form.querySelector(
 ".submit-button"
 );
 
 
 const original =
-button.innerHTML;
+submitButton.innerHTML;
 
 
-button.disabled =
+submitButton.disabled =
 true;
 
-button.textContent =
+submitButton.textContent =
 "SENDING...";
 
 
 try{
 
+
 await fetch(
 GOOGLE_SCRIPT_URL,
 {
+
 method:"POST",
+
 body:new FormData(form),
+
 mode:"no-cors"
+
 }
 );
 
@@ -1693,16 +1620,20 @@ form.reset();
 status.textContent =
 "Thank you. Your enquiry has been sent.";
 
+
 status.className =
 "form-status success";
 
 
 }catch(error){
 
+
 console.error(error);
+
 
 status.textContent =
 "Something went wrong. Please try again.";
+
 
 status.className =
 "form-status error";
@@ -1710,51 +1641,17 @@ status.className =
 
 }finally{
 
-button.disabled =
+
+submitButton.disabled =
 false;
 
-button.innerHTML =
+submitButton.innerHTML =
 original;
 
+
 }
 
 }
 );
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(value){
-
-return String(
-value || ""
-).replace(
-/[&<>"']/g,
-char => ({
-
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-
-}[char])
-);
-
-}
-
-
-function escapeAttribute(value){
-
-return escapeHTML(
-value
-).replace(
-/`/g,
-"&#096;"
-);
-
-}
 
 });
