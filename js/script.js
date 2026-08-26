@@ -1,867 +1,1760 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =========================================
-       YEAR
-    ========================================= */
+"use strict";
 
-    const year = document.getElementById("year");
 
-    if (year) {
-        year.textContent = new Date().getFullYear();
-    }
+/* =========================================================
+   BASIC
+========================================================= */
 
+const root = document.documentElement;
 
-    /* =========================================
-       THEME
-       LIGHT / DARK
-    ========================================= */
+const year = document.getElementById("year");
 
-    const html = document.documentElement;
-    const themeToggle =
-        document.getElementById("themeToggle");
+if(year){
 
-    const themeIcon =
-        document.getElementById("themeIcon");
+year.textContent =
+new Date().getFullYear();
 
+}
 
-    const savedTheme =
-        localStorage.getItem("shakilstic-theme");
 
+/* =========================================================
+   THEME
+   Browser theme first.
+   Manual button overrides it.
+========================================================= */
 
-    function systemTheme() {
+const themeToggle =
+document.getElementById("themeToggle");
 
-        return window.matchMedia(
-            "(prefers-color-scheme: dark)"
-        ).matches
-            ? "dark"
-            : "light";
+const themeIcon =
+document.getElementById("themeIcon");
 
-    }
+const savedTheme =
+localStorage.getItem("shakilstic-theme");
 
 
-    function applyTheme(theme) {
+function browserTheme(){
 
-        let actualTheme = theme;
+return window.matchMedia(
+"(prefers-color-scheme: dark)"
+).matches
+? "dark"
+: "light";
 
-        if (theme === "auto") {
-            actualTheme = systemTheme();
-        }
+}
 
-        html.setAttribute(
-            "data-theme",
-            actualTheme
-        );
 
-        html.classList.toggle(
-            "dark",
-            actualTheme === "dark"
-        );
+function applyTheme(theme){
 
+root.setAttribute(
+"data-theme",
+theme
+);
 
-        if (themeIcon) {
+if(themeIcon){
 
-            themeIcon.textContent =
-                actualTheme === "dark"
-                    ? "☀"
-                    : "☾";
+themeIcon.textContent =
+theme === "dark"
+? "☀"
+: "☾";
 
-        }
+}
 
-    }
+}
 
 
-    const initialTheme =
-        savedTheme || "auto";
+applyTheme(
+savedTheme === "dark" ||
+savedTheme === "light"
+? savedTheme
+: browserTheme()
+);
 
 
-    applyTheme(initialTheme);
+themeToggle?.addEventListener(
+"click",
+() => {
 
+const current =
+root.getAttribute("data-theme");
 
-    if (themeToggle) {
+const next =
+current === "dark"
+? "light"
+: "dark";
 
-        themeToggle.addEventListener(
-            "click",
-            () => {
+applyTheme(next);
 
-                const current =
-                    html.classList.contains("dark")
-                        ? "dark"
-                        : "light";
+localStorage.setItem(
+"shakilstic-theme",
+next
+);
 
+}
+);
 
-                const next =
-                    current === "dark"
-                        ? "light"
-                        : "dark";
 
+/* =========================================================
+   MOBILE MENU
+========================================================= */
 
-                localStorage.setItem(
-                    "shakilstic-theme",
-                    next
-                );
+const menuToggle =
+document.getElementById("menuToggle");
 
+const mobileMenu =
+document.getElementById("mobileMenu");
 
-                applyTheme(next);
 
+menuToggle?.addEventListener(
+"click",
+() => {
 
-                themeToggle.classList.remove(
-                    "clicked"
-                );
+const open =
+mobileMenu.classList.toggle("open");
 
-                void themeToggle.offsetWidth;
+menuToggle.textContent =
+open ? "×" : "☰";
 
-                themeToggle.classList.add(
-                    "clicked"
-                );
+}
+);
 
-            }
-        );
 
-    }
+document.querySelectorAll(
+".mobile-menu a"
+).forEach(link => {
 
+link.addEventListener(
+"click",
+() => {
 
-    /* =========================================
-       BROWSER THEME CHANGE
-    ========================================= */
+mobileMenu.classList.remove(
+"open"
+);
 
-    window
-        .matchMedia(
-            "(prefers-color-scheme: dark)"
-        )
-        .addEventListener(
-            "change",
-            event => {
+menuToggle.textContent =
+"☰";
 
-                if (!localStorage.getItem(
-                    "shakilstic-theme"
-                )) {
+}
+);
 
-                    applyTheme(
-                        event.matches
-                            ? "dark"
-                            : "light"
-                    );
+});
 
-                }
 
-            }
-        );
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
 
+const revealElements =
+document.querySelectorAll(".reveal");
 
-    /* =========================================
-       MOBILE MENU
-    ========================================= */
 
-    const menuToggle =
-        document.getElementById(
-            "menuToggle"
-        );
+if("IntersectionObserver" in window){
 
-    const mobileMenu =
-        document.getElementById(
-            "mobileMenu"
-        );
+const revealObserver =
+new IntersectionObserver(
+(entries, observer) => {
 
+entries.forEach(entry => {
 
-    if (
-        menuToggle &&
-        mobileMenu
-    ) {
+if(!entry.isIntersecting)
+return;
 
-        menuToggle.addEventListener(
-            "click",
-            () => {
+entry.target.classList.add(
+"visible"
+);
 
-                mobileMenu.classList.toggle(
-                    "open"
-                );
+observer.unobserve(
+entry.target
+);
 
-                menuToggle.classList.toggle(
-                    "active"
-                );
+});
 
-            }
-        );
+},
+{
+threshold:.08,
+rootMargin:
+"0px 0px -45px 0px"
+}
+);
 
 
-        mobileMenu
-            .querySelectorAll("a")
-            .forEach(link => {
+revealElements.forEach(
+element =>
+revealObserver.observe(element)
+);
 
-                link.addEventListener(
-                    "click",
-                    () => {
+}else{
 
-                        mobileMenu.classList.remove(
-                            "open"
-                        );
+revealElements.forEach(
+element =>
+element.classList.add("visible")
+);
 
-                        menuToggle.classList.remove(
-                            "active"
-                        );
+}
 
-                    }
-                );
 
-            });
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
 
-    }
+const cursorDot =
+document.querySelector(".cursor-dot");
 
+const cursorRing =
+document.querySelector(".cursor-ring");
 
-    /* =========================================
-       PORTFOLIO
-    ========================================= */
 
-    const portfolio =
-        document.getElementById(
-            "portfolio"
-        );
+if(
+cursorDot &&
+cursorRing &&
+window.matchMedia(
+"(pointer:fine)"
+).matches
+){
 
+let mouseX = 0;
+let mouseY = 0;
 
-    const categories = [
+let ringX = 0;
+let ringY = 0;
 
-        {
-            key: "B",
-            title: "BOOK COVER DESIGN",
-            description:
-                "Book covers and editorial visuals designed to make a strong first impression."
-        },
 
-        {
-            key: "W",
-            title: "WEB DESIGN & DEVELOPMENT",
-            description:
-                "Responsive websites combining visual design, usability and modern digital experiences."
-        },
+document.addEventListener(
+"mousemove",
+event => {
 
-        {
-            key: "S",
-            title: "SOCIAL MEDIA POSTER",
-            description:
-                "Bold campaign visuals created for social media, advertising and digital communication."
-        },
+mouseX =
+event.clientX;
 
-        {
-            key: "L",
-            title: "LOGO DESIGN",
-            description:
-                "Distinctive identities designed to be recognizable, flexible and memorable."
-        },
+mouseY =
+event.clientY;
 
-        {
-            key: "P",
-            title: "PRINT MEDIA DESIGN",
-            description:
-                "Professional print designs including posters, brochures and promotional materials."
-        }
+cursorDot.style.left =
+mouseX + "px";
 
-    ];
+cursorDot.style.top =
+mouseY + "px";
 
+}
+);
 
-    /*
-       Maximum image number.
 
-       B1.jpg → B30.jpg
-       L1.jpg → L30.jpg
-       W1.jpg → W30.jpg
+function animateCursor(){
 
-       Change 30 to 50 or 100 later
-       if you ever need more.
-    */
+ringX +=
+(mouseX - ringX) * .13;
 
-    const MAX_IMAGES = 30;
+ringY +=
+(mouseY - ringY) * .13;
 
+cursorRing.style.left =
+ringX + "px";
 
-    /* =========================================
-       FAST IMAGE CHECK
-    ========================================= */
+cursorRing.style.top =
+ringY + "px";
 
-    function checkImage(src) {
+requestAnimationFrame(
+animateCursor
+);
 
-        return new Promise(resolve => {
+}
 
-            const image =
-                new Image();
+animateCursor();
 
 
-            image.onload = () => {
+document.querySelectorAll(
+"a, button, input, textarea"
+).forEach(element => {
 
-                resolve({
-                    exists: true,
-                    src: src
-                });
+element.addEventListener(
+"mouseenter",
+() =>
+document.body.classList.add(
+"cursor-hover"
+)
+);
 
-            };
+element.addEventListener(
+"mouseleave",
+() =>
+document.body.classList.remove(
+"cursor-hover"
+)
+);
 
+});
 
-            image.onerror = () => {
+}
 
-                resolve({
-                    exists: false,
-                    src: src
-                });
 
-            };
+/* =========================================================
+   MAGNETIC BUTTON
+========================================================= */
 
+if(
+window.matchMedia(
+"(pointer:fine)"
+).matches
+){
 
-            image.src = src;
+document.querySelectorAll(
+".magnetic"
+).forEach(button => {
 
-        });
+button.addEventListener(
+"mousemove",
+event => {
 
-    }
+const rect =
+button.getBoundingClientRect();
 
+const x =
+event.clientX -
+rect.left -
+rect.width / 2;
 
-    /* =========================================
-       FIND IMAGES IN PARALLEL
-    ========================================= */
+const y =
+event.clientY -
+rect.top -
+rect.height / 2;
 
-    async function findImages(key) {
+button.style.transform =
+`translate(
+${x * .08}px,
+${y * .08}px
+)`;
 
-        const checks = [];
+}
+);
 
 
-        for (
-            let i = 1;
-            i <= MAX_IMAGES;
-            i++
-        ) {
+button.addEventListener(
+"mouseleave",
+() => {
 
-            checks.push(
-                checkImage(
-                    `assets/images/${key}${i}.jpg`
-                )
-            );
+button.style.transform =
+"";
 
-        }
+}
+);
 
+});
 
-        const results =
-            await Promise.all(checks);
+}
 
 
-        return results
-            .filter(result => result.exists)
-            .map(result => result.src);
+/* =========================================================
+   IMAGE SYSTEM
+=========================================================
 
-    }
+FILES:
 
+B1.jpg
+B2.jpg
+B3.jpg
 
-    /* =========================================
-       CREATE CATEGORY
-    ========================================= */
+W1.jpg
+W2.jpg
 
-    function createCategory(
-        category,
-        images
-    ) {
+P1.jpg
+P2.jpg
 
-        if (!images.length) {
-            return "";
-        }
+L1.jpg
+L2.jpg
 
+M1.jpg
+M2.jpg
 
-        const cards =
-            images
-                .map(
-                    (src, index) => {
+B = Book
+W = Web
+P = Poster
+L = Logo
+M = Print
 
-                        return `
+You can use B1-B100 etc.
+Missing numbers are ignored.
+========================================================= */
 
-                        <article
-                            class="project ${
-                                index < 4
-                                    ? "visible"
-                                    : ""
-                            }"
-                        >
+const GITHUB_API =
+"https://api.github.com/repos/shakilstic/shakilstic.github.io/contents/assets/images";
 
-                            <div class="project-media">
 
-                                <img
-                                    src="${src}"
-                                    alt="${category.title} ${
-                                        index + 1
-                                    }"
-                                    loading="${
-                                        index < 4
-                                            ? "eager"
-                                            : "lazy"
-                                    }"
-                                >
+const RAW =
+"https://shakilstic.github.io/assets/images/";
 
-                            </div>
 
-                            <div class="project-info">
+const categories = {
 
-                                <span class="project-number">
-                                    ${String(
-                                        index + 1
-                                    ).padStart(2, "0")}
-                                </span>
+bookGrid:{
+prefix:"B",
+section:"book"
+},
 
-                                <h3>
-                                    ${category.title}
-                                </h3>
+webGrid:{
+prefix:"W",
+section:"web"
+},
 
-                            </div>
+posterGrid:{
+prefix:"P",
+section:"poster"
+},
 
-                        </article>
+logoGrid:{
+prefix:"L",
+section:"logo"
+},
 
-                        `;
+printGrid:{
+prefix:"M",
+section:"print"
 
-                    }
-                )
-                .join("");
+}
 
+};
 
-        const showMore =
-            images.length > 4
-                ? `
 
-                    <button
-                        type="button"
-                        class="show-more"
-                    >
-                        <span>
-                            SHOW MORE
-                        </span>
+const categoryNames = {
 
-                        <b>+</b>
+B:"Book Cover Design",
 
-                    </button>
+W:"Web Design & Develop",
 
-                  `
-                : "";
+P:"Social Media Poster",
 
+L:"Logo Design",
 
-        return `
+M:"Print Media Design"
 
-            <section
-                class="portfolio-section reveal"
-            >
+};
 
-                <div class="container">
 
-                    <div class="section-head">
+function createProject(
+file,
+prefix,
+number
+){
 
-                        <div>
+const card =
+document.createElement(
+"article"
+);
 
-                            <p class="eyebrow">
-                                ${category.title}
-                            </p>
+card.className =
+"project-card";
 
-                            <h2>
-                                ${category.title}
-                            </h2>
 
-                        </div>
+if(number > 4){
 
-                        <p class="section-description">
-                            ${category.description}
-                        </p>
+card.classList.add(
+"extra"
+);
 
-                    </div>
+}
 
 
-                    <div class="projects">
+const image =
+document.createElement("img");
 
-                        ${cards}
 
-                    </div>
+image.src =
+file.download_url ||
+RAW +
+encodeURIComponent(
+file.name
+);
 
 
-                    ${showMore}
+image.alt =
+`${categoryNames[prefix]} ${number}`;
 
-                </div>
 
-            </section>
+image.loading =
+number <= 4
+? "eager"
+: "lazy";
 
-        `;
 
-    }
+image.decoding =
+"async";
 
 
-    /* =========================================
-       BUILD PORTFOLIO
-    ========================================= */
+const index =
+document.createElement("span");
 
-    async function buildPortfolio() {
+index.className =
+"project-number";
 
-        if (!portfolio) {
-            return;
-        }
+index.textContent =
+String(number)
+.padStart(2,"0");
 
 
-        /*
-           Check ALL categories at the
-           same time.
-        */
+const label =
+document.createElement("span");
 
-        const results =
-            await Promise.all(
+label.className =
+"project-label";
 
-                categories.map(
-                    async category => {
+label.textContent =
+categoryNames[prefix];
 
-                        const images =
-                            await findImages(
-                                category.key
-                            );
 
+card.append(
+image,
+index,
+label
+);
 
-                        return {
-                            category,
-                            images
-                        };
 
-                    }
-                )
+return card;
 
-            );
+}
 
 
-        const output =
-            results
-                .map(
-                    item =>
-                        createCategory(
-                            item.category,
-                            item.images
-                        )
-                )
-                .join("");
+function renderCategory(
+gridId,
+prefix,
+files
+){
 
+const grid =
+document.getElementById(
+gridId
+);
 
-        portfolio.innerHTML =
-            output;
+if(!grid)
+return;
 
 
-        setupShowMore();
+const section =
+grid.closest(".category");
 
-        setupReveal();
 
-    }
+const found =
+files
 
+.map(file => {
 
-    /* =========================================
-       SHOW MORE / SHOW LESS
-    ========================================= */
+const base =
+file.name.replace(
+/\.[^.]+$/,
+""
+);
 
-    function setupShowMore() {
+const match =
+base.match(
+new RegExp(
+`^${prefix}(\\d+)$`,
+"i"
+)
+);
 
-        document
-            .querySelectorAll(
-                ".show-more"
-            )
-            .forEach(button => {
+if(!match)
+return null;
 
-                button.addEventListener(
-                    "click",
-                    () => {
 
-                        const section =
-                            button.closest(
-                                ".portfolio-section"
-                            );
+return {
 
+file:file,
 
-                        if (!section) {
-                            return;
-                        }
+number:
+Number(match[1])
 
+};
 
-                        const projects =
-                            section.querySelectorAll(
-                                ".project"
-                            );
+})
 
+.filter(Boolean)
 
-                        const expanded =
-                            section.classList.toggle(
-                                "expanded"
-                            );
+.sort(
+(a,b) =>
+a.number -
+b.number
+);
 
 
-                        projects.forEach(
-                            (project, index) => {
+grid.innerHTML = "";
 
-                                if (
-                                    index >= 4
-                                ) {
 
-                                    project.classList.toggle(
-                                        "visible",
-                                        expanded
-                                    );
+/* No image = hide entire section */
 
-                                }
+if(!found.length){
 
-                            }
-                        );
+section.style.display =
+"none";
 
+return;
 
-                        const text =
-                            button.querySelector(
-                                "span"
-                            );
+}
 
 
-                        const icon =
-                            button.querySelector(
-                                "b"
-                            );
+section.style.display =
+"";
 
 
-                        if (expanded) {
+found.forEach(item => {
 
-                            if (text) {
-                                text.textContent =
-                                    "SHOW LESS";
-                            }
+grid.appendChild(
+createProject(
+item.file,
+prefix.toUpperCase(),
+item.number
+)
+);
 
-                            if (icon) {
-                                icon.textContent =
-                                    "−";
-                            }
+});
 
-                        }
 
-                        else {
+setupShowMore(grid);
 
-                            if (text) {
-                                text.textContent =
-                                    "SHOW MORE";
-                            }
+}
 
-                            if (icon) {
-                                icon.textContent =
-                                    "+";
-                            }
 
+async function loadImages(){
 
-                            section.scrollIntoView({
-                                behavior:
-                                    "smooth",
-                                block:
-                                    "start"
-                            });
+try{
 
-                        }
+const response =
+await fetch(
+GITHUB_API,
+{
+headers:{
+"Accept":
+"application/vnd.github+json"
+}
+}
+);
 
-                    }
-                );
 
-            });
+if(!response.ok){
 
-    }
+throw new Error(
+"GitHub API unavailable"
+);
 
+}
 
-    /* =========================================
-       SCROLL REVEAL
-    ========================================= */
 
-    function setupReveal() {
+const files =
+await response.json();
 
-        const elements =
-            document.querySelectorAll(
-                ".reveal"
-            );
 
+const images =
+files.filter(
+file =>
+file.type === "file" &&
+/\.(jpg|jpeg|png|webp|gif)$/i
+.test(file.name)
+);
 
-        if (
-            !(
-                "IntersectionObserver"
-                in window
-            )
-        ) {
 
-            elements.forEach(
-                element => {
+Object.entries(
+categories
+).forEach(
+([gridId,data]) => {
 
-                    element.classList.add(
-                        "is-visible"
-                    );
+renderCategory(
+gridId,
+data.prefix,
+images
+);
 
-                }
-            );
+}
+);
 
-            return;
 
-        }
+}catch(error){
 
+console.error(error);
 
-        const observer =
-            new IntersectionObserver(
-                entries => {
+document
+.querySelectorAll(
+".category"
+)
+.forEach(section => {
 
-                    entries.forEach(
-                        entry => {
+section.style.display =
+"none";
 
-                            if (
-                                entry.isIntersecting
-                            ) {
+});
 
-                                entry.target.classList.add(
-                                    "is-visible"
-                                );
+}
 
+}
 
-                                observer.unobserve(
-                                    entry.target
-                                );
 
-                            }
+function setupShowMore(grid){
 
-                        }
-                    );
+const button =
+document.querySelector(
+`.show-more[data-target="${grid.id}"]`
+);
 
-                },
-                {
-                    threshold: 0.08
-                }
-            );
 
+if(!button)
+return;
 
-        elements.forEach(
-            element => {
 
-                observer.observe(
-                    element
-                );
+const extras =
+grid.querySelectorAll(
+".project-card.extra"
+);
 
-            }
-        );
 
-    }
+if(!extras.length){
 
+button.hidden =
+true;
 
-    /* =========================================
-       BUTTON CLICK EFFECT
-    ========================================= */
+return;
 
-    document
-        .querySelectorAll(
-            ".button, .show-more, .theme-toggle"
-        )
-        .forEach(button => {
+}
 
-            button.addEventListener(
-                "click",
-                () => {
 
-                    button.classList.remove(
-                        "clicked"
-                    );
+button.hidden =
+false;
 
 
-                    void button.offsetWidth;
+button.addEventListener(
+"click",
+() => {
 
+const expanded =
+grid.classList.toggle(
+"expanded"
+);
 
-                    button.classList.add(
-                        "clicked"
-                    );
 
-                }
-            );
+const text =
+button.childNodes[0];
 
-        });
 
+const icon =
+button.querySelector(
+"span"
+);
 
-    /* =========================================
-       SMOOTH ANCHOR NAVIGATION
-    ========================================= */
 
-    document
-        .querySelectorAll(
-            'a[href^="#"]'
-        )
-        .forEach(link => {
+if(expanded){
 
-            link.addEventListener(
-                "click",
-                event => {
+button.childNodes[0]
+.textContent =
+"SHOW LESS ";
 
-                    const id =
-                        link.getAttribute(
-                            "href"
-                        );
+icon.textContent =
+"−";
 
 
-                    if (
-                        !id ||
-                        id === "#"
-                    ) {
-                        return;
-                    }
+extras.forEach(
+(card,index) => {
 
+card.animate(
+[
+{
+opacity:0,
+transform:
+"translateY(30px) scale(.97)"
+},
+{
+opacity:1,
+transform:
+"translateY(0) scale(1)"
+}
+],
+{
+duration:450,
+delay:index * 60,
+easing:
+"cubic-bezier(.2,.8,.2,1)",
+fill:"both"
+}
+);
 
-                    const target =
-                        document.querySelector(
-                            id
-                        );
+}
+);
 
 
-                    if (!target) {
-                        return;
-                    }
+}else{
 
+button.childNodes[0]
+.textContent =
+"SHOW MORE ";
 
-                    event.preventDefault();
+icon.textContent =
+"+";
 
 
-                    target.scrollIntoView({
-                        behavior:
-                            "smooth"
-                    });
+grid.closest(
+".category"
+)?.scrollIntoView(
+{
+behavior:"smooth",
+block:"start"
+}
+);
 
-                }
-            );
+}
 
-        });
+}
+);
 
+}
 
-    /* =========================================
-       CONTACT FORM
-    ========================================= */
 
-    const contactForm =
-        document.getElementById(
-            "contactForm"
-        );
+loadImages();
 
 
-    if (contactForm) {
+/* =========================================================
+   BLOGGER CONTENT
+========================================================= */
 
-        contactForm.addEventListener(
-            "submit",
-            event => {
+const BLOGGER =
+"https://createwithshakil.blogspot.com";
 
-                event.preventDefault();
 
+let callbackNumber = 0;
 
-                const status =
-                    document.getElementById(
-                        "formStatus"
-                    );
 
+function loadBlogger(
+label
+){
 
-                if (status) {
+return new Promise(resolve => {
 
-                    status.textContent =
-                        "Your message is ready to be sent.";
+const callback =
+"portfolioCallback" +
+(++callbackNumber);
 
-                }
 
-            }
-        );
+const script =
+document.createElement(
+"script"
+);
 
-    }
 
+const timeout =
+setTimeout(
+() => {
 
-    /* =========================================
-       START
-    ========================================= */
+cleanup();
 
-    buildPortfolio();
+resolve([]);
+
+},
+7000
+);
+
+
+function cleanup(){
+
+clearTimeout(timeout);
+
+script.remove();
+
+try{
+
+delete window[callback];
+
+}catch{
+
+window[callback] =
+undefined;
+
+}
+
+}
+
+
+window[callback] =
+data => {
+
+const entries =
+data?.feed?.entry || [];
+
+cleanup();
+
+resolve(entries);
+
+};
+
+
+script.src =
+`${BLOGGER}/feeds/posts/default/-/${encodeURIComponent(label)}?alt=json-in-script&max-results=50&callback=${callback}`;
+
+
+script.async =
+true;
+
+
+script.onerror =
+() => {
+
+cleanup();
+
+resolve([]);
+
+};
+
+
+document.head.appendChild(
+script
+);
+
+});
+
+}
+
+
+/* =========================================================
+   HTML CLEANING
+========================================================= */
+
+function cleanText(
+html
+){
+
+const div =
+document.createElement(
+"div"
+);
+
+div.innerHTML =
+html || "";
+
+
+return (
+div.textContent ||
+""
+)
+.replace(
+/\s+/g,
+" "
+)
+.trim();
+
+}
+
+
+function postURL(entry){
+
+return (
+entry.link || []
+).find(
+link =>
+link.rel === "alternate"
+)?.href || "#";
+
+}
+
+
+/* =========================================================
+   CLIENT FEEDBACK
+========================================================= */
+
+async function loadTestimonials(){
+
+const section =
+document.getElementById(
+"clients"
+);
+
+const grid =
+document.getElementById(
+"testimonialGrid"
+);
+
+const button =
+document.getElementById(
+"testimonialMore"
+);
+
+
+if(!section || !grid)
+return;
+
+
+const entries =
+await loadBlogger(
+"Client Feedback"
+);
+
+
+if(!entries.length){
+
+section.style.display =
+"none";
+
+return;
+
+}
+
+
+entries.forEach(
+(entry,index) => {
+
+const card =
+document.createElement(
+"article"
+);
+
+card.className =
+"testimonial-card";
+
+
+if(index >= 3){
+
+card.classList.add(
+"extra"
+);
+
+card.style.display =
+"none";
+
+}
+
+
+const review =
+cleanText(
+entry.content?.$t ||
+entry.summary?.$t ||
+""
+);
+
+
+let stars =
+"★★★★★";
+
+
+const starMatch =
+review.match(
+/^[★☆]{3,5}/
+);
+
+
+if(starMatch){
+
+stars =
+starMatch[0];
+
+}
+
+
+const cleanReview =
+review.replace(
+/^[★☆]+\s*/,
+""
+);
+
+
+card.innerHTML = `
+
+<div class="quote">
+“
+</div>
+
+<div class="stars">
+${stars}
+</div>
+
+<p class="review collapsed">
+${escapeHTML(
+cleanReview
+)}
+</p>
+
+<button
+class="review-toggle"
+type="button">
+
+FULL REVIEW
+
+</button>
+
+<div class="client-name">
+${escapeHTML(
+entry.title?.$t ||
+"Client"
+)}
+</div>
+
+<a
+class="review-toggle"
+href="${escapeAttribute(
+postURL(entry)
+)}"
+target="_blank"
+rel="noopener">
+
+VIEW ORIGINAL ↗
+
+</a>
+
+`;
+
+
+const reviewElement =
+card.querySelector(
+".review"
+);
+
+
+const reviewButton =
+card.querySelector(
+".review-toggle"
+);
+
+
+if(cleanReview.length < 240){
+
+reviewButton.style.display =
+"none";
+
+}
+
+
+reviewButton.addEventListener(
+"click",
+() => {
+
+const open =
+reviewElement.classList.toggle(
+"collapsed"
+);
+
+reviewButton.textContent =
+open
+? "FULL REVIEW"
+: "SHOW LESS";
+
+}
+);
+
+
+grid.appendChild(
+card
+);
+
+}
+);
+
+
+const extras =
+grid.querySelectorAll(
+".extra"
+);
+
+
+if(extras.length){
+
+button.hidden =
+false;
+
+
+button.addEventListener(
+"click",
+() => {
+
+const open =
+grid.classList.toggle(
+"expanded"
+);
+
+
+extras.forEach(
+card => {
+
+card.style.display =
+open
+? "block"
+: "none";
+
+}
+);
+
+
+button.childNodes[0]
+.textContent =
+open
+? "SHOW LESS "
+: "SHOW MORE ";
+
+
+button.querySelector(
+"span"
+).textContent =
+open
+? "−"
+: "+";
+
+}
+);
+
+}
+
+}
+
+
+loadTestimonials();
+
+
+/* =========================================================
+   CURRENTLY WORKING ON
+========================================================= */
+
+async function loadWorking(){
+
+const section =
+document.getElementById(
+"currently-working"
+);
+
+const track =
+document.getElementById(
+"workingTrack"
+);
+
+
+if(!section || !track)
+return;
+
+
+const entries =
+await loadBlogger(
+"Currently Working"
+);
+
+
+if(!entries.length){
+
+section.style.display =
+"none";
+
+return;
+
+}
+
+
+const logos =
+[];
+
+
+entries.forEach(
+entry => {
+
+const html =
+entry.content?.$t ||
+"";
+
+
+const imageMatch =
+html.match(
+/<img[^>]+src=["']([^"']+)["']/i
+);
+
+
+if(!imageMatch)
+return;
+
+
+const image =
+imageMatch[1];
+
+
+const linkMatch =
+html.match(
+/https?:\/\/[^\s"'<>]+/i
+);
+
+
+const link =
+linkMatch
+? linkMatch[0]
+: postURL(entry);
+
+
+const item =
+document.createElement(
+"a"
+);
+
+
+item.className =
+"logo-item";
+
+item.href =
+link;
+
+item.target =
+"_blank";
+
+item.rel =
+"noopener noreferrer";
+
+
+const img =
+document.createElement(
+"img"
+);
+
+img.src =
+image;
+
+img.alt =
+entry.title?.$t ||
+"Currently working";
+
+
+img.loading =
+"lazy";
+
+
+item.appendChild(
+img
+);
+
+logos.push(item);
+
+track.appendChild(
+item
+);
+
+}
+);
+
+
+if(!logos.length){
+
+section.style.display =
+"none";
+
+return;
+
+}
+
+
+/* Duplicate for seamless marquee */
+
+logos.forEach(
+item => {
+
+const clone =
+item.cloneNode(true);
+
+clone.setAttribute(
+"aria-hidden",
+"true"
+);
+
+track.appendChild(
+clone
+);
+
+}
+);
+
+}
+
+
+loadWorking();
+
+
+/* =========================================================
+   SOCIAL LINKS
+========================================================= */
+
+async function loadSocials(){
+
+const section =
+document.querySelector(
+".social-section"
+);
+
+const grid =
+document.getElementById(
+"socialGrid"
+);
+
+
+if(!section || !grid)
+return;
+
+
+const entries =
+await loadBlogger(
+"Currently Working"
+);
+
+
+const urls =
+new Set();
+
+
+entries.forEach(
+entry => {
+
+const html =
+entry.content?.$t ||
+"";
+
+
+const matches =
+html.match(
+/https?:\/\/[^\s"'<>]+/gi
+) || [];
+
+
+matches.forEach(
+url => {
+
+url =
+url.replace(
+/[),.;]+$/,
+""
+);
+
+urls.add(
+url
+);
+
+}
+);
+
+}
+);
+
+
+if(!urls.size){
+
+section.style.display =
+"none";
+
+return;
+
+}
+
+
+[...urls].forEach(
+url => {
+
+const item =
+document.createElement(
+"a"
+);
+
+
+item.className =
+"social-link";
+
+item.href =
+url;
+
+item.target =
+"_blank";
+
+item.rel =
+"noopener noreferrer";
+
+
+let name =
+"PROFILE";
+
+
+try{
+
+const host =
+new URL(url).hostname
+.replace(
+"www.",
+""
+);
+
+name =
+host
+.split(".")[0]
+.toUpperCase();
+
+}catch{
+
+}
+
+
+const short =
+name
+.slice(0,2);
+
+
+item.innerHTML = `
+
+<span class="social-icon">
+${escapeHTML(short)}
+</span>
+
+<span class="social-name">
+${escapeHTML(name)}
+</span>
+
+<span class="social-arrow">
+↗
+</span>
+
+`;
+
+
+grid.appendChild(
+item
+);
+
+}
+);
+
+}
+
+
+loadSocials();
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+const navLinks =
+document.querySelectorAll(
+".desktop-nav a"
+);
+
+
+const sections =
+document.querySelectorAll(
+"main section[id]"
+);
+
+
+if(
+"IntersectionObserver"
+in window
+){
+
+const navObserver =
+new IntersectionObserver(
+entries => {
+
+entries.forEach(
+entry => {
+
+if(!entry.isIntersecting)
+return;
+
+
+navLinks.forEach(
+link => {
+
+link.classList.toggle(
+"active",
+link.getAttribute(
+"href"
+) ===
+"#" +
+entry.target.id
+);
+
+}
+);
+
+}
+);
+
+},
+{
+rootMargin:
+"-35% 0px -55% 0px"
+}
+);
+
+
+sections.forEach(
+section =>
+navObserver.observe(section)
+);
+
+}
+
+
+/* =========================================================
+   CONTACT FORM
+========================================================= */
+
+/*
+IMPORTANT:
+
+After deploying your Google Apps Script,
+paste the Web App URL below.
+
+Example:
+
+const GOOGLE_SCRIPT_URL =
+"https://script.google.com/macros/s/XXXXXXXX/exec";
+
+*/
+
+const GOOGLE_SCRIPT_URL = "";
+
+
+const form =
+document.getElementById(
+"contactForm"
+);
+
+const status =
+document.getElementById(
+"formStatus"
+);
+
+
+form?.addEventListener(
+"submit",
+async event => {
+
+event.preventDefault();
+
+
+const honeypot =
+form.querySelector(
+'[name="website"]'
+);
+
+
+if(
+honeypot &&
+honeypot.value.trim()
+){
+
+return;
+
+}
+
+
+if(!form.checkValidity()){
+
+form.reportValidity();
+
+return;
+
+}
+
+
+if(!GOOGLE_SCRIPT_URL){
+
+status.textContent =
+"Form is ready. Add your Google Apps Script Web App URL in script.js.";
+
+status.className =
+"form-status error";
+
+return;
+
+}
+
+
+const button =
+form.querySelector(
+".submit-button"
+);
+
+
+const original =
+button.innerHTML;
+
+
+button.disabled =
+true;
+
+button.textContent =
+"SENDING...";
+
+
+try{
+
+await fetch(
+GOOGLE_SCRIPT_URL,
+{
+method:"POST",
+body:new FormData(form),
+mode:"no-cors"
+}
+);
+
+
+form.reset();
+
+
+status.textContent =
+"Thank you. Your enquiry has been sent.";
+
+status.className =
+"form-status success";
+
+
+}catch(error){
+
+console.error(error);
+
+status.textContent =
+"Something went wrong. Please try again.";
+
+status.className =
+"form-status error";
+
+
+}finally{
+
+button.disabled =
+false;
+
+button.innerHTML =
+original;
+
+}
+
+}
+);
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value){
+
+return String(
+value || ""
+).replace(
+/[&<>"']/g,
+char => ({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+}[char])
+);
+
+}
+
+
+function escapeAttribute(value){
+
+return escapeHTML(
+value
+).replace(
+/`/g,
+"&#096;"
+);
+
+}
 
 });
