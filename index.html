@@ -1,207 +1,103 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Shakilstic — Visual Designer creating identities, campaigns, websites and digital experiences.">
-<title>Shakilstic — Visual Designer</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Shakil R. — Visual Designer and Web Creator">
+<title>Shakil R. | Visual Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="cursor-dot"></div>
-<div class="cursor-ring"></div>
 
 <header class="site-header">
-  <div class="wrap nav">
-    <a class="logo" href="#home">SHAKIL<span>.</span></a>
-    <nav>
+  <div class="container nav">
+    <a class="brand" href="#home">SHAKIL <span>R.</span></a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#home">Home</a>
       <a href="#work">Work</a>
-      <a href="#services">Services</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
-    <div class="nav-right">
-      <button class="theme-toggle" id="themeToggle" aria-label="Change theme">
-        <span class="theme-icon">◐</span><span id="themeLabel">AUTO</span>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+        <span id="themeIcon">☾</span>
       </button>
-      <a class="nav-cta" href="#contact">Let's talk <span>↗</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
     </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home">Home</a><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a>
   </div>
 </header>
 
 <main id="home">
-<section class="hero">
-  <div class="wrap hero-grid">
+
+<section class="hero section">
+  <div class="container hero-grid">
+    <div class="hero-visual reveal">
+      <div class="image-frame">
+        <img src="assets/images/profile.jpg" alt="Shakil R." class="profile-image" onerror="this.closest('.image-frame').classList.add('missing')">
+      </div>
+      <div class="hero-line"></div>
+    </div>
     <div class="hero-copy reveal">
-      <p class="eyebrow"><span></span> Independent Visual Designer</p>
-      <h1>Ideas made <em>visible.</em></h1>
-      <p class="hero-intro">I turn ideas into bold visual identities, compelling campaigns and digital experiences built to be remembered.</p>
-      <p class="hero-small">Strategy, art direction and design — brought together to make brands look as good as the ideas behind them.</p>
-      <div class="hero-actions">
-        <a class="button magnetic" href="#work">Explore selected work <b>↓</b></a>
-        <a class="under-link" href="#contact">Have a project? <span>Start a conversation ↗</span></a>
+      <p class="eyebrow">VISUAL DESIGN EXPERT</p>
+      <h1>SHAKIL R.</h1>
+      <h2>Visual Designer &amp; Web Creator</h2>
+      <p class="tagline">Turning ideas into bold brands, compelling visuals, and digital experiences built to be remembered.</p>
+      <p class="body-copy">From visual identity and campaign design to responsive websites, I combine strategy, clarity, and strong aesthetics to create work that feels premium and performs with purpose.</p>
+      <div class="stats">
+        <div><strong>07+</strong><span>Years Experience</span></div>
+        <div><strong>150+</strong><span>Projects</span></div>
+        <div><strong>Multi</strong><span>Platform Experience</span></div>
       </div>
-    </div>
-    <div class="hero-photo reveal reveal-delay">
-      <div class="photo-card">
-        <img src="assets/images/profile.jpg" alt="Shakil">
-        <span class="photo-code">SHK / 01</span>
-        <span class="photo-caption">VISUAL DESIGN<br>ART DIRECTION</span>
-      </div>
-      <div class="photo-orbit one"></div>
-      <div class="photo-orbit two"></div>
-    </div>
-  </div>
-  <div class="wrap hero-footer">
-    <span>Dhaka · Bangladesh</span>
-    <span>Branding / Digital / Editorial / Campaign</span>
-    <span>Scroll to explore ↓</span>
-  </div>
-</section>
-
-<section class="marquee" aria-label="Services">
-  <div class="marquee-track">
-    <span>VISUAL IDENTITY</span><i>✳</i><span>ART DIRECTION</span><i>✳</i><span>WEB DESIGN</span><i>✳</i><span>CAMPAIGN DESIGN</span><i>✳</i>
-    <span>VISUAL IDENTITY</span><i>✳</i><span>ART DIRECTION</span><i>✳</i><span>WEB DESIGN</span><i>✳</i><span>CAMPAIGN DESIGN</span><i>✳</i>
-  </div>
-</section>
-
-<section class="statement section">
-  <div class="wrap">
-    <p class="section-label">01 / APPROACH</p>
-    <h2>Good design is not decoration.<br><span>It gives an idea a point of view.</span></h2>
-    <p class="statement-copy">I care about the part between the brief and the final pixel: the thinking, the choices, the details and the feeling people remember.</p>
-  </div>
-</section>
-
-<section class="work section" id="work">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div><p class="section-label">02 / SELECTED WORK</p><h2>Selected work</h2></div>
-      <p>A collection of design work across books, digital products, campaigns, social content and identities.</p>
-    </div>
-
-    <div class="category-block" data-category="book">
-      <div class="category-head">
-        <h3>Book Cover Design</h3><p>Editorial / Cover Art / Art Direction</p>
-      </div>
-      <div class="project-grid">
-        <article class="project reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/book-1.jpg" alt="Book cover project 1"><span>01</span></div><h4>Editorial Cover / 01</h4><small>Book Cover Design</small></a></article>
-        <article class="project reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/book-2.jpg" alt="Book cover project 2"><span>02</span></div><h4>Editorial Cover / 02</h4><small>Book Cover Design</small></a></article>
-        <article class="project reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/book-3.jpg" alt="Book cover project 3"><span>03</span></div><h4>Editorial Cover / 03</h4><small>Book Cover Design</small></a></article>
-        <article class="project extra reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/book-4.jpg" alt="Book cover project 4"><span>04</span></div><h4>Editorial Cover / 04</h4><small>Book Cover Design</small></a></article>
-        <article class="project extra reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/book-5.jpg" alt="Book cover project 5"><span>05</span></div><h4>Editorial Cover / 05</h4><small>Book Cover Design</small></a></article>
-        <article class="project extra reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/book-6.jpg" alt="Book cover project 6"><span>06</span></div><h4>Editorial Cover / 06</h4><small>Book Cover Design</small></a></article>
-      </div>
-      <button class="show-more" data-target="book">Show more <span>+</span></button>
-    </div>
-
-    <div class="category-block" data-category="web">
-      <div class="category-head"><h3>Web Design & Development</h3><p>UI / UX / Responsive Web / Development</p></div>
-      <div class="project-grid">
-        <article class="project reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/web-1.jpg" alt="Web project 1"><span>01</span></div><h4>Digital Experience / 01</h4><small>Web Design & Development</small></a></article>
-        <article class="project reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/web-2.jpg" alt="Web project 2"><span>02</span></div><h4>Digital Experience / 02</h4><small>Web Design & Development</small></a></article>
-        <article class="project reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/web-3.jpg" alt="Web project 3"><span>03</span></div><h4>Digital Experience / 03</h4><small>Web Design & Development</small></a></article>
-        <article class="project extra reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/web-4.jpg" alt="Web project 4"><span>04</span></div><h4>Digital Experience / 04</h4><small>Web Design & Development</small></a></article>
-      </div>
-      <button class="show-more" data-target="web">Show more <span>+</span></button>
-    </div>
-
-    <div class="category-block" data-category="social">
-      <div class="category-head"><h3>Social Media Poster</h3><p>Campaign / Social / Promotional Visuals</p></div>
-      <div class="project-grid">
-        <article class="project reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/social-1.jpg" alt="Social poster 1"><span>01</span></div><h4>Campaign Visual / 01</h4><small>Social Media Design</small></a></article>
-        <article class="project reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/social-2.jpg" alt="Social poster 2"><span>02</span></div><h4>Campaign Visual / 02</h4><small>Social Media Design</small></a></article>
-        <article class="project reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/social-3.jpg" alt="Social poster 3"><span>03</span></div><h4>Campaign Visual / 03</h4><small>Social Media Design</small></a></article>
-        <article class="project extra reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/social-4.jpg" alt="Social poster 4"><span>04</span></div><h4>Campaign Visual / 04</h4><small>Social Media Design</small></a></article>
-      </div>
-      <button class="show-more" data-target="social">Show more <span>+</span></button>
-    </div>
-
-    <div class="category-block" data-category="logo">
-      <div class="category-head"><h3>Logo Design</h3><p>Identity / Logo Systems / Brand Assets</p></div>
-      <div class="project-grid">
-        <article class="project reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/logo-1.jpg" alt="Logo project 1"><span>01</span></div><h4>Identity System / 01</h4><small>Logo Design</small></a></article>
-        <article class="project reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/logo-2.jpg" alt="Logo project 2"><span>02</span></div><h4>Identity System / 02</h4><small>Logo Design</small></a></article>
-        <article class="project reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/logo-3.jpg" alt="Logo project 3"><span>03</span></div><h4>Identity System / 03</h4><small>Logo Design</small></a></article>
-        <article class="project extra reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/logo-4.jpg" alt="Logo project 4"><span>04</span></div><h4>Identity System / 04</h4><small>Logo Design</small></a></article>
-      </div>
-      <button class="show-more" data-target="logo">Show more <span>+</span></button>
-    </div>
-
-    <div class="category-block" data-category="print">
-      <div class="category-head"><h3>Print Media Design</h3><p>Editorial / Packaging / Print Communication</p></div>
-      <div class="project-grid">
-        <article class="project reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/print-1.jpg" alt="Print project 1"><span>01</span></div><h4>Print Communication / 01</h4><small>Print Media Design</small></a></article>
-        <article class="project reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/print-2.jpg" alt="Print project 2"><span>02</span></div><h4>Print Communication / 02</h4><small>Print Media Design</small></a></article>
-        <article class="project reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/print-3.jpg" alt="Print project 3"><span>03</span></div><h4>Print Communication / 03</h4><small>Print Media Design</small></a></article>
-        <article class="project extra reveal"><a href="#"><div class="project-image"><img src="assets/images/projects/print-4.jpg" alt="Print project 4"><span>04</span></div><h4>Print Communication / 04</h4><small>Print Media Design</small></a></article>
-      </div>
-      <button class="show-more" data-target="print">Show more <span>+</span></button>
+      <a class="button magnetic" href="#work">View My Work <span>↗</span></a>
     </div>
   </div>
 </section>
 
-<section class="testimonials section">
-  <div class="wrap">
-    <div class="section-head reveal"><div><p class="section-label">03 / CLIENT NOTES</p><h2>What clients say</h2></div><p>Good work is collaborative. Here are a few words from people I've worked with.</p></div>
-    <div class="quote-grid">
-      <article class="quote reveal"><div>★★★★★</div><blockquote>“Clean, thoughtful and very easy to work with. The final direction felt stronger than the initial brief.”</blockquote><p>— Client / Creative Project</p></article>
-      <article class="quote reveal"><div>★★★★★</div><blockquote>“Great attention to detail and a strong understanding of how design should communicate.”</blockquote><p>— Client / Brand Project</p></article>
-      <article class="quote reveal"><div>★★★★★</div><blockquote>“Fast iterations, strong concepts and a polished final result. Would definitely collaborate again.”</blockquote><p>— Client / Digital Project</p></article>
+<section class="intro section reveal">
+  <div class="container split-intro">
+    <p class="eyebrow">SELECTED WORK</p>
+    <p class="intro-note">A selection of visual identities, campaigns, digital experiences and print work crafted with clarity, character and purpose.</p>
+  </div>
+</section>
+
+<div id="portfolio"></div>
+
+<section class="about section reveal" id="about">
+  <div class="container about-grid">
+    <div><p class="eyebrow">BEYOND THE PIXELS.</p><h2>Design that has a reason.</h2></div>
+    <div>
+      <p class="body-copy">Good design is not decoration. It is a way to make an idea clearer, more memorable and easier to act on. I focus on strong visual systems, useful hierarchy and details that make the final experience feel considered.</p>
+      <div class="mini-stats"><strong>07+ <small>YEARS</small></strong><strong>150+ <small>PROJECTS</small></strong></div>
     </div>
   </div>
 </section>
 
-<section class="about section" id="about">
-  <div class="wrap about-grid">
-    <div class="reveal"><p class="section-label">04 / BEYOND THE PIXELS</p><h2>Design with<br><em>purpose.</em></h2></div>
-    <div class="about-copy reveal reveal-delay">
-      <p class="lead">I’m Shakil — a visual designer who enjoys turning a rough idea into something clear, confident and memorable.</p>
-      <p>My work moves between branding, editorial, campaign design and digital experiences. I care about the details, but always keep the bigger idea in view.</p>
-      <div class="facts"><div><strong>07+</strong><span>Years experience</span></div><div><strong>150+</strong><span>Projects</span></div><div><strong>Global</strong><span>Client experience</span></div></div>
+<section class="contact section reveal" id="contact">
+  <div class="container contact-box">
+    <div>
+      <p class="eyebrow">HAVE A PROJECT?</p>
+      <h2>LET'S BUILD SOMETHING GREAT.</h2>
+      <p class="body-copy">Tell me what you are working on, what you need and how I can help. Your message will be sent to the project inquiry sheet.</p>
     </div>
-  </div>
-</section>
-
-<section class="working section">
-  <div class="wrap">
-    <div class="section-head centered reveal"><div><p class="section-label">05 / CURRENTLY WORKING ON</p><h2>Available for selected projects</h2></div></div>
-    <div class="availability reveal">
-      <span>Brand identities</span><span>Book covers</span><span>Web design</span><span>Campaigns</span><span>Creative direction</span><span>Social visuals</span>
-    </div>
-  </div>
-</section>
-
-<section class="contact section" id="contact">
-  <div class="wrap contact-box">
-    <div class="contact-intro reveal">
-      <p class="section-label">06 / LET'S WORK TOGETHER</p>
-      <h2>Tell me what<br><em>you're building.</em></h2>
-      <p>Have a project, collaboration or design challenge in mind? Send the details. I’ll receive your message and email address directly.</p>
-      <div class="contact-meta"><span>Usually reply within 1–2 business days</span><span>Available worldwide</span></div>
-    </div>
-
-    <form id="contactForm" class="contact-form reveal" novalidate>
-      <label>Name<input name="name" type="text" placeholder="Your name" required></label>
-      <label>Email<input name="email" type="email" placeholder="you@example.com" required></label>
-      <label>What do you need?<select name="service"><option>Brand Identity</option><option>Book Cover Design</option><option>Web Design</option><option>Social Media Design</option><option>Print Media Design</option><option>Other</option></select></label>
-      <label>Tell me about the project<textarea name="message" rows="6" placeholder="A short description of your project..." required></textarea></label>
-      <input class="honeypot" name="website" tabindex="-1" autocomplete="off">
-      <button class="submit-button magnetic" type="submit">Send enquiry <span>↗</span></button>
-      <p class="form-status" id="formStatus" role="status"></p>
+    <form id="contactForm">
+      <label>Name<input name="name" required placeholder="Your name"></label>
+      <label>Email<input type="email" name="email" required placeholder="you@email.com"></label>
+      <label>Project / Message<textarea name="message" required rows="5" placeholder="Tell me about your project..."></textarea></label>
+      <button class="button" type="submit">Send Inquiry <span>↗</span></button>
+      <p class="form-status" id="formStatus"></p>
     </form>
   </div>
 </section>
+
 </main>
 
-<footer>
-  <div class="wrap footer-inner"><span>© <span id="year"></span> Shakilstic</span><span>Visual Designer / Creative</span><a href="#home">Back to top ↑</a></div>
-</footer>
-
+<footer><div class="container"><p>© <span id="year"></span> Shakilstic. All Rights Reserved.</p></div></footer>
 <script src="js/script.js"></script>
 </body>
 </html>
