@@ -8,16 +8,14 @@
 
     <meta
         name="description"
-        content="Shakil R. — Visual Design Expert specializing in book covers, branding, social media design, print media and web design."
+        content="Shakil R. — Visual Design Expert, Graphic Designer and Web Creator."
     >
-
-    <meta name="theme-color" content="#0b0b0b">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap"
         rel="stylesheet"
     >
 
@@ -26,106 +24,89 @@
 
 <body>
 
-<div class="site-noise"></div>
+<!-- =====================================================
+     CUSTOM CURSOR
+===================================================== -->
 
-<!-- ================= NAVIGATION ================= -->
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
 
-<header class="site-header" id="top">
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="site-header">
 
     <div class="nav-wrap">
 
-        <a href="#home" class="brand">
+        <a href="#home" class="logo">
             SHAKIL <span>R.</span>
         </a>
 
-        <nav class="desktop-nav">
-            <a href="#home">Home</a>
-            <a href="#work">Work</a>
-            <a href="#about">About</a>
-            <a href="#profiles">Profiles</a>
-            <a href="#contact">Contact</a>
+        <nav class="main-nav">
+
+            <a href="#home">HOME</a>
+            <a href="#work">WORK</a>
+            <a href="#about">ABOUT</a>
+            <a href="#profiles">PROFILES</a>
+            <a href="#contact">CONTACT</a>
+
         </nav>
 
-        <div class="nav-actions">
-
-            <button
-                class="theme-toggle"
-                id="themeToggle"
-                aria-label="Toggle theme"
-                type="button"
-            >
-                <svg class="sun-icon" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="4"></circle>
-                    <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
-                </svg>
-
-                <svg class="moon-icon" viewBox="0 0 24 24">
-                    <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.7 6.7 0 0 0 21 12.8Z"></path>
-                </svg>
-            </button>
-
-            <button
-                class="mobile-menu-btn"
-                id="mobileMenuBtn"
-                aria-label="Open menu"
-                type="button"
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
-        </div>
+        <!-- ONLY ICON — NO LIGHT/DARK TEXT -->
+        <button
+            class="theme-toggle"
+            id="themeToggle"
+            aria-label="Toggle theme"
+        >
+            <span class="theme-icon">☼</span>
+        </button>
 
     </div>
-
-    <nav class="mobile-nav" id="mobileNav">
-        <a href="#home">Home</a>
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
-        <a href="#profiles">Profiles</a>
-        <a href="#contact">Contact</a>
-    </nav>
 
 </header>
 
 
 <main>
 
-<!-- ================= HERO ================= -->
 
-<section class="hero section" id="home">
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero" id="home">
+
+    <div class="hero-decoration hero-circle one"></div>
+    <div class="hero-decoration hero-circle two"></div>
 
     <div class="hero-grid">
 
-        <div class="hero-photo reveal">
+        <div class="hero-photo-wrap">
 
-            <div class="photo-frame">
+            <div class="hero-photo">
 
                 <img
-                    id="profileImage"
-                    src=""
+                    src="assets/images/profile.jpg"
                     alt="Shakil R."
-                    loading="eager"
                     fetchpriority="high"
                 >
 
-                <div class="photo-orbit orbit-one"></div>
-                <div class="photo-orbit orbit-two"></div>
+                <div class="photo-mark">
+                    <span>VISUAL DESIGN</span>
+                    <span>ART DIRECTION</span>
+                </div>
 
-            </div>
-
-            <div class="photo-tag">
-                <span>VISUAL DESIGN</span>
-                <span>EXPERT</span>
             </div>
 
         </div>
 
 
-        <div class="hero-content reveal">
+        <div class="hero-content">
 
-            <p class="eyebrow">VISUAL DESIGN EXPERT</p>
+            <div class="eyebrow">
+                VISUAL DESIGN EXPERT
+            </div>
 
             <h1>
                 SHAKIL <span>R.</span>
@@ -140,36 +121,37 @@
                 and digital experiences built to be remembered.
             </p>
 
-            <p class="hero-copy">
+            <p class="hero-description">
                 From visual identity and campaign design to responsive
-                websites, I combine strategy, clarity, and strong aesthetics
-                to create work that feels premium and performs with purpose.
+                websites, I combine strategy, clarity, and strong
+                aesthetics to create work that feels premium and
+                performs with purpose.
             </p>
 
 
             <div class="hero-stats">
 
                 <div>
-                    <strong>7+</strong>
-                    <span>Years Experience</span>
+                    <strong>07+</strong>
+                    <small>YEARS EXPERIENCE</small>
                 </div>
 
                 <div>
                     <strong>150+</strong>
-                    <span>Projects</span>
+                    <small>PROJECTS</small>
                 </div>
 
                 <div>
-                    <strong>Multi</strong>
-                    <span>Platform Experience</span>
+                    <strong>MULTI</strong>
+                    <small>PLATFORM EXPERIENCE</small>
                 </div>
 
             </div>
 
 
-            <a href="#work" class="primary-btn">
-                <span>View My Work</span>
-                <span class="arrow">↗</span>
+            <a href="#work" class="primary-button">
+                VIEW MY WORK
+                <span>↗</span>
             </a>
 
         </div>
@@ -179,292 +161,296 @@
 </section>
 
 
-<!-- ================= WORK INTRO ================= -->
+<!-- =====================================================
+     INTRO / WORK
+===================================================== -->
 
-<section class="work-intro section reveal">
+<section class="intro-strip" id="work">
 
-    <div class="section-label">
-        SELECTED WORK
-    </div>
+    <div class="container intro-grid">
 
-    <p>
-        A curated selection of visual identities, campaigns,
-        digital experiences and print work crafted with clarity,
-        character and purpose.
-    </p>
-
-</section>
-
-
-<!-- ================= PORTFOLIO ================= -->
-
-<section id="work" class="portfolio-section section">
-
-    <!-- BOOK COVER -->
-
-    <div
-        class="portfolio-category"
-        data-category="book"
-        data-prefix="B"
-        data-title="Book Cover Design"
-        data-description="Your cover gets one chance to make a first impression. I design bold, genre-aware covers that spark curiosity, communicate value instantly, and make the right reader want to pick up your book."
-    >
-
-        <div class="category-heading reveal">
-
-            <div>
-                <p class="eyebrow">01 / BOOKS</p>
-                <h2>BOOK COVER<br><span>DESIGN.</span></h2>
-            </div>
-
-            <p class="category-description"></p>
-
+        <div class="eyebrow">
+            SELECTED WORK
         </div>
-
-        <div class="project-grid"></div>
-
-        <button class="show-more-btn">
-            <span>SHOW MORE</span>
-            <span class="plus">+</span>
-        </button>
-
-    </div>
-
-
-    <!-- WEB DESIGN -->
-
-    <div
-        class="portfolio-category"
-        data-category="web"
-        data-prefix="W"
-        data-title="Web Design & Develop"
-        data-description="A good website should look impressive and quietly do the selling for you. I build clean, responsive experiences that guide visitors naturally, strengthen trust, and turn attention into action."
-    >
-
-        <div class="category-heading reveal">
-
-            <div>
-                <p class="eyebrow">02 / DIGITAL</p>
-                <h2>WEB DESIGN<br><span>& DEVELOP.</span></h2>
-            </div>
-
-            <p class="category-description"></p>
-
-        </div>
-
-        <div class="project-grid"></div>
-
-        <button class="show-more-btn">
-            <span>SHOW MORE</span>
-            <span class="plus">+</span>
-        </button>
-
-    </div>
-
-
-    <!-- SOCIAL MEDIA -->
-
-    <div
-        class="portfolio-category"
-        data-category="social"
-        data-prefix="S"
-        data-title="Social Media Poster"
-        data-description="In a crowded feed, you have seconds to be noticed. I create sharp, brand-focused social visuals that stop the scroll, deliver the message fast, and make your business look instantly more credible."
-    >
-
-        <div class="category-heading reveal">
-
-            <div>
-                <p class="eyebrow">03 / SOCIAL</p>
-                <h2>SOCIAL MEDIA<br><span>POSTER.</span></h2>
-            </div>
-
-            <p class="category-description"></p>
-
-        </div>
-
-        <div class="project-grid"></div>
-
-        <button class="show-more-btn">
-            <span>SHOW MORE</span>
-            <span class="plus">+</span>
-        </button>
-
-    </div>
-
-
-    <!-- LOGO -->
-
-    <div
-        class="portfolio-category"
-        data-category="logo"
-        data-prefix="L"
-        data-title="Logo Design"
-        data-description="A memorable identity starts with a mark that feels unmistakably yours. I create distinctive, versatile logos built to give brands a confident and recognizable visual presence."
-    >
-
-        <div class="category-heading reveal">
-
-            <div>
-                <p class="eyebrow">04 / IDENTITY</p>
-                <h2>LOGO<br><span>DESIGN.</span></h2>
-            </div>
-
-            <p class="category-description"></p>
-
-        </div>
-
-        <div class="project-grid"></div>
-
-        <button class="show-more-btn">
-            <span>SHOW MORE</span>
-            <span class="plus">+</span>
-        </button>
-
-    </div>
-
-
-    <!-- PRINT -->
-
-    <div
-        class="portfolio-category"
-        data-category="print"
-        data-prefix="P"
-        data-title="Print Media Design"
-        data-description="From T-shirts and food packaging to menus, banners, and promotional materials, I create print-ready designs that carry your brand confidently from the screen into the real world."
-    >
-
-        <div class="category-heading reveal">
-
-            <div>
-                <p class="eyebrow">05 / PRINT</p>
-                <h2>PRINT MEDIA<br><span>DESIGN.</span></h2>
-            </div>
-
-            <p class="category-description"></p>
-
-        </div>
-
-        <div class="project-grid"></div>
-
-        <button class="show-more-btn">
-            <span>SHOW MORE</span>
-            <span class="plus">+</span>
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- ================= ACTIVE CLIENTS ================= -->
-
-<section class="active-section section" id="profiles">
-
-    <div class="section-heading centered reveal">
-
-        <p class="eyebrow">CURRENTLY WORKING ON</p>
-
-        <h2>
-            WHERE I'M<br>
-            <span>ACTIVE.</span>
-        </h2>
-
-    </div>
-
-
-    <div class="active-slider reveal">
-
-        <button
-            class="slider-arrow prev"
-            id="activePrev"
-            aria-label="Previous"
-        >
-            ←
-        </button>
-
-        <div class="active-window">
-
-            <div class="active-track" id="activeTrack"></div>
-
-        </div>
-
-        <button
-            class="slider-arrow next"
-            id="activeNext"
-            aria-label="Next"
-        >
-            →
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- ================= CLIENTS SAY ================= -->
-
-<section class="testimonials section">
-
-    <div class="section-heading reveal">
-
-        <p class="eyebrow">WHAT CLIENTS SAY</p>
-
-        <h2>
-            KIND<br>
-            <span>WORDS.</span>
-        </h2>
 
         <p>
-            The strongest proof is what clients say after the project
-            is finished. These words come from people who trusted me
-            with their ideas—and left with work they were proud of.
+            A curated selection of visual identities, campaigns,
+            digital experiences and print work crafted with clarity,
+            character and purpose.
         </p>
 
     </div>
 
+</section>
 
-    <div class="testimonial-grid" id="testimonialGrid">
 
-        <!-- Testimonials are generated by JS -->
+<!-- =====================================================
+     PORTFOLIO
+===================================================== -->
+
+<section class="portfolio-section">
+
+    <div class="container">
+
+        <!-- BOOK COVERS -->
+
+        <div class="portfolio-category">
+
+            <div class="category-heading">
+
+                <div>
+                    <div class="eyebrow">01 / BOOKS</div>
+
+                    <h2>
+                        BOOK COVER<br>
+                        DESIGN<span>.</span>
+                    </h2>
+                </div>
+
+                <p>
+                    Your cover gets one chance to make a first impression.
+                    I design bold, genre-aware covers that spark curiosity,
+                    communicate value instantly, and make the right reader
+                    want to pick up your book.
+                </p>
+
+            </div>
+
+
+            <div
+                class="project-grid image-grid"
+                id="bookGrid"
+                data-type="B"
+                data-count="20"
+            ></div>
+
+        </div>
+
+
+        <!-- WEB DESIGN -->
+
+        <div class="portfolio-category">
+
+            <div class="category-heading">
+
+                <div>
+                    <div class="eyebrow">02 / DIGITAL</div>
+
+                    <h2>
+                        WEB DESIGN<br>
+                        & DEVELOP<span>.</span>
+                    </h2>
+                </div>
+
+                <p>
+                    A good website should look impressive and quietly do
+                    the selling for you. I build clean, responsive
+                    experiences that guide visitors naturally, strengthen
+                    trust, and turn attention into action.
+                </p>
+
+            </div>
+
+
+            <div
+                class="project-grid image-grid"
+                id="webGrid"
+                data-type="W"
+                data-count="20"
+            ></div>
+
+        </div>
+
+
+        <!-- SOCIAL MEDIA -->
+
+        <div class="portfolio-category">
+
+            <div class="category-heading">
+
+                <div>
+                    <div class="eyebrow">03 / SOCIAL</div>
+
+                    <h2>
+                        SOCIAL MEDIA<br>
+                        POSTER<span>.</span>
+                    </h2>
+
+                </div>
+
+                <p>
+                    In a crowded feed, you have seconds to be noticed.
+                    I create sharp, brand-focused social visuals that stop
+                    the scroll, deliver the message fast, and make your
+                    business look instantly more credible.
+                </p>
+
+            </div>
+
+
+            <div
+                class="project-grid image-grid"
+                id="socialGrid"
+                data-type="S"
+                data-count="20"
+            ></div>
+
+        </div>
+
+
+        <!-- LOGO -->
+
+        <div class="portfolio-category">
+
+            <div class="category-heading">
+
+                <div>
+                    <div class="eyebrow">04 / IDENTITY</div>
+
+                    <h2>
+                        LOGO<br>
+                        DESIGN<span>.</span>
+                    </h2>
+
+                </div>
+
+                <p>
+                    A memorable identity starts with a mark that feels
+                    unmistakably yours. I create distinctive, versatile
+                    logos built to give brands a confident and recognizable
+                    visual presence.
+                </p>
+
+            </div>
+
+
+            <div
+                class="project-grid image-grid logo-grid"
+                id="logoGrid"
+                data-type="L"
+                data-count="20"
+            ></div>
+
+        </div>
+
+
+        <!-- PRINT -->
+
+        <div class="portfolio-category">
+
+            <div class="category-heading">
+
+                <div>
+                    <div class="eyebrow">05 / PRINT</div>
+
+                    <h2>
+                        PRINT MEDIA<br>
+                        DESIGN<span>.</span>
+                    </h2>
+
+                </div>
+
+                <p>
+                    From T-shirts and food packaging to menus, banners,
+                    and promotional materials, I create print-ready designs
+                    that carry your brand confidently from the screen into
+                    the real world.
+                </p>
+
+            </div>
+
+
+            <div
+                class="project-grid image-grid"
+                id="printGrid"
+                data-type="P"
+                data-count="20"
+            ></div>
+
+        </div>
 
     </div>
 
 </section>
 
 
-<!-- ================= BEYOND PIXELS ================= -->
+<!-- =====================================================
+     CLIENT TESTIMONIALS
+===================================================== -->
 
-<section class="about-section section" id="about">
+<section class="testimonials-section" id="testimonials">
 
-    <div class="about-grid reveal">
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <div class="eyebrow">
+                    WHAT CLIENTS SAY
+                </div>
+
+                <h2>
+                    TRUSTED BY<br>
+                    PEOPLE<span>.</span>
+                </h2>
+
+            </div>
+
+            <p>
+                The strongest proof is what clients say after the project
+                is finished. These words come from people who trusted me
+                with their ideas—and left with work they were proud to
+                put into the world.
+            </p>
+
+        </div>
+
+
+        <div class="testimonial-grid" id="testimonialGrid"></div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     BEYOND THE PIXELS
+===================================================== -->
+
+<section class="about-section" id="about">
+
+    <div class="container about-grid">
 
         <div>
 
-            <p class="eyebrow">BEYOND THE PIXELS</p>
+            <div class="eyebrow">
+                BEYOND THE PIXELS.
+            </div>
 
             <h2>
                 DESIGN THAT<br>
-                HAS A <span>REASON.</span>
+                HAS A<br>
+                REASON<span>.</span>
             </h2>
 
         </div>
 
 
-        <div class="about-copy">
+        <div class="about-content">
 
             <p>
-                I'm a multidisciplinary designer with an obsessive focus
-                on quality. I don't just design visuals—I build digital
-                landmarks. My philosophy is simple: if it doesn't evoke
-                emotion, it's just pixels.
+                I'm a multidisciplinary designer with an obsessive
+                focus on quality. I don't just design visuals—I build
+                digital landmarks. My philosophy is simple: if it doesn't
+                evoke emotion, it's just pixels.
             </p>
 
             <p>
-                With over 7 years of experience working with startups and
-                established brands, I've learned that the best design is
-                invisible—it simply works, feels right, and leaves a
-                lasting impression.
+                With over 7 years of experience working with startups
+                and established brands, I've learned that the best
+                design is invisible—it simply works, feels right,
+                and leaves a lasting impression.
             </p>
 
 
@@ -472,12 +458,12 @@
 
                 <div>
                     <strong>07+</strong>
-                    <span>Years Experience</span>
+                    <small>YEARS</small>
                 </div>
 
                 <div>
                     <strong>150+</strong>
-                    <span>Projects</span>
+                    <small>PROJECTS</small>
                 </div>
 
             </div>
@@ -489,15 +475,77 @@
 </section>
 
 
-<!-- ================= CONTACT ================= -->
+<!-- =====================================================
+     CURRENTLY WORKING ON
+===================================================== -->
 
-<section class="contact-section section" id="contact">
+<section class="profiles-section" id="profiles">
 
-    <div class="contact-card reveal">
+    <div class="container">
+
+        <div class="center-heading">
+
+            <div class="eyebrow">
+                CURRENTLY WORKING ON
+            </div>
+
+            <h2>
+                WHERE I'M<br>
+                <span>ACTIVE</span>
+            </h2>
+
+        </div>
+
+
+        <div class="profile-slider">
+
+            <button
+                class="slider-arrow prev"
+                id="profilePrev"
+                aria-label="Previous profiles"
+            >
+                ←
+            </button>
+
+
+            <div class="profile-window">
+
+                <div
+                    class="profile-track"
+                    id="profileTrack"
+                ></div>
+
+            </div>
+
+
+            <button
+                class="slider-arrow next"
+                id="profileNext"
+                aria-label="Next profiles"
+            >
+                →
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section class="contact-section" id="contact">
+
+    <div class="container contact-box">
 
         <div class="contact-copy">
 
-            <p class="eyebrow">LET'S WORK TOGETHER</p>
+            <div class="eyebrow">
+                LET'S WORK TOGETHER
+            </div>
 
             <h2>
                 LET'S BUILD<br>
@@ -516,116 +564,65 @@
                 YOUR MESSAGE GOES DIRECTLY TO THE PROJECT ENQUIRY SHEET.
             </small>
 
-
-            <!-- SOCIAL ICONS -->
-
-            <div class="social-links">
-
-                <a
-                    href="#"
-                    target="_blank"
-                    rel="noopener"
-                    class="social-icon"
-                    data-social="behance"
-                    aria-label="Behance"
-                >
-                    Be
-                </a>
-
-                <a
-                    href="#"
-                    target="_blank"
-                    rel="noopener"
-                    class="social-icon"
-                    data-social="linkedin"
-                    aria-label="LinkedIn"
-                >
-                    in
-                </a>
-
-                <a
-                    href="#"
-                    target="_blank"
-                    rel="noopener"
-                    class="social-icon"
-                    data-social="x"
-                    aria-label="X"
-                >
-                    X
-                </a>
-
-            </div>
-
         </div>
 
 
-        <!-- FORM -->
-
         <form
-            id="contactForm"
             class="contact-form"
+            id="contactForm"
         >
 
-            <div class="form-group">
-
-                <label for="name">NAME</label>
+            <label>
+                NAME
 
                 <input
                     type="text"
-                    id="name"
                     name="name"
                     placeholder="Your name"
                     required
                 >
 
-            </div>
+            </label>
 
 
-            <div class="form-group">
-
-                <label for="email">EMAIL</label>
+            <label>
+                EMAIL
 
                 <input
                     type="email"
-                    id="email"
                     name="email"
                     placeholder="you@email.com"
                     required
                 >
 
-            </div>
+            </label>
 
 
-            <div class="form-group">
-
-                <label for="message">PROJECT / MESSAGE</label>
+            <label>
+                PROJECT / MESSAGE
 
                 <textarea
-                    id="message"
                     name="message"
                     placeholder="Tell me about your project..."
                     required
                 ></textarea>
 
-            </div>
+            </label>
 
 
-            <button
-                class="submit-btn"
-                type="submit"
-            >
+            <button type="submit" class="submit-button">
 
-                <span>SEND ENQUIRY</span>
+                SEND ENQUIRY
 
                 <span>↗</span>
 
             </button>
 
 
-            <p
+            <div
                 class="form-status"
                 id="formStatus"
-            ></p>
+            ></div>
 
         </form>
 
@@ -633,41 +630,88 @@
 
 </section>
 
+
 </main>
 
 
-<!-- ================= FOOTER ================= -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer class="site-footer">
 
-    <div class="footer-line"></div>
+    <div class="container footer-top">
 
-    <div class="footer-content">
+        <div class="footer-socials">
 
-        <p>
-            © 2026 Shakilistic. All Rights Reserved.
-        </p>
+            <!-- ADD YOUR LINKS IN script.js -->
 
-        <a href="#home" class="footer-top-link">
-            BACK TO TOP
-            <span>↑</span>
-        </a>
+            <a
+                href="#"
+                class="social-icon"
+                id="behanceLink"
+                target="_blank"
+                rel="noopener"
+                aria-label="Behance"
+            >
+                Be
+            </a>
+
+
+            <a
+                href="#"
+                class="social-icon"
+                id="linkedinLink"
+                target="_blank"
+                rel="noopener"
+                aria-label="LinkedIn"
+            >
+                in
+            </a>
+
+
+            <a
+                href="#"
+                class="social-icon"
+                id="xLink"
+                target="_blank"
+                rel="noopener"
+                aria-label="X"
+            >
+                X
+            </a>
+
+        </div>
+
+
+        <button
+            class="back-top"
+            id="backTop"
+            aria-label="Back to top"
+        >
+
+            <span>BACK TO TOP</span>
+
+            <b>↑</b>
+
+        </button>
+
+    </div>
+
+
+    <div class="container footer-bottom">
+
+        <span>
+            © 2026 Shakil R. All Rights Reserved.
+        </span>
+
+        <span>
+            VISUAL DESIGN EXPERT
+        </span>
 
     </div>
 
 </footer>
-
-
-<!-- ================= FLOATING TOP BUTTON ================= -->
-
-<button
-    class="back-top"
-    id="backTop"
-    aria-label="Back to top"
-    type="button"
->
-    ↑
-</button>
 
 
 <script src="js/script.js" defer></script>
