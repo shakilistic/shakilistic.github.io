@@ -1,1185 +1,676 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+    <title>Shakil R. — Visual Design Expert</title>
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="Shakil R. — Visual Design Expert specializing in book covers, branding, social media design, print media and web design."
+    >
 
-<meta
-name="description"
-content="Shakil R. — Visual Design Expert and creative designer.">
+    <meta name="theme-color" content="#0b0b0b">
 
-<title>Shakilstic — Visual Design Expert</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet"
+    >
 
-<link
-rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link
-href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
-rel="stylesheet">
-
-<link
-rel="stylesheet"
-href="css/style.css">
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 
 <body>
 
+<div class="site-noise"></div>
 
-<!-- CUSTOM CURSOR -->
+<!-- ================= NAVIGATION ================= -->
 
-<div class="cursor-dot"></div>
-<div class="cursor-ring"></div>
+<header class="site-header" id="top">
 
+    <div class="nav-wrap">
 
+        <a href="#home" class="brand">
+            SHAKIL <span>R.</span>
+        </a>
 
-<!-- HEADER -->
+        <nav class="desktop-nav">
+            <a href="#home">Home</a>
+            <a href="#work">Work</a>
+            <a href="#about">About</a>
+            <a href="#profiles">Profiles</a>
+            <a href="#contact">Contact</a>
+        </nav>
 
-<header class="site-header">
+        <div class="nav-actions">
 
-<div class="wrap nav">
+            <button
+                class="theme-toggle"
+                id="themeToggle"
+                aria-label="Toggle theme"
+                type="button"
+            >
+                <svg class="sun-icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
+                </svg>
 
+                <svg class="moon-icon" viewBox="0 0 24 24">
+                    <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.7 6.7 0 0 0 21 12.8Z"></path>
+                </svg>
+            </button>
 
-<a
-href="#home"
-class="brand">
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn"
+                aria-label="Open menu"
+                type="button"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
-SHAKIL <span>R.</span>
+        </div>
 
-</a>
+    </div>
 
-
-<nav class="desktop-nav">
-
-<a href="#home">Home</a>
-<a href="#work">Work</a>
-<a href="#about">About</a>
-<a href="#currently-working">Profiles</a>
-<a href="#contact">Contact</a>
-
-</nav>
-
-
-<div class="nav-actions">
-
-
-<button
-class="theme-toggle"
-id="themeToggle"
-type="button"
-aria-label="Change theme">
-
-<span id="themeIcon">☾</span>
-
-</button>
-
-
-<button
-class="menu-toggle"
-id="menuToggle"
-type="button"
-aria-label="Open menu">
-
-☰
-
-</button>
-
-
-</div>
-
-</div>
-
-
-<nav
-class="mobile-menu"
-id="mobileMenu">
-
-<a href="#home">Home</a>
-<a href="#work">Work</a>
-<a href="#about">About</a>
-<a href="#currently-working">Profiles</a>
-<a href="#contact">Contact</a>
-
-</nav>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#home">Home</a>
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#profiles">Profiles</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
 </header>
 
 
+<main>
 
+<!-- ================= HERO ================= -->
 
-<main id="home">
+<section class="hero section" id="home">
 
+    <div class="hero-grid">
 
+        <div class="hero-photo reveal">
 
-<!-- =====================================================
-HERO
-===================================================== -->
+            <div class="photo-frame">
 
-<section class="hero">
+                <img
+                    id="profileImage"
+                    src=""
+                    alt="Shakil R."
+                    loading="eager"
+                    fetchpriority="high"
+                >
 
+                <div class="photo-orbit orbit-one"></div>
+                <div class="photo-orbit orbit-two"></div>
 
-<div class="wrap hero-grid">
+            </div>
 
+            <div class="photo-tag">
+                <span>VISUAL DESIGN</span>
+                <span>EXPERT</span>
+            </div>
 
-<div class="hero-visual reveal">
+        </div>
 
 
-<div class="hero-image-wrap">
+        <div class="hero-content reveal">
 
+            <p class="eyebrow">VISUAL DESIGN EXPERT</p>
 
-<img
-src="assets/images/profile.jpg"
-alt="Shakil R."
-class="hero-image"
-fetchpriority="high">
+            <h1>
+                SHAKIL <span>R.</span>
+            </h1>
 
+            <h2>
+                Visual Design Expert
+            </h2>
 
-<div class="image-label">
-SHK / 01
-</div>
+            <p class="hero-lead">
+                Turning ideas into bold brands, compelling visuals,
+                and digital experiences built to be remembered.
+            </p>
 
+            <p class="hero-copy">
+                From visual identity and campaign design to responsive
+                websites, I combine strategy, clarity, and strong aesthetics
+                to create work that feels premium and performs with purpose.
+            </p>
 
-<div class="image-caption">
 
-VISUAL DESIGN<br>
-ART DIRECTION
+            <div class="hero-stats">
 
-</div>
+                <div>
+                    <strong>7+</strong>
+                    <span>Years Experience</span>
+                </div>
 
+                <div>
+                    <strong>150+</strong>
+                    <span>Projects</span>
+                </div>
 
-</div>
+                <div>
+                    <strong>Multi</strong>
+                    <span>Platform Experience</span>
+                </div>
 
+            </div>
 
-<div class="orbit orbit-one"></div>
 
-<div class="orbit orbit-two"></div>
+            <a href="#work" class="primary-btn">
+                <span>View My Work</span>
+                <span class="arrow">↗</span>
+            </a>
 
+        </div>
 
-</div>
-
-
-
-<div class="hero-content">
-
-
-<p class="hero-expert reveal">
-
-VISUAL DESIGN EXPERT
-
-</p>
-
-
-<h1 class="hero-title reveal delay-1">
-
-SHAKIL <span>R.</span>
-
-</h1>
-
-
-<p class="hero-tagline reveal delay-2">
-
-Turning ideas into bold brands, compelling visuals,
-and digital experiences built to be remembered.
-
-</p>
-
-
-<p class="hero-description reveal delay-3">
-
-From visual identity and campaign design to responsive
-websites, I combine strategy, clarity, and strong
-aesthetics to create work that feels premium and
-performs with purpose.
-
-</p>
-
-
-<div class="hero-meta reveal delay-4">
-
-<span>
-FREELANCE — FROM $45/HR
-</span>
-
-<span>
-DHAKA · BANGLADESH
-</span>
-
-</div>
-
-
-<div class="hero-actions reveal delay-5">
-
-
-<a
-href="#work"
-class="button magnetic">
-
-VIEW MY WORK
-
-<span>↘</span>
-
-</a>
-
-
-<a
-href="#contact"
-class="simple-link">
-
-START A CONVERSATION ↗
-
-</a>
-
-
-</div>
-
-
-</div>
-
-</div>
-
-
-
-<div class="wrap hero-footer">
-
-<span>
-BRANDING / DIGITAL / EDITORIAL / CAMPAIGN
-</span>
-
-<span>
-SCROLL TO EXPLORE ↓
-</span>
-
-</div>
-
+    </div>
 
 </section>
 
 
+<!-- ================= WORK INTRO ================= -->
 
+<section class="work-intro section reveal">
 
-<!-- =====================================================
-WORK INTRO
-===================================================== -->
+    <div class="section-label">
+        SELECTED WORK
+    </div>
 
-<section class="work-intro">
-
-
-<div class="wrap work-intro-grid">
-
-
-<p class="eyebrow">
-SELECTED WORK
-</p>
-
-
-<p>
-
-A selection of visual identities, campaigns,
-digital experiences and print work crafted with
-clarity, character and purpose.
-
-</p>
-
-
-</div>
+    <p>
+        A curated selection of visual identities, campaigns,
+        digital experiences and print work crafted with clarity,
+        character and purpose.
+    </p>
 
 </section>
 
 
+<!-- ================= PORTFOLIO ================= -->
+
+<section id="work" class="portfolio-section section">
+
+    <!-- BOOK COVER -->
+
+    <div
+        class="portfolio-category"
+        data-category="book"
+        data-prefix="B"
+        data-title="Book Cover Design"
+        data-description="Your cover gets one chance to make a first impression. I design bold, genre-aware covers that spark curiosity, communicate value instantly, and make the right reader want to pick up your book."
+    >
+
+        <div class="category-heading reveal">
+
+            <div>
+                <p class="eyebrow">01 / BOOKS</p>
+                <h2>BOOK COVER<br><span>DESIGN.</span></h2>
+            </div>
+
+            <p class="category-description"></p>
+
+        </div>
+
+        <div class="project-grid"></div>
+
+        <button class="show-more-btn">
+            <span>SHOW MORE</span>
+            <span class="plus">+</span>
+        </button>
+
+    </div>
 
 
-<!-- =====================================================
-PORTFOLIO
-===================================================== -->
+    <!-- WEB DESIGN -->
 
-<section
-class="portfolio"
-id="work">
+    <div
+        class="portfolio-category"
+        data-category="web"
+        data-prefix="W"
+        data-title="Web Design & Develop"
+        data-description="A good website should look impressive and quietly do the selling for you. I build clean, responsive experiences that guide visitors naturally, strengthen trust, and turn attention into action."
+    >
 
+        <div class="category-heading reveal">
 
-<div class="wrap">
+            <div>
+                <p class="eyebrow">02 / DIGITAL</p>
+                <h2>WEB DESIGN<br><span>& DEVELOP.</span></h2>
+            </div>
 
+            <p class="category-description"></p>
 
-<div class="section-heading reveal">
+        </div>
 
+        <div class="project-grid"></div>
 
-<span class="section-number">
-01 / SELECTED WORK
-</span>
+        <button class="show-more-btn">
+            <span>SHOW MORE</span>
+            <span class="plus">+</span>
+        </button>
 
-
-<h2>
-
-DESIGN<br>
-<span>THAT GETS NOTICED.</span>
-
-</h2>
-
-
-<p>
-
-Five disciplines. One goal — create work that
-communicates clearly and leaves a lasting impression.
-
-</p>
+    </div>
 
 
-</div>
+    <!-- SOCIAL MEDIA -->
+
+    <div
+        class="portfolio-category"
+        data-category="social"
+        data-prefix="S"
+        data-title="Social Media Poster"
+        data-description="In a crowded feed, you have seconds to be noticed. I create sharp, brand-focused social visuals that stop the scroll, deliver the message fast, and make your business look instantly more credible."
+    >
+
+        <div class="category-heading reveal">
+
+            <div>
+                <p class="eyebrow">03 / SOCIAL</p>
+                <h2>SOCIAL MEDIA<br><span>POSTER.</span></h2>
+            </div>
+
+            <p class="category-description"></p>
+
+        </div>
+
+        <div class="project-grid"></div>
+
+        <button class="show-more-btn">
+            <span>SHOW MORE</span>
+            <span class="plus">+</span>
+        </button>
+
+    </div>
 
 
+    <!-- LOGO -->
+
+    <div
+        class="portfolio-category"
+        data-category="logo"
+        data-prefix="L"
+        data-title="Logo Design"
+        data-description="A memorable identity starts with a mark that feels unmistakably yours. I create distinctive, versatile logos built to give brands a confident and recognizable visual presence."
+    >
+
+        <div class="category-heading reveal">
+
+            <div>
+                <p class="eyebrow">04 / IDENTITY</p>
+                <h2>LOGO<br><span>DESIGN.</span></h2>
+            </div>
+
+            <p class="category-description"></p>
+
+        </div>
+
+        <div class="project-grid"></div>
+
+        <button class="show-more-btn">
+            <span>SHOW MORE</span>
+            <span class="plus">+</span>
+        </button>
+
+    </div>
 
 
-<!-- BOOK COVER -->
+    <!-- PRINT -->
 
-<section
-class="category"
-data-category="book">
+    <div
+        class="portfolio-category"
+        data-category="print"
+        data-prefix="P"
+        data-title="Print Media Design"
+        data-description="From T-shirts and food packaging to menus, banners, and promotional materials, I create print-ready designs that carry your brand confidently from the screen into the real world."
+    >
 
+        <div class="category-heading reveal">
 
-<div class="category-heading">
+            <div>
+                <p class="eyebrow">05 / PRINT</p>
+                <h2>PRINT MEDIA<br><span>DESIGN.</span></h2>
+            </div>
 
+            <p class="category-description"></p>
 
-<div>
+        </div>
 
-<span class="category-number">
-01
-</span>
+        <div class="project-grid"></div>
 
+        <button class="show-more-btn">
+            <span>SHOW MORE</span>
+            <span class="plus">+</span>
+        </button>
 
-<h3>
-Book Cover Design
-</h3>
-
-</div>
-
-
-<p>
-
-Your cover gets one chance to make a first impression.
-I design bold, genre-aware covers that spark curiosity,
-communicate value instantly, and make the right reader
-want to pick up your book.
-
-</p>
-
-
-</div>
-
-
-<div
-class="project-grid"
-id="bookGrid">
-</div>
-
-
-<button
-class="show-more"
-data-target="bookGrid"
-hidden>
-
-SHOW MORE
-
-<span>+</span>
-
-</button>
-
+    </div>
 
 </section>
 
 
+<!-- ================= ACTIVE CLIENTS ================= -->
+
+<section class="active-section section" id="profiles">
+
+    <div class="section-heading centered reveal">
+
+        <p class="eyebrow">CURRENTLY WORKING ON</p>
+
+        <h2>
+            WHERE I'M<br>
+            <span>ACTIVE.</span>
+        </h2>
+
+    </div>
 
 
-<!-- WEB -->
+    <div class="active-slider reveal">
 
-<section
-class="category"
-data-category="web">
+        <button
+            class="slider-arrow prev"
+            id="activePrev"
+            aria-label="Previous"
+        >
+            ←
+        </button>
 
+        <div class="active-window">
 
-<div class="category-heading">
+            <div class="active-track" id="activeTrack"></div>
 
+        </div>
 
-<div>
+        <button
+            class="slider-arrow next"
+            id="activeNext"
+            aria-label="Next"
+        >
+            →
+        </button>
 
-<span class="category-number">
-02
-</span>
-
-
-<h3>
-Web Design &amp; Develop
-</h3>
-
-</div>
-
-
-<p>
-
-A good website should look impressive and quietly do
-the selling for you. I build clean, responsive
-experiences that guide visitors naturally, strengthen
-trust, and turn attention into action.
-
-</p>
-
-
-</div>
-
-
-<div
-class="project-grid"
-id="webGrid">
-</div>
-
-
-<button
-class="show-more"
-data-target="webGrid"
-hidden>
-
-SHOW MORE
-
-<span>+</span>
-
-</button>
-
+    </div>
 
 </section>
 
 
+<!-- ================= CLIENTS SAY ================= -->
+
+<section class="testimonials section">
+
+    <div class="section-heading reveal">
+
+        <p class="eyebrow">WHAT CLIENTS SAY</p>
+
+        <h2>
+            KIND<br>
+            <span>WORDS.</span>
+        </h2>
+
+        <p>
+            The strongest proof is what clients say after the project
+            is finished. These words come from people who trusted me
+            with their ideas—and left with work they were proud of.
+        </p>
+
+    </div>
 
 
-<!-- SOCIAL POSTER -->
+    <div class="testimonial-grid" id="testimonialGrid">
 
-<section
-class="category"
-data-category="poster">
+        <!-- Testimonials are generated by JS -->
 
-
-<div class="category-heading">
-
-
-<div>
-
-<span class="category-number">
-03
-</span>
-
-
-<h3>
-Social Media Poster
-</h3>
-
-</div>
-
-
-<p>
-
-In a crowded feed, you have seconds to be noticed.
-I create sharp, brand-focused social visuals that stop
-the scroll, deliver the message fast, and make your
-business look instantly more credible.
-
-</p>
-
-
-</div>
-
-
-<div
-class="project-grid"
-id="posterGrid">
-</div>
-
-
-<button
-class="show-more"
-data-target="posterGrid"
-hidden>
-
-SHOW MORE
-
-<span>+</span>
-
-</button>
-
+    </div>
 
 </section>
 
 
+<!-- ================= BEYOND PIXELS ================= -->
+
+<section class="about-section section" id="about">
+
+    <div class="about-grid reveal">
+
+        <div>
+
+            <p class="eyebrow">BEYOND THE PIXELS</p>
+
+            <h2>
+                DESIGN THAT<br>
+                HAS A <span>REASON.</span>
+            </h2>
+
+        </div>
 
 
-<!-- LOGO -->
+        <div class="about-copy">
 
-<section
-class="category"
-data-category="logo">
+            <p>
+                I'm a multidisciplinary designer with an obsessive focus
+                on quality. I don't just design visuals—I build digital
+                landmarks. My philosophy is simple: if it doesn't evoke
+                emotion, it's just pixels.
+            </p>
 
-
-<div class="category-heading">
-
-
-<div>
-
-<span class="category-number">
-04
-</span>
-
-
-<h3>
-Logo Design
-</h3>
-
-</div>
+            <p>
+                With over 7 years of experience working with startups and
+                established brands, I've learned that the best design is
+                invisible—it simply works, feels right, and leaves a
+                lasting impression.
+            </p>
 
 
-<p>
+            <div class="about-stats">
 
-A memorable identity starts with a mark that feels
-unmistakably yours. I create distinctive, versatile
-logos built to give brands a confident and recognizable
-visual presence.
+                <div>
+                    <strong>07+</strong>
+                    <span>Years Experience</span>
+                </div>
 
-</p>
+                <div>
+                    <strong>150+</strong>
+                    <span>Projects</span>
+                </div>
 
+            </div>
 
-</div>
+        </div>
 
-
-<div
-class="project-grid"
-id="logoGrid">
-</div>
-
-
-<button
-class="show-more"
-data-target="logoGrid"
-hidden>
-
-SHOW MORE
-
-<span>+</span>
-
-</button>
-
+    </div>
 
 </section>
 
 
+<!-- ================= CONTACT ================= -->
+
+<section class="contact-section section" id="contact">
+
+    <div class="contact-card reveal">
+
+        <div class="contact-copy">
+
+            <p class="eyebrow">LET'S WORK TOGETHER</p>
+
+            <h2>
+                LET'S BUILD<br>
+                SOMETHING<br>
+                <span>GREAT.</span>
+            </h2>
+
+            <p>
+                Have an idea, a brand to build, or a website that needs
+                a stronger presence? I'm open to creative collaborations
+                across graphic design, visual identity, and website design
+                & development. Let's create something people remember.
+            </p>
+
+            <small>
+                YOUR MESSAGE GOES DIRECTLY TO THE PROJECT ENQUIRY SHEET.
+            </small>
 
 
-<!-- PRINT -->
+            <!-- SOCIAL ICONS -->
 
-<section
-class="category"
-data-category="print">
+            <div class="social-links">
+
+                <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                    class="social-icon"
+                    data-social="behance"
+                    aria-label="Behance"
+                >
+                    Be
+                </a>
+
+                <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                    class="social-icon"
+                    data-social="linkedin"
+                    aria-label="LinkedIn"
+                >
+                    in
+                </a>
+
+                <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                    class="social-icon"
+                    data-social="x"
+                    aria-label="X"
+                >
+                    X
+                </a>
+
+            </div>
+
+        </div>
 
 
-<div class="category-heading">
+        <!-- FORM -->
+
+        <form
+            id="contactForm"
+            class="contact-form"
+        >
+
+            <div class="form-group">
+
+                <label for="name">NAME</label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Your name"
+                    required
+                >
+
+            </div>
 
 
-<div>
+            <div class="form-group">
 
-<span class="category-number">
-05
-</span>
+                <label for="email">EMAIL</label>
 
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@email.com"
+                    required
+                >
 
-<h3>
-Print Media Design
-</h3>
-
-</div>
-
-
-<p>
-
-From T-shirts and food packaging to menus, banners,
-and promotional materials, I create print-ready
-designs that carry your brand confidently from the
-screen into the real world.
-
-</p>
+            </div>
 
 
-</div>
+            <div class="form-group">
+
+                <label for="message">PROJECT / MESSAGE</label>
+
+                <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Tell me about your project..."
+                    required
+                ></textarea>
+
+            </div>
 
 
-<div
-class="project-grid"
-id="printGrid">
-</div>
+            <button
+                class="submit-btn"
+                type="submit"
+            >
+
+                <span>SEND ENQUIRY</span>
+
+                <span>↗</span>
+
+            </button>
 
 
-<button
-class="show-more"
-data-target="printGrid"
-hidden>
+            <p
+                class="form-status"
+                id="formStatus"
+            ></p>
 
-SHOW MORE
+        </form>
 
-<span>+</span>
-
-</button>
-
+    </div>
 
 </section>
-
-
-</div>
-
-</section>
-
-
-
-
-<!-- =====================================================
-CLIENTS
-===================================================== -->
-
-<section
-class="clients"
-id="clients">
-
-
-<div class="wrap">
-
-
-<div class="section-heading split reveal">
-
-
-<div>
-
-<span class="section-number">
-02 / WHAT CLIENTS SAY
-</span>
-
-
-<h2>
-
-WHAT<br>
-<span>CLIENTS SAY.</span>
-
-</h2>
-
-</div>
-
-
-<p>
-
-The strongest proof is what clients say after the
-project is finished. These words come from people
-who trusted me with their ideas.
-
-</p>
-
-
-</div>
-
-
-<div
-class="testimonial-grid"
-id="testimonialGrid">
-</div>
-
-
-<button
-class="show-more"
-id="testimonialMore"
-hidden>
-
-SHOW MORE
-
-<span>+</span>
-
-</button>
-
-
-</div>
-
-</section>
-
-
-
-
-<!-- =====================================================
-ABOUT
-===================================================== -->
-
-<section
-class="about"
-id="about">
-
-
-<div class="wrap about-grid">
-
-
-<div class="about-title reveal">
-
-
-<span class="section-number">
-03 / BEYOND THE PIXELS
-</span>
-
-
-<h2>
-
-BEYOND<br>
-<span>THE PIXELS.</span>
-
-</h2>
-
-
-</div>
-
-
-<div class="about-content reveal delay-1">
-
-
-<p class="about-lead">
-
-I'm a multidisciplinary designer with an obsessive
-focus on quality. I don't just design visuals —
-I build digital landmarks.
-
-</p>
-
-
-<p>
-
-My philosophy is simple: if it doesn't evoke emotion,
-it's just pixels.
-
-</p>
-
-
-<p>
-
-With over 7 years of experience working with startups
-and established brands, I've learned that the best
-design is invisible — it simply works, feels right,
-and leaves a lasting impression.
-
-</p>
-
-
-<div class="facts">
-
-
-<div>
-
-<strong>07+</strong>
-
-<span>
-Years Experience
-</span>
-
-</div>
-
-
-<div>
-
-<strong>150+</strong>
-
-<span>
-Projects
-</span>
-
-</div>
-
-
-<div>
-
-<strong>GLOBAL</strong>
-
-<span>
-Client Experience
-</span>
-
-</div>
-
-
-</div>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-
-
-<!-- =====================================================
-CURRENTLY WORKING
-===================================================== -->
-
-<section
-class="currently-working"
-id="currently-working">
-
-
-<div class="wrap">
-
-
-<div class="section-heading centered reveal">
-
-
-<span class="section-number">
-04 / CURRENTLY WORKING ON
-</span>
-
-
-<h2>
-
-WHERE I'M<br>
-<span>ACTIVE.</span>
-
-</h2>
-
-
-<p>
-
-Selected platforms and clients where I currently
-share work and creative experience.
-
-</p>
-
-
-</div>
-
-
-
-<div class="working-slider reveal">
-
-
-<button
-type="button"
-class="slider-arrow"
-id="workingPrev"
-aria-label="Previous profile">
-
-←
-
-</button>
-
-
-<div
-class="working-display"
-id="workingDisplay">
-
-</div>
-
-
-<button
-type="button"
-class="slider-arrow"
-id="workingNext"
-aria-label="Next profile">
-
-→
-
-</button>
-
-
-</div>
-
-
-<div
-class="working-counter"
-id="workingCounter">
-
-01 / 01
-
-</div>
-
-
-</div>
-
-</section>
-
-
-
-
-<!-- =====================================================
-CONTACT
-===================================================== -->
-
-<section
-class="contact"
-id="contact">
-
-
-<div class="wrap contact-box reveal">
-
-
-<div class="contact-copy">
-
-
-<span class="eyebrow">
-LET'S WORK TOGETHER
-</span>
-
-
-<h2>
-
-LET'S BUILD<br>
-<span>SOMETHING GREAT.</span>
-
-</h2>
-
-
-<p>
-
-Have an idea, a brand to build, or a website that
-needs a stronger presence? I'm open to creative
-collaborations across graphic design, visual identity,
-and website design &amp; development. Let's create
-something people remember.
-
-</p>
-
-
-<span class="contact-note">
-
-YOUR MESSAGE GOES DIRECTLY TO THE PROJECT ENQUIRY SHEET.
-
-</span>
-
-
-</div>
-
-
-
-
-<form id="contactForm">
-
-
-<input
-type="text"
-name="website"
-class="honeypot"
-tabindex="-1"
-autocomplete="off">
-
-
-<label>
-
-NAME
-
-<input
-type="text"
-name="name"
-placeholder="Your name"
-required>
-
-</label>
-
-
-<label>
-
-EMAIL
-
-<input
-type="email"
-name="email"
-placeholder="you@email.com"
-required>
-
-</label>
-
-
-<label>
-
-PROJECT / MESSAGE
-
-<textarea
-name="message"
-placeholder="Tell me about your project..."
-required></textarea>
-
-</label>
-
-
-<button
-type="submit"
-class="button submit-button">
-
-SEND ENQUIRY
-
-<span>↗</span>
-
-</button>
-
-
-<p
-class="form-status"
-id="formStatus">
-</p>
-
-
-</form>
-
-</div>
-
-</section>
-
 
 </main>
 
 
+<!-- ================= FOOTER ================= -->
 
+<footer class="site-footer">
 
-<!-- =====================================================
-FOOTER
-===================================================== -->
+    <div class="footer-line"></div>
 
-<footer>
+    <div class="footer-content">
 
+        <p>
+            © 2026 Shakilistic. All Rights Reserved.
+        </p>
 
-<div class="wrap footer">
+        <a href="#home" class="footer-top-link">
+            BACK TO TOP
+            <span>↑</span>
+        </a>
 
-
-<div class="footer-left">
-
-
-<a
-href="#home"
-class="brand">
-
-SHAKIL <span>R.</span>
-
-</a>
-
-
-<p>
-Visual Designer
-</p>
-
-
-<div class="footer-socials">
-
-
-<a
-href="#"
-class="footer-social"
-aria-label="Behance">
-
-Be
-
-</a>
-
-
-<a
-href="#"
-class="footer-social"
-aria-label="LinkedIn">
-
-in
-
-</a>
-
-
-<a
-href="#"
-class="footer-social"
-aria-label="X">
-
-X
-
-</a>
-
-
-</div>
-
-
-</div>
-
-
-
-<div class="footer-center">
-
-
-<a href="#home">
-Home
-</a>
-
-
-<a href="#work">
-Work
-</a>
-
-
-<a href="#about">
-About
-</a>
-
-
-<a href="#currently-working">
-Profiles
-</a>
-
-
-<a href="#contact">
-Contact
-</a>
-
-
-</div>
-
-
-
-<div class="footer-right">
-
-
-<button
-type="button"
-id="goTop"
-class="go-top">
-
-<span>
-BACK TO TOP
-</span>
-
-<strong>
-↑
-</strong>
-
-</button>
-
-
-</div>
-
-
-<p class="copyright">
-
-© <span id="year"></span>
-Shakilstic. All Rights Reserved.
-
-</p>
-
-
-</div>
+    </div>
 
 </footer>
 
 
+<!-- ================= FLOATING TOP BUTTON ================= -->
 
-<script
-src="js/script.js">
-</script>
+<button
+    class="back-top"
+    id="backTop"
+    aria-label="Back to top"
+    type="button"
+>
+    ↑
+</button>
 
+
+<script src="js/script.js" defer></script>
 
 </body>
 </html>
