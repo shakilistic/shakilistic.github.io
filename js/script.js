@@ -1,1217 +1,649 @@
 /* =========================================================
    SHAKIL R. PORTFOLIO
-   Main JavaScript
-========================================================= */
-
-
-/* =========================================================
-   SETTINGS
-========================================================= */
-
-const CONFIG = {
-
-    /* -----------------------------------------
-       IMAGE FOLDER
-    ----------------------------------------- */
-
-    imageFolder: "assets/images/",
-
-
-    /* -----------------------------------------
-       PROFILE IMAGE
-       Rename your profile image to:
-
-       profile.jpg
-       profile.png
-       profile.webp
-    ----------------------------------------- */
-
-    profileNames: [
-        "profile.jpg",
-        "profile.jpeg",
-        "profile.png",
-        "profile.webp"
-    ],
-
-
-    /* -----------------------------------------
-       SOCIAL LINKS
-
-       Replace these with your real URLs later.
-    ----------------------------------------- */
-
-    socials: {
-
-        behance: "#",
-
-        linkedin: "#",
-
-        x: "#"
-
-    },
-
-
-    /* -----------------------------------------
-       GOOGLE APPS SCRIPT
-
-       After deploying Apps Script,
-       paste your Web App URL here.
-    ----------------------------------------- */
-
-    googleScriptURL:
-        "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE",
-
-
-    /* -----------------------------------------
-       HOW MANY IMAGE SLOTS TO CHECK
-
-       You can go beyond 20.
-       40 gives plenty of room.
-
-       B1 → B40
-       W1 → W40
-       etc.
-    ----------------------------------------- */
-
-    maxImages: 40
-
-};
-
-
-/* =========================================================
-   IMAGE EXTENSIONS
-========================================================= */
-
-const IMAGE_EXTENSIONS = [
-    "jpg",
-    "jpeg",
-    "png",
-    "webp"
-];
-
-
-/* =========================================================
-   DOM READY
+   COMPLETE JAVASCRIPT
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    initTheme();
 
-    initNavigation();
+    /* =====================================================
+       SETTINGS
+    ===================================================== */
 
-    initProfileImage();
-
-    initPortfolio();
-
-    initActiveProfiles();
-
-    initTestimonials();
-
-    initScrollAnimations();
-
-    initHeader();
-
-    initBackToTop();
-
-    initContactForm();
-
-    initSocialLinks();
-
-});
-
-
-/* =========================================================
-   THEME
-========================================================= */
-
-function initTheme() {
-
-    const toggle =
-        document.getElementById("themeToggle");
-
-    const saved =
-        localStorage.getItem("shakil-theme");
-
-
-    if (saved === "light") {
-
-        document.body.classList.add(
-            "light-theme"
-        );
-
-    } else if (saved === "dark") {
-
-        document.body.classList.remove(
-            "light-theme"
-        );
-
-    } else {
-
-        const prefersLight =
-            window.matchMedia(
-                "(prefers-color-scheme: light)"
-            ).matches;
-
-        document.body.classList.toggle(
-            "light-theme",
-            prefersLight
-        );
-
-    }
-
-
-    toggle.addEventListener("click", () => {
-
-        document.body.classList.toggle(
-            "light-theme"
-        );
-
-        const isLight =
-            document.body.classList.contains(
-                "light-theme"
-            );
-
-        localStorage.setItem(
-            "shakil-theme",
-            isLight ? "light" : "dark"
-        );
-
-    });
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function initNavigation() {
-
-    const menuButton =
-        document.getElementById(
-            "mobileMenuBtn"
-        );
-
-    const mobileNav =
-        document.getElementById(
-            "mobileNav"
-        );
-
-
-    menuButton.addEventListener("click", () => {
-
-        mobileNav.classList.toggle("open");
-
-    });
-
-
-    mobileNav
-        .querySelectorAll("a")
-        .forEach(link => {
-
-            link.addEventListener(
-                "click",
-                () => {
-
-                    mobileNav.classList.remove(
-                        "open"
-                    );
-
-                }
-            );
-
-        });
-
-}
-
-
-/* =========================================================
-   PROFILE IMAGE
-========================================================= */
-
-async function initProfileImage() {
-
-    const img =
-        document.getElementById(
-            "profileImage"
-        );
-
-    const found =
-        await findImage(
-            CONFIG.profileNames
-        );
-
-
-    if (found) {
-
-        img.src = found;
-
-        img.onload = () => {
-
-            img.classList.add("loaded");
-
-        };
-
-    } else {
+    const SETTINGS = {
 
         /*
-          If profile image is missing,
-          keep the frame but do not break page.
-        */
+         * CHANGE YOUR SOCIAL LINKS HERE
+         */
 
-        img.remove();
+        behance:
+            "https://www.behance.net/",
 
-    }
+        linkedin:
+            "https://www.linkedin.com/",
 
-}
+        x:
+            "https://x.com/",
 
 
-/* =========================================================
-   FIND IMAGE
-========================================================= */
+        /*
+         * GOOGLE APPS SCRIPT
+         *
+         * Keep your existing deployed URL here.
+         * If your existing form already worked, paste
+         * the SAME URL you were using before.
+         */
 
-function findImage(names) {
+        googleScript:
+            "",
 
-    return new Promise(resolve => {
+    };
 
-        let index = 0;
 
+    /* =====================================================
+       IMAGE EXTENSIONS
+    ===================================================== */
 
-        function testNext() {
+    const extensions = [
+        "jpg",
+        "jpeg",
+        "png",
+        "webp"
+    ];
 
-            if (index >= names.length) {
 
-                resolve(null);
+    /* =====================================================
+       IMAGE AUTO LOADER
+       
+       B1.jpg
+       B2.jpg
+       B3.png
 
-                return;
-            }
+       L1.jpg
+       L2.webp
 
+       W1.jpg
+       S1.png
+       P1.jpg
+    ===================================================== */
 
-            const name =
-                names[index++];
+    function createImageSlots(container) {
 
-            const img =
-                new Image();
+        if (!container) return;
 
 
-            img.onload = () => {
+        const type =
+            container.dataset.type;
 
-                resolve(
-                    CONFIG.imageFolder + name
-                );
+        const count =
+            Number(container.dataset.count || 20);
 
-            };
 
-
-            img.onerror = () => {
-
-                testNext();
-
-            };
-
-
-            img.src =
-                CONFIG.imageFolder + name;
-
-        }
-
-
-        testNext();
-
-    });
-
-}
-
-
-/* =========================================================
-   FIND NUMBERED IMAGE
-========================================================= */
-
-function findNumberedImage(prefix, number) {
-
-    return new Promise(resolve => {
-
-        let extensionIndex = 0;
-
-
-        function tryExtension() {
-
-            if (
-                extensionIndex >=
-                IMAGE_EXTENSIONS.length
-            ) {
-
-                resolve(null);
-
-                return;
-            }
-
-
-            const extension =
-                IMAGE_EXTENSIONS[
-                    extensionIndex++
-                ];
-
-
-            const filename =
-                `${prefix}${number}.${extension}`;
-
-
-            const img =
-                new Image();
-
-
-            img.onload = () => {
-
-                resolve(
-                    CONFIG.imageFolder +
-                    filename
-                );
-
-            };
-
-
-            img.onerror = () => {
-
-                tryExtension();
-
-            };
-
-
-            img.src =
-                CONFIG.imageFolder +
-                filename;
-
-        }
-
-
-        tryExtension();
-
-    });
-
-}
-
-
-/* =========================================================
-   PORTFOLIO
-========================================================= */
-
-function initPortfolio() {
-
-    const categories =
-        document.querySelectorAll(
-            ".portfolio-category"
-        );
-
-
-    categories.forEach(category => {
-
-        const prefix =
-            category.dataset.prefix;
-
-        const description =
-            category.dataset.description;
-
-        const descriptionElement =
-            category.querySelector(
-                ".category-description"
-            );
-
-        const grid =
-            category.querySelector(
-                ".project-grid"
-            );
-
-        const button =
-            category.querySelector(
-                ".show-more-btn"
-            );
-
-
-        descriptionElement.textContent =
-            description;
-
-
-        loadCategoryImages(
-            prefix,
-            grid,
-            category,
-            button
-        );
-
-    });
-
-}
-
-
-/* =========================================================
-   LOAD CATEGORY
-========================================================= */
-
-async function loadCategoryImages(
-    prefix,
-    grid,
-    category,
-    button
-) {
-
-    const foundImages = [];
-
-
-    /*
-      Check B1 → B40,
-      W1 → W40,
-      etc.
-    */
-
-    for (
-        let number = 1;
-        number <= CONFIG.maxImages;
-        number++
-    ) {
-
-        const image =
-            await findNumberedImage(
-                prefix,
-                number
-            );
-
-
-        if (image) {
-
-            foundImages.push({
-                number,
-                image
-            });
-
-        }
-
-    }
-
-
-    /*
-      No image = hide whole section
-    */
-
-    if (foundImages.length === 0) {
-
-        category.remove();
-
-        return;
-
-    }
-
-
-    /*
-      Create cards
-    */
-
-    foundImages.forEach(
-        (item, index) => {
+        for (let i = 1; i <= count; i++) {
 
             const card =
-                document.createElement(
-                    "article"
-                );
+                document.createElement("article");
 
             card.className =
                 "project-card";
 
 
             /*
-              First 4 visible.
-              Everything else hidden.
-            */
+             * We initially create the image element.
+             * If none of the extensions exists,
+             * the card automatically disappears.
+             */
 
-            if (index >= 4) {
+            const img =
+                document.createElement("img");
 
-                card.classList.add(
-                    "is-hidden"
-                );
+
+            img.alt =
+                `${type}${i}`;
+
+
+            let extensionIndex = 0;
+
+
+            function tryNextExtension() {
+
+                if (extensionIndex >= extensions.length) {
+
+                    card.remove();
+
+                    return;
+                }
+
+
+                const ext =
+                    extensions[extensionIndex];
+
+
+                extensionIndex++;
+
+
+                img.src =
+                    `assets/images/${type}${i}.${ext}`;
 
             }
 
 
-            const img =
-                document.createElement(
-                    "img"
-                );
-
-            img.src =
-                item.image;
-
-            img.alt =
-                `${prefix} design`;
-
-            img.loading =
-                index < 4
-                    ? "eager"
-                    : "lazy";
+            img.onerror =
+                tryNextExtension;
 
 
-            const overlay =
-                document.createElement(
-                    "div"
-                );
+            img.onload =
+                () => {
 
-            overlay.className =
-                "project-overlay";
+                    card.classList.remove("empty");
 
-
-            const title =
-                document.createElement(
-                    "strong"
-                );
-
-            title.textContent =
-                getCategoryTitle(
-                    prefix
-                );
+                };
 
 
-            const type =
-                document.createElement(
-                    "span"
-                );
+            card.classList.add("empty");
 
-            type.textContent =
-                "Selected work";
-
-
-            overlay.appendChild(title);
-
-            overlay.appendChild(type);
 
             card.appendChild(img);
 
-            card.appendChild(overlay);
+            container.appendChild(card);
 
-            grid.appendChild(card);
 
-        }
-    );
-
-
-    /*
-      Hide show-more button
-      if 4 or fewer images
-    */
-
-    if (foundImages.length <= 4) {
-
-        button.style.display =
-            "none";
-
-    }
-
-
-    button.addEventListener(
-        "click",
-        () => {
-
-            const hiddenCards =
-                grid.querySelectorAll(
-                    ".project-card.is-hidden"
-                );
-
-
-            const expanded =
-                button.classList.contains(
-                    "expanded"
-                );
-
-
-            if (!expanded) {
-
-                hiddenCards.forEach(card => {
-
-                    card.classList.remove(
-                        "is-hidden"
-                    );
-
-                });
-
-                button.classList.add(
-                    "expanded"
-                );
-
-                button.querySelector(
-                    "span"
-                ).textContent =
-                    "SHOW LESS";
-
-            } else {
-
-                const allCards =
-                    grid.querySelectorAll(
-                        ".project-card"
-                    );
-
-
-                allCards.forEach(
-                    (card, index) => {
-
-                        if (index >= 4) {
-
-                            card.classList.add(
-                                "is-hidden"
-                            );
-
-                        }
-
-                    }
-                );
-
-
-                button.classList.remove(
-                    "expanded"
-                );
-
-                button.querySelector(
-                    "span"
-                ).textContent =
-                    "SHOW MORE";
-
-
-                category.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   CATEGORY TITLES
-========================================================= */
-
-function getCategoryTitle(prefix) {
-
-    const titles = {
-
-        B: "Book Cover Design",
-
-        W: "Web Design & Develop",
-
-        S: "Social Media Poster",
-
-        L: "Logo Design",
-
-        P: "Print Media Design"
-
-    };
-
-
-    return titles[prefix] ||
-        "Selected Work";
-
-}
-
-
-/* =========================================================
-   ACTIVE CLIENT PROFILES
-========================================================= */
-
-async function initActiveProfiles() {
-
-    const track =
-        document.getElementById(
-            "activeTrack"
-        );
-
-    const section =
-        document.querySelector(
-            ".active-section"
-        );
-
-
-    const logos = [];
-
-
-    /*
-      A1 → A40
-
-      Rename active/client logo:
-
-      A1.png
-      A2.png
-      A3.png
-
-      etc.
-    */
-
-    for (
-        let number = 1;
-        number <= CONFIG.maxImages;
-        number++
-    ) {
-
-        const image =
-            await findNumberedImage(
-                "A",
-                number
-            );
-
-
-        if (image) {
-
-            logos.push(image);
+            tryNextExtension();
 
         }
 
     }
 
 
-    if (logos.length === 0) {
+    /* =====================================================
+       LOAD ALL PORTFOLIO IMAGES
+    ===================================================== */
 
-        section.remove();
-
-        return;
-
-    }
-
-
-    /*
-      Duplicate logos for
-      seamless continuous loop.
-    */
-
-    const repeated =
-        [
-            ...logos,
-            ...logos,
-            ...logos
-        ];
+    document
+        .querySelectorAll(".image-grid")
+        .forEach(createImageSlots);
 
 
-    repeated.forEach(image => {
+    /* =====================================================
+       TESTIMONIALS
+    ===================================================== */
 
-        const item =
-            document.createElement(
-                "div"
-            );
+    const testimonials = [
 
-        item.className =
-            "active-logo";
+        {
+            name:
+                "Dr. Erlinda Asa Sabili",
 
+            role:
+                "MD, FACP",
 
-        const img =
-            document.createElement(
-                "img"
-            );
+            initials:
+                "EA",
 
-        img.src = image;
-
-        img.alt =
-            "Client platform";
-
-
-        item.appendChild(img);
-
-        track.appendChild(item);
-
-    });
-
-
-    startActiveSlider(
-        track,
-        logos.length
-    );
-
-}
-
-
-/* =========================================================
-   ACTIVE SLIDER
-========================================================= */
-
-function startActiveSlider(
-    track,
-    originalCount
-) {
-
-    let position = 0;
-
-    let paused = false;
-
-    let direction = 1;
-
-    let itemWidth = 145;
-
-
-    const windowElement =
-        document.querySelector(
-            ".active-window"
-        );
-
-
-    const getWidth = () => {
-
-        const first =
-            track.querySelector(
-                ".active-logo"
-            );
-
-        if (!first) return 145;
-
-        const style =
-            getComputedStyle(track);
-
-        const gap =
-            parseFloat(style.gap) || 0;
-
-        return first.offsetWidth + gap;
-
-    };
-
-
-    function move(
-        amount = 1
-    ) {
-
-        itemWidth =
-            getWidth();
-
-        position +=
-            amount;
-
-        track.style.transition =
-            "transform .65s cubic-bezier(.2,.8,.2,1)";
-
-        track.style.transform =
-            `translateX(${-position * itemWidth}px)`;
-
+            text:
+                "Hi Shakil! I just wanted to take a moment to sincerely thank you for the outstanding work you've done on the cover and design for my Balance Exercise for Seniors Simplified. The attention to detail, creativity, and professionalism you brought to this project truly exceeded my expectations. I've received many compliments on how beautiful and impactful the design is. It has made a big difference in the presentation of the book, and I couldn't be happier with the result. I also want you to know that I will definitely be working with you again on my upcoming projects. Your talent and reliability have made this an easy decision. Thank you once again for helping bring my vision to life. I look forward to collaborating with you on future books!"
+        }
 
         /*
-          Infinite reset.
-        */
+         * IMPORTANT:
+         *
+         * Add ONLY real client testimonials here.
+         *
+         * Example:
+         *
+         * {
+         *     name: "Client Name",
+         *     role: "Company / Role",
+         *     initials: "CN",
+         *     text: "Exact client feedback..."
+         * }
+         *
+         */
 
-        if (
-            position >=
-            originalCount
-        ) {
+    ];
 
-            setTimeout(() => {
 
-                track.style.transition =
-                    "none";
+    const testimonialGrid =
+        document.getElementById(
+            "testimonialGrid"
+        );
 
-                position = 0;
 
-                track.style.transform =
-                    "translateX(0)";
+    function renderTestimonials() {
 
-            }, 680);
+        if (!testimonialGrid) return;
+
+
+        testimonialGrid.innerHTML = "";
+
+
+        if (!testimonials.length) {
+
+            return;
 
         }
 
 
-        if (position < 0) {
+        testimonials.forEach(
+            (item, index) => {
 
-            track.style.transition =
-                "none";
+                const card =
+                    document.createElement("article");
 
-            position =
-                originalCount - 1;
 
-            track.style.transform =
-                `translateX(${-position * itemWidth}px)`;
+                card.className =
+                    "testimonial-card";
 
-        }
+
+                card.innerHTML = `
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <p class="testimonial-text">
+                        ${escapeHTML(item.text)}
+                    </p>
+
+                    <div class="testimonial-author">
+
+                        <div class="author-avatar">
+                            ${escapeHTML(item.initials)}
+                        </div>
+
+                        <div>
+
+                            <div class="author-name">
+                                ${escapeHTML(item.name)}
+                            </div>
+
+                            <div class="author-role">
+                                ${escapeHTML(item.role)}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                testimonialGrid.appendChild(card);
+
+            }
+        );
 
     }
 
 
-    let timer =
-        setInterval(
-            () => {
+    function escapeHTML(value) {
 
-                if (!paused) {
+        return String(value)
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#039;");
 
-                    move(1);
+    }
+
+
+    renderTestimonials();
+
+
+    /* =====================================================
+       CURRENTLY WORKING ON
+       
+       L1 = first logo
+       L2 = second logo
+       ...
+       
+       It displays 6 at a time.
+       Auto slides continuously.
+       Mouse hover pauses.
+       Arrow buttons work.
+    ===================================================== */
+
+    const profileTrack =
+        document.getElementById(
+            "profileTrack"
+        );
+
+
+    const profilePrev =
+        document.getElementById(
+            "profilePrev"
+        );
+
+
+    const profileNext =
+        document.getElementById(
+            "profileNext"
+        );
+
+
+    const profileWindow =
+        document.querySelector(
+            ".profile-window"
+        );
+
+
+    const PROFILE_COUNT = 20;
+
+
+    let profileIndex = 0;
+
+    let profileTimer = null;
+
+    let profilePaused = false;
+
+
+    function buildProfiles() {
+
+        if (!profileTrack) return;
+
+
+        profileTrack.innerHTML = "";
+
+
+        for (
+            let i = 1;
+            i <= PROFILE_COUNT;
+            i++
+        ) {
+
+            const item =
+                document.createElement("div");
+
+
+            item.className =
+                "profile-item";
+
+
+            const img =
+                document.createElement("img");
+
+
+            img.alt =
+                `Profile ${i}`;
+
+
+            let extIndex = 0;
+
+
+            function tryProfileImage() {
+
+                if (
+                    extIndex >=
+                    extensions.length
+                ) {
+
+                    item.remove();
+
+                    return;
 
                 }
 
-            },
-            2200
+
+                img.src =
+                    `assets/images/L${i}.${extensions[extIndex]}`;
+
+                extIndex++;
+
+            }
+
+
+            img.onerror =
+                tryProfileImage;
+
+
+            item.appendChild(img);
+
+            profileTrack.appendChild(item);
+
+
+            tryProfileImage();
+
+        }
+
+    }
+
+
+    buildProfiles();
+
+
+    /*
+     * Get visible profile count.
+     */
+
+    function visibleProfileCount() {
+
+        if (
+            window.innerWidth <= 600
+        ) {
+
+            return 3;
+
+        }
+
+
+        if (
+            window.innerWidth <= 900
+        ) {
+
+            return 4;
+
+        }
+
+
+        return 6;
+
+    }
+
+
+    function getProfileStep() {
+
+        const first =
+            profileTrack.querySelector(
+                ".profile-item"
+            );
+
+
+        if (!first) return 0;
+
+
+        const gap =
+            parseFloat(
+                getComputedStyle(
+                    profileTrack
+                ).gap
+            ) || 0;
+
+
+        return first.offsetWidth + gap;
+
+    }
+
+
+    function moveProfiles(
+        direction = 1
+    ) {
+
+        const items =
+            profileTrack.querySelectorAll(
+                ".profile-item"
+            );
+
+
+        if (!items.length) return;
+
+
+        const visible =
+            visibleProfileCount();
+
+
+        const maxIndex =
+            Math.max(
+                0,
+                items.length - visible
+            );
+
+
+        profileIndex += direction;
+
+
+        /*
+         * Continuous loop
+         */
+
+        if (
+            profileIndex >
+            maxIndex
+        ) {
+
+            profileIndex = 0;
+
+        }
+
+
+        if (
+            profileIndex < 0
+        ) {
+
+            profileIndex =
+                maxIndex;
+
+        }
+
+
+        const step =
+            getProfileStep();
+
+
+        profileTrack.style.transform =
+            `translate3d(-${profileIndex * step}px,0,0)`;
+
+    }
+
+
+    profileNext?.addEventListener(
+        "click",
+        () => {
+
+            moveProfiles(1);
+
+        }
+    );
+
+
+    profilePrev?.addEventListener(
+        "click",
+        () => {
+
+            moveProfiles(-1);
+
+        }
+    );
+
+
+    /*
+     * Auto slide
+     */
+
+    function startProfileAutoSlide() {
+
+        clearInterval(
+            profileTimer
         );
 
 
-    windowElement.addEventListener(
+        profileTimer =
+            setInterval(
+                () => {
+
+                    if (!profilePaused) {
+
+                        moveProfiles(1);
+
+                    }
+
+                },
+                2200
+            );
+
+    }
+
+
+    profileWindow?.addEventListener(
         "mouseenter",
         () => {
 
-            paused = true;
+            profilePaused = true;
 
         }
     );
 
 
-    windowElement.addEventListener(
+    profileWindow?.addEventListener(
         "mouseleave",
         () => {
 
-            paused = false;
+            profilePaused = false;
 
         }
     );
 
 
-    document
-        .getElementById("activeNext")
-        .addEventListener(
-            "click",
-            () => {
-
-                move(1);
-
-            }
-        );
-
-
-    document
-        .getElementById("activePrev")
-        .addEventListener(
-            "click",
-            () => {
-
-                move(-1);
-
-            }
-        );
+    startProfileAutoSlide();
 
 
     window.addEventListener(
         "resize",
         () => {
 
-            itemWidth =
-                getWidth();
+            profileIndex = 0;
 
-            track.style.transition =
-                "none";
+            if (profileTrack) {
 
-            track.style.transform =
-                `translateX(${-position * itemWidth}px)`;
+                profileTrack.style.transform =
+                    "translate3d(0,0,0)";
 
-        }
-    );
-
-}
-
-
-/* =========================================================
-   TESTIMONIALS
-========================================================= */
-
-function initTestimonials() {
-
-    const grid =
-        document.getElementById(
-            "testimonialGrid"
-        );
-
-
-    /*
-      This is the client feedback
-      supplied in your current design.
-
-      Add more objects later if you
-      have more real testimonials.
-    */
-
-    const testimonials = [
-
-        {
-            name: "Dr. Erlinda Asa Sabili",
-            role: "MD, FACP",
-            initials: "EA",
-            text:
-                "Hi Shakil! I just wanted to take a moment to sincerely thank you for the outstanding work you've done on the cover and design for my Balance Exercise for Seniors Simplified. The attention to detail, creativity, and professionalism you brought to this project truly exceeded my expectations. I've received many compliments on how beautiful and impactful the design is. It has made a big difference in the presentation of the book, and I couldn't be happier with the result. I also want you to know that I will definitely be working with you again on my upcoming projects. Your talent and reliability have made this an easy decision. Thank you once again for helping bring my vision to life. I look forward to collaborating with you on future books!"
-        }
-
-    ];
-
-
-    if (
-        testimonials.length === 0
-    ) {
-
-        document
-            .querySelector(
-                ".testimonials"
-            )
-            .remove();
-
-        return;
-
-    }
-
-
-    testimonials.forEach(item => {
-
-        const card =
-            document.createElement(
-                "article"
-            );
-
-        card.className =
-            "testimonial-card";
-
-
-        card.innerHTML = `
-
-            <div class="stars">
-                ★★★★★
-            </div>
-
-            <p class="testimonial-text">
-                ${item.text}
-            </p>
-
-            <div class="testimonial-author">
-
-                <div class="author-avatar">
-                    ${item.initials}
-                </div>
-
-                <div>
-                    <div class="author-name">
-                        ${item.name}
-                    </div>
-
-                    <div class="author-role">
-                        ${item.role}
-                    </div>
-                </div>
-
-            </div>
-
-        `;
-
-
-        grid.appendChild(card);
-
-    });
-
-}
-
-
-/* =========================================================
-   SCROLL REVEAL
-========================================================= */
-
-function initScrollAnimations() {
-
-    const elements =
-        document.querySelectorAll(
-            ".reveal"
-        );
-
-
-    const observer =
-        new IntersectionObserver(
-            entries => {
-
-                entries.forEach(entry => {
-
-                    if (
-                        entry.isIntersecting
-                    ) {
-
-                        entry.target.classList.add(
-                            "visible"
-                        );
-
-                        observer.unobserve(
-                            entry.target
-                        );
-
-                    }
-
-                });
-
-            },
-            {
-                threshold: .12
             }
-        );
 
-
-    elements.forEach(
-        element =>
-            observer.observe(element)
-    );
-
-}
-
-
-/* =========================================================
-   HEADER SCROLL
-========================================================= */
-
-function initHeader() {
-
-    const header =
-        document.querySelector(
-            ".site-header"
-        );
-
-
-    function update() {
-
-        header.classList.toggle(
-            "scrolled",
-            window.scrollY > 30
-        );
-
-    }
-
-
-    update();
-
-    window.addEventListener(
-        "scroll",
-        update,
-        {
-            passive: true
         }
     );
 
-}
 
+    /* =====================================================
+       BACK TO TOP
+       
+       Fixed position.
+       Appears after scrolling.
+       Works from ANY point on page.
+    ===================================================== */
 
-/* =========================================================
-   BACK TO TOP
-========================================================= */
-
-function initBackToTop() {
-
-    const button =
+    const backTop =
         document.getElementById(
             "backTop"
         );
 
 
-    function update() {
+    function updateBackTop() {
+
+        if (!backTop) return;
+
 
         if (
-            window.scrollY > 450
+            window.scrollY > 500
         ) {
 
-            button.classList.add(
+            backTop.classList.add(
                 "show"
             );
 
         } else {
 
-            button.classList.remove(
+            backTop.classList.remove(
                 "show"
             );
 
@@ -1222,14 +654,14 @@ function initBackToTop() {
 
     window.addEventListener(
         "scroll",
-        update,
+        updateBackTop,
         {
             passive: true
         }
     );
 
 
-    button.addEventListener(
+    backTop?.addEventListener(
         "click",
         () => {
 
@@ -1245,90 +677,316 @@ function initBackToTop() {
     );
 
 
-    update();
-
-}
+    updateBackTop();
 
 
-/* =========================================================
-   SOCIAL LINKS
-========================================================= */
+    /* =====================================================
+       THEME TOGGLE
+       
+       ICON ONLY.
+       No "LIGHT / DARK" text.
+    ===================================================== */
 
-function initSocialLinks() {
-
-    document
-        .querySelectorAll(
-            ".social-icon"
-        )
-        .forEach(link => {
-
-            const key =
-                link.dataset.social;
+    const themeToggle =
+        document.getElementById(
+            "themeToggle"
+        );
 
 
-            if (
-                CONFIG.socials[key] &&
-                CONFIG.socials[key] !== "#"
-            ) {
+    const savedTheme =
+        localStorage.getItem(
+            "shakil-theme"
+        );
 
-                link.href =
-                    CONFIG.socials[key];
 
-            } else {
+    if (
+        savedTheme === "light"
+    ) {
 
-                link.addEventListener(
-                    "click",
-                    event => {
+        document.body.classList.add(
+            "light"
+        );
 
-                        event.preventDefault();
+        themeToggle.querySelector(
+            ".theme-icon"
+        ).textContent = "☾";
+
+    }
+
+
+    themeToggle?.addEventListener(
+        "click",
+        () => {
+
+            document.body.classList.toggle(
+                "light"
+            );
+
+
+            const isLight =
+                document.body.classList.contains(
+                    "light"
+                );
+
+
+            localStorage.setItem(
+                "shakil-theme",
+                isLight
+                    ? "light"
+                    : "dark"
+            );
+
+
+            themeToggle.querySelector(
+                ".theme-icon"
+            ).textContent =
+                isLight
+                    ? "☾"
+                    : "☼";
+
+        }
+    );
+
+
+    /* =====================================================
+       SOCIAL LINKS
+    ===================================================== */
+
+    const behance =
+        document.getElementById(
+            "behanceLink"
+        );
+
+
+    const linkedin =
+        document.getElementById(
+            "linkedinLink"
+        );
+
+
+    const xLink =
+        document.getElementById(
+            "xLink"
+        );
+
+
+    if (behance)
+        behance.href =
+            SETTINGS.behance;
+
+
+    if (linkedin)
+        linkedin.href =
+            SETTINGS.linkedin;
+
+
+    if (xLink)
+        xLink.href =
+            SETTINGS.x;
+
+
+    /* =====================================================
+       SCROLL REVEAL
+    ===================================================== */
+
+    const revealElements =
+        document.querySelectorAll(
+            ".portfolio-category, .testimonial-card, .about-grid, .profiles-section, .contact-box"
+        );
+
+
+    const revealObserver =
+        new IntersectionObserver(
+            (entries) => {
+
+                entries.forEach(
+                    (entry) => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "reveal",
+                                "visible"
+                            );
+
+                            revealObserver.unobserve(
+                                entry.target
+                            );
+
+                        }
 
                     }
                 );
 
+            },
+            {
+                threshold: .12
             }
-
-        });
-
-}
+        );
 
 
-/* =========================================================
-   CONTACT FORM
-========================================================= */
+    revealElements.forEach(
+        element => {
 
-function initContactForm() {
+            element.classList.add(
+                "reveal"
+            );
 
-    const form =
+            revealObserver.observe(
+                element
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       CURSOR
+    ===================================================== */
+
+    const cursorDot =
+        document.querySelector(
+            ".cursor-dot"
+        );
+
+
+    const cursorRing =
+        document.querySelector(
+            ".cursor-ring"
+        );
+
+
+    if (
+        cursorDot &&
+        cursorRing &&
+        window.matchMedia(
+            "(pointer:fine)"
+        ).matches
+    ) {
+
+        let mouseX = 0;
+
+        let mouseY = 0;
+
+        let ringX = 0;
+
+        let ringY = 0;
+
+
+        document.addEventListener(
+            "mousemove",
+            event => {
+
+                mouseX =
+                    event.clientX;
+
+                mouseY =
+                    event.clientY;
+
+
+                cursorDot.style.left =
+                    `${mouseX}px`;
+
+                cursorDot.style.top =
+                    `${mouseY}px`;
+
+            }
+        );
+
+
+        function animateCursor() {
+
+            ringX +=
+                (mouseX - ringX) * .15;
+
+            ringY +=
+                (mouseY - ringY) * .15;
+
+
+            cursorRing.style.left =
+                `${ringX}px`;
+
+            cursorRing.style.top =
+                `${ringY}px`;
+
+
+            requestAnimationFrame(
+                animateCursor
+            );
+
+        }
+
+
+        animateCursor();
+
+
+        document
+            .querySelectorAll(
+                "a, button, .project-card, .profile-item"
+            )
+            .forEach(
+                element => {
+
+                    element.addEventListener(
+                        "mouseenter",
+                        () => {
+
+                            document.body.classList.add(
+                                "cursor-hover"
+                            );
+
+                        }
+                    );
+
+
+                    element.addEventListener(
+                        "mouseleave",
+                        () => {
+
+                            document.body.classList.remove(
+                                "cursor-hover"
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+    }
+
+
+    /* =====================================================
+       CONTACT FORM
+    ===================================================== */
+
+    const contactForm =
         document.getElementById(
             "contactForm"
         );
 
-    const status =
+
+    const formStatus =
         document.getElementById(
             "formStatus"
         );
 
 
-    form.addEventListener(
+    contactForm?.addEventListener(
         "submit",
         async event => {
 
             event.preventDefault();
 
 
-            const url =
-                CONFIG.googleScriptURL;
-
-
             if (
-                !url ||
-                url.includes(
-                    "PASTE_YOUR"
-                )
+                !SETTINGS.googleScript
             ) {
 
-                status.textContent =
-                    "Contact form is not connected yet.";
+                formStatus.textContent =
+                    "Please configure the Google Apps Script URL.";
 
                 return;
 
@@ -1336,57 +994,47 @@ function initContactForm() {
 
 
             const submit =
-                form.querySelector(
-                    ".submit-btn"
+                contactForm.querySelector(
+                    ".submit-button"
                 );
 
 
             submit.disabled = true;
 
 
-            status.textContent =
-                "Sending enquiry...";
-
-
-            const data =
-                new FormData(form);
+            formStatus.textContent =
+                "Sending...";
 
 
             try {
 
-                /*
-                  text/plain avoids CORS
-                  preflight with Apps Script.
-                */
+                const formData =
+                    new FormData(
+                        contactForm
+                    );
+
 
                 await fetch(
-                    url,
+                    SETTINGS.googleScript,
                     {
-
                         method: "POST",
 
                         mode: "no-cors",
 
-                        body:
-                            new URLSearchParams(
-                                data
-                            )
-
+                        body: formData
                     }
                 );
 
 
-                form.reset();
+                formStatus.textContent =
+                    "Thank you. Your message has been sent.";
 
+                contactForm.reset();
 
-                status.textContent =
-                    "Thank you. Your enquiry has been sent.";
 
             } catch (error) {
 
-                console.error(error);
-
-                status.textContent =
+                formStatus.textContent =
                     "Something went wrong. Please try again.";
 
             }
@@ -1397,4 +1045,5 @@ function initContactForm() {
         }
     );
 
-}
+
+});
