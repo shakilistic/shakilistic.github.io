@@ -1,697 +1,634 @@
-document.addEventListener("DOMContentLoaded", () => {
+const root = document.documentElement;
 
-    /* ==============================
-       YEAR
-    ============================== */
+const saved = localStorage.getItem("shakilstic-theme");
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-    const year = document.getElementById("year");
-
-    if (year) {
-        year.textContent = new Date().getFullYear();
-    }
+root.classList.toggle(
+  "dark",
+  saved ? saved === "dark" : prefersDark
+);
 
 
-    /* ==============================
-       THEME
-       AUTO → LIGHT → DARK → AUTO
-    ============================== */
+/* =========================
+   THEME SWITCH
+========================= */
 
-    const themeToggle = document.getElementById("themeToggle");
-    const themeLabel = document.getElementById("themeLabel");
-    const themeIcon = document.querySelector(".theme-icon");
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = document.getElementById("themeIcon");
 
-    let currentTheme =
-        localStorage.getItem("shakilstic-theme") || "auto";
+function updateIcon() {
+  if (!themeIcon) return;
 
+  themeIcon.textContent =
+    root.classList.contains("dark") ? "☀" : "☾";
+}
 
-    function systemTheme() {
-        return window.matchMedia(
-            "(prefers-color-scheme: dark)"
-        ).matches ? "dark" : "light";
-    }
+updateIcon();
 
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
 
-    function applyTheme(mode) {
+    root.classList.toggle("dark");
 
-        const actualTheme =
-            mode === "auto" ? systemTheme() : mode;
+    localStorage.setItem(
+      "shakilstic-theme",
+      root.classList.contains("dark")
+        ? "dark"
+        : "light"
+    );
 
-        document.documentElement.setAttribute(
-            "data-theme",
-            actualTheme
-        );
-
-
-        if (themeLabel) {
-            themeLabel.textContent =
-                mode.toUpperCase();
-        }
+    updateIcon();
+  });
+}
 
 
-        if (themeIcon) {
+/* =========================
+   MOBILE MENU
+========================= */
 
-            if (mode === "auto") {
-                themeIcon.textContent = "◐";
-            }
+const menuToggle =
+  document.getElementById("menuToggle");
 
-            else if (mode === "light") {
-                themeIcon.textContent = "☀";
-            }
+const mobileMenu =
+  document.getElementById("mobileMenu");
 
-            else {
-                themeIcon.textContent = "☾";
-            }
-        }
-    }
+if (menuToggle && mobileMenu) {
 
+  menuToggle.addEventListener("click", () => {
+    mobileMenu.classList.toggle("open");
+  });
 
-    applyTheme(currentTheme);
+  document
+    .querySelectorAll(".mobile-menu a")
+    .forEach(link => {
 
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("open");
+      });
 
-    if (themeToggle) {
-
-        themeToggle.addEventListener("click", () => {
-
-            if (currentTheme === "auto") {
-                currentTheme = "light";
-            }
-
-            else if (currentTheme === "light") {
-                currentTheme = "dark";
-            }
-
-            else {
-                currentTheme = "auto";
-            }
+    });
+}
 
 
-            localStorage.setItem(
-                "shakilstic-theme",
-                currentTheme
-            );
+/* =========================
+   PORTFOLIO CATEGORIES
+========================= */
+
+const categories = [
+
+  {
+    key: "B",
+    title: "BOOK COVER DESIGN",
+    desc:
+      "Book covers, editorial concepts and visual systems designed to make the first impression count."
+  },
+
+  {
+    key: "W",
+    title: "WEB DESIGN & DEVELOPMENT",
+    desc:
+      "Responsive digital experiences with clear hierarchy, personality and useful interactions."
+  },
+
+  {
+    key: "S",
+    title: "SOCIAL MEDIA POSTER",
+    desc:
+      "Campaign visuals and social graphics built for attention, clarity and platform performance."
+  },
+
+  {
+    key: "L",
+    title: "LOGO DESIGN",
+    desc:
+      "Identity marks and visual directions created to be recognizable, flexible and memorable."
+  },
+
+  {
+    key: "P",
+    title: "PRINT MEDIA DESIGN",
+    desc:
+      "Print-ready creative work across posters, brochures, packaging and promotional materials."
+  }
+
+];
 
 
-            applyTheme(currentTheme);
+const portfolio =
+  document.getElementById("portfolio");
 
 
-            themeToggle.classList.remove("clicked");
+/* =========================
+   IMAGE CHECK
+========================= */
 
-            void themeToggle.offsetWidth;
+const imageExists = src =>
+  new Promise(resolve => {
 
-            themeToggle.classList.add("clicked");
+    const img = new Image();
+
+    img.onload = () => resolve(true);
+
+    img.onerror = () => resolve(false);
+
+    img.src = src;
+
+  });
+
+
+/* =========================
+   BUILD PORTFOLIO
+========================= */
+
+async function buildPortfolio() {
+
+  if (!portfolio) return;
+
+  let html = "";
+
+  for (const category of categories) {
+
+    const found = [];
+
+    /*
+      Checks:
+
+      B1.jpg
+      B2.jpg
+      B3.jpg
+      ...
+
+      W1.jpg
+      L1.jpg
+      etc.
+    */
+
+    for (let i = 1; i <= 30; i++) {
+
+      const src =
+        `assets/images/${category.key}${i}.jpg`;
+
+      if (await imageExists(src)) {
+
+        found.push({
+          src: src,
+          number: i
         });
+
+      }
+
     }
 
 
-    /* Browser theme changes while AUTO */
+    /*
+      If no images exist,
+      completely hide the section.
+    */
 
-    window.matchMedia(
-        "(prefers-color-scheme: dark)"
-    ).addEventListener("change", () => {
+    if (!found.length) continue;
 
-        if (currentTheme === "auto") {
-            applyTheme("auto");
-        }
+
+    html += `
+
+      <section
+        class="portfolio-section reveal"
+        id="${category.key.toLowerCase()}-work"
+      >
+
+        <div class="container">
+
+          <div class="section-head">
+
+            <div>
+
+              <p class="eyebrow">
+                ${category.title}
+              </p>
+
+              <h2>
+                ${category.title}
+              </h2>
+
+            </div>
+
+            <p class="section-description">
+              ${category.desc}
+            </p>
+
+          </div>
+
+
+          <div class="projects">
+
+    `;
+
+
+    found.forEach((item, index) => {
+
+      html += `
+
+        <article
+          class="project ${index < 4 ? "visible" : ""}"
+        >
+
+          <div class="project-media">
+
+            <img
+              src="${item.src}"
+              alt="${category.title} ${item.number}"
+              loading="lazy"
+            >
+
+          </div>
+
+
+          <div class="project-info">
+
+            <small>
+              ${String(item.number).padStart(2, "0")}
+            </small>
+
+            <h3>
+              ${category.title}
+            </h3>
+
+          </div>
+
+        </article>
+
+      `;
 
     });
 
 
-    /* ==============================
-       SCROLL REVEAL
-    ============================== */
+    html += `
 
-    const revealElements =
-        document.querySelectorAll(".reveal");
+          </div>
 
+          ${
+            found.length > 4
+              ? `
+                <button
+                  class="show-more active"
+                  type="button"
+                >
+                  Show More
+                </button>
+              `
+              : ""
+          }
 
-    if ("IntersectionObserver" in window) {
+        </div>
 
-        const revealObserver =
-            new IntersectionObserver(
-                (entries, observer) => {
+      </section>
 
-                    entries.forEach(entry => {
+    `;
 
-                        if (!entry.isIntersecting) {
-                            return;
-                        }
-
-
-                        /*
-                           IMPORTANT:
-                           CSS uses .is-visible
-                        */
-
-                        entry.target.classList.add(
-                            "is-visible"
-                        );
+  }
 
 
-                        observer.unobserve(
-                            entry.target
-                        );
+  /*
+    If absolutely no portfolio images exist.
+  */
 
-                    });
+  portfolio.innerHTML =
+    html ||
+    `
 
-                },
-                {
-                    threshold: 0.08,
-                    rootMargin: "0px 0px -40px 0px"
-                }
+      <section class="portfolio-section">
+
+        <div class="container">
+
+          <p class="body-copy">
+
+            Add portfolio images to
+            <b>assets/images</b>
+
+            using names such as:
+
+            B1.jpg,
+            L1.jpg,
+            W1.jpg,
+            S1.jpg,
+            P1.jpg
+
+          </p>
+
+        </div>
+
+      </section>
+
+    `;
+
+
+  /* =========================
+     SHOW MORE / LESS
+  ========================= */
+
+  document
+    .querySelectorAll(".show-more")
+    .forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        const projects =
+          button.parentElement
+            .querySelectorAll(".project");
+
+
+        const expanded =
+          button.dataset.open === "1";
+
+
+        projects.forEach((project, index) => {
+
+          if (index >= 4) {
+
+            project.classList.toggle(
+              "visible",
+              !expanded
             );
 
-
-        revealElements.forEach(element => {
-
-            revealObserver.observe(element);
-
-        });
-
-    }
-
-    else {
-
-        revealElements.forEach(element => {
-
-            element.classList.add("is-visible");
-
-        });
-
-    }
-
-
-    /* ==============================
-       SHOW MORE / SHOW LESS
-    ============================== */
-
-    document
-        .querySelectorAll(".show-more")
-        .forEach(button => {
-
-            button.addEventListener("click", () => {
-
-                const target =
-                    button.dataset.target;
-
-                const grid =
-                    document.getElementById(target);
-
-
-                if (!grid) {
-                    return;
-                }
-
-
-                const expanded =
-                    grid.classList.toggle("expanded");
-
-
-                const buttonText =
-                    button.querySelector(
-                        ".show-more-text"
-                    );
-
-
-                const icon =
-                    button.querySelector("span");
-
-
-                if (expanded) {
-
-                    if (buttonText) {
-                        buttonText.textContent =
-                            "SHOW LESS";
-                    }
-
-                    if (icon) {
-                        icon.textContent = "−";
-                    }
-
-                }
-
-                else {
-
-                    if (buttonText) {
-                        buttonText.textContent =
-                            "SHOW MORE";
-                    }
-
-                    if (icon) {
-                        icon.textContent = "+";
-                    }
-
-
-                    const category =
-                        button.closest(
-                            ".category-block"
-                        );
-
-
-                    if (category) {
-
-                        category.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start"
-                        });
-
-                    }
-
-                }
-
-            });
+          }
 
         });
 
 
-    /* ==============================
-       CUSTOM CURSOR
-    ============================== */
-
-    const cursorDot =
-        document.querySelector(".cursor-dot");
-
-    const cursorRing =
-        document.querySelector(".cursor-ring");
+        button.dataset.open =
+          expanded ? "0" : "1";
 
 
-    if (
-        cursorDot &&
-        cursorRing &&
-        window.matchMedia("(pointer:fine)").matches
-    ) {
+        button.textContent =
+          expanded
+            ? "Show More"
+            : "Show Less";
 
-        let mouseX = 0;
-        let mouseY = 0;
+      });
 
-        let ringX = 0;
-        let ringY = 0;
+    });
 
 
-        document.addEventListener(
-            "mousemove",
-            event => {
+  observeReveals();
 
-                mouseX = event.clientX;
-                mouseY = event.clientY;
+}
 
 
-                cursorDot.style.left =
-                    `${mouseX}px`;
+/* =========================
+   SCROLL ANIMATION
+========================= */
 
-                cursorDot.style.top =
-                    `${mouseY}px`;
+function observeReveals() {
 
-            }
+  const elements =
+    document.querySelectorAll(
+      ".reveal:not(.observer-ready)"
+    );
+
+
+  if (!("IntersectionObserver" in window)) {
+
+    elements.forEach(element => {
+      element.classList.add("in");
+    });
+
+    return;
+  }
+
+
+  const observer =
+    new IntersectionObserver(
+      entries => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            entry.target.classList.add("in");
+
+          }
+
+        });
+
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+
+  elements.forEach(element => {
+
+    element.classList.add(
+      "observer-ready"
+    );
+
+    observer.observe(element);
+
+  });
+
+}
+
+
+buildPortfolio();
+
+
+/* =========================
+   YEAR
+========================= */
+
+const year =
+  document.getElementById("year");
+
+if (year) {
+
+  year.textContent =
+    new Date().getFullYear();
+
+}
+
+
+/* =========================
+   BUTTON RIPPLE EFFECT
+========================= */
+
+document
+  .querySelectorAll(".button")
+  .forEach(button => {
+
+    button.addEventListener(
+      "pointerdown",
+      event => {
+
+        const rect =
+          button.getBoundingClientRect();
+
+
+        const x =
+          event.clientX - rect.left;
+
+        const y =
+          event.clientY - rect.top;
+
+
+        const ripple =
+          document.createElement("i");
+
+
+        ripple.style.cssText = `
+
+          position:absolute;
+
+          width:10px;
+          height:10px;
+
+          border-radius:50%;
+
+          background:#fff;
+
+          opacity:.35;
+
+          left:${x}px;
+          top:${y}px;
+
+          transform:
+            translate(-50%,-50%)
+            scale(1);
+
+          transition:
+            transform .55s,
+            opacity .55s;
+
+          pointer-events:none;
+
+        `;
+
+
+        button.appendChild(ripple);
+
+
+        requestAnimationFrame(() => {
+
+          ripple.style.transform =
+            "translate(-50%,-50%) scale(30)";
+
+          ripple.style.opacity = "0";
+
+        });
+
+
+        setTimeout(() => {
+
+          ripple.remove();
+
+        }, 600);
+
+      }
+
+    );
+
+  });
+
+
+/* =========================
+   CONTACT FORM
+========================= */
+
+const FORM_ENDPOINT = "";
+
+
+const contactForm =
+  document.getElementById("contactForm");
+
+
+if (contactForm) {
+
+  contactForm.addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+
+      const status =
+        document.getElementById(
+          "formStatus"
         );
 
 
-        function moveRing() {
+      /*
+        Google Apps Script URL
+        will be added later.
+      */
 
-            ringX +=
-                (mouseX - ringX) * 0.14;
+      if (!FORM_ENDPOINT) {
 
-            ringY +=
-                (mouseY - ringY) * 0.14;
+        if (status) {
 
-
-            cursorRing.style.left =
-                `${ringX}px`;
-
-            cursorRing.style.top =
-                `${ringY}px`;
-
-
-            requestAnimationFrame(
-                moveRing
-            );
+          status.textContent =
+            "Form is ready. Google Sheet connection will be activated next.";
 
         }
 
+        return;
 
-        moveRing();
-
-
-        document
-            .querySelectorAll(
-                "a, button, .project, input, textarea, select"
-            )
-            .forEach(element => {
-
-                element.addEventListener(
-                    "mouseenter",
-                    () => {
-
-                        document.body.classList.add(
-                            "cursor-hover"
-                        );
-
-                    }
-                );
+      }
 
 
-                element.addEventListener(
-                    "mouseleave",
-                    () => {
+      if (status) {
 
-                        document.body.classList.remove(
-                            "cursor-hover"
-                        );
+        status.textContent =
+          "Sending...";
 
-                    }
-                );
+      }
 
-            });
+
+      try {
+
+        const data =
+          Object.fromEntries(
+            new FormData(
+              contactForm
+            ).entries()
+          );
+
+
+        await fetch(
+          FORM_ENDPOINT,
+          {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify(data)
+          }
+        );
+
+
+        contactForm.reset();
+
+
+        if (status) {
+
+          status.textContent =
+            "Thanks — your inquiry has been sent.";
+
+        }
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+
+        if (status) {
+
+          status.textContent =
+            "Could not send right now. Please try again.";
+
+        }
+
+      }
 
     }
+  );
 
-
-    /* ==============================
-       BUTTON CLICK EFFECT
-    ============================== */
-
-    document
-        .querySelectorAll(
-            ".button, .submit-button, .show-more, .theme-toggle"
-        )
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    button.classList.remove(
-                        "clicked"
-                    );
-
-                    void button.offsetWidth;
-
-                    button.classList.add(
-                        "clicked"
-                    );
-
-                }
-            );
-
-        });
-
-
-    /* ==============================
-       SMOOTH NAVIGATION
-    ============================== */
-
-    document
-        .querySelectorAll(
-            'a[href^="#"]'
-        )
-        .forEach(link => {
-
-            link.addEventListener(
-                "click",
-                event => {
-
-                    const targetID =
-                        link.getAttribute("href");
-
-
-                    if (
-                        !targetID ||
-                        targetID === "#"
-                    ) {
-                        return;
-                    }
-
-
-                    const target =
-                        document.querySelector(
-                            targetID
-                        );
-
-
-                    if (!target) {
-                        return;
-                    }
-
-
-                    event.preventDefault();
-
-
-                    target.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
-                    });
-
-                }
-            );
-
-        });
-
-
-    /* ==============================
-       ACTIVE NAV
-    ============================== */
-
-    const sections =
-        document.querySelectorAll(
-            "section[id]"
-        );
-
-
-    const navLinks =
-        document.querySelectorAll(
-            "nav a"
-        );
-
-
-    if (
-        sections.length &&
-        navLinks.length &&
-        "IntersectionObserver" in window
-    ) {
-
-        const navObserver =
-            new IntersectionObserver(
-                entries => {
-
-                    entries.forEach(entry => {
-
-                        if (
-                            !entry.isIntersecting
-                        ) {
-                            return;
-                        }
-
-
-                        navLinks.forEach(link => {
-
-                            link.classList.remove(
-                                "active"
-                            );
-
-
-                            if (
-                                link.getAttribute(
-                                    "href"
-                                ) ===
-                                `#${entry.target.id}`
-                            ) {
-
-                                link.classList.add(
-                                    "active"
-                                );
-
-                            }
-
-                        });
-
-                    });
-
-                },
-                {
-                    rootMargin:
-                        "-40% 0px -50% 0px"
-                }
-            );
-
-
-        sections.forEach(section => {
-
-            navObserver.observe(section);
-
-        });
-
-    }
-
-
-    /* ==============================
-       CONTACT FORM
-    ============================== */
-
-    const contactForm =
-        document.getElementById(
-            "contactForm"
-        );
-
-
-    const formStatus =
-        document.getElementById(
-            "formStatus"
-        );
-
-
-    /*
-       GOOGLE APPS SCRIPT URL
-       Will be added later.
-    */
-
-    const GOOGLE_SCRIPT_URL = "";
-
-
-    if (contactForm) {
-
-        contactForm.addEventListener(
-            "submit",
-            async event => {
-
-                event.preventDefault();
-
-
-                const honeypot =
-                    contactForm.querySelector(
-                        '[name="website"]'
-                    );
-
-
-                if (
-                    honeypot &&
-                    honeypot.value.trim()
-                ) {
-
-                    return;
-
-                }
-
-
-                if (
-                    !contactForm.checkValidity()
-                ) {
-
-                    contactForm.reportValidity();
-
-                    return;
-
-                }
-
-
-                const submitButton =
-                    contactForm.querySelector(
-                        ".submit-button"
-                    );
-
-
-                const originalText =
-                    submitButton
-                        ? submitButton.innerHTML
-                        : "SEND";
-
-
-                if (!GOOGLE_SCRIPT_URL) {
-
-                    if (formStatus) {
-
-                        formStatus.textContent =
-                            "The contact form is ready. Google Sheet connection will be added next.";
-
-                        formStatus.className =
-                            "form-status info";
-
-                    }
-
-                    return;
-                }
-
-
-                if (submitButton) {
-                    submitButton.disabled = true;
-                    submitButton.textContent =
-                        "SENDING...";
-                }
-
-
-                try {
-
-                    const formData =
-                        new FormData(
-                            contactForm
-                        );
-
-
-                    await fetch(
-                        GOOGLE_SCRIPT_URL,
-                        {
-                            method: "POST",
-                            body: formData,
-                            mode: "no-cors"
-                        }
-                    );
-
-
-                    contactForm.reset();
-
-
-                    if (formStatus) {
-
-                        formStatus.textContent =
-                            "Thank you. Your message has been sent.";
-
-                        formStatus.className =
-                            "form-status success";
-
-                    }
-
-                }
-
-                catch (error) {
-
-                    console.error(error);
-
-
-                    if (formStatus) {
-
-                        formStatus.textContent =
-                            "Something went wrong. Please try again.";
-
-                        formStatus.className =
-                            "form-status error";
-
-                    }
-
-                }
-
-                finally {
-
-                    if (submitButton) {
-
-                        submitButton.disabled = false;
-
-                        submitButton.innerHTML =
-                            originalText;
-
-                    }
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* ==============================
-       PAGE READY
-    ============================== */
-
-    document.body.classList.add(
-        "page-ready"
-    );
-
-});
+}
