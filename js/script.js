@@ -1,7 +1,8 @@
 /* =========================================================
-   SHAKIL R.
-   COMPLETE PORTFOLIO JAVASCRIPT
+   SHAKIL R. PORTFOLIO
+   COMPLETE JAVASCRIPT
 ========================================================= */
+
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -13,33 +14,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const themeToggle =
         document.getElementById("themeToggle");
 
-    const themeIcon =
-        document.querySelector(".theme-icon");
 
     let theme =
-        localStorage.getItem("shakilstic-theme") ||
+        localStorage.getItem("shakilistic-theme") ||
         "dark";
 
 
     function applyTheme(value) {
 
         document.documentElement
-            .setAttribute("data-theme", value);
+            .setAttribute(
+                "data-theme",
+                value
+            );
 
         localStorage.setItem(
-            "shakilstic-theme",
+            "shakilistic-theme",
             value
         );
-
-
-        if (themeIcon) {
-
-            themeIcon.textContent =
-                value === "dark"
-                    ? "☼"
-                    : "☾";
-
-        }
 
     }
 
@@ -68,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       MOBILE MENU
+       MOBILE NAV
     ===================================================== */
 
     const mobileToggle =
@@ -76,13 +68,17 @@ document.addEventListener("DOMContentLoaded", () => {
             "mobileToggle"
         );
 
+
     const mobileNav =
         document.getElementById(
             "mobileNav"
         );
 
 
-    if (mobileToggle && mobileNav) {
+    if (
+        mobileToggle &&
+        mobileNav
+    ) {
 
         mobileToggle.addEventListener(
             "click",
@@ -104,9 +100,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     "click",
                     () => {
 
-                        mobileNav.classList.remove(
-                            "open"
-                        );
+                        mobileNav
+                            .classList
+                            .remove("open");
 
                     }
                 );
@@ -118,13 +114,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       CURSOR
+       CUSTOM CURSOR
     ===================================================== */
 
     const cursorDot =
         document.querySelector(
             ".cursor-dot"
         );
+
 
     const cursorRing =
         document.querySelector(
@@ -164,13 +161,13 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    function cursorAnimation() {
+    function animateCursor() {
 
         ringX +=
-            (mouseX - ringX) * .14;
+            (mouseX - ringX) * .16;
 
         ringY +=
-            (mouseY - ringY) * .14;
+            (mouseY - ringY) * .16;
 
 
         if (cursorRing) {
@@ -185,18 +182,67 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         requestAnimationFrame(
-            cursorAnimation
+            animateCursor
         );
 
     }
 
 
-    cursorAnimation();
+    if (
+        window.matchMedia(
+            "(pointer:fine)"
+        ).matches
+    ) {
+
+        animateCursor();
+
+    }
 
 
 
     /* =====================================================
-       REVEAL
+       CURSOR HOVER
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            "a, button, input, textarea"
+        )
+        .forEach(element => {
+
+            element.addEventListener(
+                "mouseenter",
+                () => {
+
+                    document.body
+                        .classList
+                        .add(
+                            "cursor-hover"
+                        );
+
+                }
+            );
+
+
+            element.addEventListener(
+                "mouseleave",
+                () => {
+
+                    document.body
+                        .classList
+                        .remove(
+                            "cursor-hover"
+                        );
+
+                }
+            );
+
+        });
+
+
+
+    /* =====================================================
+       SCROLL REVEAL
     ===================================================== */
 
     const revealElements =
@@ -205,9 +251,12 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-    if ("IntersectionObserver" in window) {
+    if (
+        "IntersectionObserver"
+        in window
+    ) {
 
-        const observer =
+        const revealObserver =
             new IntersectionObserver(
                 entries => {
 
@@ -220,11 +269,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
                                 entry.target
                                     .classList
-                                    .add("visible");
+                                    .add(
+                                        "visible"
+                                    );
 
-                                observer.unobserve(
-                                    entry.target
-                                );
+                                revealObserver
+                                    .unobserve(
+                                        entry.target
+                                    );
 
                             }
 
@@ -241,14 +293,15 @@ document.addEventListener("DOMContentLoaded", () => {
         revealElements.forEach(
             element => {
 
-                observer.observe(
+                revealObserver.observe(
                     element
                 );
 
             }
         );
 
-    } else {
+    }
+    else {
 
         revealElements.forEach(
             element => {
@@ -265,57 +318,125 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       DYNAMIC PORTFOLIO
+       BACK TO TOP
        
-       B1 = Book Cover
-       W1 = Web
-       S1 = Social
-       L1 = Logo
-       P1 = Print
+       Fixed on screen.
+       Appears after scrolling.
+    ===================================================== */
+
+    const backTop =
+        document.getElementById(
+            "backTop"
+        );
+
+
+    function updateBackTop() {
+
+        if (!backTop)
+            return;
+
+
+        if (
+            window.scrollY > 500
+        ) {
+
+            backTop.classList.add(
+                "show"
+            );
+
+        }
+        else {
+
+            backTop.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateBackTop,
+        {
+            passive: true
+        }
+    );
+
+
+    updateBackTop();
+
+
+    if (backTop) {
+
+        backTop.addEventListener(
+            "click",
+            () => {
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+        );
+
+    }
+
+
+
+    /* =====================================================
+       DYNAMIC PORTFOLIO IMAGES
        
-       Supports 1–200.
+       B1 = Book Cover 1
+       B2 = Book Cover 2
        
-       IMPORTANT:
-       Uses GitHub API directory listing.
-       This means it does NOT make hundreds
-       of image requests.
+       W1 = Web 1
+       S1 = Social 1
+       L1 = Logo 1
+       P1 = Print 1
+       
+       Supports up to 100 images.
+       
+       Missing numbers stay blank.
+       
+       Example:
+       
+       B1.jpg
+       B2.jpg
+       B5.png
+       
+       B3 and B4 can be missing.
+       
+       No serial number is displayed.
     ===================================================== */
 
     const categories = [
 
         {
             prefix: "B",
-            grid: "bookGrid",
-            section: "book-covers",
-            title: "Book Cover"
+            grid: "bookGrid"
         },
 
         {
             prefix: "W",
-            grid: "webGrid",
-            section: "web-design",
-            title: "Web Design"
+            grid: "webGrid"
         },
 
         {
             prefix: "S",
-            grid: "socialGrid",
-            section: "social-design",
-            title: "Social Media"
+            grid: "socialGrid"
         },
 
         {
             prefix: "L",
-            grid: "logoGrid",
-            section: "logo-design",
-            title: "Logo Design"
+            grid: "logoGrid"
         },
 
         {
             prefix: "P",
-            grid: "printGrid",
-            section: "print-design",
-            title: "Print Media"
+            grid: "printGrid"
         }
 
     ];
@@ -325,36 +446,42 @@ document.addEventListener("DOMContentLoaded", () => {
         "jpg",
         "jpeg",
         "png",
-        "webp",
-        "gif"
+        "webp"
     ];
 
 
-    const GITHUB_API =
-        "https://api.github.com/repos/shakilstic/shakilstic.github.io/contents/assets/images?ref=main";
+
+    function testImage(
+        src
+    ) {
+
+        return new Promise(
+            resolve => {
+
+                const img =
+                    new Image();
 
 
-    const GITHUB_RAW =
-        "https://raw.githubusercontent.com/shakilstic/shakilstic.github.io/main/assets/images/";
+                img.onload =
+                    () => resolve(true);
 
 
-    function escapeHTML(text) {
+                img.onerror =
+                    () => resolve(false);
 
-        const div =
-            document.createElement("div");
 
-        div.textContent =
-            text || "";
+                img.src =
+                    src;
 
-        return div.innerHTML;
+            }
+        );
 
     }
 
 
+
     function createProject(
-        src,
-        title,
-        number
+        src
     ) {
 
         const article =
@@ -364,7 +491,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         article.className =
-            "project-card reveal";
+            "project-card";
 
 
         article.innerHTML = `
@@ -372,26 +499,16 @@ document.addEventListener("DOMContentLoaded", () => {
             <a
                 href="${src}"
                 target="_blank"
-                rel="noopener">
+                rel="noopener"
+            >
 
                 <div class="project-image">
 
                     <img
                         src="${src}"
-                        alt="${escapeHTML(title)}"
-                        loading="lazy">
-
-                </div>
-
-                <div class="project-info">
-
-                    <h3>
-                        ${escapeHTML(title)}
-                    </h3>
-
-                    <span>
-                        Selected Work
-                    </span>
+                        alt="Portfolio project"
+                        loading="lazy"
+                    >
 
                 </div>
 
@@ -405,180 +522,111 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    async function loadPortfolioImages() {
 
-        try {
+    async function loadCategory(
+        category
+    ) {
 
-            const response =
-                await fetch(
-                    GITHUB_API,
-                    {
-                        cache: "no-store"
-                    }
-                );
+        const grid =
+            document.getElementById(
+                category.grid
+            );
 
 
-            if (!response.ok) {
+        if (!grid)
+            return;
 
-                throw new Error(
-                    "GitHub API failed"
-                );
+
+        const section =
+            grid.closest(
+                ".design-category"
+            );
+
+
+        let found =
+            0;
+
+
+        for (
+            let number = 1;
+            number <= 100;
+            number++
+        ) {
+
+            let foundImage =
+                null;
+
+
+            for (
+                const extension
+                of imageExtensions
+            ) {
+
+                const src =
+                    `assets/images/${category.prefix}${number}.${extension}`;
+
+
+                const exists =
+                    await testImage(
+                        src
+                    );
+
+
+                if (exists) {
+
+                    foundImage =
+                        src;
+
+                    break;
+
+                }
 
             }
 
 
-            const files =
-                await response.json();
+            if (!foundImage)
+                continue;
 
 
-            categories.forEach(
-                category => {
-
-                    const grid =
-                        document.getElementById(
-                            category.grid
-                        );
+            found++;
 
 
-                    const section =
-                        document.getElementById(
-                            category.section
-                        );
+            const card =
+                createProject(
+                    foundImage
+                );
 
 
-                    if (!grid || !section)
-                        return;
+            grid.appendChild(
+                card
+            );
 
 
-                    grid.innerHTML = "";
+            requestAnimationFrame(
+                () => {
 
-
-                    const matchingFiles =
-                        files
-                            .filter(file => {
-
-                                if (
-                                    file.type !==
-                                    "file"
-                                )
-                                    return false;
-
-
-                                const name =
-                                    file.name;
-
-
-                                const match =
-                                    name.match(
-                                        new RegExp(
-                                            `^${category.prefix}(\\d+)\\.(${imageExtensions.join("|")})$`,
-                                            "i"
-                                        )
-                                    );
-
-
-                                return !!match;
-
-                            })
-                            .sort(
-                                (a, b) => {
-
-                                    const aNumber =
-                                        parseInt(
-                                            a.name.match(
-                                                /\d+/
-                                            )[0]
-                                        );
-
-
-                                    const bNumber =
-                                        parseInt(
-                                            b.name.match(
-                                                /\d+/
-                                            )[0]
-                                        );
-
-
-                                    return (
-                                        aNumber -
-                                        bNumber
-                                    );
-
-                                }
-                            );
-
-
-                    if (
-                        matchingFiles.length === 0
-                    ) {
-
-                        section.classList.add(
-                            "is-empty"
-                        );
-
-                        return;
-
-                    }
-
-
-                    section.classList.remove(
-                        "is-empty"
-                    );
-
-
-                    matchingFiles.forEach(
-                        file => {
-
-                            const number =
-                                file.name.match(
-                                    /\d+/
-                                )[0];
-
-
-                            const src =
-                                GITHUB_RAW +
-                                encodeURIComponent(
-                                    file.name
-                                );
-
-
-                            const card =
-                                createProject(
-                                    src,
-                                    category.title,
-                                    number
-                                );
-
-
-                            grid.appendChild(
-                                card
-                            );
-
-
-                            requestAnimationFrame(
-                                () => {
-
-                                    card.classList.add(
-                                        "visible"
-                                    );
-
-                                }
-                            );
-
-                        }
+                    card.classList.add(
+                        "visible"
                     );
 
                 }
             );
 
-
         }
 
-        catch(error) {
 
-            console.error(
-                "Portfolio images could not load:",
-                error
+        /*
+           Hide entire section if
+           there are no images.
+        */
+
+        if (
+            found === 0 &&
+            section
+        ) {
+
+            section.classList.add(
+                "is-empty"
             );
 
         }
@@ -586,19 +634,33 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    loadPortfolioImages();
+
+    categories.forEach(
+        category => {
+
+            loadCategory(
+                category
+            );
+
+        }
+    );
 
 
 
     /* =====================================================
-       BLOGGER JSONP
+       BLOGGER
+       
+       Client Feedback
+       Currently Working
     ===================================================== */
 
     const BLOGGER =
         "https://createwithshakil.blogspot.com";
 
 
-    let jsonpCounter = 0;
+    let jsonpCounter =
+        0;
+
 
 
     function bloggerFeed(
@@ -609,8 +671,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return new Promise(
             (resolve, reject) => {
 
-                const callbackName =
-                    `shakilBlogger_${++jsonpCounter}`;
+                const callback =
+                    `shakilFeed_${++jsonpCounter}`;
 
 
                 const script =
@@ -626,42 +688,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 const url =
-                    `${BLOGGER}/feeds/posts/default/-/${encodedLabel}?alt=json-in-script&max-results=${maxResults}&callback=${callbackName}`;
+                    `${BLOGGER}/feeds/posts/default/-/${encodedLabel}?alt=json-in-script&max-results=${maxResults}&callback=${callback}`;
 
 
-                const timeout =
-                    setTimeout(
-                        () => {
-
-                            delete window[
-                                callbackName
-                            ];
-
-                            script.remove();
-
-                            reject(
-                                new Error(
-                                    "Blogger timeout"
-                                )
-                            );
-
-                        },
-                        8000
-                    );
-
-
-                window[callbackName] =
+                window[callback] =
                     data => {
 
-                        clearTimeout(
-                            timeout
-                        );
-
-
                         delete window[
-                            callbackName
+                            callback
                         ];
-
 
                         script.remove();
 
@@ -677,15 +712,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 script.onerror =
                     () => {
 
-                        clearTimeout(
-                            timeout
-                        );
-
-
                         delete window[
-                            callbackName
+                            callback
                         ];
-
 
                         script.remove();
 
@@ -714,28 +743,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    function entryTitle(entry) {
+    /* =====================================================
+       BLOGGER HELPERS
+    ===================================================== */
+
+    function entryTitle(
+        entry
+    ) {
 
         return (
-            entry.title?.$t ||
+            entry?.title?.$t ||
             "Client"
         );
 
     }
 
 
-    function entryContent(entry) {
+    function entryContent(
+        entry
+    ) {
 
         return (
-            entry.content?.$t ||
-            entry.summary?.$t ||
+            entry?.content?.$t ||
+            entry?.summary?.$t ||
             ""
         );
 
     }
 
 
-    function stripHTML(html) {
+    function stripHTML(
+        html
+    ) {
 
         const div =
             document.createElement(
@@ -744,7 +783,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         div.innerHTML =
-            html || "";
+            html;
 
 
         return (
@@ -752,8 +791,58 @@ document.addEventListener("DOMContentLoaded", () => {
             div.innerText ||
             ""
         )
-        .replace(/\s+/g, " ")
+        .replace(
+            /\s+/g,
+            " "
+        )
         .trim();
+
+    }
+
+
+    function firstImage(
+        entry
+    ) {
+
+        const html =
+            entryContent(
+                entry
+            );
+
+
+        const match =
+            html.match(
+                /<img[^>]+src=["']([^"']+)["']/i
+            );
+
+
+        return match
+            ? match[1]
+            : "";
+
+    }
+
+
+    function entryUrl(
+        entry
+    ) {
+
+        const links =
+            entry?.link ||
+            [];
+
+
+        const alternate =
+            links.find(
+                link =>
+                    link.rel ===
+                    "alternate"
+            );
+
+
+        return alternate
+            ? alternate.href
+            : "#";
 
     }
 
@@ -762,9 +851,8 @@ document.addEventListener("DOMContentLoaded", () => {
     /* =====================================================
        CLIENT FEEDBACK
        
-       ALL BLOGGER CLIENT FEEDBACK POSTS
-       
-       No "View Original"
+       ALL reviews are shown.
+       No Show More button.
     ===================================================== */
 
     const clientsGrid =
@@ -773,19 +861,56 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-    const clientsMore =
-        document.getElementById(
-            "clientsMore"
-        );
+    function escapeHTML(
+        text
+    ) {
+
+        const div =
+            document.createElement(
+                "div"
+            );
 
 
-    let allClients = [];
-
-    let clientsExpanded =
-        false;
+        div.textContent =
+            text || "";
 
 
-    function createClientCard(entry) {
+        return div.innerHTML;
+
+    }
+
+
+
+    function makeClientCard(
+        entry
+    ) {
+
+        const name =
+            entryTitle(
+                entry
+            );
+
+
+        const raw =
+            entryContent(
+                entry
+            );
+
+
+        const text =
+            stripHTML(
+                raw
+            );
+
+
+        const cleaned =
+            text
+                .replace(
+                    /^[★☆\s]+/,
+                    ""
+                )
+                .trim();
+
 
         const card =
             document.createElement(
@@ -794,26 +919,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         card.className =
-            "client-card reveal";
-
-
-        const name =
-            entryTitle(entry);
-
-
-        let text =
-            stripHTML(
-                entryContent(entry)
-            );
-
-
-        text =
-            text
-                .replace(
-                    /^[★☆\s]+/,
-                    ""
-                )
-                .trim();
+            "client-card";
 
 
         card.innerHTML = `
@@ -823,7 +929,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <div class="client-review">
-                ${escapeHTML(text)}
+                ${escapeHTML(cleaned)}
             </div>
 
             <div class="client-name">
@@ -838,56 +944,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function renderClients() {
-
-        if (!clientsGrid)
-            return;
-
-
-        clientsGrid.innerHTML =
-            "";
-
-
-        const amount =
-            clientsExpanded
-                ? allClients.length
-                : Math.min(
-                    3,
-                    allClients.length
-                );
-
-
-        allClients
-            .slice(0, amount)
-            .forEach(entry => {
-
-                clientsGrid.appendChild(
-                    createClientCard(
-                        entry
-                    )
-                );
-
-            });
-
-
-        if (
-            clientsMore &&
-            allClients.length > 3
-        ) {
-
-            clientsMore.hidden =
-                false;
-
-
-            clientsMore.textContent =
-                clientsExpanded
-                    ? "SHOW LESS"
-                    : "SHOW MORE";
-
-        }
-
-    }
-
 
     async function loadClients() {
 
@@ -897,38 +953,73 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
 
-            allClients =
+            const clients =
                 await bloggerFeed(
                     "Client Feedback",
                     100
                 );
 
 
+            clientsGrid.innerHTML =
+                "";
+
+
             if (
-                !allClients.length
+                !clients.length
             ) {
 
-                clientsGrid.innerHTML =
-                    "";
+                clientsGrid.innerHTML = `
+
+                    <div class="loading-state">
+
+                        Client feedback
+                        will appear here.
+
+                    </div>
+
+                `;
 
                 return;
 
             }
 
 
-            renderClients();
+            /*
+               IMPORTANT:
+               ALL client feedback is rendered.
+            */
+
+            clients.forEach(
+                entry => {
+
+                    clientsGrid.appendChild(
+                        makeClientCard(
+                            entry
+                        )
+                    );
+
+                }
+            );
 
         }
-
         catch(error) {
 
-            console.warn(
-                "Client feedback unavailable:",
+            console.error(
+                "Client feedback:",
                 error
             );
 
-            clientsGrid.innerHTML =
-                "";
+
+            clientsGrid.innerHTML = `
+
+                <div class="loading-state">
+
+                    Unable to load
+                    client feedback right now.
+
+                </div>
+
+            `;
 
         }
 
@@ -938,35 +1029,18 @@ document.addEventListener("DOMContentLoaded", () => {
     loadClients();
 
 
-    if (clientsMore) {
-
-        clientsMore.addEventListener(
-            "click",
-            () => {
-
-                clientsExpanded =
-                    !clientsExpanded;
-
-                renderClients();
-
-            }
-        );
-
-    }
-
-
 
     /* =====================================================
        CURRENTLY WORKING
        
-       6 LOGOS VISIBLE
-       AUTO SLIDE
-       CONTINUOUS LOOP
-       PAUSE ON MOUSE
-       ARROW CONTROL
-       
-       Blogger:
+       Blogger label:
        Currently Working
+       
+       6 logos visible where possible.
+       
+       Auto continuous movement.
+       Mouse hover pauses.
+       Arrow buttons work.
     ===================================================== */
 
     const profileTrack =
@@ -993,42 +1067,45 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-    let profiles = [];
-
-    let profilePosition = 0;
-
-    let profileTimer = null;
-
-    let profilePaused = false;
+    let profiles =
+        [];
 
 
-    function firstImage(entry) {
-
-        const html =
-            entryContent(entry);
+    let profileIndex =
+        0;
 
 
-        const match =
-            html.match(
-                /<img[^>]+src=["']([^"']+)["']/i
-            );
+    let autoProfileTimer =
+        null;
 
 
-        return match
-            ? match[1]
-            : "";
-
-    }
+    let profilePaused =
+        false;
 
 
-    function createProfileCard(entry) {
+    let profileMoving =
+        false;
+
+
+
+    function makeProfile(
+        entry
+    ) {
 
         const image =
-            firstImage(entry);
+            firstImage(
+                entry
+            );
 
 
         if (!image)
             return null;
+
+
+        const url =
+            entryUrl(
+                entry
+            );
 
 
         const card =
@@ -1042,13 +1119,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         card.href =
-            "#";
+            url || "#";
 
 
-        card.setAttribute(
-            "aria-label",
-            entryTitle(entry)
-        );
+        card.target =
+            "_blank";
+
+
+        card.rel =
+            "noopener noreferrer";
 
 
         card.innerHTML = `
@@ -1058,24 +1137,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 alt="${escapeHTML(
                     entryTitle(entry)
                 )}"
-                loading="lazy">
+                loading="lazy"
+            >
 
         `;
-
-
-        /*
-           Important:
-           Clicking logo DOES NOT open Blogger.
-        */
-
-        card.addEventListener(
-            "click",
-            event => {
-
-                event.preventDefault();
-
-            }
-        );
 
 
         return card;
@@ -1083,10 +1148,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function getProfileStep() {
+
+    function cardWidth() {
+
+        if (!profileTrack)
+            return 0;
+
 
         const card =
-            profileTrack?.querySelector(
+            profileTrack.querySelector(
                 ".profile-card"
             );
 
@@ -1111,9 +1181,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+
     function renderProfiles() {
 
-        if (!profileTrack)
+        if (
+            !profileTrack ||
+            !profiles.length
+        )
             return;
 
 
@@ -1121,16 +1195,12 @@ document.addEventListener("DOMContentLoaded", () => {
             "";
 
 
-        if (!profiles.length)
-            return;
-
-
         /*
-           Triple clone creates enough
-           material for a smooth loop.
+           Triple clone for
+           continuous loop.
         */
 
-        const repeated =
+        const displayProfiles =
             [
                 ...profiles,
                 ...profiles,
@@ -1138,11 +1208,11 @@ document.addEventListener("DOMContentLoaded", () => {
             ];
 
 
-        repeated.forEach(
+        displayProfiles.forEach(
             entry => {
 
                 const card =
-                    createProfileCard(
+                    makeProfile(
                         entry
                     );
 
@@ -1159,18 +1229,23 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        profilePosition =
+        /*
+           Start in the middle copy.
+        */
+
+        profileIndex =
             profiles.length;
 
 
-        setProfilePosition(
+        updateProfilePosition(
             false
         );
 
     }
 
 
-    function setProfilePosition(
+
+    function updateProfilePosition(
         animate = true
     ) {
 
@@ -1180,18 +1255,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         profileTrack.style.transition =
             animate
-                ? "transform .55s cubic-bezier(.2,.8,.2,1)"
+                ? "transform .7s cubic-bezier(.2,.8,.2,1)"
                 : "none";
 
 
-        const step =
-            getProfileStep();
-
-
         profileTrack.style.transform =
-            `translate3d(-${profilePosition * step}px,0,0)`;
+            `translateX(-${profileIndex * cardWidth()}px)`;
 
     }
+
 
 
     function moveProfile(
@@ -1200,16 +1272,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (
             !profiles.length ||
-            !profileTrack
+            !profileTrack ||
+            profileMoving
         )
             return;
 
 
-        profilePosition +=
+        profileMoving =
+            true;
+
+
+        profileIndex +=
             direction;
 
 
-        setProfilePosition(
+        updateProfilePosition(
             true
         );
 
@@ -1217,15 +1294,20 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(
             () => {
 
+                /*
+                   Jump silently to
+                   the middle copy.
+                */
+
                 if (
-                    profilePosition >=
+                    profileIndex >=
                     profiles.length * 2
                 ) {
 
-                    profilePosition =
+                    profileIndex =
                         profiles.length;
 
-                    setProfilePosition(
+                    updateProfilePosition(
                         false
                     );
 
@@ -1233,34 +1315,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 if (
-                    profilePosition <
+                    profileIndex <
                     profiles.length
                 ) {
 
-                    profilePosition =
+                    profileIndex =
                         profiles.length;
 
-                    setProfilePosition(
+                    updateProfilePosition(
                         false
                     );
 
                 }
 
+
+                profileMoving =
+                    false;
+
             },
-            570
+            720
         );
 
     }
 
 
+
     function startProfileAuto() {
 
         clearInterval(
-            profileTimer
+            autoProfileTimer
         );
 
 
-        profileTimer =
+        autoProfileTimer =
             setInterval(
                 () => {
 
@@ -1275,10 +1362,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
 
                 },
-                2300
+                2400
             );
 
     }
+
 
 
     if (profilePrev) {
@@ -1299,6 +1387,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+
     if (profileNext) {
 
         profileNext.addEventListener(
@@ -1315,6 +1404,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
     }
+
 
 
     if (profileWindow) {
@@ -1343,7 +1433,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+
     async function loadProfiles() {
+
+        if (!profileTrack)
+            return;
+
 
         try {
 
@@ -1354,31 +1449,41 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
 
-            /*
-               Remove entries without images.
-            */
-
             profiles =
                 profiles.filter(
                     entry =>
-                        !!firstImage(
-                            entry
-                        )
+                        firstImage(entry)
                 );
+
+
+            if (
+                !profiles.length
+            ) {
+
+                profileTrack.innerHTML =
+                    "";
+
+                return;
+
+            }
 
 
             renderProfiles();
 
+
             startProfileAuto();
 
         }
-
         catch(error) {
 
-            console.warn(
-                "Currently Working unavailable:",
+            console.error(
+                "Currently Working:",
                 error
             );
+
+
+            profileTrack.innerHTML =
+                "";
 
         }
 
@@ -1386,95 +1491,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     loadProfiles();
-
-
-
-    /* =====================================================
-       BACK TO TOP
-       
-       Fixed button.
-       Available from anywhere.
-    ===================================================== */
-
-    const backTop =
-        document.getElementById(
-            "backTop"
-        );
-
-
-    if (backTop) {
-
-        backTop.addEventListener(
-            "click",
-            () => {
-
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
-
-            }
-        );
-
-    }
-
-
-
-    /* =====================================================
-       MAGNETIC BUTTONS
-    ===================================================== */
-
-    document
-        .querySelectorAll(
-            ".magnetic"
-        )
-        .forEach(button => {
-
-            button.addEventListener(
-                "mousemove",
-                event => {
-
-                    if (
-                        window.innerWidth <
-                        900
-                    )
-                        return;
-
-
-                    const rect =
-                        button.getBoundingClientRect();
-
-
-                    const x =
-                        event.clientX -
-                        rect.left -
-                        rect.width / 2;
-
-
-                    const y =
-                        event.clientY -
-                        rect.top -
-                        rect.height / 2;
-
-
-                    button.style.transform =
-                        `translate(${x * .12}px,${y * .12}px)`;
-
-                }
-            );
-
-
-            button.addEventListener(
-                "mouseleave",
-                () => {
-
-                    button.style.transform =
-                        "";
-
-                }
-            );
-
-        });
 
 
 
@@ -1510,21 +1526,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 const name =
-                    formData.get(
-                        "name"
-                    );
+                    String(
+                        formData.get(
+                            "name"
+                        ) || ""
+                    ).trim();
 
 
                 const email =
-                    formData.get(
-                        "email"
-                    );
+                    String(
+                        formData.get(
+                            "email"
+                        ) || ""
+                    ).trim();
 
 
                 const message =
-                    formData.get(
-                        "message"
-                    );
+                    String(
+                        formData.get(
+                            "message"
+                        ) || ""
+                    ).trim();
 
 
                 if (
@@ -1547,7 +1569,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const subject =
                     encodeURIComponent(
-                        "New Project Enquiry — Shakilstic"
+                        "New Project Enquiry — Shakil R."
                     );
 
 
@@ -1557,16 +1579,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
 
-                window.location.href =
-                    `mailto:?subject=${subject}&body=${body}`;
-
-
                 if (formStatus) {
 
                     formStatus.textContent =
                         "Opening your email client...";
 
                 }
+
+
+                window.location.href =
+                    `mailto:?subject=${subject}&body=${body}`;
 
             }
         );
@@ -1576,7 +1598,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       SMOOTH INTERNAL LINKS
+       MAGNETIC BUTTON
+    ===================================================== */
+
+    if (
+        window.matchMedia(
+            "(pointer:fine)"
+        ).matches
+    ) {
+
+        document
+            .querySelectorAll(
+                ".magnetic"
+            )
+            .forEach(button => {
+
+                button.addEventListener(
+                    "mousemove",
+                    event => {
+
+                        const rect =
+                            button.getBoundingClientRect();
+
+
+                        const x =
+                            event.clientX -
+                            rect.left -
+                            rect.width / 2;
+
+
+                        const y =
+                            event.clientY -
+                            rect.top -
+                            rect.height / 2;
+
+
+                        button.style.transform =
+                            `translate(${x * .10}px, ${y * .10}px)`;
+
+                    }
+                );
+
+
+                button.addEventListener(
+                    "mouseleave",
+                    () => {
+
+                        button.style.transform =
+                            "";
+
+                    }
+                );
+
+            });
+
+    }
+
+
+
+    /* =====================================================
+       INTERNAL LINKS
     ===================================================== */
 
     document
@@ -1616,8 +1697,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                     target.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
+                        behavior:
+                            "smooth",
+                        block:
+                            "start"
                     });
 
                 }
@@ -1625,5 +1708,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
         });
 
+
+
+    /* =====================================================
+       YEAR
+    ===================================================== */
+
+    const year =
+        document.getElementById(
+            "year"
+        );
+
+
+    if (year) {
+
+        year.textContent =
+            new Date()
+                .getFullYear();
+
+    }
 
 });
