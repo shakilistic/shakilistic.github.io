@@ -1,6 +1,6 @@
 /* =========================================================
-   SHAKIL R. PORTFOLIO
-   COMPLETE JAVASCRIPT
+   SHAKIL R.
+   COMPLETE PORTFOLIO JAVASCRIPT
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,9 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const themeToggle =
         document.getElementById("themeToggle");
 
+    const themeIcon =
+        document.querySelector(".theme-icon");
+
     let theme =
         localStorage.getItem("shakilstic-theme") ||
-        "light";
+        "dark";
 
 
     function applyTheme(value) {
@@ -27,6 +30,16 @@ document.addEventListener("DOMContentLoaded", () => {
             "shakilstic-theme",
             value
         );
+
+
+        if (themeIcon) {
+
+            themeIcon.textContent =
+                value === "dark"
+                    ? "☼"
+                    : "☾";
+
+        }
 
     }
 
@@ -41,9 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
             () => {
 
                 theme =
-                    theme === "light"
-                        ? "dark"
-                        : "light";
+                    theme === "dark"
+                        ? "light"
+                        : "dark";
 
                 applyTheme(theme);
 
@@ -55,14 +68,68 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       CUSTOM CURSOR
+       MOBILE MENU
+    ===================================================== */
+
+    const mobileToggle =
+        document.getElementById(
+            "mobileToggle"
+        );
+
+    const mobileNav =
+        document.getElementById(
+            "mobileNav"
+        );
+
+
+    if (mobileToggle && mobileNav) {
+
+        mobileToggle.addEventListener(
+            "click",
+            () => {
+
+                mobileNav.classList.toggle(
+                    "open"
+                );
+
+            }
+        );
+
+
+        mobileNav
+            .querySelectorAll("a")
+            .forEach(link => {
+
+                link.addEventListener(
+                    "click",
+                    () => {
+
+                        mobileNav.classList.remove(
+                            "open"
+                        );
+
+                    }
+                );
+
+            });
+
+    }
+
+
+
+    /* =====================================================
+       CURSOR
     ===================================================== */
 
     const cursorDot =
-        document.querySelector(".cursor-dot");
+        document.querySelector(
+            ".cursor-dot"
+        );
 
     const cursorRing =
-        document.querySelector(".cursor-ring");
+        document.querySelector(
+            ".cursor-ring"
+        );
 
 
     let mouseX = 0;
@@ -76,8 +143,12 @@ document.addEventListener("DOMContentLoaded", () => {
         "mousemove",
         event => {
 
-            mouseX = event.clientX;
-            mouseY = event.clientY;
+            mouseX =
+                event.clientX;
+
+            mouseY =
+                event.clientY;
+
 
             if (cursorDot) {
 
@@ -93,13 +164,13 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    function animateCursor() {
+    function cursorAnimation() {
 
         ringX +=
-            (mouseX - ringX) * .16;
+            (mouseX - ringX) * .14;
 
         ringY +=
-            (mouseY - ringY) * .16;
+            (mouseY - ringY) * .14;
 
 
         if (cursorRing) {
@@ -114,83 +185,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         requestAnimationFrame(
-            animateCursor
+            cursorAnimation
         );
 
     }
 
 
-    animateCursor();
-
-
-    document
-        .querySelectorAll(
-            "a, button, input, textarea"
-        )
-        .forEach(element => {
-
-            element.addEventListener(
-                "mouseenter",
-                () => {
-
-                    document.body
-                        .classList
-                        .add("cursor-hover");
-
-                }
-            );
-
-
-            element.addEventListener(
-                "mouseleave",
-                () => {
-
-                    document.body
-                        .classList
-                        .remove("cursor-hover");
-
-                }
-            );
-
-        });
+    cursorAnimation();
 
 
 
     /* =====================================================
-       MOBILE NAV
-    ===================================================== */
-
-    const mobileNav =
-        document.getElementById("mobileNav");
-
-
-    document
-        .querySelectorAll(
-            ".desktop-nav a"
-        )
-        .forEach(link => {
-
-            link.addEventListener(
-                "click",
-                () => {
-
-                    if (mobileNav) {
-
-                        mobileNav
-                            .classList
-                            .remove("open");
-
-                    }
-
-                }
-            );
-
-        });
-
-
-
-    /* =====================================================
-       SCROLL REVEAL
+       REVEAL
     ===================================================== */
 
     const revealElements =
@@ -199,70 +205,57 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-    const revealObserver =
-        new IntersectionObserver(
-            entries => {
+    if ("IntersectionObserver" in window) {
 
-                entries.forEach(
-                    entry => {
+        const observer =
+            new IntersectionObserver(
+                entries => {
 
-                        if (
-                            entry.isIntersecting
-                        ) {
+                    entries.forEach(
+                        entry => {
 
-                            entry.target
-                                .classList
-                                .add("visible");
+                            if (
+                                entry.isIntersecting
+                            ) {
 
-                            revealObserver
-                                .unobserve(
+                                entry.target
+                                    .classList
+                                    .add("visible");
+
+                                observer.unobserve(
                                     entry.target
                                 );
 
-                        }
+                            }
 
-                    }
+                        }
+                    );
+
+                },
+                {
+                    threshold: .08
+                }
+            );
+
+
+        revealElements.forEach(
+            element => {
+
+                observer.observe(
+                    element
                 );
 
-            },
-            {
-                threshold: .10
             }
         );
 
+    } else {
 
-    revealElements.forEach(
-        element => {
+        revealElements.forEach(
+            element => {
 
-            revealObserver.observe(
-                element
-            );
-
-        }
-    );
-
-
-
-    /* =====================================================
-       BACK TO TOP
-    ===================================================== */
-
-    const backTop =
-        document.getElementById(
-            "backTop"
-        );
-
-
-    if (backTop) {
-
-        backTop.addEventListener(
-            "click",
-            () => {
-
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
+                element.classList.add(
+                    "visible"
+                );
 
             }
         );
@@ -272,22 +265,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       DYNAMIC PORTFOLIO IMAGES
+       DYNAMIC PORTFOLIO
        
-       B1 = Book Cover 1
-       B2 = Book Cover 2
-       ...
+       B1 = Book Cover
+       W1 = Web
+       S1 = Social
+       L1 = Logo
+       P1 = Print
        
-       W1 = Web 1
-       S1 = Social 1
-       L1 = Logo 1
-       P1 = Print 1
+       Supports 1–200.
        
-       If image doesn't exist:
-       nothing is shown.
-       
-       Section automatically hides if
-       no images exist.
+       IMPORTANT:
+       Uses GitHub API directory listing.
+       This means it does NOT make hundreds
+       of image requests.
     ===================================================== */
 
     const categories = [
@@ -295,30 +286,35 @@ document.addEventListener("DOMContentLoaded", () => {
         {
             prefix: "B",
             grid: "bookGrid",
+            section: "book-covers",
             title: "Book Cover"
         },
 
         {
             prefix: "W",
             grid: "webGrid",
+            section: "web-design",
             title: "Web Design"
         },
 
         {
             prefix: "S",
             grid: "socialGrid",
+            section: "social-design",
             title: "Social Media"
         },
 
         {
             prefix: "L",
             grid: "logoGrid",
+            section: "logo-design",
             title: "Logo Design"
         },
 
         {
             prefix: "P",
             grid: "printGrid",
+            section: "print-design",
             title: "Print Media"
         }
 
@@ -329,8 +325,30 @@ document.addEventListener("DOMContentLoaded", () => {
         "jpg",
         "jpeg",
         "png",
-        "webp"
+        "webp",
+        "gif"
     ];
+
+
+    const GITHUB_API =
+        "https://api.github.com/repos/shakilstic/shakilstic.github.io/contents/assets/images?ref=main";
+
+
+    const GITHUB_RAW =
+        "https://raw.githubusercontent.com/shakilstic/shakilstic.github.io/main/assets/images/";
+
+
+    function escapeHTML(text) {
+
+        const div =
+            document.createElement("div");
+
+        div.textContent =
+            text || "";
+
+        return div.innerHTML;
+
+    }
 
 
     function createProject(
@@ -344,19 +362,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 "article"
             );
 
+
         article.className =
             "project-card reveal";
 
 
         article.innerHTML = `
 
-            <a href="${src}" target="_blank">
+            <a
+                href="${src}"
+                target="_blank"
+                rel="noopener">
 
                 <div class="project-image">
 
                     <img
                         src="${src}"
-                        alt="${title} ${number}"
+                        alt="${escapeHTML(title)}"
                         loading="lazy">
 
                 </div>
@@ -364,11 +386,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="project-info">
 
                     <h3>
-                        ${title} / ${number}
+                        ${escapeHTML(title)}
                     </h3>
 
                     <span>
-                        ${title}
+                        Selected Work
                     </span>
 
                 </div>
@@ -383,161 +405,193 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function testImage(src) {
+    async function loadPortfolioImages() {
 
-        return new Promise(resolve => {
+        try {
 
-            const img =
-                new Image();
-
-
-            img.onload = () =>
-                resolve(true);
-
-
-            img.onerror = () =>
-                resolve(false);
-
-
-            img.src = src;
-
-        });
-
-    }
-
-
-    async function loadCategory(
-        category
-    ) {
-
-        const grid =
-            document.getElementById(
-                category.grid
-            );
-
-
-        if (!grid) return;
-
-
-        const section =
-            grid.closest(
-                ".design-section"
-            );
-
-
-        let found = 0;
-
-
-        /*
-           Supports 1–100 images.
-           You can upload more than 20.
-        */
-
-        for (
-            let number = 1;
-            number <= 100;
-            number++
-        ) {
-
-            let foundImage = null;
-
-
-            for (
-                const extension
-                of imageExtensions
-            ) {
-
-                const src =
-                    `assets/images/${category.prefix}${number}.${extension}`;
-
-
-                const exists =
-                    await testImage(src);
-
-
-                if (exists) {
-
-                    foundImage =
-                        src;
-
-                    break;
-
-                }
-
-            }
-
-
-            if (!foundImage) {
-
-                continue;
-
-            }
-
-
-            found++;
-
-
-            const card =
-                createProject(
-                    foundImage,
-                    category.title,
-                    number
+            const response =
+                await fetch(
+                    GITHUB_API,
+                    {
+                        cache: "no-store"
+                    }
                 );
 
 
-            grid.appendChild(card);
+            if (!response.ok) {
 
-        }
+                throw new Error(
+                    "GitHub API failed"
+                );
 
-
-        if (!found && section) {
-
-            section.classList
-                .add("is-empty");
-
-        }
+            }
 
 
-        /*
-           Reveal dynamically generated cards.
-        */
+            const files =
+                await response.json();
 
-        grid
-            .querySelectorAll(
-                ".reveal"
-            )
-            .forEach(
-                element => {
 
-                    setTimeout(
-                        () => {
+            categories.forEach(
+                category => {
 
-                            element
-                                .classList
-                                .add("visible");
+                    const grid =
+                        document.getElementById(
+                            category.grid
+                        );
 
-                        },
-                        80
+
+                    const section =
+                        document.getElementById(
+                            category.section
+                        );
+
+
+                    if (!grid || !section)
+                        return;
+
+
+                    grid.innerHTML = "";
+
+
+                    const matchingFiles =
+                        files
+                            .filter(file => {
+
+                                if (
+                                    file.type !==
+                                    "file"
+                                )
+                                    return false;
+
+
+                                const name =
+                                    file.name;
+
+
+                                const match =
+                                    name.match(
+                                        new RegExp(
+                                            `^${category.prefix}(\\d+)\\.(${imageExtensions.join("|")})$`,
+                                            "i"
+                                        )
+                                    );
+
+
+                                return !!match;
+
+                            })
+                            .sort(
+                                (a, b) => {
+
+                                    const aNumber =
+                                        parseInt(
+                                            a.name.match(
+                                                /\d+/
+                                            )[0]
+                                        );
+
+
+                                    const bNumber =
+                                        parseInt(
+                                            b.name.match(
+                                                /\d+/
+                                            )[0]
+                                        );
+
+
+                                    return (
+                                        aNumber -
+                                        bNumber
+                                    );
+
+                                }
+                            );
+
+
+                    if (
+                        matchingFiles.length === 0
+                    ) {
+
+                        section.classList.add(
+                            "is-empty"
+                        );
+
+                        return;
+
+                    }
+
+
+                    section.classList.remove(
+                        "is-empty"
+                    );
+
+
+                    matchingFiles.forEach(
+                        file => {
+
+                            const number =
+                                file.name.match(
+                                    /\d+/
+                                )[0];
+
+
+                            const src =
+                                GITHUB_RAW +
+                                encodeURIComponent(
+                                    file.name
+                                );
+
+
+                            const card =
+                                createProject(
+                                    src,
+                                    category.title,
+                                    number
+                                );
+
+
+                            grid.appendChild(
+                                card
+                            );
+
+
+                            requestAnimationFrame(
+                                () => {
+
+                                    card.classList.add(
+                                        "visible"
+                                    );
+
+                                }
+                            );
+
+                        }
                     );
 
                 }
             );
 
+
+        }
+
+        catch(error) {
+
+            console.error(
+                "Portfolio images could not load:",
+                error
+            );
+
+        }
+
     }
 
 
-    categories.forEach(
-        loadCategory
-    );
+    loadPortfolioImages();
 
 
 
     /* =====================================================
-       BLOGGER JSONP ENGINE
-       
-       Blogger:
-       Client Feedback
-       Currently Working
+       BLOGGER JSONP
     ===================================================== */
 
     const BLOGGER =
@@ -555,8 +609,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return new Promise(
             (resolve, reject) => {
 
-                const callback =
-                    `shakilFeed_${++jsonpCounter}`;
+                const callbackName =
+                    `shakilBlogger_${++jsonpCounter}`;
 
 
                 const script =
@@ -572,17 +626,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 const url =
-                    `${BLOGGER}/feeds/posts/default/-/${encodedLabel}?alt=json-in-script&max-results=${maxResults}&callback=${callback}`;
+                    `${BLOGGER}/feeds/posts/default/-/${encodedLabel}?alt=json-in-script&max-results=${maxResults}&callback=${callbackName}`;
 
 
-                window[callback] =
+                const timeout =
+                    setTimeout(
+                        () => {
+
+                            delete window[
+                                callbackName
+                            ];
+
+                            script.remove();
+
+                            reject(
+                                new Error(
+                                    "Blogger timeout"
+                                )
+                            );
+
+                        },
+                        8000
+                    );
+
+
+                window[callbackName] =
                     data => {
 
+                        clearTimeout(
+                            timeout
+                        );
+
+
                         delete window[
-                            callback
+                            callbackName
                         ];
 
+
                         script.remove();
+
 
                         resolve(
                             data?.feed?.entry ||
@@ -595,11 +677,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 script.onerror =
                     () => {
 
+                        clearTimeout(
+                            timeout
+                        );
+
+
                         delete window[
-                            callback
+                            callbackName
                         ];
 
+
                         script.remove();
+
 
                         reject(
                             new Error(
@@ -610,7 +699,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     };
 
 
-                script.src = url;
+                script.src =
+                    url;
+
 
                 document.body.appendChild(
                     script
@@ -622,10 +713,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-
-    /* =====================================================
-       BLOGGER HELPERS
-    ===================================================== */
 
     function entryTitle(entry) {
 
@@ -648,16 +735,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function stripHTML(
-        html
-    ) {
+    function stripHTML(html) {
 
         const div =
             document.createElement(
                 "div"
             );
 
-        div.innerHTML = html;
+
+        div.innerHTML =
+            html || "";
+
 
         return (
             div.textContent ||
@@ -670,53 +758,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function firstImage(
-        entry
-    ) {
-
-        const html =
-            entryContent(entry);
-
-
-        const match =
-            html.match(
-                /<img[^>]+src=["']([^"']+)["']/i
-            );
-
-
-        return match
-            ? match[1]
-            : "";
-
-    }
-
-
-    function entryUrl(
-        entry
-    ) {
-
-        const links =
-            entry.link || [];
-
-
-        const alternate =
-            links.find(
-                link =>
-                    link.rel ===
-                    "alternate"
-            );
-
-
-        return alternate
-            ? alternate.href
-            : "#";
-
-    }
-
-
 
     /* =====================================================
        CLIENT FEEDBACK
+       
+       ALL BLOGGER CLIENT FEEDBACK POSTS
+       
+       No "View Original"
     ===================================================== */
 
     const clientsGrid =
@@ -737,38 +785,7 @@ document.addEventListener("DOMContentLoaded", () => {
         false;
 
 
-    function makeClientCard(
-        entry
-    ) {
-
-        const name =
-            entryTitle(entry);
-
-
-        const raw =
-            entryContent(entry);
-
-
-        const text =
-            stripHTML(raw);
-
-
-        let rating =
-            "★★★★★";
-
-
-        /*
-           Remove star rating from review text
-        */
-
-        const cleaned =
-            text
-                .replace(
-                    /^[★☆\s]+/,
-                    ""
-                )
-                .trim();
-
+    function createClientCard(entry) {
 
         const card =
             document.createElement(
@@ -777,17 +794,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         card.className =
-            "client-card";
+            "client-card reveal";
+
+
+        const name =
+            entryTitle(entry);
+
+
+        let text =
+            stripHTML(
+                entryContent(entry)
+            );
+
+
+        text =
+            text
+                .replace(
+                    /^[★☆\s]+/,
+                    ""
+                )
+                .trim();
 
 
         card.innerHTML = `
 
             <div class="client-stars">
-                ${rating}
+                ★★★★★
             </div>
 
             <div class="client-review">
-                ${escapeHTML(cleaned)}
+                ${escapeHTML(text)}
             </div>
 
             <div class="client-name">
@@ -802,34 +838,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function escapeHTML(
-        text
-    ) {
-
-        const div =
-            document.createElement(
-                "div"
-            );
-
-        div.textContent =
-            text || "";
-
-
-        return div.innerHTML;
-
-    }
-
-
     function renderClients() {
 
         if (!clientsGrid)
             return;
 
 
-        clientsGrid.innerHTML = "";
+        clientsGrid.innerHTML =
+            "";
 
 
-        const limit =
+        const amount =
             clientsExpanded
                 ? allClients.length
                 : Math.min(
@@ -839,11 +858,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         allClients
-            .slice(0, limit)
+            .slice(0, amount)
             .forEach(entry => {
 
                 clientsGrid.appendChild(
-                    makeClientCard(
+                    createClientCard(
                         entry
                     )
                 );
@@ -860,10 +879,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 false;
 
 
-            clientsMore.innerHTML =
+            clientsMore.textContent =
                 clientsExpanded
-                    ? "Show Less <span>−</span>"
-                    : "Show More <span>+</span>";
+                    ? "SHOW LESS"
+                    : "SHOW MORE";
 
         }
 
@@ -885,20 +904,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
 
-            /*
-               If no feedback is returned,
-               keep section clean.
-            */
-
             if (
                 !allClients.length
             ) {
 
-                clientsGrid.innerHTML = `
-                    <div class="loading-state">
-                        Client feedback will appear here.
-                    </div>
-                `;
+                clientsGrid.innerHTML =
+                    "";
 
                 return;
 
@@ -907,16 +918,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
             renderClients();
 
-
         }
 
         catch(error) {
 
-            clientsGrid.innerHTML = `
-                <div class="loading-state">
-                    Unable to load client feedback right now.
-                </div>
-            `;
+            console.warn(
+                "Client feedback unavailable:",
+                error
+            );
+
+            clientsGrid.innerHTML =
+                "";
 
         }
 
@@ -945,12 +957,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       CURRENTLY WORKING PROFILES
+       CURRENTLY WORKING
        
-       Blogger label:
+       6 LOGOS VISIBLE
+       AUTO SLIDE
+       CONTINUOUS LOOP
+       PAUSE ON MOUSE
+       ARROW CONTROL
+       
+       Blogger:
        Currently Working
-       
-       First image = logo
     ===================================================== */
 
     const profileTrack =
@@ -979,19 +995,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let profiles = [];
 
+    let profilePosition = 0;
 
-    let profileIndex = 0;
-
-
-    let autoProfileTimer = null;
-
+    let profileTimer = null;
 
     let profilePaused = false;
 
 
-    function makeProfile(
-        entry
-    ) {
+    function firstImage(entry) {
+
+        const html =
+            entryContent(entry);
+
+
+        const match =
+            html.match(
+                /<img[^>]+src=["']([^"']+)["']/i
+            );
+
+
+        return match
+            ? match[1]
+            : "";
+
+    }
+
+
+    function createProfileCard(entry) {
 
         const image =
             firstImage(entry);
@@ -999,10 +1029,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!image)
             return null;
-
-
-        const url =
-            entryUrl(entry);
 
 
         const card =
@@ -1016,15 +1042,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         card.href =
-            url || "#";
+            "#";
 
 
-        card.target =
-            "_blank";
-
-
-        card.rel =
-            "noopener";
+        card.setAttribute(
+            "aria-label",
+            entryTitle(entry)
+        );
 
 
         card.innerHTML = `
@@ -1039,77 +1063,32 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
 
 
+        /*
+           Important:
+           Clicking logo DOES NOT open Blogger.
+        */
+
+        card.addEventListener(
+            "click",
+            event => {
+
+                event.preventDefault();
+
+            }
+        );
+
+
         return card;
 
     }
 
 
-    function renderProfiles() {
-
-        if (!profileTrack)
-            return;
-
-
-        profileTrack.innerHTML =
-            "";
-
-
-        /*
-           Clone enough profiles
-           for continuous looping.
-        */
-
-        const displayProfiles =
-            [
-                ...profiles,
-                ...profiles,
-                ...profiles
-            ];
-
-
-        displayProfiles
-            .forEach(entry => {
-
-                const card =
-                    makeProfile(
-                        entry
-                    );
-
-
-                if (card) {
-
-                    profileTrack
-                        .appendChild(
-                            card
-                        );
-
-                }
-
-            });
-
-
-        profileIndex =
-            profiles.length;
-
-
-        updateProfilePosition(
-            false
-        );
-
-    }
-
-
-    function cardWidth() {
-
-        if (!profileTrack)
-            return 0;
-
+    function getProfileStep() {
 
         const card =
-            profileTrack
-                .querySelector(
-                    ".profile-card"
-                );
+            profileTrack?.querySelector(
+                ".profile-card"
+            );
 
 
         if (!card)
@@ -1132,7 +1111,66 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function updateProfilePosition(
+    function renderProfiles() {
+
+        if (!profileTrack)
+            return;
+
+
+        profileTrack.innerHTML =
+            "";
+
+
+        if (!profiles.length)
+            return;
+
+
+        /*
+           Triple clone creates enough
+           material for a smooth loop.
+        */
+
+        const repeated =
+            [
+                ...profiles,
+                ...profiles,
+                ...profiles
+            ];
+
+
+        repeated.forEach(
+            entry => {
+
+                const card =
+                    createProfileCard(
+                        entry
+                    );
+
+
+                if (card) {
+
+                    profileTrack.appendChild(
+                        card
+                    );
+
+                }
+
+            }
+        );
+
+
+        profilePosition =
+            profiles.length;
+
+
+        setProfilePosition(
+            false
+        );
+
+    }
+
+
+    function setProfilePosition(
         animate = true
     ) {
 
@@ -1142,12 +1180,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         profileTrack.style.transition =
             animate
-                ? "transform .65s cubic-bezier(.2,.8,.2,1)"
+                ? "transform .55s cubic-bezier(.2,.8,.2,1)"
                 : "none";
 
 
+        const step =
+            getProfileStep();
+
+
         profileTrack.style.transform =
-            `translateX(-${profileIndex * cardWidth()}px)`;
+            `translate3d(-${profilePosition * step}px,0,0)`;
 
     }
 
@@ -1163,33 +1205,27 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
 
 
-        profileIndex +=
+        profilePosition +=
             direction;
 
 
-        updateProfilePosition(
+        setProfilePosition(
             true
         );
 
-
-        /*
-           Continuous loop:
-           silently jump back to
-           equivalent position.
-        */
 
         setTimeout(
             () => {
 
                 if (
-                    profileIndex >=
+                    profilePosition >=
                     profiles.length * 2
                 ) {
 
-                    profileIndex =
+                    profilePosition =
                         profiles.length;
 
-                    updateProfilePosition(
+                    setProfilePosition(
                         false
                     );
 
@@ -1197,22 +1233,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 if (
-                    profileIndex <
+                    profilePosition <
                     profiles.length
                 ) {
 
-                    profileIndex =
+                    profilePosition =
                         profiles.length;
 
-                    updateProfilePosition(
+                    setProfilePosition(
                         false
                     );
 
                 }
 
             },
-            680
+            570
         );
+
+    }
+
+
+    function startProfileAuto() {
+
+        clearInterval(
+            profileTimer
+        );
+
+
+        profileTimer =
+            setInterval(
+                () => {
+
+                    if (
+                        !profilePaused
+                    ) {
+
+                        moveProfile(
+                            1
+                        );
+
+                    }
+
+                },
+                2300
+            );
 
     }
 
@@ -1223,9 +1287,11 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             () => {
 
-                moveProfile(-1);
+                moveProfile(
+                    -1
+                );
 
-                restartProfileAuto();
+                startProfileAuto();
 
             }
         );
@@ -1239,45 +1305,14 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             () => {
 
-                moveProfile(1);
+                moveProfile(
+                    1
+                );
 
-                restartProfileAuto();
+                startProfileAuto();
 
             }
         );
-
-    }
-
-
-    function startProfileAuto() {
-
-        clearInterval(
-            autoProfileTimer
-        );
-
-
-        autoProfileTimer =
-            setInterval(
-                () => {
-
-                    if (
-                        !profilePaused
-                    ) {
-
-                        moveProfile(1);
-
-                    }
-
-                },
-                2600
-            );
-
-    }
-
-
-    function restartProfileAuto() {
-
-        startProfileAuto();
 
     }
 
@@ -1310,10 +1345,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function loadProfiles() {
 
-        if (!profileTrack)
-            return;
-
-
         try {
 
             profiles =
@@ -1323,16 +1354,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
 
-            if (
-                !profiles.length
-            ) {
+            /*
+               Remove entries without images.
+            */
 
-                profileTrack.innerHTML =
-                    "";
-
-                return;
-
-            }
+            profiles =
+                profiles.filter(
+                    entry =>
+                        !!firstImage(
+                            entry
+                        )
+                );
 
 
             renderProfiles();
@@ -1343,8 +1375,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         catch(error) {
 
-            profileTrack.innerHTML =
-                "";
+            console.warn(
+                "Currently Working unavailable:",
+                error
+            );
 
         }
 
@@ -1352,6 +1386,95 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     loadProfiles();
+
+
+
+    /* =====================================================
+       BACK TO TOP
+       
+       Fixed button.
+       Available from anywhere.
+    ===================================================== */
+
+    const backTop =
+        document.getElementById(
+            "backTop"
+        );
+
+
+    if (backTop) {
+
+        backTop.addEventListener(
+            "click",
+            () => {
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+        );
+
+    }
+
+
+
+    /* =====================================================
+       MAGNETIC BUTTONS
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            ".magnetic"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "mousemove",
+                event => {
+
+                    if (
+                        window.innerWidth <
+                        900
+                    )
+                        return;
+
+
+                    const rect =
+                        button.getBoundingClientRect();
+
+
+                    const x =
+                        event.clientX -
+                        rect.left -
+                        rect.width / 2;
+
+
+                    const y =
+                        event.clientY -
+                        rect.top -
+                        rect.height / 2;
+
+
+                    button.style.transform =
+                        `translate(${x * .12}px,${y * .12}px)`;
+
+                }
+            );
+
+
+            button.addEventListener(
+                "mouseleave",
+                () => {
+
+                    button.style.transform =
+                        "";
+
+                }
+            );
+
+        });
 
 
 
@@ -1410,19 +1533,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     !message
                 ) {
 
-                    formStatus.textContent =
-                        "Please complete all fields.";
+                    if (formStatus) {
+
+                        formStatus.textContent =
+                            "Please complete all fields.";
+
+                    }
 
                     return;
 
                 }
 
-
-                /*
-                   Replace this later with
-                   your Google Apps Script
-                   endpoint if required.
-                */
 
                 const subject =
                     encodeURIComponent(
@@ -1440,64 +1561,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     `mailto:?subject=${subject}&body=${body}`;
 
 
-                formStatus.textContent =
-                    "Opening your email client...";
+                if (formStatus) {
+
+                    formStatus.textContent =
+                        "Opening your email client...";
+
+                }
 
             }
         );
 
     }
-
-
-
-    /* =====================================================
-       MAGNETIC BUTTON EFFECT
-    ===================================================== */
-
-    document
-        .querySelectorAll(
-            ".magnetic"
-        )
-        .forEach(button => {
-
-            button.addEventListener(
-                "mousemove",
-                event => {
-
-                    const rect =
-                        button.getBoundingClientRect();
-
-
-                    const x =
-                        event.clientX -
-                        rect.left -
-                        rect.width / 2;
-
-
-                    const y =
-                        event.clientY -
-                        rect.top -
-                        rect.height / 2;
-
-
-                    button.style.transform =
-                        `translate(${x * .12}px,${y * .12}px)`;
-
-                }
-            );
-
-
-            button.addEventListener(
-                "mouseleave",
-                () => {
-
-                    button.style.transform =
-                        "";
-
-                }
-            );
-
-        });
 
 
 
@@ -1516,10 +1590,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 event => {
 
                     const id =
-                        link
-                            .getAttribute(
-                                "href"
-                            );
+                        link.getAttribute(
+                            "href"
+                        );
 
 
                     if (
@@ -1543,10 +1616,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                     target.scrollIntoView({
-                        behavior:
-                            "smooth",
-                        block:
-                            "start"
+                        behavior: "smooth",
+                        block: "start"
                     });
 
                 }
