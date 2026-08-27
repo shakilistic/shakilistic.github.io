@@ -1,40 +1,72 @@
 <!DOCTYPE html>
+
 <html lang="en" data-theme="dark">
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
 
-    <meta
-        name="description"
-        content="Shakil R. — Visual Design Expert, Graphic Designer and Web Creator."
-    >
+<meta
+name="description"
+content="Shakil R. — Visual Design Expert, Graphic Designer and Web Creator."
+>
 
-    <title>Shakil R. — Visual Design Expert</title>
-
-
-    <!-- Google Fonts -->
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
+<title>Shakil R. — Visual Design Expert</title>
 
 
-    <link rel="stylesheet" href="css/style.css">
+<!-- Google Fonts -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com/"
+crossorigin
+>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono\:wght@400;700&family=Work+Sans\:wght@300;400;500;600;700&display=swap"
+rel="stylesheet"
+>
+
+
+<link rel="stylesheet" href="https://shakilistic.github.io/css/style.css">
+
+
+<!-- =========================================================
+     FINAL FIXES — DO NOT CHANGE DESIGN
+     1. Light-theme social icons visible in black; orange on hover.
+     2. Remove numbered section eyebrows.
+========================================================== -->
+<style>
+html[data-theme="light"] .contact-socials .social-icon img {
+  filter: brightness(0) saturate(100%) !important;
+}
+
+html[data-theme="light"] .contact-socials .social-icon svg {
+  color: #111111 !important;
+}
+
+html[data-theme="light"] .contact-socials .social-icon:hover img,
+html[data-theme="light"] .contact-socials .social-icon:focus-visible img {
+  filter: brightness(0) saturate(100%) invert(31%) sepia(99%) saturate(3500%) hue-rotate(3deg) brightness(103%) contrast(104%) !important;
+}
+
+html[data-theme="light"] .contact-socials .social-icon:hover svg,
+html[data-theme="light"] .contact-socials .social-icon:focus-visible svg {
+  color: #ff4d00 !important;
+}
+
+/* Remove only the 01 / 02 / 03 / 04 / 05 labels above portfolio sections. */
+.design-category .category-copy > div > .eyebrow {
+  display: none !important;
+}
+</style>
 
 </head>
 
@@ -42,1153 +74,1166 @@
 <body>
 
 
-    <!-- ================= DECORATIONS ================= -->
+<!-- ================= DECORATIONS ================= -->
 
-    <div class="decor decor-one"></div>
+<div class="decor decor-one"></div>
 
-    <!-- Orange cursor/ball REMOVED -->
+<!-- Orange cursor/ball REMOVED -->
 
 
-    <!-- ================= HEADER ================= -->
+<!-- ================= HEADER ================= -->
 
-    <header class="site-header">
+<header class="site-header">
 
-        <div class="container nav">
+<div class="container nav">
 
 
-            <a
-                href="#home"
-                class="brand"
-            >
-                SHAKIL <span>R.</span>
-            </a>
+<a
+href="https://shakilistic.github.io/#home"
+class="brand"
+>
+SHAKIL <span>R.</span>
+</a>
 
 
-            <nav class="desktop-nav">
+<nav class="desktop-nav">
 
-                <a href="#home">
-                    HOME
-                </a>
+<a href="https://shakilistic.github.io/#home">
+HOME
+</a>
 
-                <a href="#work">
-                    WORK
-                </a>
+<a href="https://shakilistic.github.io/#work">
+WORK
+</a>
 
-                <a href="#about">
-                    ABOUT
-                </a>
+<a href="https://shakilistic.github.io/#about">
+ABOUT
+</a>
 
-                <a href="#profiles">
-                    PROFILES
-                </a>
+<a href="https://shakilistic.github.io/#profiles">
+PROFILES
+</a>
 
-                <a href="#contact">
-                    CONTACT
-                </a>
+<a href="https://shakilistic.github.io/#contact">
+CONTACT
+</a>
 
-            </nav>
+</nav>
 
 
-            <!-- Theme button -->
+<!-- Theme button -->
 
-            <button
-                id="themeToggle"
-                class="theme-toggle"
-                aria-label="Toggle theme"
-                type="button"
-            >
+<button
+id="themeToggle"
+class="theme-toggle"
+aria-label="Toggle theme"
+type="button"
+>
 
-                <span class="theme-sun">
-                    ☼
-                </span>
+<span class="theme-sun">
+☼
+</span>
 
-                <span class="theme-moon">
-                    ◐
-                </span>
+<span class="theme-moon">
+◐
+</span>
 
-            </button>
+</button>
 
 
-            <!-- Mobile menu -->
+<!-- Mobile menu -->
 
-            <button
-                id="mobileToggle"
-                class="mobile-toggle"
-                aria-label="Open menu"
-                type="button"
-            >
+<button
+id="mobileToggle"
+class="mobile-toggle"
+aria-label="Open menu"
+type="button"
+>
 
-                <span></span>
-                <span></span>
-                <span></span>
+<span></span>
+<span></span>
+<span></span>
 
-            </button>
+</button>
 
-        </div>
+</div>
 
 
-        <div
-            id="mobileNav"
-            class="mobile-nav"
-        >
+<div
+id="mobileNav"
+class="mobile-nav"
+>
 
-            <a href="#home">
-                HOME
-            </a>
+<a href="https://shakilistic.github.io/#home">
+HOME
+</a>
 
-            <a href="#work">
-                WORK
-            </a>
+<a href="https://shakilistic.github.io/#work">
+WORK
+</a>
 
-            <a href="#about">
-                ABOUT
-            </a>
+<a href="https://shakilistic.github.io/#about">
+ABOUT
+</a>
 
-            <a href="#profiles">
-                PROFILES
-            </a>
+<a href="https://shakilistic.github.io/#profiles">
+PROFILES
+</a>
 
-            <a href="#contact">
-                CONTACT
-            </a>
+<a href="https://shakilistic.github.io/#contact">
+CONTACT
+</a>
 
-        </div>
+</div>
 
-    </header>
+</header>
 
 
 
-    <!-- ================= MAIN ================= -->
+<!-- ================= MAIN ================= -->
 
-    <main id="home">
+<main id="home">
 
 
-        <!-- ================= HERO ================= -->
+<!-- ================= HERO ================= -->
 
-        <section class="hero">
+<section class="hero">
 
-            <div class="container hero-grid">
+<div class="container hero-grid">
 
 
-                <div class="hero-image reveal">
+<div class="hero-image reveal">
 
-                    <div class="hero-image-frame">
+<div class="hero-image-frame">
 
-                        <img
-                            src="assets/images/profile.jpg"
-                            alt="Shakil R."
-                            loading="eager"
-                            fetchpriority="high"
-                        >
+<img
+src="https://shakilistic.github.io/assets/images/profile.jpg"
+alt="Shakil R."
+loading="eager"
+fetchpriority="high"
+>
 
-                    </div>
+</div>
 
-                </div>
+</div>
 
 
 
-                <div class="hero-content reveal">
+<div class="hero-content reveal">
 
 
-                    <div class="eyebrow">
-                        VISUAL DESIGN EXPERT
-                    </div>
+<div class="eyebrow">
+VISUAL DESIGN EXPERT
+</div>
 
 
-                    <h1>
-                        SHAKIL <span>R.</span>
-                    </h1>
+<h1>
+SHAKIL <span>R.</span>
+</h1>
 
 
-                    <h2>
-                        Visual Design Expert
-                    </h2>
+<h2>
+Visual Design Expert
+</h2>
 
 
-                    <p class="hero-lead">
+<p class="hero-lead">
 
-                        Turning ideas into bold brands,
-                        compelling visuals, and digital
-                        experiences built to be remembered.
+Turning ideas into bold brands,
+compelling visuals, and digital
+experiences built to be remembered.
 
-                    </p>
+</p>
 
 
-                    <p class="hero-description">
+<p class="hero-description">
 
-                        From visual identity and campaign design
-                        to responsive websites, I combine strategy,
-                        clarity, and strong aesthetics to create
-                        work that feels premium and performs
-                        with purpose.
+From visual identity and campaign design
+to responsive websites, I combine strategy,
+clarity, and strong aesthetics to create
+work that feels premium and performs
+with purpose.
 
-                    </p>
+</p>
 
 
-                    <div class="stats">
+<div class="stats">
 
 
-                        <div>
+<div>
 
-                            <strong>
-                                07+
-                            </strong>
+<strong>
+07+
+</strong>
 
-                            <small>
-                                YEARS EXPERIENCE
-                            </small>
+<small>
+YEARS EXPERIENCE
+</small>
 
-                        </div>
+</div>
 
 
-                        <div>
+<div>
 
-                            <strong>
-                                150+
-                            </strong>
+<strong>
+150+
+</strong>
 
-                            <small>
-                                PROJECTS
-                            </small>
+<small>
+PROJECTS
+</small>
 
-                        </div>
+</div>
 
 
-                        <div>
+<div>
 
-                            <strong>
-                                MULTI
-                            </strong>
+<strong>
+MULTI
+</strong>
 
-                            <small>
-                                PLATFORM EXPERIENCE
-                            </small>
+<small>
+PLATFORM EXPERIENCE
+</small>
 
-                        </div>
+</div>
 
 
-                    </div>
+</div>
 
 
-                    <a
-                        href="#work"
-                        class="button magnetic"
-                    >
+<a
+href="https://shakilistic.github.io/#work"
+class="button magnetic"
+>
 
-                        VIEW MY WORK
+VIEW MY WORK
 
-                        <span>
-                            ↗
-                        </span>
+<span>
+↗
+</span>
 
-                    </a>
+</a>
 
 
-                </div>
+</div>
 
-            </div>
+</div>
 
-        </section>
+</section>
 
 
 
-        <!-- ================= WORK INTRO ================= -->
+<!-- ================= WORK INTRO ================= -->
 
-        <section class="work-intro">
+<section class="work-intro">
 
-            <div class="container intro-grid">
+<div class="container intro-grid">
 
 
-                <div class="eyebrow">
-                    SELECTED WORK
-                </div>
+<div class="eyebrow">
+SELECTED WORK
+</div>
 
 
-                <p>
+<p>
 
-                    A curated selection of visual identities,
-                    campaigns, digital experiences and print work
-                    crafted with clarity, character and purpose.
+A curated selection of visual identities,
+campaigns, digital experiences and print work
+crafted with clarity, character and purpose.
 
-                </p>
+</p>
 
 
-            </div>
+</div>
 
-        </section>
+</section>
 
 
 
-        <!-- ================= DESIGN WORK ================= -->
+<!-- ================= DESIGN WORK ================= -->
 
-        <section
-            id="work"
-            class="design-section"
-        >
+<section
+id="work"
+class="design-section"
+>
 
-            <div class="container">
+<div class="container">
 
 
-                <!-- ================= BOOK COVER ================= -->
+<!-- ================= BOOK COVER ================= -->
 
-                <section
-                    class="design-category"
-                    id="book-covers"
-                >
+<section
+class="design-category"
+id="book-covers"
+>
 
 
-                    <div class="category-copy">
+<div class="category-copy">
 
 
-                        <div>
+<div>
 
-                            <div class="eyebrow">
-                                01 / BOOK COVERS
-                            </div>
+<div class="eyebrow">
+01 / BOOK COVERS
+</div>
 
 
-                            <h2>
+<h2>
 
-                                BOOK COVER
-                                <br>
+BOOK COVER
+<br>
 
-                                <span>
-                                    DESIGN.
-                                </span>
+<span>
+DESIGN.
+</span>
 
-                            </h2>
+</h2>
 
-                        </div>
+</div>
 
 
-                        <p>
+<p>
 
-                            Your cover gives one chance to make
-                            a first impression. I design bold,
-                            genre-aware covers that speak clearly,
-                            communicate value instantly, and make
-                            the book impossible to ignore.
+Your cover gives one chance to make
+a first impression. I design bold,
+genre-aware covers that speak clearly,
+communicate value instantly, and make
+the book impossible to ignore.
 
-                        </p>
+</p>
 
 
-                    </div>
+</div>
 
 
-                    <div
-                        id="bookGrid"
-                        class="portfolio-grid"
-                    ></div>
+<div
+id="bookGrid"
+class="portfolio-grid"
+></div>
 
 
-                </section>
+</section>
 
 
 
-                <!-- ================= WEB ================= -->
+<!-- ================= WEB ================= -->
 
-                <section
-                    class="design-category"
-                    id="web-design"
-                >
+<section
+class="design-category"
+id="web-design"
+>
 
 
-                    <div class="category-copy">
+<div class="category-copy">
 
 
-                        <div>
+<div>
 
-                            <div class="eyebrow">
-                                02 / WEB DESIGN
-                            </div>
+<div class="eyebrow">
+02 / WEB DESIGN
+</div>
 
 
-                            <h2>
+<h2>
 
-                                STATIC WEB DESIGN
-                                <br>
+STATIC WEB DESIGN
+<br>
 
-                                <span>
-                                    &amp; DEVELOP.
-                                </span>
+<span>
+&amp; DEVELOP.
+</span>
 
-                            </h2>
+</h2>
 
-                        </div>
+</div>
 
 
-                        <p>
+<p>
 
-                            A good website should look impressive
-                            and guide the visitor naturally. I build
-                            clean, responsive experiences that feel
-                            intuitive, perform well, and turn
-                            attention into action.
+A good website should look impressive
+and guide the visitor naturally. I build
+clean, responsive experiences that feel
+intuitive, perform well, and turn
+attention into action.
 
-                        </p>
+</p>
 
 
-                    </div>
+</div>
 
 
-                    <div
-                        id="webGrid"
-                        class="portfolio-grid"
-                    ></div>
+<div
+id="webGrid"
+class="portfolio-grid"
+></div>
 
 
-                </section>
+</section>
 
 
 
-                <!-- ================= SOCIAL ================= -->
+<!-- ================= SOCIAL ================= -->
 
-                <section
-                    class="design-category"
-                    id="social-design"
-                >
+<section
+class="design-category"
+id="social-design"
+>
 
 
-                    <div class="category-copy">
+<div class="category-copy">
 
 
-                        <div>
+<div>
 
-                            <div class="eyebrow">
-                                03 / SOCIAL MEDIA
-                            </div>
+<div class="eyebrow">
+03 / SOCIAL MEDIA
+</div>
 
 
-                            <h2>
+<h2>
 
-                                SOCIAL MEDIA
-                                <br>
+SOCIAL MEDIA
+<br>
 
-                                <span>
-                                    POSTER.
-                                </span>
+<span>
+POSTER.
+</span>
 
-                            </h2>
+</h2>
 
-                        </div>
+</div>
 
 
-                        <p>
+<p>
 
-                            In a crowded feed, you have seconds
-                            to be noticed. I create sharp,
-                            brand-focused social visuals that
-                            stop the scroll, deliver the message
-                            fast, and make your business look
-                            instantly more credible.
+In a crowded feed, you have seconds
+to be noticed. I create sharp,
+brand-focused social visuals that
+stop the scroll, deliver the message
+fast, and make your business look
+instantly more credible.
 
-                        </p>
+</p>
 
 
-                    </div>
+</div>
 
 
-                    <div
-                        id="socialGrid"
-                        class="portfolio-grid"
-                    ></div>
+<div
+id="socialGrid"
+class="portfolio-grid"
+></div>
 
 
-                </section>
+</section>
 
 
 
-                <!-- ================= LOGO ================= -->
+<!-- ================= LOGO ================= -->
 
-                <section
-                    class="design-category"
-                    id="logo-design"
-                >
+<section
+class="design-category"
+id="logo-design"
+>
 
 
-                    <div class="category-copy">
+<div class="category-copy">
 
 
-                        <div>
+<div>
 
-                            <div class="eyebrow">
-                                04 / IDENTITY
-                            </div>
+<div class="eyebrow">
+04 / IDENTITY
+</div>
 
 
-                            <h2>
+<h2>
 
-                                LOGO
-                                <br>
+LOGO
+<br>
 
-                                <span>
-                                    DESIGN.
-                                </span>
+<span>
+DESIGN.
+</span>
 
-                            </h2>
+</h2>
 
-                        </div>
+</div>
 
 
-                        <p>
+<p>
 
-                            A memorable identity starts with
-                            a mark that feels unmistakably yours.
-                            I create distinctive, versatile logos
-                            built to give brands confidence and
-                            recognizable visual presence.
+A memorable identity starts with
+a mark that feels unmistakably yours.
+I create distinctive, versatile logos
+built to give brands confidence and
+recognizable visual presence.
 
-                        </p>
+</p>
 
 
-                    </div>
+</div>
 
 
-                    <div
-                        id="logoGrid"
-                        class="portfolio-grid"
-                    ></div>
+<div
+id="logoGrid"
+class="portfolio-grid"
+></div>
 
 
-                </section>
+</section>
 
 
 
-                <!-- ================= PRINT ================= -->
+<!-- ================= PRINT ================= -->
 
-                <section
-                    class="design-category"
-                    id="print-design"
-                >
+<section
+class="design-category"
+id="print-design"
+>
 
 
-                    <div class="category-copy">
+<div class="category-copy">
 
 
-                        <div>
+<div>
 
-                            <div class="eyebrow">
-                                05 / PRINT
-                            </div>
+<div class="eyebrow">
+05 / PRINT
+</div>
 
 
-                            <h2>
+<h2>
 
-                                PRINT MEDIA
-                                <br>
+PRINT MEDIA
+<br>
 
-                                <span>
-                                    DESIGN.
-                                </span>
+<span>
+DESIGN.
+</span>
 
-                            </h2>
+</h2>
 
-                        </div>
+</div>
 
 
-                        <p>
+<p>
 
-                            From T-shirts and food packaging
-                            to menus, banners and promotional
-                            materials, I create print-ready
-                            designs that carry your brand
-                            confidently from screen into
-                            the real world.
+From T-shirts and food packaging
+to menus, banners and promotional
+materials, I create print-ready
+designs that carry your brand
+confidently from screen into
+the real world.
 
-                        </p>
+</p>
 
 
-                    </div>
+</div>
 
 
-                    <div
-                        id="printGrid"
-                        class="portfolio-grid"
-                    ></div>
+<div
+id="printGrid"
+class="portfolio-grid"
+></div>
 
 
-                </section>
+</section>
 
 
-            </div>
+</div>
 
-        </section>
+</section>
 
 
 
-        <!-- ================= CLIENTS ================= -->
+<!-- ================= CLIENTS ================= -->
 
-        <section
-            id="clients"
-            class="clients-section"
-        >
+<section
+id="clients"
+class="clients-section"
+>
 
-            <div class="container">
+<div class="container">
 
 
-                <div class="split-heading">
+<div class="split-heading">
 
 
-                    <div>
+<div>
 
-                        <div class="eyebrow">
-                            06 / CLIENT FEEDBACK
-                        </div>
+<div class="eyebrow">
+06 / CLIENT FEEDBACK
+</div>
 
 
-                        <h2>
+<h2>
 
-                            WHAT CLIENTS
-                            <br>
+WHAT CLIENTS
+<br>
 
-                            <span>
-                                SAY.
-                            </span>
+<span>
+SAY.
+</span>
 
-                        </h2>
+</h2>
 
-                    </div>
+</div>
 
 
-                    <p>
+<p>
 
-                        The strongest proof of great work is
-                        what the people behind the project say
-                        after they receive it. These are genuine
-                        client experiences collected from my work.
+The strongest proof of great work is
+what the people behind the project say
+after they receive it. These are genuine
+client experiences collected from my work.
 
-                    </p>
+</p>
 
 
-                </div>
+</div>
 
 
 
-                <!-- First 3 reviews -->
-                <div
-                    id="clientsGrid"
-                    class="clients-grid"
-                ></div>
+<!-- First 3 reviews -->
+<div
+id="clientsGrid"
+class="clients-grid"
+></div>
 
 
-                <!-- SHOW MORE -->
-                <button
-                    id="clientsMore"
-                    class="outline-button"
-                    type="button"
-                    hidden
-                >
-                    SHOW MORE
-                    <span>+</span>
-                </button>
+<!-- SHOW MORE -->
+<button
+id="clientsMore"
+class="outline-button"
+type="button"
+hidden
+>
+SHOW MORE
+<span>+</span>
+</button>
 
 
-            </div>
+</div>
 
-        </section>
+</section>
 
 
 
-        <!-- ================= ABOUT ================= -->
+<!-- ================= ABOUT ================= -->
 
-        <section
-            id="about"
-            class="reason-section"
-        >
+<section
+id="about"
+class="reason-section"
+>
 
-            <div class="container reason-grid">
+<div class="container reason-grid">
 
 
-                <div>
+<div>
 
-                    <div class="eyebrow">
-                        BEYOND THE PIXELS
-                    </div>
+<div class="eyebrow">
+BEYOND THE PIXELS
+</div>
 
 
-                    <h2>
+<h2>
 
-                        DESIGN THAT
-                        <br>
+DESIGN THAT
+<br>
 
-                        HAS A
-                        <br>
+HAS A
+<br>
 
-                        <span>
-                            REASON.
-                        </span>
+<span>
+REASON.
+</span>
 
-                    </h2>
+</h2>
 
-                </div>
+</div>
 
 
-                <div class="reason-copy">
+<div class="reason-copy">
 
 
-                    <p>
+<p>
 
-                        I’m a multidisciplinary designer with
-                        an obsessive focus on quality. I don't
-                        just design visuals — I build digital
-                        landmarks. My philosophy is simple:
-                        if it doesn't evoke emotion, it's just
-                        pixels.
+I’m a multidisciplinary designer with
+an obsessive focus on quality. I don't
+just design visuals — I build digital
+landmarks. My philosophy is simple:
+if it doesn't evoke emotion, it's just
+pixels.
 
-                    </p>
+</p>
 
 
-                    <p>
+<p>
 
-                        With over 7 years of experience working
-                        with startups, established brands and
-                        independent creators, I've learned that
-                        the best design is invisible — it simply
-                        works, feels right, and leaves a lasting
-                        impression.
+With over 7 years of experience working
+with startups, established brands and
+independent creators, I've learned that
+the best design is invisible — it simply
+works, feels right, and leaves a lasting
+impression.
 
-                    </p>
+</p>
 
 
-                    <div class="mini-stats">
+<div class="mini-stats">
 
 
-                        <div>
+<div>
 
-                            <strong>
-                                07+
-                            </strong>
+<strong>
+07+
+</strong>
 
-                            <small>
-                                YEARS
-                            </small>
+<small>
+YEARS
+</small>
 
-                        </div>
+</div>
 
 
-                        <div>
+<div>
 
-                            <strong>
-                                150+
-                            </strong>
+<strong>
+150+
+</strong>
 
-                            <small>
-                                PROJECTS
-                            </small>
+<small>
+PROJECTS
+</small>
 
-                        </div>
+</div>
 
 
-                    </div>
+</div>
 
 
-                </div>
+</div>
 
 
-            </div>
+</div>
 
-        </section>
+</section>
 
 
 
-        <!-- ================= CURRENTLY WORKING ================= -->
+<!-- ================= CURRENTLY WORKING ================= -->
 
-        <section
-            id="profiles"
-            class="profiles-section"
-        >
+<section
+id="profiles"
+class="profiles-section"
+>
 
-            <div class="container">
+<div class="container">
 
 
-                <div class="profiles-heading">
+<div class="profiles-heading">
 
 
-                    <div class="eyebrow">
-                        CURRENTLY WORKING ON
-                    </div>
+<div class="eyebrow">
+CURRENTLY WORKING ON
+</div>
 
 
-                    <h2>
+<h2>
 
-                        WHERE I'M
-                        <br>
+WHERE I'M
+<br>
 
-                        <span>
-                            ACTIVE
-                        </span>
+<span>
+ACTIVE
+</span>
 
-                    </h2>
+</h2>
 
 
-                </div>
+</div>
 
 
 
-                <div class="profile-slider">
+<div class="profile-slider">
 
 
-                    <button
-                        id="profilePrev"
-                        class="slider-arrow"
-                        aria-label="Previous profile"
-                        type="button"
-                    >
-                        ←
-                    </button>
+<button
+id="profilePrev"
+class="slider-arrow"
+aria-label="Previous profile"
+type="button"
+>
+←
+</button>
 
 
-                    <div
-                        id="profileWindow"
-                        class="profile-window"
-                    >
+<div
+id="profileWindow"
+class="profile-window"
+>
 
-                        <div
-                            id="profileTrack"
-                            class="profile-track"
-                        ></div>
+<div
+id="profileTrack"
+class="profile-track"
+></div>
 
-                    </div>
+</div>
 
 
-                    <button
-                        id="profileNext"
-                        class="slider-arrow"
-                        aria-label="Next profile"
-                        type="button"
-                    >
-                        →
-                    </button>
+<button
+id="profileNext"
+class="slider-arrow"
+aria-label="Next profile"
+type="button"
+>
+→
+</button>
 
 
-                </div>
+</div>
 
 
-            </div>
+</div>
 
-        </section>
+</section>
 
 
 
-        <!-- ================= CONTACT ================= -->
+<!-- ================= CONTACT ================= -->
 
-        <section
-            id="contact"
-            class="contact-section"
-        >
+<section
+id="contact"
+class="contact-section"
+>
 
-            <div class="container">
+<div class="container">
 
 
-                <div class="contact-box">
+<div class="contact-box">
 
 
-                    <div class="contact-copy">
+<div class="contact-copy">
 
 
-                        <div class="eyebrow">
-                            LET'S WORK TOGETHER
-                        </div>
+<div class="eyebrow">
+LET'S WORK TOGETHER
+</div>
 
 
-                        <h2>
+<h2>
 
-                            LET'S BUILD
-                            <br>
+LET'S BUILD
+<br>
 
-                            SOMETHING
-                            <br>
+SOMETHING
+<br>
 
-                            <span>
-                                GREAT.
-                            </span>
+<span>
+GREAT.
+</span>
 
-                        </h2>
+</h2>
 
 
-                        <p>
+<p>
 
-                            Have an idea, a brand to build,
-                            or a website that needs a stronger
-                            presence? I'm open to creative
-                            collaborations across graphic design,
-                            visual identity, and website design
-                            &amp; development. Let's create
-                            something people remember.
+Have an idea, a brand to build,
+or a website that needs a stronger
+presence? I'm open to creative
+collaborations across graphic design,
+visual identity, and website design
+&amp; development. Let's create
+something people remember.
 
-                        </p>
+</p>
 
 
 
-                        <!-- ================= SOCIAL ICONS ================= -->
+<!-- ================= SOCIAL ICONS ================= -->
 
-                        <div class="contact-socials">
+<div class="contact-socials">
 
 
-                            <!-- BEHANCE -->
+<!-- BEHANCE -->
 
-                            <a
-                                href="https://www.behance.net/shakilistic"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="Behance"
-                                class="social-icon"
-                            >
+<a
+href="https://www.behance.net/shakilistic"
+target="_blank"
+rel="noopener noreferrer"
+aria-label="Behance"
+class="social-icon"
+>
 
-                                <img
-                                    src="https://cdn.simpleicons.org/behance/ffffff"
-                                    alt="Behance"
-                                >
+<img
+src="https://cdn.simpleicons.org/behance/ffffff"
+alt="Behance"
+>
 
-                            </a>
+</a>
 
 
 
-                            <!-- X -->
+<!-- X -->
 
-                            <a
-                                href="https://x.com/shakilistic"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="X"
-                                class="social-icon"
-                            >
+<a
+href="https://x.com/shakilistic"
+target="_blank"
+rel="noopener noreferrer"
+aria-label="X"
+class="social-icon"
+>
 
-                                <img
-                                    src="https://cdn.simpleicons.org/x/ffffff"
-                                    alt="X"
-                                >
+<img
+src="https://cdn.simpleicons.org/x/ffffff"
+alt="X"
+>
 
-                            </a>
+</a>
 
 
 
-                            <!-- PINTEREST -->
+<!-- PINTEREST -->
 
-                            <a
-                                href="https://www.pinterest.com/shakilistic/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="Pinterest"
-                                class="social-icon"
-                            >
+<a
+href="https://www.pinterest.com/shakilistic/"
+target="_blank"
+rel="noopener noreferrer"
+aria-label="Pinterest"
+class="social-icon"
+>
 
-                                <img
-                                    src="https://cdn.simpleicons.org/pinterest/ffffff"
-                                    alt="Pinterest"
-                                >
+<img
+src="https://cdn.simpleicons.org/pinterest/ffffff"
+alt="Pinterest"
+>
 
-                            </a>
+</a>
 
 
 
-                            <!-- LINKEDIN
-                                 INLINE SVG
-                                 No external image = no broken logo
-                            -->
+<!-- LINKEDIN
+INLINE SVG
+No external image = no broken logo
+-->
 
-                            <a
-                                href="https://www.linkedin.com/in/shakilistic/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="LinkedIn"
-                                class="social-icon"
-                            >
+<a
+href="https://www.linkedin.com/in/shakilistic/"
+target="_blank"
+rel="noopener noreferrer"
+aria-label="LinkedIn"
+class="social-icon"
+>
 
-                                <svg
-                                    viewBox="0 0 24 24"
-                                    aria-hidden="true"
-                                    class="linkedin-svg"
-                                >
+<svg
+viewBox="0 0 24 24"
+aria-hidden="true"
+class="linkedin-svg"
+>
 
-                                    <path
-                                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V8.998h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.288zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM6.114 20.452H2.56V8.998h3.554v11.454zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                                        fill="currentColor"
-                                    ></path>
+<path
+d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V8.998h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.288zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM6.114 20.452H2.56V8.998h3.554v11.454zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+fill="currentColor"
+></path>
 
-                                </svg>
+</svg>
 
-                            </a>
+</a>
 
 
 
-                            <!-- GITHUB -->
+<!-- GITHUB -->
 
-                            <a
-                                href="https://github.com/shakilistic"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="GitHub"
-                                class="social-icon"
-                            >
+<a
+href="https://github.com/shakilistic"
+target="_blank"
+rel="noopener noreferrer"
+aria-label="GitHub"
+class="social-icon"
+>
 
-                                <img
-                                    src="https://cdn.simpleicons.org/github/ffffff"
-                                    alt="GitHub"
-                                >
+<img
+src="https://cdn.simpleicons.org/github/ffffff"
+alt="GitHub"
+>
 
-                            </a>
+</a>
 
 
 
-                            <!-- DRIBBBLE -->
+<!-- DRIBBBLE -->
 
-                            <a
-                                href="https://dribbble.com/shakilistic"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="Dribbble"
-                                class="social-icon"
-                            >
+<a
+href="https://dribbble.com/shakilistic"
+target="_blank"
+rel="noopener noreferrer"
+aria-label="Dribbble"
+class="social-icon"
+>
 
-                                <img
-                                    src="https://cdn.simpleicons.org/dribbble/ffffff"
-                                    alt="Dribbble"
-                                >
+<img
+src="https://cdn.simpleicons.org/dribbble/ffffff"
+alt="Dribbble"
+>
 
-                            </a>
+</a>
 
 
-                        </div>
+</div>
 
 
-                    </div>
+</div>
 
 
 
-                    <!-- CONTACT FORM -->
+<!-- CONTACT FORM -->
 
-                    <form
-                        id="contactForm"
-                        class="contact-form"
-                    >
+<form
+id="contactForm"
+class="contact-form"
+>
 
 
-                        <label>
+<label>
 
-                            NAME
+NAME
 
-                            <input
-                                type="text"
-                                name="name"
-                                placeholder="Your name"
-                                required
-                            >
+<input
+type="text"
+name="name"
+placeholder="Your name"
+required
+>
 
-                        </label>
+</label>
 
 
-                        <label>
+<label>
 
-                            EMAIL
+EMAIL
 
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="you@email.com"
-                                required
-                            >
+<input
+type="email"
+name="email"
+placeholder="you\@email.com"
+required
+>
 
-                        </label>
+</label>
 
 
-                        <label>
+<label>
 
-                            PROJECT / MESSAGE
+PROJECT / MESSAGE
 
-                            <textarea
-                                name="message"
-                                placeholder="Tell me about your project..."
-                                required
-                            ></textarea>
+<textarea
+name="message"
+placeholder="Tell me about your project..."
+required
+></textarea>
 
-                        </label>
+</label>
 
 
-                        <button
-                            type="submit"
-                            class="button magnetic"
-                        >
+<button
+type="submit"
+class="button magnetic"
+>
 
-                            SEND ENQUIRY
+SEND ENQUIRY
 
-                            <span>
-                                ↗
-                            </span>
+<span>
+↗
+</span>
 
-                        </button>
+</button>
 
 
-                        <div
-                            id="formStatus"
-                            class="form-status"
-                        ></div>
+<div
+id="formStatus"
+class="form-status"
+></div>
 
 
-                    </form>
+</form>
 
 
-                </div>
+</div>
 
 
-            </div>
+</div>
 
-        </section>
+</section>
 
 
-    </main>
+</main>
 
 
 
-    <!-- ================= FOOTER ================= -->
+<!-- ================= FOOTER ================= -->
 
-    <footer class="site-footer">
+<footer class="site-footer">
 
-        <div class="container footer-bottom">
+<div class="container footer-bottom">
 
 
-            <span>
+<span>
 
-                ©
-                <span id="year"></span>
-                Shakil R.
-                All Rights Reserved.
+©
+<span id="year"></span>
+Shakil R.
+All Rights Reserved.
 
-            </span>
+</span>
 
 
-            <span>
-                VISUAL DESIGN EXPERT
-            </span>
+<span>
+VISUAL DESIGN EXPERT
+</span>
 
 
-        </div>
+</div>
 
-    </footer>
+</footer>
 
 
 
-    <!-- ================= FIXED BACK TO TOP ================= -->
+<!-- ================= FIXED BACK TO TOP ================= -->
 
-    <button
-        id="backTop"
-        class="back-top"
-        aria-label="Back to top"
-        type="button"
-    >
+<button
+id="backTop"
+class="back-top"
+aria-label="Back to top"
+type="button"
+>
 
-        <span>
-            ↑
-        </span>
+<span>
+↑
+</span>
 
-    </button>
+</button>
 
 
-    <script
-        src="js/script.js"
-        defer
-    ></script>
+<script
+src="https://shakilistic.github.io/js/script.js"
+defer
+></script>
 
+
+
+<script>
+/* Portfolio samples are preview-only: keep the existing hover animation,
+   but do not open the image or navigate anywhere when clicked. */
+document.addEventListener("click", function (event) {
+  var link = event.target.closest(".project-card a");
+  if (link) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+}, true);
+</script>
 
 </body>
 
