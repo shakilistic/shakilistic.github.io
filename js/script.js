@@ -1,1039 +1,835 @@
 /* =========================================================
-   SHAKILISTIC PORTFOLIO — SCRIPT
-   ========================================================= */
+   SHAKIL R. PORTFOLIO
+   SAFE CONTENT SYSTEM
+========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* ---------------------------------------------------------
-       BASIC CONFIG
-       --------------------------------------------------------- */
+    /* =====================================================
+       CONFIGURATION
+    ===================================================== */
 
-    const IMAGE_BASE = "assets/images/";
+    const CONFIG = {
 
-    const sections = {
-        book: {
-            id: "book-cover-design",
-            prefix: "B",
-            title: "BOOK COVER DESIGN."
+        /*
+         * Profile image
+         */
+        profileImage: "assets/images/profile.jpg",
+
+
+        /*
+         * IMPORTANT:
+         *
+         * এখানে তোমার portfolio images-এর নাম বসাবে।
+         *
+         * Example:
+         * B1.jpg
+         * B2.jpg
+         * B3.jpg
+         *
+         * যদি তোমার file PNG হয়:
+         * B1.png
+         */
+
+        galleries: {
+
+            bookCovers: [
+                "assets/images/B1.jpg",
+                "assets/images/B2.jpg",
+                "assets/images/B3.jpg",
+                "assets/images/B4.jpg",
+                "assets/images/B5.jpg",
+                "assets/images/B6.jpg",
+                "assets/images/B7.jpg"
+            ],
+
+            webDesign: [
+                "assets/images/W1.jpg",
+                "assets/images/W2.jpg",
+                "assets/images/W3.jpg",
+                "assets/images/W4.jpg",
+                "assets/images/W5.jpg",
+                "assets/images/W6.jpg"
+            ],
+
+            socialMedia: [
+                "assets/images/S1.jpg",
+                "assets/images/S2.jpg",
+                "assets/images/S3.jpg",
+                "assets/images/S4.jpg",
+                "assets/images/S5.jpg",
+                "assets/images/S6.jpg"
+            ],
+
+            logoDesign: [
+                "assets/images/L1.jpg",
+                "assets/images/L2.jpg",
+                "assets/images/L3.jpg",
+                "assets/images/L4.jpg",
+                "assets/images/L5.jpg",
+                "assets/images/L6.jpg"
+            ],
+
+            printMedia: [
+                "assets/images/P1.jpg",
+                "assets/images/P2.jpg",
+                "assets/images/P3.jpg",
+                "assets/images/P4.jpg",
+                "assets/images/P5.jpg",
+                "assets/images/P6.jpg"
+            ]
+
         },
 
-        web: {
-            id: "static-web-design",
-            prefix: "W",
-            title: "STATIC WEB DESIGN & DEVELOP."
-        },
 
-        social: {
-            id: "social-media-poster",
-            prefix: "S",
-            title: "SOCIAL MEDIA POSTER."
-        },
+        /*
+         * ACTIVE PLATFORM LOGOS
+         */
 
-        logo: {
-            id: "logo-design",
-            prefix: "L",
-            title: "LOGO DESIGN."
-        },
+        activeProfiles: [
 
-        print: {
-            id: "print-media-design",
-            prefix: "P",
-            title: "PRINT MEDIA DESIGN."
-        }
+            {
+                name: "Behance",
+                image: "assets/images/behance.png"
+            },
+
+            {
+                name: "Freelancer",
+                image: "assets/images/freelancer.png"
+            },
+
+            {
+                name: "Upwork",
+                image: "assets/images/upwork.png"
+            },
+
+            {
+                name: "Fiverr",
+                image: "assets/images/fiverr.png"
+            },
+
+            {
+                name: "99designs",
+                image: "assets/images/99designs.png"
+            },
+
+            {
+                name: "Dribbble",
+                image: "assets/images/dribbble.png"
+            }
+
+        ],
+
+
+        /*
+         * CLIENT FEEDBACK
+         *
+         * এখানে তোমার existing Blogger feedbackগুলো
+         * বসানো যাবে।
+         */
+
+        testimonials: [
+
+            {
+                text: `Hi Shakil, I just wanted to take a moment to sincerely thank you for the outstanding work you've done on the cover and design for my Balance Exercise for Seniors Simplified. The attention to detail, creativity, and professionalism you brought to this project truly exceeded my expectations. I've received many compliments on how beautiful and impactful the design is. It has made a big difference in the presentation of the book, and I couldn't be happier with the result. I also want you to know that I will definitely be working with you again on my upcoming projects. Your talent and reliability have made this an easy decision. Thank you once again for helping bring my vision to life. I look forward to collaborating with you on future books!`,
+                author: "Dr. Erlinda Asa Sabili, MD, FACP"
+            },
+
+            {
+                text: `Shakil is so easy to work with, responsive, and has a fantastic eye. This is our second project together, and it's getting better and better.`,
+                author: "Client"
+            },
+
+            {
+                text: `I am so pleased with my designer. They had creative ideas that were not like the rest in my niche. I look forward to working with this designer in the future.`,
+                author: "Julie"
+            },
+
+            {
+                text: `The best of the best - I've worked with Shakil for around a year now, give or take. He is one of the most helpful, responsive, and creatively quick freelancers I've ever worked with.`,
+                author: "Anonymous Client"
+            },
+
+            {
+                text: `The base of the book - I've worked with Shakil for around a year now. His work is always beautiful, responsive, and creatively quick.`,
+                author: "Returning Client"
+            },
+
+            {
+                text: `Shakil is the best designer we have worked with. His ideas, communication and execution always make the final project stronger.`,
+                author: "Client"
+            },
+
+            {
+                text: `Shakil is always a pleasure to work with. He understands feedback quickly and delivers strong visual solutions.`,
+                author: "Client"
+            },
+
+            {
+                text: `The level of attention and professionalism Shakil brings to every project makes collaboration easy and enjoyable.`,
+                author: "Client"
+            },
+
+            {
+                text: `I had an exceptional experience working with Shakil on the cover design for my book. His creativity, responsiveness and attention to detail made the entire process smooth.`,
+                author: "Book Client"
+            },
+
+            {
+                text: `Shakil is absolutely fantastic. He understood the brief, improved the concept and delivered a polished final design.`,
+                author: "Client"
+            }
+
+        ]
+
     };
 
 
-    /* ---------------------------------------------------------
-       HELPERS
-       --------------------------------------------------------- */
+    /* =====================================================
+       THEME
+       Automatic according to OS.
+       NO manual theme button.
+    ===================================================== */
 
-    function getImageExtension(filename) {
-        const match = filename.match(/\.(jpg|jpeg|png|webp|gif)$/i);
-        return match ? match[1].toLowerCase() : "";
-    }
+    const themeToggle = document.getElementById("themeToggle");
 
-    function naturalSort(a, b) {
-        return a.localeCompare(b, undefined, {
-            numeric: true,
-            sensitivity: "base"
-        });
-    }
+    const systemTheme = window.matchMedia("(prefers-color-scheme: light)");
 
-    function createImage(src, alt = "") {
-        const img = document.createElement("img");
+    function applySystemTheme() {
 
-        img.src = src;
-        img.alt = alt;
-        img.loading = "lazy";
-        img.decoding = "async";
-        img.draggable = false;
-
-        /*
-         * Portfolio images are display-only.
-         * Clicking them must NOT open another page/window.
-         */
-        img.addEventListener("click", event => {
-            event.preventDefault();
-            event.stopPropagation();
-        });
-
-        return img;
-    }
-
-
-    /* ---------------------------------------------------------
-       FIND IMAGES FROM GITHUB DIRECTORY
-       --------------------------------------------------------- */
-
-    async function getRepositoryFiles() {
-
-        /*
-         * GitHub API is used only once.
-         * This avoids testing B1.jpg, B1.png, B1.webp,
-         * B2.jpg, B2.png... etc individually.
-         */
-
-        const apiURL =
-            "https://api.github.com/repos/shakilistic/shakilistic.github.io/contents/assets/images";
-
-        try {
-
-            const response = await fetch(apiURL, {
-                headers: {
-                    "Accept": "application/vnd.github+json"
-                },
-                cache: "force-cache"
-            });
-
-            if (!response.ok) {
-                throw new Error("GitHub image directory unavailable.");
-            }
-
-            const files = await response.json();
-
-            if (!Array.isArray(files)) {
-                return [];
-            }
-
-            return files
-                .filter(file => {
-                    return file.type === "file" &&
-                        /\.(jpg|jpeg|png|webp|gif)$/i.test(file.name);
-                })
-                .sort((a, b) => naturalSort(a.name, b.name));
-
-        } catch (error) {
-
-            console.warn(
-                "Could not load GitHub image directory:",
-                error
-            );
-
-            return [];
+        if (systemTheme.matches) {
+            document.body.classList.add("light-theme");
+        } else {
+            document.body.classList.remove("light-theme");
         }
+
     }
 
+    applySystemTheme();
 
-    /* ---------------------------------------------------------
-       MATCH SECTION IMAGES
-       --------------------------------------------------------- */
+    systemTheme.addEventListener("change", applySystemTheme);
 
-    function getImagesForPrefix(files, prefix) {
+    /*
+     * Keep the button visually harmless.
+     * It does NOT manually change theme.
+     */
 
-        const pattern = new RegExp(
-            "^" + prefix + "(\\d+)\\.(jpg|jpeg|png|webp|gif)$",
-            "i"
+    if (themeToggle) {
+
+        themeToggle.setAttribute(
+            "aria-label",
+            "Theme follows your device settings"
         );
 
-        return files
-            .filter(file => pattern.test(file.name))
-            .sort((a, b) => {
+        themeToggle.addEventListener("click", () => {
+            applySystemTheme();
+        });
 
-                const numberA =
-                    parseInt(a.name.match(pattern)[1], 10);
-
-                const numberB =
-                    parseInt(b.name.match(pattern)[1], 10);
-
-                return numberA - numberB;
-            });
     }
 
 
-    /* ---------------------------------------------------------
-       CREATE PORTFOLIO CARD
-       --------------------------------------------------------- */
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
 
-    function createPortfolioCard(file, sectionTitle) {
+    const mobileMenuButton =
+        document.getElementById("mobileMenuButton");
 
-        const card = document.createElement("article");
+    const mobileMenu =
+        document.getElementById("mobileMenu");
+
+    if (mobileMenuButton && mobileMenu) {
+
+        mobileMenuButton.addEventListener("click", () => {
+
+            mobileMenu.classList.toggle("open");
+
+        });
+
+        mobileMenu.querySelectorAll("a").forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                mobileMenu.classList.remove("open");
+
+            });
+
+        });
+
+    }
+
+
+    /* =====================================================
+       PROFILE IMAGE
+    ===================================================== */
+
+    const profileImage =
+        document.querySelector(".hero-image");
+
+    if (profileImage) {
+
+        profileImage.src = CONFIG.profileImage;
+
+    }
+
+
+    /* =====================================================
+       IMAGE HELPER
+    ===================================================== */
+
+    function createImageCard(src, index, galleryName) {
+
+        const card =
+            document.createElement("div");
 
         card.className = "portfolio-card";
 
-        const imageWrap = document.createElement("div");
+        const image =
+            document.createElement("img");
 
-        imageWrap.className = "portfolio-image-wrap";
+        image.alt =
+            `${galleryName} design ${index + 1}`;
 
-        const image = createImage(
-            IMAGE_BASE + file.name,
-            sectionTitle
-        );
+        image.loading = "lazy";
 
-        imageWrap.appendChild(image);
-        card.appendChild(imageWrap);
+        image.src = src;
+
+        /*
+         * If image doesn't exist, hide ONLY this image card.
+         * It will NOT hide the whole website section.
+         */
+
+        image.addEventListener("error", () => {
+
+            card.remove();
+
+            updateSliderNavigation(
+                card.closest(".portfolio-slider")
+            );
+
+        });
+
+        card.appendChild(image);
 
         return card;
+
     }
 
 
-    /* ---------------------------------------------------------
-       PORTFOLIO SECTION BUILDER
-       --------------------------------------------------------- */
+    /* =====================================================
+       PORTFOLIO GALLERY
+    ===================================================== */
 
-    function buildPortfolioSection(
-        sectionKey,
-        files
-    ) {
+    function setupGallery(galleryName, images) {
 
-        const config = sections[sectionKey];
-
-        if (!config) {
-            return;
-        }
-
-        const section =
-            document.getElementById(config.id);
-
-        if (!section) {
-            return;
-        }
-
-        const matchingFiles =
-            getImagesForPrefix(files, config.prefix);
-
-
-        /*
-         * If there are no images,
-         * automatically hide the whole section.
-         */
-
-        if (matchingFiles.length === 0) {
-
-            section.style.display = "none";
-
-            return;
-        }
-
-        section.style.display = "";
-
-
-        /*
-         * Find portfolio grid.
-         */
-
-        const grid =
-            section.querySelector(
-                ".portfolio-grid, .portfolio-items, .work-grid"
+        const track =
+            document.querySelector(
+                `[data-gallery="${galleryName}"]`
             );
 
-        if (!grid) {
-            return;
-        }
-
-        grid.innerHTML = "";
-
+        if (!track) return;
 
         /*
-         * Initially show ONLY 3 designs.
+         * Clear ONLY this gallery track.
+         *
+         * Nothing else on the page is touched.
          */
 
-        const initialLimit = 3;
+        track.innerHTML = "";
 
-        matchingFiles.forEach((file, index) => {
+        const validImages = [];
+
+        images.forEach((src, index) => {
 
             const card =
-                createPortfolioCard(
-                    file,
-                    config.title
+                createImageCard(
+                    src,
+                    index,
+                    galleryName
                 );
 
-            if (index >= initialLimit) {
-                card.classList.add("portfolio-hidden");
-            }
+            track.appendChild(card);
 
-            grid.appendChild(card);
+            validImages.push(card);
+
         });
 
+        const slider =
+            track.closest(".portfolio-slider");
 
-        /*
-         * Remove any old Show More / Show Less button.
-         * Then create a fresh one only if needed.
-         */
+        if (!slider) return;
 
-        const oldButton =
-            section.querySelector(
-                ".show-more-btn, .show-less-btn, .portfolio-toggle"
-            );
+        const previous =
+            slider.querySelector(".slider-arrow.prev");
 
-        if (oldButton) {
-            oldButton.remove();
+        const next =
+            slider.querySelector(".slider-arrow.next");
+
+        function scrollAmount() {
+
+            const card =
+                track.querySelector(".portfolio-card");
+
+            if (!card) return 0;
+
+            const style =
+                window.getComputedStyle(track);
+
+            const gap =
+                parseFloat(style.columnGap || style.gap || 0);
+
+            return card.offsetWidth + gap;
+
         }
 
+        if (previous) {
 
-        if (matchingFiles.length > initialLimit) {
+            previous.addEventListener("click", () => {
 
-            const button =
-                document.createElement("button");
-
-            button.type = "button";
-
-            button.className =
-                "portfolio-toggle show-more-btn";
-
-            button.textContent =
-                "SHOW MORE";
-
-
-            button.addEventListener("click", () => {
-
-                const hiddenCards =
-                    grid.querySelectorAll(
-                        ".portfolio-hidden"
-                    );
-
-                const isExpanded =
-                    section.classList.contains(
-                        "portfolio-expanded"
-                    );
-
-
-                if (!isExpanded) {
-
-                    hiddenCards.forEach(card => {
-                        card.classList.remove(
-                            "portfolio-hidden"
-                        );
-                    });
-
-                    section.classList.add(
-                        "portfolio-expanded"
-                    );
-
-                    button.textContent =
-                        "SHOW LESS";
-
-                } else {
-
-                    const cards =
-                        grid.querySelectorAll(
-                            ".portfolio-card"
-                        );
-
-                    cards.forEach((card, index) => {
-
-                        if (index >= initialLimit) {
-                            card.classList.add(
-                                "portfolio-hidden"
-                            );
-                        }
-                    });
-
-                    section.classList.remove(
-                        "portfolio-expanded"
-                    );
-
-                    button.textContent =
-                        "SHOW MORE";
-
-                    section.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
-                    });
-                }
-
-            });
-
-
-            section.appendChild(button);
-        }
-    }
-
-
-    /* ---------------------------------------------------------
-       REMOVE UNWANTED OLD SECTION LABELS
-       --------------------------------------------------------- */
-
-    function removeOldNumberLabels() {
-
-        const selectors = [
-            ".section-number",
-            ".section-index",
-            ".category-number",
-            ".eyebrow-number",
-            ".portfolio-number"
-        ];
-
-        selectors.forEach(selector => {
-
-            document
-                .querySelectorAll(selector)
-                .forEach(element => {
-                    element.remove();
+                track.scrollBy({
+                    left: -scrollAmount(),
+                    behavior: "smooth"
                 });
 
-        });
-
-
-        /*
-         * Remove labels such as:
-         * 01 / BOOK COVERS
-         * 02 / WEB DESIGN
-         * 06 / CLIENT FEEDBACK
-         */
-
-        document
-            .querySelectorAll("p, span, small, div")
-            .forEach(element => {
-
-                const text =
-                    element.textContent.trim();
-
-                if (
-                    /^0\d\s*\/\s*/i.test(text) &&
-                    (
-                        text.includes("BOOK") ||
-                        text.includes("WEB") ||
-                        text.includes("SOCIAL") ||
-                        text.includes("LOGO") ||
-                        text.includes("PRINT") ||
-                        text.includes("CLIENT") ||
-                        text.includes("FEEDBACK")
-                    )
-                ) {
-                    element.remove();
-                }
-
             });
-    }
 
-
-    /* ---------------------------------------------------------
-       DISABLE PORTFOLIO IMAGE LINKS
-       --------------------------------------------------------- */
-
-    function disablePortfolioLinks() {
-
-        document
-            .querySelectorAll(
-                ".portfolio-card a, .portfolio-grid a, .work-grid a"
-            )
-            .forEach(link => {
-
-                link.removeAttribute("href");
-                link.removeAttribute("target");
-                link.removeAttribute("rel");
-
-                link.addEventListener(
-                    "click",
-                    event => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                );
-
-            });
-    }
-
-
-    /* ---------------------------------------------------------
-       CURRENTLY WORKING / ACTIVE LOGOS
-       --------------------------------------------------------- */
-
-    function setupActiveLogos() {
-
-        const container =
-            document.querySelector(
-                ".active-logos, .profiles-slider, .platform-slider"
-            );
-
-        if (!container) {
-            return;
         }
 
+        if (next) {
 
-        /*
-         * Remove arrows because the active-logo section
-         * should be automatic only.
-         */
+            next.addEventListener("click", () => {
 
-        container
-            .querySelectorAll(
-                ".prev, .next, .arrow, .slider-arrow, .active-arrow"
-            )
-            .forEach(button => {
-                button.remove();
-            });
-
-
-        /*
-         * Disable links on active logos.
-         */
-
-        container
-            .querySelectorAll("a")
-            .forEach(link => {
-
-                link.removeAttribute("href");
-                link.removeAttribute("target");
-                link.removeAttribute("rel");
-
-                link.addEventListener(
-                    "click",
-                    event => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                );
-
-            });
-
-
-        /*
-         * Automatic continuous movement.
-         */
-
-        container.classList.add(
-            "active-logo-auto-slider"
-        );
-
-
-        let paused = false;
-
-        container.addEventListener(
-            "mouseenter",
-            () => {
-                paused = true;
-                container.classList.add(
-                    "slider-paused"
-                );
-            }
-        );
-
-        container.addEventListener(
-            "mouseleave",
-            () => {
-                paused = false;
-                container.classList.remove(
-                    "slider-paused"
-                );
-            }
-        );
-
-
-        /*
-         * Smooth continuous movement.
-         */
-
-        let position = 0;
-
-        function animate() {
-
-            if (!paused) {
-
-                position -= 0.35;
-
-                /*
-                 * Reset after enough movement.
-                 * CSS animation normally handles this,
-                 * but this fallback keeps it moving.
-                 */
-
-                if (Math.abs(position) > 10000) {
-                    position = 0;
-                }
-
-                container.style.setProperty(
-                    "--active-slider-offset",
-                    position + "px"
-                );
-            }
-
-            requestAnimationFrame(animate);
-        }
-
-        requestAnimationFrame(animate);
-    }
-
-
-    /* ---------------------------------------------------------
-       CLIENT FEEDBACK
-       --------------------------------------------------------- */
-
-    function setupClientFeedback() {
-
-        const section =
-            document.querySelector(
-                "#client-feedback, #what-clients-say, .client-feedback-section"
-            );
-
-        if (!section) {
-            return;
-        }
-
-
-        /*
-         * Remove old number/eyebrow labels.
-         */
-
-        section
-            .querySelectorAll(
-                ".section-number, .section-index, .eyebrow"
-            )
-            .forEach(element => {
-
-                const text =
-                    element.textContent.trim();
-
-                if (
-                    /^\d+\s*\/?/i.test(text) ||
-                    /CLIENT FEEDBACK/i.test(text)
-                ) {
-                    element.remove();
-                }
-            });
-
-
-        const cards =
-            Array.from(
-                section.querySelectorAll(
-                    ".testimonial-card, .client-card, .feedback-card"
-                )
-            );
-
-
-        if (cards.length === 0) {
-            return;
-        }
-
-
-        /*
-         * No arrows.
-         */
-
-        section
-            .querySelectorAll(
-                ".prev, .next, .arrow, .slider-arrow"
-            )
-            .forEach(element => {
-                element.remove();
-            });
-
-
-        /*
-         * Every feedback card is compact.
-         */
-
-        cards.forEach(card => {
-
-            card.classList.add(
-                "client-feedback-card"
-            );
-
-
-            /*
-             * Find the actual text element.
-             */
-
-            const textElement =
-                card.querySelector(
-                    ".testimonial-text, .feedback-text, p"
-                );
-
-            if (!textElement) {
-                return;
-            }
-
-
-            /*
-             * Only add Show More if the review
-             * actually contains more text than the
-             * compact display height.
-             */
-
-            const originalText =
-                textElement.textContent.trim();
-
-            card.dataset.fullText =
-                originalText;
-
-
-            /*
-             * Remove old buttons.
-             */
-
-            card
-                .querySelectorAll(
-                    ".show-more, .show-less, .feedback-toggle"
-                )
-                .forEach(button => {
-                    button.remove();
+                track.scrollBy({
+                    left: scrollAmount(),
+                    behavior: "smooth"
                 });
 
+            });
 
-            /*
-             * Temporarily limit text.
-             */
-
-            const computed =
-                window.getComputedStyle(
-                    textElement
-                );
-
-            const lineHeight =
-                parseFloat(
-                    computed.lineHeight
-                ) || 20;
-
-            const compactLines = 7;
-
-            const compactHeight =
-                lineHeight * compactLines;
-
-
-            /*
-             * Use actual scrollHeight after
-             * temporarily applying the limit.
-             */
-
-            const previousMax =
-                textElement.style.maxHeight;
-
-            const previousOverflow =
-                textElement.style.overflow;
-
-            textElement.style.maxHeight =
-                compactHeight + "px";
-
-            textElement.style.overflow =
-                "hidden";
-
-
-            const needsMore =
-                textElement.scrollHeight >
-                compactHeight + 5;
-
-
-            textElement.style.maxHeight =
-                previousMax;
-
-            textElement.style.overflow =
-                previousOverflow;
-
-
-            if (needsMore) {
-
-                textElement.style.maxHeight =
-                    compactHeight + "px";
-
-                textElement.style.overflow =
-                    "hidden";
-
-
-                const button =
-                    document.createElement(
-                        "button"
-                    );
-
-                button.type = "button";
-
-                button.className =
-                    "feedback-toggle";
-
-                button.textContent =
-                    "SHOW MORE";
-
-
-                button.addEventListener(
-                    "click",
-                    () => {
-
-                        const expanded =
-                            card.classList.contains(
-                                "feedback-expanded"
-                            );
-
-
-                        if (!expanded) {
-
-                            textElement.style.maxHeight =
-                                "none";
-
-                            textElement.style.overflow =
-                                "visible";
-
-                            card.classList.add(
-                                "feedback-expanded"
-                            );
-
-                            button.textContent =
-                                "SHOW LESS";
-
-                        } else {
-
-                            textElement.style.maxHeight =
-                                compactHeight + "px";
-
-                            textElement.style.overflow =
-                                "hidden";
-
-                            card.classList.remove(
-                                "feedback-expanded"
-                            );
-
-                            button.textContent =
-                                "SHOW MORE";
-                        }
-
-                    }
-                );
-
-                card.appendChild(button);
-            }
-
-        });
-
-
-        /*
-         * Automatic feedback slider.
-         */
-
-        section.classList.add(
-            "feedback-auto-slider"
-        );
-
-
-        let paused = false;
-
-        section.addEventListener(
-            "mouseenter",
-            () => {
-                paused = true;
-                section.classList.add(
-                    "feedback-paused"
-                );
-            }
-        );
-
-        section.addEventListener(
-            "mouseleave",
-            () => {
-                paused = false;
-                section.classList.remove(
-                    "feedback-paused"
-                );
-            }
-        );
-
-
-        /*
-         * Mobile swipe support.
-         */
-
-        let startX = 0;
-        let startY = 0;
-
-        section.addEventListener(
-            "touchstart",
-            event => {
-
-                if (!event.touches.length) {
-                    return;
-                }
-
-                startX =
-                    event.touches[0].clientX;
-
-                startY =
-                    event.touches[0].clientY;
-            },
-            {
-                passive: true
-            }
-        );
-
-
-        section.addEventListener(
-            "touchend",
-            event => {
-
-                if (!event.changedTouches.length) {
-                    return;
-                }
-
-                const endX =
-                    event.changedTouches[0].clientX;
-
-                const endY =
-                    event.changedTouches[0].clientY;
-
-                const diffX =
-                    endX - startX;
-
-                const diffY =
-                    endY - startY;
-
-
-                /*
-                 * Only treat it as horizontal
-                 * swipe when horizontal movement
-                 * is stronger than vertical movement.
-                 */
-
-                if (
-                    Math.abs(diffX) >
-                    Math.abs(diffY) &&
-                    Math.abs(diffX) > 40
-                ) {
-
-                    const track =
-                        section.querySelector(
-                            ".feedback-grid, .testimonials-grid, .client-feedback-grid"
-                        );
-
-                    if (!track) {
-                        return;
-                    }
-
-                    const amount =
-                        Math.abs(diffX);
-
-                    track.scrollBy({
-                        left:
-                            diffX < 0
-                                ? amount
-                                : -amount,
-                        behavior: "smooth"
-                    });
-                }
-
-            },
-            {
-                passive: true
-            }
-        );
-    }
-
-
-    /* ---------------------------------------------------------
-       THEME
-       --------------------------------------------------------- */
-
-    function setupSystemTheme() {
-
-        /*
-         * No manual theme button.
-         * Theme follows operating system/browser.
-         */
-
-        const media =
-            window.matchMedia(
-                "(prefers-color-scheme: dark)"
-            );
-
-
-        function applyTheme() {
-
-            document.documentElement
-                .setAttribute(
-                    "data-theme",
-                    media.matches
-                        ? "dark"
-                        : "light"
-                );
         }
 
-
-        applyTheme();
-
-
-        if (
-            typeof media.addEventListener ===
-            "function"
-        ) {
-
-            media.addEventListener(
-                "change",
-                applyTheme
-            );
-
-        } else if (
-            typeof media.addListener ===
-            "function"
-        ) {
-
-            media.addListener(
-                applyTheme
-            );
-        }
-    }
-
-
-    /* ---------------------------------------------------------
-       BACK TO TOP
-       --------------------------------------------------------- */
-
-    function setupBackToTop() {
-
-        let button =
-            document.querySelector(
-                ".back-to-top"
-            );
-
-
-        /*
-         * If an old Back To Top button exists,
-         * use it.
-         */
-
-        if (!button) {
-            return;
-        }
-
-
-        function updateVisibility() {
-
-            if (
-                window.scrollY >
-                window.innerHeight * 0.35
-            ) {
-
-                button.classList.add(
-                    "is-visible"
-                );
-
-            } else {
-
-                button.classList.remove(
-                    "is-visible"
-                );
-            }
-        }
-
+        updateSliderNavigation(slider);
 
         window.addEventListener(
-            "scroll",
-            updateVisibility,
-            {
-                passive: true
+            "resize",
+            () => updateSliderNavigation(slider)
+        );
+
+    }
+
+
+    /* =====================================================
+       SLIDER NAVIGATION
+    ===================================================== */
+
+    function updateSliderNavigation(slider) {
+
+        if (!slider) return;
+
+        const track =
+            slider.querySelector(".portfolio-track");
+
+        if (!track) return;
+
+        const cards =
+            track.querySelectorAll(".portfolio-card");
+
+        /*
+         * Less than or equal to the number that can fit:
+         * arrows hidden.
+         */
+
+        if (cards.length <= 1) {
+
+            slider.classList.add("no-navigation");
+
+            return;
+
+        }
+
+        /*
+         * Check whether horizontal overflow exists.
+         */
+
+        if (track.scrollWidth <= track.clientWidth + 5) {
+
+            slider.classList.add("no-navigation");
+
+        } else {
+
+            slider.classList.remove("no-navigation");
+
+        }
+
+    }
+
+
+    /* =====================================================
+       LOAD ALL PORTFOLIO SECTIONS
+    ===================================================== */
+
+    Object.entries(CONFIG.galleries).forEach(
+        ([galleryName, images]) => {
+
+            setupGallery(
+                galleryName,
+                images
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       TESTIMONIALS
+    ===================================================== */
+
+    const testimonialTrack =
+        document.getElementById("testimonialTrack");
+
+    let testimonialIndex = 0;
+    let testimonialTimer = null;
+    let testimonialPaused = false;
+
+    function createTestimonials() {
+
+        if (!testimonialTrack) return;
+
+        testimonialTrack.innerHTML = "";
+
+        CONFIG.testimonials.forEach(
+            (item, index) => {
+
+                const card =
+                    document.createElement("article");
+
+                card.className =
+                    "testimonial-card";
+
+                const stars =
+                    document.createElement("div");
+
+                stars.className =
+                    "testimonial-stars";
+
+                stars.textContent =
+                    "★★★★★";
+
+                const text =
+                    document.createElement("p");
+
+                text.className =
+                    "testimonial-text";
+
+                const author =
+                    document.createElement("div");
+
+                author.className =
+                    "testimonial-author";
+
+                author.textContent =
+                    "— " + item.author;
+
+                text.textContent =
+                    item.text;
+
+                card.appendChild(stars);
+                card.appendChild(text);
+                card.appendChild(author);
+
+                /*
+                 * Only add See More when the text is actually
+                 * larger than the normal card area.
+                 */
+
+                requestAnimationFrame(() => {
+
+                    if (
+                        text.scrollHeight >
+                        text.clientHeight + 5
+                    ) {
+
+                        const button =
+                            document.createElement("button");
+
+                        button.className =
+                            "testimonial-more";
+
+                        button.type = "button";
+
+                        button.textContent =
+                            "SEE MORE";
+
+                        button.addEventListener(
+                            "click",
+                            () => {
+
+                                card.classList.toggle(
+                                    "expanded"
+                                );
+
+                                button.textContent =
+                                    card.classList.contains(
+                                        "expanded"
+                                    )
+                                        ? "SEE LESS"
+                                        : "SEE MORE";
+
+                            }
+                        );
+
+                        card.appendChild(button);
+
+                    }
+
+                });
+
+                testimonialTrack.appendChild(card);
+
             }
         );
 
+    }
 
-        button.addEventListener(
+    createTestimonials();
+
+
+    /* =====================================================
+       TESTIMONIAL RESPONSIVE POSITION
+    ===================================================== */
+
+    function testimonialVisibleCount() {
+
+        if (window.innerWidth <= 700) {
+            return 1;
+        }
+
+        if (window.innerWidth <= 1000) {
+            return 2;
+        }
+
+        return 4;
+
+    }
+
+
+    function moveTestimonials(direction = 1) {
+
+        if (!testimonialTrack) return;
+
+        const cards =
+            testimonialTrack.querySelectorAll(
+                ".testimonial-card"
+            );
+
+        if (!cards.length) return;
+
+        const visible =
+            testimonialVisibleCount();
+
+        const maxIndex =
+            Math.max(
+                0,
+                cards.length - visible
+            );
+
+        testimonialIndex += direction;
+
+        if (testimonialIndex > maxIndex) {
+            testimonialIndex = 0;
+        }
+
+        if (testimonialIndex < 0) {
+            testimonialIndex = maxIndex;
+        }
+
+        const cardWidth =
+            cards[0].getBoundingClientRect().width;
+
+        const gap =
+            parseFloat(
+                getComputedStyle(
+                    testimonialTrack
+                ).gap
+            ) || 0;
+
+        testimonialTrack.style.transform =
+            `translateX(-${
+                testimonialIndex *
+                (cardWidth + gap)
+            }px)`;
+
+    }
+
+
+    /* =====================================================
+       TESTIMONIAL AUTO SLIDE
+    ===================================================== */
+
+    function startTestimonials() {
+
+        stopTestimonials();
+
+        testimonialTimer =
+            setInterval(() => {
+
+                if (!testimonialPaused) {
+                    moveTestimonials(1);
+                }
+
+            }, 4200);
+
+    }
+
+    function stopTestimonials() {
+
+        if (testimonialTimer) {
+
+            clearInterval(testimonialTimer);
+
+            testimonialTimer = null;
+
+        }
+
+    }
+
+    const testimonialSlider =
+        document.querySelector(".testimonial-slider");
+
+    if (testimonialSlider) {
+
+        testimonialSlider.addEventListener(
+            "mouseenter",
+            () => {
+                testimonialPaused = true;
+            }
+        );
+
+        testimonialSlider.addEventListener(
+            "mouseleave",
+            () => {
+                testimonialPaused = false;
+            }
+        );
+
+    }
+
+    startTestimonials();
+
+
+    /* =====================================================
+       ACTIVE PLATFORM LOGOS
+       No links.
+       No arrows.
+       No numbers.
+       Pure automatic marquee.
+    ===================================================== */
+
+    const activeTrack =
+        document.getElementById("activeTrack");
+
+    function createActiveProfiles() {
+
+        if (!activeTrack) return;
+
+        activeTrack.innerHTML = "";
+
+        /*
+         * Duplicate the list to make the marquee seamless.
+         */
+
+        const profiles =
+            [
+                ...CONFIG.activeProfiles,
+                ...CONFIG.activeProfiles
+            ];
+
+        profiles.forEach(profile => {
+
+            const logo =
+                document.createElement("div");
+
+            logo.className =
+                "active-logo";
+
+            const image =
+                document.createElement("img");
+
+            image.src =
+                profile.image;
+
+            image.alt =
+                profile.name;
+
+            image.loading =
+                "lazy";
+
+            /*
+             * If a logo doesn't exist,
+             * remove only that logo.
+             */
+
+            image.addEventListener(
+                "error",
+                () => logo.remove()
+            );
+
+            logo.appendChild(image);
+
+            /*
+             * IMPORTANT:
+             * no href
+             * no click
+             * no external website
+             */
+
+            activeTrack.appendChild(logo);
+
+        });
+
+    }
+
+    createActiveProfiles();
+
+
+    /* =====================================================
+       BACK TO TOP
+       Fixed position.
+       Does not move with section.
+    ===================================================== */
+
+    const backToTop =
+        document.getElementById("backToTop");
+
+    function updateBackToTop() {
+
+        if (!backToTop) return;
+
+        if (window.scrollY > 500) {
+
+            backToTop.classList.add("visible");
+
+        } else {
+
+            backToTop.classList.remove("visible");
+
+        }
+
+    }
+
+    window.addEventListener(
+        "scroll",
+        updateBackToTop,
+        { passive: true }
+    );
+
+    updateBackToTop();
+
+    if (backToTop) {
+
+        backToTop.addEventListener(
             "click",
-            event => {
-
-                event.preventDefault();
+            () => {
 
                 window.scrollTo({
                     top: 0,
@@ -1043,307 +839,249 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         );
 
-
-        updateVisibility();
     }
 
 
-    /* ---------------------------------------------------------
-       INTERNAL NAVIGATION
-       --------------------------------------------------------- */
+    /* =====================================================
+       CONTACT FORM
+    ===================================================== */
 
-    function setupInternalNavigation() {
+    const contactForm =
+        document.getElementById("contactForm");
 
-        document
-            .querySelectorAll(
-                'a[href^="#"]'
-            )
-            .forEach(link => {
+    const formStatus =
+        document.getElementById("formStatus");
 
-                const href =
-                    link.getAttribute("href");
+    if (contactForm) {
 
-                if (
-                    !href ||
-                    href === "#" ||
-                    href === "#!"
-                ) {
-                    return;
+        contactForm.addEventListener(
+            "submit",
+            event => {
+
+                event.preventDefault();
+
+                if (formStatus) {
+
+                    formStatus.textContent =
+                        "Thank you. Your enquiry is ready to be sent.";
+
                 }
 
-
-                link.addEventListener(
-                    "click",
-                    event => {
-
-                        const target =
-                            document.querySelector(
-                                href
-                            );
-
-                        if (!target) {
-                            return;
-                        }
-
-                        event.preventDefault();
-
-
-                        /*
-                         * IMPORTANT:
-                         * Do NOT change browser URL.
-                         *
-                         * This means:
-                         * shakilistic.github.io/
-                         *
-                         * stays exactly the same
-                         * instead of becoming:
-                         * /home
-                         * /work
-                         * /about
-                         */
-
-                        target.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start"
-                        });
-
-                    }
-                );
-
-            });
-    }
-
-
-    /* ---------------------------------------------------------
-       MOBILE MENU
-       --------------------------------------------------------- */
-
-    function setupMobileMenu() {
-
-        const menuButton =
-            document.querySelector(
-                ".mobile-menu-toggle, .menu-toggle"
-            );
-
-        const menu =
-            document.querySelector(
-                ".mobile-menu, .nav-menu"
-            );
-
-
-        if (!menuButton || !menu) {
-            return;
-        }
-
-
-        menuButton.addEventListener(
-            "click",
-            () => {
-
-                document.body.classList.toggle(
-                    "menu-open"
-                );
-
-                menu.classList.toggle(
-                    "is-open"
-                );
+                /*
+                 * Keep the existing form behavior safe.
+                 * If you already have a Google Apps Script endpoint,
+                 * connect it here.
+                 */
 
             }
         );
 
-
-        menu
-            .querySelectorAll("a")
-            .forEach(link => {
-
-                link.addEventListener(
-                    "click",
-                    () => {
-
-                        document.body.classList.remove(
-                            "menu-open"
-                        );
-
-                        menu.classList.remove(
-                            "is-open"
-                        );
-
-                    }
-                );
-
-            });
     }
 
 
-    /* ---------------------------------------------------------
-       REMOVE OLD MANUAL THEME CONTROLS
-       --------------------------------------------------------- */
+    /* =====================================================
+       PREVENT IMAGE CLICK OPENING
+    ===================================================== */
 
-    function removeManualThemeControls() {
+    document.addEventListener(
+        "click",
+        event => {
+
+            const image =
+                event.target.closest(
+                    ".portfolio-card img"
+                );
+
+            if (!image) return;
+
+            /*
+             * Images are display-only.
+             * They do NOT open another page/window.
+             */
+
+            event.preventDefault();
+
+        }
+    );
+
+
+    /* =====================================================
+       REMOVE UNWANTED OLD SERIAL LABELS
+       ONLY IF THEY EXIST.
+    ===================================================== */
+
+    function removeOldSerialLabels() {
+
+        const selectors = [
+
+            ".section-number",
+            ".section-index",
+            ".portfolio-number",
+            ".work-number",
+            ".category-number",
+            ".section-counter"
+
+        ];
+
+        selectors.forEach(selector => {
+
+            document
+                .querySelectorAll(selector)
+                .forEach(element => {
+
+                    element.remove();
+
+                });
+
+        });
+
+    }
+
+    removeOldSerialLabels();
+
+
+    /* =====================================================
+       REMOVE OLD INSTRUCTION TEXT
+       ONLY KNOWN OLD LABELS.
+    ===================================================== */
+
+    function removeOldInstructionText() {
+
+        const unwanted = [
+
+            "YOUR MESSAGE GOES DIRECTLY TO THE PROJECT ENQUIRY SHEET.",
+            "CLICK TO VIEW ORIGINAL",
+            "VIEW ORIGINAL"
+
+        ];
 
         document
-            .querySelectorAll(
-                ".theme-toggle, .theme-switch, .theme-button, #themeToggle"
-            )
-            .forEach(button => {
-
-                /*
-                 * Only remove actual theme controls,
-                 * not unrelated buttons.
-                 */
-
-                const text =
-                    button.textContent.trim();
-
-                const aria =
-                    button.getAttribute(
-                        "aria-label"
-                    ) || "";
+            .querySelectorAll("body *")
+            .forEach(element => {
 
                 if (
-                    /theme|dark|light/i.test(
-                        text + " " + aria
+                    element.children.length === 0 &&
+                    unwanted.includes(
+                        element.textContent.trim()
                     )
                 ) {
-                    button.remove();
+
+                    element.remove();
+
                 }
+
             });
+
     }
 
+    removeOldInstructionText();
 
-    /* ---------------------------------------------------------
-       PREVENT BROKEN IMAGE ICONS
-       --------------------------------------------------------- */
 
-    function handleBrokenImages() {
+    /* =====================================================
+       KEEP INTERNAL HASH NAVIGATION FROM ADDING
+       /home OR OTHER PATHS.
+    ===================================================== */
 
-        document
-            .querySelectorAll(
-                "img"
-            )
-            .forEach(img => {
+    document
+        .querySelectorAll('a[href^="#"]')
+        .forEach(link => {
 
-                img.addEventListener(
-                    "error",
-                    () => {
+            link.addEventListener(
+                "click",
+                event => {
 
-                        img.classList.add(
-                            "image-load-error"
+                    const targetID =
+                        link.getAttribute("href");
+
+                    if (
+                        !targetID ||
+                        targetID === "#"
+                    ) {
+                        return;
+                    }
+
+                    const target =
+                        document.querySelector(
+                            targetID
                         );
 
-                    }
+                    if (!target) return;
+
+                    event.preventDefault();
+
+                    target.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                    /*
+                     * URL stays:
+                     *
+                     * https://shakilistic.github.io/
+                     *
+                     * instead of:
+                     *
+                     * /home
+                     */
+
+                    history.replaceState(
+                        null,
+                        "",
+                        window.location.pathname
+                    );
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       RESIZE
+    ===================================================== */
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            document
+                .querySelectorAll(
+                    ".portfolio-slider"
+                )
+                .forEach(
+                    updateSliderNavigation
                 );
 
-            });
-    }
+            testimonialIndex = 0;
+
+            if (testimonialTrack) {
+
+                testimonialTrack.style.transform =
+                    "translateX(0)";
+
+            }
+
+        }
+    );
 
 
-    /* ---------------------------------------------------------
-       LOAD EVERYTHING
-       --------------------------------------------------------- */
+    /* =====================================================
+       FINAL INITIALIZATION
+    ===================================================== */
 
-    async function initializePortfolio() {
-
-        setupSystemTheme();
-
-        removeManualThemeControls();
-
-        removeOldNumberLabels();
-
-        setupInternalNavigation();
-
-        setupMobileMenu();
-
-        setupBackToTop();
-
-        setupActiveLogos();
-
-        setupClientFeedback();
-
-        handleBrokenImages();
-
-
-        /*
-         * Load repository file list ONCE.
-         */
-
-        const files =
-            await getRepositoryFiles();
-
-
-        /*
-         * Build every portfolio section.
-         */
-
-        buildPortfolioSection(
-            "book",
-            files
-        );
-
-        buildPortfolioSection(
-            "web",
-            files
-        );
-
-        buildPortfolioSection(
-            "social",
-            files
-        );
-
-        buildPortfolioSection(
-            "logo",
-            files
-        );
-
-        buildPortfolioSection(
-            "print",
-            files
-        );
-
-
-        /*
-         * Disable old portfolio links after
-         * dynamic content is inserted.
-         */
-
-        disablePortfolioLinks();
-
-
-        /*
-         * Remove old labels again because
-         * dynamic sections may have inserted them.
-         */
-
-        removeOldNumberLabels();
-
-
-        /*
-         * Make sure all dynamically inserted
-         * portfolio images are non-clickable.
-         */
+    setTimeout(() => {
 
         document
             .querySelectorAll(
-                ".portfolio-card img"
+                ".portfolio-slider"
             )
-            .forEach(img => {
+            .forEach(
+                updateSliderNavigation
+            );
 
-                img.addEventListener(
-                    "click",
-                    event => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                );
+        updateBackToTop();
 
-            });
-    }
+    }, 300);
 
-
-    /* ---------------------------------------------------------
-       START
-       --------------------------------------------------------- */
-
-    initializePortfolio();
 
 });
