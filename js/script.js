@@ -1,1796 +1,1349 @@
 /* =========================================================
-   SHAKIL R. PORTFOLIO
-   COMPLETE JAVASCRIPT
-========================================================= */
+   SHAKILISTIC PORTFOLIO — SCRIPT
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* ---------------------------------------------------------
+       BASIC CONFIG
+       --------------------------------------------------------- */
+
+    const IMAGE_BASE = "assets/images/";
+
+    const sections = {
+        book: {
+            id: "book-cover-design",
+            prefix: "B",
+            title: "BOOK COVER DESIGN."
+        },
+
+        web: {
+            id: "static-web-design",
+            prefix: "W",
+            title: "STATIC WEB DESIGN & DEVELOP."
+        },
+
+        social: {
+            id: "social-media-poster",
+            prefix: "S",
+            title: "SOCIAL MEDIA POSTER."
+        },
+
+        logo: {
+            id: "logo-design",
+            prefix: "L",
+            title: "LOGO DESIGN."
+        },
+
+        print: {
+            id: "print-media-design",
+            prefix: "P",
+            title: "PRINT MEDIA DESIGN."
+        }
+    };
 
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+    /* ---------------------------------------------------------
+       HELPERS
+       --------------------------------------------------------- */
+
+    function getImageExtension(filename) {
+        const match = filename.match(/\.(jpg|jpeg|png|webp|gif)$/i);
+        return match ? match[1].toLowerCase() : "";
+    }
+
+    function naturalSort(a, b) {
+        return a.localeCompare(b, undefined, {
+            numeric: true,
+            sensitivity: "base"
+        });
+    }
+
+    function createImage(src, alt = "") {
+        const img = document.createElement("img");
+
+        img.src = src;
+        img.alt = alt;
+        img.loading = "lazy";
+        img.decoding = "async";
+        img.draggable = false;
+
+        /*
+         * Portfolio images are display-only.
+         * Clicking them must NOT open another page/window.
+         */
+        img.addEventListener("click", event => {
+            event.preventDefault();
+            event.stopPropagation();
+        });
+
+        return img;
+    }
 
 
-        /* =====================================================
-           THEME
-        ===================================================== */
+    /* ---------------------------------------------------------
+       FIND IMAGES FROM GITHUB DIRECTORY
+       --------------------------------------------------------- */
 
-        const themeToggle =
-            document.getElementById(
-                "themeToggle"
+    async function getRepositoryFiles() {
+
+        /*
+         * GitHub API is used only once.
+         * This avoids testing B1.jpg, B1.png, B1.webp,
+         * B2.jpg, B2.png... etc individually.
+         */
+
+        const apiURL =
+            "https://api.github.com/repos/shakilistic/shakilistic.github.io/contents/assets/images";
+
+        try {
+
+            const response = await fetch(apiURL, {
+                headers: {
+                    "Accept": "application/vnd.github+json"
+                },
+                cache: "force-cache"
+            });
+
+            if (!response.ok) {
+                throw new Error("GitHub image directory unavailable.");
+            }
+
+            const files = await response.json();
+
+            if (!Array.isArray(files)) {
+                return [];
+            }
+
+            return files
+                .filter(file => {
+                    return file.type === "file" &&
+                        /\.(jpg|jpeg|png|webp|gif)$/i.test(file.name);
+                })
+                .sort((a, b) => naturalSort(a.name, b.name));
+
+        } catch (error) {
+
+            console.warn(
+                "Could not load GitHub image directory:",
+                error
             );
 
-
-        let theme =
-            localStorage.getItem(
-                "shakilstic-theme"
-            ) || "dark";
+            return [];
+        }
+    }
 
 
-        function applyTheme(
-            value
-        ) {
+    /* ---------------------------------------------------------
+       MATCH SECTION IMAGES
+       --------------------------------------------------------- */
 
-            document.documentElement
-                .setAttribute(
-                    "data-theme",
-                    value
+    function getImagesForPrefix(files, prefix) {
+
+        const pattern = new RegExp(
+            "^" + prefix + "(\\d+)\\.(jpg|jpeg|png|webp|gif)$",
+            "i"
+        );
+
+        return files
+            .filter(file => pattern.test(file.name))
+            .sort((a, b) => {
+
+                const numberA =
+                    parseInt(a.name.match(pattern)[1], 10);
+
+                const numberB =
+                    parseInt(b.name.match(pattern)[1], 10);
+
+                return numberA - numberB;
+            });
+    }
+
+
+    /* ---------------------------------------------------------
+       CREATE PORTFOLIO CARD
+       --------------------------------------------------------- */
+
+    function createPortfolioCard(file, sectionTitle) {
+
+        const card = document.createElement("article");
+
+        card.className = "portfolio-card";
+
+        const imageWrap = document.createElement("div");
+
+        imageWrap.className = "portfolio-image-wrap";
+
+        const image = createImage(
+            IMAGE_BASE + file.name,
+            sectionTitle
+        );
+
+        imageWrap.appendChild(image);
+        card.appendChild(imageWrap);
+
+        return card;
+    }
+
+
+    /* ---------------------------------------------------------
+       PORTFOLIO SECTION BUILDER
+       --------------------------------------------------------- */
+
+    function buildPortfolioSection(
+        sectionKey,
+        files
+    ) {
+
+        const config = sections[sectionKey];
+
+        if (!config) {
+            return;
+        }
+
+        const section =
+            document.getElementById(config.id);
+
+        if (!section) {
+            return;
+        }
+
+        const matchingFiles =
+            getImagesForPrefix(files, config.prefix);
+
+
+        /*
+         * If there are no images,
+         * automatically hide the whole section.
+         */
+
+        if (matchingFiles.length === 0) {
+
+            section.style.display = "none";
+
+            return;
+        }
+
+        section.style.display = "";
+
+
+        /*
+         * Find portfolio grid.
+         */
+
+        const grid =
+            section.querySelector(
+                ".portfolio-grid, .portfolio-items, .work-grid"
+            );
+
+        if (!grid) {
+            return;
+        }
+
+        grid.innerHTML = "";
+
+
+        /*
+         * Initially show ONLY 3 designs.
+         */
+
+        const initialLimit = 3;
+
+        matchingFiles.forEach((file, index) => {
+
+            const card =
+                createPortfolioCard(
+                    file,
+                    config.title
                 );
 
+            if (index >= initialLimit) {
+                card.classList.add("portfolio-hidden");
+            }
 
-            localStorage.setItem(
-                "shakilstic-theme",
-                value
+            grid.appendChild(card);
+        });
+
+
+        /*
+         * Remove any old Show More / Show Less button.
+         * Then create a fresh one only if needed.
+         */
+
+        const oldButton =
+            section.querySelector(
+                ".show-more-btn, .show-less-btn, .portfolio-toggle"
             );
 
+        if (oldButton) {
+            oldButton.remove();
         }
 
 
-        applyTheme(
-            theme
+        if (matchingFiles.length > initialLimit) {
+
+            const button =
+                document.createElement("button");
+
+            button.type = "button";
+
+            button.className =
+                "portfolio-toggle show-more-btn";
+
+            button.textContent =
+                "SHOW MORE";
+
+
+            button.addEventListener("click", () => {
+
+                const hiddenCards =
+                    grid.querySelectorAll(
+                        ".portfolio-hidden"
+                    );
+
+                const isExpanded =
+                    section.classList.contains(
+                        "portfolio-expanded"
+                    );
+
+
+                if (!isExpanded) {
+
+                    hiddenCards.forEach(card => {
+                        card.classList.remove(
+                            "portfolio-hidden"
+                        );
+                    });
+
+                    section.classList.add(
+                        "portfolio-expanded"
+                    );
+
+                    button.textContent =
+                        "SHOW LESS";
+
+                } else {
+
+                    const cards =
+                        grid.querySelectorAll(
+                            ".portfolio-card"
+                        );
+
+                    cards.forEach((card, index) => {
+
+                        if (index >= initialLimit) {
+                            card.classList.add(
+                                "portfolio-hidden"
+                            );
+                        }
+                    });
+
+                    section.classList.remove(
+                        "portfolio-expanded"
+                    );
+
+                    button.textContent =
+                        "SHOW MORE";
+
+                    section.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+                }
+
+            });
+
+
+            section.appendChild(button);
+        }
+    }
+
+
+    /* ---------------------------------------------------------
+       REMOVE UNWANTED OLD SECTION LABELS
+       --------------------------------------------------------- */
+
+    function removeOldNumberLabels() {
+
+        const selectors = [
+            ".section-number",
+            ".section-index",
+            ".category-number",
+            ".eyebrow-number",
+            ".portfolio-number"
+        ];
+
+        selectors.forEach(selector => {
+
+            document
+                .querySelectorAll(selector)
+                .forEach(element => {
+                    element.remove();
+                });
+
+        });
+
+
+        /*
+         * Remove labels such as:
+         * 01 / BOOK COVERS
+         * 02 / WEB DESIGN
+         * 06 / CLIENT FEEDBACK
+         */
+
+        document
+            .querySelectorAll("p, span, small, div")
+            .forEach(element => {
+
+                const text =
+                    element.textContent.trim();
+
+                if (
+                    /^0\d\s*\/\s*/i.test(text) &&
+                    (
+                        text.includes("BOOK") ||
+                        text.includes("WEB") ||
+                        text.includes("SOCIAL") ||
+                        text.includes("LOGO") ||
+                        text.includes("PRINT") ||
+                        text.includes("CLIENT") ||
+                        text.includes("FEEDBACK")
+                    )
+                ) {
+                    element.remove();
+                }
+
+            });
+    }
+
+
+    /* ---------------------------------------------------------
+       DISABLE PORTFOLIO IMAGE LINKS
+       --------------------------------------------------------- */
+
+    function disablePortfolioLinks() {
+
+        document
+            .querySelectorAll(
+                ".portfolio-card a, .portfolio-grid a, .work-grid a"
+            )
+            .forEach(link => {
+
+                link.removeAttribute("href");
+                link.removeAttribute("target");
+                link.removeAttribute("rel");
+
+                link.addEventListener(
+                    "click",
+                    event => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                );
+
+            });
+    }
+
+
+    /* ---------------------------------------------------------
+       CURRENTLY WORKING / ACTIVE LOGOS
+       --------------------------------------------------------- */
+
+    function setupActiveLogos() {
+
+        const container =
+            document.querySelector(
+                ".active-logos, .profiles-slider, .platform-slider"
+            );
+
+        if (!container) {
+            return;
+        }
+
+
+        /*
+         * Remove arrows because the active-logo section
+         * should be automatic only.
+         */
+
+        container
+            .querySelectorAll(
+                ".prev, .next, .arrow, .slider-arrow, .active-arrow"
+            )
+            .forEach(button => {
+                button.remove();
+            });
+
+
+        /*
+         * Disable links on active logos.
+         */
+
+        container
+            .querySelectorAll("a")
+            .forEach(link => {
+
+                link.removeAttribute("href");
+                link.removeAttribute("target");
+                link.removeAttribute("rel");
+
+                link.addEventListener(
+                    "click",
+                    event => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                );
+
+            });
+
+
+        /*
+         * Automatic continuous movement.
+         */
+
+        container.classList.add(
+            "active-logo-auto-slider"
         );
 
 
-        if (themeToggle) {
+        let paused = false;
 
-            themeToggle.addEventListener(
-                "click",
-                () => {
+        container.addEventListener(
+            "mouseenter",
+            () => {
+                paused = true;
+                container.classList.add(
+                    "slider-paused"
+                );
+            }
+        );
 
-                    theme =
-                        theme === "dark"
-                            ? "light"
-                            : "dark";
+        container.addEventListener(
+            "mouseleave",
+            () => {
+                paused = false;
+                container.classList.remove(
+                    "slider-paused"
+                );
+            }
+        );
 
 
-                    applyTheme(
-                        theme
-                    );
+        /*
+         * Smooth continuous movement.
+         */
 
+        let position = 0;
+
+        function animate() {
+
+            if (!paused) {
+
+                position -= 0.35;
+
+                /*
+                 * Reset after enough movement.
+                 * CSS animation normally handles this,
+                 * but this fallback keeps it moving.
+                 */
+
+                if (Math.abs(position) > 10000) {
+                    position = 0;
                 }
+
+                container.style.setProperty(
+                    "--active-slider-offset",
+                    position + "px"
+                );
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+
+    /* ---------------------------------------------------------
+       CLIENT FEEDBACK
+       --------------------------------------------------------- */
+
+    function setupClientFeedback() {
+
+        const section =
+            document.querySelector(
+                "#client-feedback, #what-clients-say, .client-feedback-section"
             );
 
+        if (!section) {
+            return;
         }
 
 
+        /*
+         * Remove old number/eyebrow labels.
+         */
 
-        /* =====================================================
-           MOBILE NAV
-        ===================================================== */
+        section
+            .querySelectorAll(
+                ".section-number, .section-index, .eyebrow"
+            )
+            .forEach(element => {
 
-        const mobileToggle =
-            document.getElementById(
-                "mobileToggle"
-            );
+                const text =
+                    element.textContent.trim();
 
-
-        const mobileNav =
-            document.getElementById(
-                "mobileNav"
-            );
-
-
-        if (
-            mobileToggle &&
-            mobileNav
-        ) {
-
-            mobileToggle.addEventListener(
-                "click",
-                () => {
-
-                    mobileNav.classList.toggle(
-                        "open"
-                    );
-
+                if (
+                    /^\d+\s*\/?/i.test(text) ||
+                    /CLIENT FEEDBACK/i.test(text)
+                ) {
+                    element.remove();
                 }
+            });
+
+
+        const cards =
+            Array.from(
+                section.querySelectorAll(
+                    ".testimonial-card, .client-card, .feedback-card"
+                )
             );
 
 
-            mobileNav
-                .querySelectorAll("a")
-                .forEach(
-                    link => {
+        if (cards.length === 0) {
+            return;
+        }
 
-                        link.addEventListener(
-                            "click",
-                            () => {
 
-                                mobileNav
-                                    .classList
-                                    .remove(
-                                        "open"
-                                    );
+        /*
+         * No arrows.
+         */
 
-                            }
-                        );
+        section
+            .querySelectorAll(
+                ".prev, .next, .arrow, .slider-arrow"
+            )
+            .forEach(element => {
+                element.remove();
+            });
 
-                    }
+
+        /*
+         * Every feedback card is compact.
+         */
+
+        cards.forEach(card => {
+
+            card.classList.add(
+                "client-feedback-card"
+            );
+
+
+            /*
+             * Find the actual text element.
+             */
+
+            const textElement =
+                card.querySelector(
+                    ".testimonial-text, .feedback-text, p"
                 );
 
-        }
-
-
-
-        /* =====================================================
-           NO CUSTOM CURSOR
-           
-           Orange cursor ball has been completely removed.
-        ===================================================== */
-
-
-
-        /* =====================================================
-           SCROLL REVEAL
-        ===================================================== */
-
-        const revealElements =
-            document.querySelectorAll(
-                ".reveal"
-            );
-
-
-        if (
-            "IntersectionObserver"
-            in window
-        ) {
-
-            const revealObserver =
-                new IntersectionObserver(
-                    entries => {
-
-                        entries.forEach(
-                            entry => {
-
-                                if (
-                                    entry.isIntersecting
-                                ) {
-
-                                    entry.target
-                                        .classList
-                                        .add(
-                                            "visible"
-                                        );
-
-
-                                    revealObserver
-                                        .unobserve(
-                                            entry.target
-                                        );
-
-                                }
-
-                            }
-                        );
-
-                    },
-                    {
-                        threshold: .08
-                    }
-                );
-
-
-            revealElements.forEach(
-                element => {
-
-                    revealObserver.observe(
-                        element
-                    );
-
-                }
-            );
-
-        }
-        else {
-
-            revealElements.forEach(
-                element => {
-
-                    element.classList.add(
-                        "visible"
-                    );
-
-                }
-            );
-
-        }
-
-
-
-        /* =====================================================
-           BACK TO TOP
-        ===================================================== */
-
-        const backTop =
-            document.getElementById(
-                "backTop"
-            );
-
-
-        function updateBackTop() {
-
-            if (!backTop)
+            if (!textElement) {
                 return;
-
-
-            if (
-                window.scrollY > 500
-            ) {
-
-                backTop.classList.add(
-                    "show"
-                );
-
-            }
-            else {
-
-                backTop.classList.remove(
-                    "show"
-                );
-
             }
 
-        }
+
+            /*
+             * Only add Show More if the review
+             * actually contains more text than the
+             * compact display height.
+             */
+
+            const originalText =
+                textElement.textContent.trim();
+
+            card.dataset.fullText =
+                originalText;
 
 
-        window.addEventListener(
-            "scroll",
-            updateBackTop,
+            /*
+             * Remove old buttons.
+             */
+
+            card
+                .querySelectorAll(
+                    ".show-more, .show-less, .feedback-toggle"
+                )
+                .forEach(button => {
+                    button.remove();
+                });
+
+
+            /*
+             * Temporarily limit text.
+             */
+
+            const computed =
+                window.getComputedStyle(
+                    textElement
+                );
+
+            const lineHeight =
+                parseFloat(
+                    computed.lineHeight
+                ) || 20;
+
+            const compactLines = 7;
+
+            const compactHeight =
+                lineHeight * compactLines;
+
+
+            /*
+             * Use actual scrollHeight after
+             * temporarily applying the limit.
+             */
+
+            const previousMax =
+                textElement.style.maxHeight;
+
+            const previousOverflow =
+                textElement.style.overflow;
+
+            textElement.style.maxHeight =
+                compactHeight + "px";
+
+            textElement.style.overflow =
+                "hidden";
+
+
+            const needsMore =
+                textElement.scrollHeight >
+                compactHeight + 5;
+
+
+            textElement.style.maxHeight =
+                previousMax;
+
+            textElement.style.overflow =
+                previousOverflow;
+
+
+            if (needsMore) {
+
+                textElement.style.maxHeight =
+                    compactHeight + "px";
+
+                textElement.style.overflow =
+                    "hidden";
+
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+                button.type = "button";
+
+                button.className =
+                    "feedback-toggle";
+
+                button.textContent =
+                    "SHOW MORE";
+
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const expanded =
+                            card.classList.contains(
+                                "feedback-expanded"
+                            );
+
+
+                        if (!expanded) {
+
+                            textElement.style.maxHeight =
+                                "none";
+
+                            textElement.style.overflow =
+                                "visible";
+
+                            card.classList.add(
+                                "feedback-expanded"
+                            );
+
+                            button.textContent =
+                                "SHOW LESS";
+
+                        } else {
+
+                            textElement.style.maxHeight =
+                                compactHeight + "px";
+
+                            textElement.style.overflow =
+                                "hidden";
+
+                            card.classList.remove(
+                                "feedback-expanded"
+                            );
+
+                            button.textContent =
+                                "SHOW MORE";
+                        }
+
+                    }
+                );
+
+                card.appendChild(button);
+            }
+
+        });
+
+
+        /*
+         * Automatic feedback slider.
+         */
+
+        section.classList.add(
+            "feedback-auto-slider"
+        );
+
+
+        let paused = false;
+
+        section.addEventListener(
+            "mouseenter",
+            () => {
+                paused = true;
+                section.classList.add(
+                    "feedback-paused"
+                );
+            }
+        );
+
+        section.addEventListener(
+            "mouseleave",
+            () => {
+                paused = false;
+                section.classList.remove(
+                    "feedback-paused"
+                );
+            }
+        );
+
+
+        /*
+         * Mobile swipe support.
+         */
+
+        let startX = 0;
+        let startY = 0;
+
+        section.addEventListener(
+            "touchstart",
+            event => {
+
+                if (!event.touches.length) {
+                    return;
+                }
+
+                startX =
+                    event.touches[0].clientX;
+
+                startY =
+                    event.touches[0].clientY;
+            },
             {
                 passive: true
             }
         );
 
 
-        updateBackTop();
+        section.addEventListener(
+            "touchend",
+            event => {
 
-
-        if (backTop) {
-
-            backTop.addEventListener(
-                "click",
-                () => {
-
-                    window.scrollTo({
-
-                        top: 0,
-
-                        behavior:
-                            "smooth"
-
-                    });
-
+                if (!event.changedTouches.length) {
+                    return;
                 }
-            );
 
-        }
+                const endX =
+                    event.changedTouches[0].clientX;
 
+                const endY =
+                    event.changedTouches[0].clientY;
 
+                const diffX =
+                    endX - startX;
 
-        /* =====================================================
-           DYNAMIC PORTFOLIO IMAGES
-           
-           B1 = Book Cover
-           W1 = Web
-           S1 = Social
-           L1 = Logo
-           P1 = Print
-           
-           Supports up to 100.
-        ===================================================== */
-
-        const categories = [
-
-            {
-                prefix: "B",
-                grid: "bookGrid",
-                title: "Book Cover"
-            },
-
-            {
-                prefix: "W",
-                grid: "webGrid",
-                title: "Web Design"
-            },
-
-            {
-                prefix: "S",
-                grid: "socialGrid",
-                title: "Social Media"
-            },
-
-            {
-                prefix: "L",
-                grid: "logoGrid",
-                title: "Logo Design"
-            },
-
-            {
-                prefix: "P",
-                grid: "printGrid",
-                title: "Print Media"
-            }
-
-        ];
+                const diffY =
+                    endY - startY;
 
 
-        const imageExtensions = [
+                /*
+                 * Only treat it as horizontal
+                 * swipe when horizontal movement
+                 * is stronger than vertical movement.
+                 */
 
-            "jpg",
-            "jpeg",
-            "png",
-            "webp"
-
-        ];
-
-
-
-        function testImage(
-            src
-        ) {
-
-            return new Promise(
-                resolve => {
-
-                    const img =
-                        new Image();
-
-
-                    img.onload =
-                        () => resolve(
-                            true
-                        );
-
-
-                    img.onerror =
-                        () => resolve(
-                            false
-                        );
-
-
-                    img.src =
-                        src;
-
-                }
-            );
-
-        }
-
-
-
-        function createProject(
-            src,
-            title,
-            number
-        ) {
-
-            const article =
-                document.createElement(
-                    "article"
-                );
-
-
-            article.className =
-                "project-card";
-
-
-            article.innerHTML = `
-
-                <a
-                    href="${src}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-
-                    <div class="project-image">
-
-                        <img
-                            src="${src}"
-                            alt="${title}"
-                            loading="lazy"
-                        >
-
-                    </div>
-
-                </a>
-
-            `;
-
-
-            return article;
-
-        }
-
-
-
-        async function loadCategory(
-            category
-        ) {
-
-            const grid =
-                document.getElementById(
-                    category.grid
-                );
-
-
-            if (!grid)
-                return;
-
-
-            const section =
-                grid.closest(
-                    ".design-category"
-                );
-
-
-            let found =
-                0;
-
-
-            for (
-                let number = 1;
-                number <= 100;
-                number++
-            ) {
-
-
-                let foundImage =
-                    null;
-
-
-                for (
-                    const extension
-                    of imageExtensions
+                if (
+                    Math.abs(diffX) >
+                    Math.abs(diffY) &&
+                    Math.abs(diffX) > 40
                 ) {
 
-                    const src =
-                        `assets/images/${category.prefix}${number}.${extension}`;
-
-
-                    const exists =
-                        await testImage(
-                            src
+                    const track =
+                        section.querySelector(
+                            ".feedback-grid, .testimonials-grid, .client-feedback-grid"
                         );
 
-
-                    if (exists) {
-
-                        foundImage =
-                            src;
-
-                        break;
-
+                    if (!track) {
+                        return;
                     }
 
+                    const amount =
+                        Math.abs(diffX);
+
+                    track.scrollBy({
+                        left:
+                            diffX < 0
+                                ? amount
+                                : -amount,
+                        behavior: "smooth"
+                    });
                 }
 
-
-                if (!foundImage)
-                    continue;
-
-
-                found++;
-
-
-                const card =
-                    createProject(
-                        foundImage,
-                        category.title,
-                        number
-                    );
-
-
-                grid.appendChild(
-                    card
-                );
-
-
-                requestAnimationFrame(
-                    () => {
-
-                        card.classList.add(
-                            "visible"
-                        );
-
-                    }
-                );
-
+            },
+            {
+                passive: true
             }
+        );
+    }
 
 
-            /*
-               If category has no images,
-               hide entire section.
-            */
+    /* ---------------------------------------------------------
+       THEME
+       --------------------------------------------------------- */
 
-            if (
-                found === 0 &&
-                section
-            ) {
+    function setupSystemTheme() {
 
-                section.classList.add(
-                    "is-empty"
+        /*
+         * No manual theme button.
+         * Theme follows operating system/browser.
+         */
+
+        const media =
+            window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            );
+
+
+        function applyTheme() {
+
+            document.documentElement
+                .setAttribute(
+                    "data-theme",
+                    media.matches
+                        ? "dark"
+                        : "light"
                 );
-
-            }
-
         }
 
 
+        applyTheme();
 
-        categories.forEach(
-            category => {
 
-                loadCategory(
-                    category
+        if (
+            typeof media.addEventListener ===
+            "function"
+        ) {
+
+            media.addEventListener(
+                "change",
+                applyTheme
+            );
+
+        } else if (
+            typeof media.addListener ===
+            "function"
+        ) {
+
+            media.addListener(
+                applyTheme
+            );
+        }
+    }
+
+
+    /* ---------------------------------------------------------
+       BACK TO TOP
+       --------------------------------------------------------- */
+
+    function setupBackToTop() {
+
+        let button =
+            document.querySelector(
+                ".back-to-top"
+            );
+
+
+        /*
+         * If an old Back To Top button exists,
+         * use it.
+         */
+
+        if (!button) {
+            return;
+        }
+
+
+        function updateVisibility() {
+
+            if (
+                window.scrollY >
+                window.innerHeight * 0.35
+            ) {
+
+                button.classList.add(
+                    "is-visible"
+                );
+
+            } else {
+
+                button.classList.remove(
+                    "is-visible"
+                );
+            }
+        }
+
+
+        window.addEventListener(
+            "scroll",
+            updateVisibility,
+            {
+                passive: true
+            }
+        );
+
+
+        button.addEventListener(
+            "click",
+            event => {
+
+                event.preventDefault();
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+        );
+
+
+        updateVisibility();
+    }
+
+
+    /* ---------------------------------------------------------
+       INTERNAL NAVIGATION
+       --------------------------------------------------------- */
+
+    function setupInternalNavigation() {
+
+        document
+            .querySelectorAll(
+                'a[href^="#"]'
+            )
+            .forEach(link => {
+
+                const href =
+                    link.getAttribute("href");
+
+                if (
+                    !href ||
+                    href === "#" ||
+                    href === "#!"
+                ) {
+                    return;
+                }
+
+
+                link.addEventListener(
+                    "click",
+                    event => {
+
+                        const target =
+                            document.querySelector(
+                                href
+                            );
+
+                        if (!target) {
+                            return;
+                        }
+
+                        event.preventDefault();
+
+
+                        /*
+                         * IMPORTANT:
+                         * Do NOT change browser URL.
+                         *
+                         * This means:
+                         * shakilistic.github.io/
+                         *
+                         * stays exactly the same
+                         * instead of becoming:
+                         * /home
+                         * /work
+                         * /about
+                         */
+
+                        target.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    }
+                );
+
+            });
+    }
+
+
+    /* ---------------------------------------------------------
+       MOBILE MENU
+       --------------------------------------------------------- */
+
+    function setupMobileMenu() {
+
+        const menuButton =
+            document.querySelector(
+                ".mobile-menu-toggle, .menu-toggle"
+            );
+
+        const menu =
+            document.querySelector(
+                ".mobile-menu, .nav-menu"
+            );
+
+
+        if (!menuButton || !menu) {
+            return;
+        }
+
+
+        menuButton.addEventListener(
+            "click",
+            () => {
+
+                document.body.classList.toggle(
+                    "menu-open"
+                );
+
+                menu.classList.toggle(
+                    "is-open"
                 );
 
             }
         );
 
 
-
-        /* =====================================================
-           BLOGGER JSONP
-           
-           Client Feedback
-           Currently Working
-        ===================================================== */
-
-        const BLOGGER =
-            "https://createwithshakil.blogspot.com";
-
-
-        let jsonpCounter =
-            0;
-
-
-
-        function bloggerFeed(
-            label,
-            maxResults = 100
-        ) {
-
-            return new Promise(
-                (resolve, reject) => {
-
-
-                    const callback =
-                        `shakilFeed_${++jsonpCounter}`;
-
-
-                    const script =
-                        document.createElement(
-                            "script"
-                        );
-
-
-                    const encodedLabel =
-                        encodeURIComponent(
-                            label
-                        );
-
-
-                    const url =
-                        `${BLOGGER}/feeds/posts/default/-/${encodedLabel}?alt=json-in-script&max-results=${maxResults}&callback=${callback}`;
-
-
-                    window[callback] =
-                        data => {
-
-                            delete window[
-                                callback
-                            ];
-
-
-                            script.remove();
-
-
-                            resolve(
-                                data?.feed?.entry ||
-                                []
-                            );
-
-                        };
-
-
-                    script.onerror =
-                        () => {
-
-                            delete window[
-                                callback
-                            ];
-
-
-                            script.remove();
-
-
-                            reject(
-                                new Error(
-                                    "Blogger feed failed"
-                                )
-                            );
-
-                        };
-
-
-                    script.src =
-                        url;
-
-
-                    document.body.appendChild(
-                        script
-                    );
-
-                }
-            );
-
-        }
-
-
-
-        /* =====================================================
-           BLOGGER HELPERS
-        ===================================================== */
-
-        function entryTitle(
-            entry
-        ) {
-
-            return (
-                entry?.title?.$t ||
-                "Client"
-            );
-
-        }
-
-
-        function entryContent(
-            entry
-        ) {
-
-            return (
-                entry?.content?.$t ||
-                entry?.summary?.$t ||
-                ""
-            );
-
-        }
-
-
-        function stripHTML(
-            html
-        ) {
-
-            const div =
-                document.createElement(
-                    "div"
-                );
-
-
-            div.innerHTML =
-                html;
-
-
-            return (
-                div.textContent ||
-                div.innerText ||
-                ""
-            )
-            .replace(
-                /\s+/g,
-                " "
-            )
-            .trim();
-
-        }
-
-
-        function firstImage(
-            entry
-        ) {
-
-            const html =
-                entryContent(
-                    entry
-                );
-
-
-            const match =
-                html.match(
-                    /<img[^>]+src=["']([^"']+)["']/i
-                );
-
-
-            return match
-                ? match[1]
-                : "";
-
-        }
-
-
-        function entryUrl(
-            entry
-        ) {
-
-            const links =
-                entry?.link ||
-                [];
-
-
-            const alternate =
-                links.find(
-                    link =>
-                        link.rel ===
-                        "alternate"
-                );
-
-
-            return alternate
-                ? alternate.href
-                : "#";
-
-        }
-
-
-
-        /* =====================================================
-           ESCAPE HTML
-        ===================================================== */
-
-        function escapeHTML(
-            text
-        ) {
-
-            const div =
-                document.createElement(
-                    "div"
-                );
-
-
-            div.textContent =
-                text || "";
-
-
-            return div.innerHTML;
-
-        }
-
-
-
-        /* =====================================================
-           CLIENT FEEDBACK
-           
-           FIRST 3 SHOW.
-           SHOW MORE = remaining reviews.
-           SHOW LESS = collapse back to 3.
-        ===================================================== */
-
-        const clientsGrid =
-            document.getElementById(
-                "clientsGrid"
-            );
-
-
-        const clientsMore =
-            document.getElementById(
-                "clientsMore"
-            );
-
-
-        let allClients =
-            [];
-
-
-        let clientsExpanded =
-            false;
-
-
-
-        function makeClientCard(
-            entry
-        ) {
-
-            const name =
-                entryTitle(
-                    entry
-                );
-
-
-            const raw =
-                entryContent(
-                    entry
-                );
-
-
-            const text =
-                stripHTML(
-                    raw
-                );
-
-
-            const cleaned =
-                text
-                    .replace(
-                        /^[★☆\s]+/,
-                        ""
-                    )
-                    .trim();
-
-
-            const card =
-                document.createElement(
-                    "article"
-                );
-
-
-            card.className =
-                "client-card";
-
-
-            card.innerHTML = `
-
-                <div class="client-stars">
-                    ★★★★★
-                </div>
-
-                <div class="client-review">
-                    ${escapeHTML(
-                        cleaned
-                    )}
-                </div>
-
-                <div class="client-name">
-                    — ${escapeHTML(
-                        name
-                    )}
-                </div>
-
-            `;
-
-
-            return card;
-
-        }
-
-
-
-        function renderClients() {
-
-            if (!clientsGrid)
-                return;
-
-
-            clientsGrid.innerHTML =
-                "";
-
-
-            /*
-               Only 3 reviews initially.
-               All reviews after SHOW MORE.
-            */
-
-            const limit =
-                clientsExpanded
-                    ? allClients.length
-                    : Math.min(
-                        3,
-                        allClients.length
-                    );
-
-
-            allClients
-                .slice(
-                    0,
-                    limit
-                )
-                .forEach(
-                    entry => {
-
-                        clientsGrid.appendChild(
-                            makeClientCard(
-                                entry
-                            )
-                        );
-
-                    }
-                );
-
-
-            /*
-               SHOW MORE appears only
-               when there are more than 3.
-            */
-
-            if (
-                clientsMore &&
-                allClients.length > 3
-            ) {
-
-                clientsMore.hidden =
-                    false;
-
-
-                clientsMore.innerHTML =
-                    clientsExpanded
-
-                        ? `
-                            SHOW LESS
-                            <span>−</span>
-                          `
-
-                        : `
-                            SHOW MORE
-                            <span>+</span>
-                          `;
-
-            }
-            else if (clientsMore) {
-
-                clientsMore.hidden =
-                    true;
-
-            }
-
-        }
-
-
-
-        async function loadClients() {
-
-            if (!clientsGrid)
-                return;
-
-
-            try {
-
-                allClients =
-                    await bloggerFeed(
-                        "Client Feedback",
-                        100
-                    );
-
-
-                if (
-                    !allClients.length
-                ) {
-
-                    clientsGrid.innerHTML = `
-
-                        <div class="loading-state">
-
-                            Client feedback
-                            will appear here.
-
-                        </div>
-
-                    `;
-
-
-                    if (clientsMore) {
-
-                        clientsMore.hidden =
-                            true;
-
-                    }
-
-
-                    return;
-
-                }
-
-
-                renderClients();
-
-            }
-            catch(error) {
-
-                console.error(
-                    "Client feedback:",
-                    error
-                );
-
-
-                clientsGrid.innerHTML = `
-
-                    <div class="loading-state">
-
-                        Unable to load
-                        client feedback right now.
-
-                    </div>
-
-                `;
-
-
-                if (clientsMore) {
-
-                    clientsMore.hidden =
-                        true;
-
-                }
-
-            }
-
-        }
-
-
-        loadClients();
-
-
-
-        /*
-           SHOW MORE / SHOW LESS
-        */
-
-        if (clientsMore) {
-
-            clientsMore.addEventListener(
-                "click",
-                () => {
-
-                    clientsExpanded =
-                        !clientsExpanded;
-
-
-                    renderClients();
-
-
-                    /*
-                       When collapsing,
-                       return smoothly to
-                       top of client section.
-                    */
-
-                    if (
-                        !clientsExpanded
-                    ) {
-
-                        const clientsSection =
-                            document.getElementById(
-                                "clients"
-                            );
-
-
-                        if (
-                            clientsSection
-                        ) {
-
-                            clientsSection.scrollIntoView({
-                                behavior:
-                                    "smooth",
-                                block:
-                                    "start"
-                            });
-
-                        }
-
-                    }
-
-                }
-            );
-
-        }
-
-
-
-        /* =====================================================
-           CURRENTLY WORKING
-        ===================================================== */
-
-        const profileTrack =
-            document.getElementById(
-                "profileTrack"
-            );
-
-
-        const profileWindow =
-            document.getElementById(
-                "profileWindow"
-            );
-
-
-        const profilePrev =
-            document.getElementById(
-                "profilePrev"
-            );
-
-
-        const profileNext =
-            document.getElementById(
-                "profileNext"
-            );
-
-
-        let profiles =
-            [];
-
-
-        let profileIndex =
-            0;
-
-
-        let autoProfileTimer =
-            null;
-
-
-        let profilePaused =
-            false;
-
-
-        let profileMoving =
-            false;
-
-
-
-        function makeProfile(
-            entry
-        ) {
-
-            const image =
-                firstImage(
-                    entry
-                );
-
-
-            if (!image)
-                return null;
-
-
-            const url =
-                entryUrl(
-                    entry
-                );
-
-
-            const card =
-                document.createElement(
-                    "a"
-                );
-
-
-            card.className =
-                "profile-card";
-
-
-            card.href =
-                url || "#";
-
-
-            card.target =
-                "_blank";
-
-
-            card.rel =
-                "noopener noreferrer";
-
-
-            card.innerHTML = `
-
-                <img
-                    src="${image}"
-                    alt="${escapeHTML(
-                        entryTitle(entry)
-                    )}"
-                    loading="lazy"
-                >
-
-            `;
-
-
-            return card;
-
-        }
-
-
-
-        function cardWidth() {
-
-            if (!profileTrack)
-                return 0;
-
-
-            const card =
-                profileTrack.querySelector(
-                    ".profile-card"
-                );
-
-
-            if (!card)
-                return 0;
-
-
-            const gap =
-                parseFloat(
-                    getComputedStyle(
-                        profileTrack
-                    ).gap
-                ) || 0;
-
-
-            return (
-                card.offsetWidth +
-                gap
-            );
-
-        }
-
-
-
-        function renderProfiles() {
-
-            if (
-                !profileTrack ||
-                !profiles.length
-            )
-                return;
-
-
-            profileTrack.innerHTML =
-                "";
-
-
-            const displayProfiles =
-                [
-                    ...profiles,
-                    ...profiles,
-                    ...profiles
-                ];
-
-
-            displayProfiles.forEach(
-                entry => {
-
-                    const card =
-                        makeProfile(
-                            entry
-                        );
-
-
-                    if (card) {
-
-                        profileTrack.appendChild(
-                            card
-                        );
-
-                    }
-
-                }
-            );
-
-
-            profileIndex =
-                profiles.length;
-
-
-            updateProfilePosition(
-                false
-            );
-
-        }
-
-
-
-        function updateProfilePosition(
-            animate = true
-        ) {
-
-            if (!profileTrack)
-                return;
-
-
-            profileTrack.style.transition =
-                animate
-
-                    ? "transform .7s cubic-bezier(.2,.8,.2,1)"
-
-                    : "none";
-
-
-            profileTrack.style.transform =
-                `translateX(-${profileIndex * cardWidth()}px)`;
-
-        }
-
-
-
-        function moveProfile(
-            direction
-        ) {
-
-            if (
-                !profiles.length ||
-                !profileTrack ||
-                profileMoving
-            )
-                return;
-
-
-            profileMoving =
-                true;
-
-
-            profileIndex +=
-                direction;
-
-
-            updateProfilePosition(
-                true
-            );
-
-
-            setTimeout(
-                () => {
-
-
-                    if (
-                        profileIndex >=
-                        profiles.length * 2
-                    ) {
-
-                        profileIndex =
-                            profiles.length;
-
-
-                        updateProfilePosition(
-                            false
-                        );
-
-                    }
-
-
-                    if (
-                        profileIndex <
-                        profiles.length
-                    ) {
-
-                        profileIndex =
-                            profiles.length;
-
-
-                        updateProfilePosition(
-                            false
-                        );
-
-                    }
-
-
-                    profileMoving =
-                        false;
-
-
-                },
-                720
-            );
-
-        }
-
-
-
-        function startProfileAuto() {
-
-            clearInterval(
-                autoProfileTimer
-            );
-
-
-            autoProfileTimer =
-                setInterval(
+        menu
+            .querySelectorAll("a")
+            .forEach(link => {
+
+                link.addEventListener(
+                    "click",
                     () => {
 
-                        if (
-                            !profilePaused
-                        ) {
-
-                            moveProfile(
-                                1
-                            );
-
-                        }
-
-                    },
-                    2400
-                );
-
-        }
-
-
-
-        if (profilePrev) {
-
-            profilePrev.addEventListener(
-                "click",
-                () => {
-
-                    moveProfile(
-                        -1
-                    );
-
-
-                    startProfileAuto();
-
-                }
-            );
-
-        }
-
-
-
-        if (profileNext) {
-
-            profileNext.addEventListener(
-                "click",
-                () => {
-
-                    moveProfile(
-                        1
-                    );
-
-
-                    startProfileAuto();
-
-                }
-            );
-
-        }
-
-
-
-        if (profileWindow) {
-
-            profileWindow.addEventListener(
-                "mouseenter",
-                () => {
-
-                    profilePaused =
-                        true;
-
-                }
-            );
-
-
-            profileWindow.addEventListener(
-                "mouseleave",
-                () => {
-
-                    profilePaused =
-                        false;
-
-                }
-            );
-
-        }
-
-
-
-        async function loadProfiles() {
-
-            if (!profileTrack)
-                return;
-
-
-            try {
-
-                profiles =
-                    await bloggerFeed(
-                        "Currently Working",
-                        100
-                    );
-
-
-                profiles =
-                    profiles.filter(
-                        entry =>
-                            firstImage(
-                                entry
-                            )
-                    );
-
-
-                if (
-                    !profiles.length
-                ) {
-
-                    profileTrack.innerHTML =
-                        "";
-
-                    return;
-
-                }
-
-
-                renderProfiles();
-
-
-                startProfileAuto();
-
-            }
-            catch(error) {
-
-                console.error(
-                    "Currently Working:",
-                    error
-                );
-
-
-                profileTrack.innerHTML =
-                    "";
-
-            }
-
-        }
-
-
-        loadProfiles();
-
-
-
-        /* =====================================================
-           CONTACT FORM
-        ===================================================== */
-
-        const contactForm =
-            document.getElementById(
-                "contactForm"
-            );
-
-
-        const formStatus =
-            document.getElementById(
-                "formStatus"
-            );
-
-
-        if (contactForm) {
-
-            contactForm.addEventListener(
-                "submit",
-                event => {
-
-                    event.preventDefault();
-
-
-                    const formData =
-                        new FormData(
-                            contactForm
+                        document.body.classList.remove(
+                            "menu-open"
                         );
 
-
-                    const name =
-                        String(
-                            formData.get(
-                                "name"
-                            ) || ""
-                        ).trim();
-
-
-                    const email =
-                        String(
-                            formData.get(
-                                "email"
-                            ) || ""
-                        ).trim();
-
-
-                    const message =
-                        String(
-                            formData.get(
-                                "message"
-                            ) || ""
-                        ).trim();
-
-
-                    if (
-                        !name ||
-                        !email ||
-                        !message
-                    ) {
-
-                        if (formStatus) {
-
-                            formStatus.textContent =
-                                "Please complete all fields.";
-
-                        }
-
-
-                        return;
-
-                    }
-
-
-                    const subject =
-                        encodeURIComponent(
-                            "New Project Enquiry — Shakil R."
+                        menu.classList.remove(
+                            "is-open"
                         );
-
-
-                    const body =
-                        encodeURIComponent(
-                            `Name: ${name}\n\nEmail: ${email}\n\nMessage:\n${message}`
-                        );
-
-
-                    window.location.href =
-                        `mailto:?subject=${subject}&body=${body}`;
-
-
-                    if (formStatus) {
-
-                        formStatus.textContent =
-                            "Opening your email client...";
-
-                    }
-
-                }
-            );
-
-        }
-
-
-
-        /* =====================================================
-           MAGNETIC BUTTON
-        ===================================================== */
-
-        if (
-            window.matchMedia(
-                "(pointer:fine)"
-            ).matches
-        ) {
-
-            document
-                .querySelectorAll(
-                    ".magnetic"
-                )
-                .forEach(
-                    button => {
-
-
-                        button.addEventListener(
-                            "mousemove",
-                            event => {
-
-
-                                const rect =
-                                    button.getBoundingClientRect();
-
-
-                                const x =
-                                    event.clientX -
-                                    rect.left -
-                                    rect.width / 2;
-
-
-                                const y =
-                                    event.clientY -
-                                    rect.top -
-                                    rect.height / 2;
-
-
-                                button.style.transform =
-                                    `translate(${x * .10}px, ${y * .10}px)`;
-
-
-                            }
-                        );
-
-
-                        button.addEventListener(
-                            "mouseleave",
-                            () => {
-
-                                button.style.transform =
-                                    "";
-
-                            }
-                        );
-
 
                     }
                 );
 
-        }
+            });
+    }
 
 
+    /* ---------------------------------------------------------
+       REMOVE OLD MANUAL THEME CONTROLS
+       --------------------------------------------------------- */
 
-        /* =====================================================
-           INTERNAL LINKS
-        ===================================================== */
+    function removeManualThemeControls() {
 
         document
             .querySelectorAll(
-                'a[href^="#"]'
+                ".theme-toggle, .theme-switch, .theme-button, #themeToggle"
             )
-            .forEach(
-                link => {
+            .forEach(button => {
 
-                    link.addEventListener(
-                        "click",
-                        event => {
+                /*
+                 * Only remove actual theme controls,
+                 * not unrelated buttons.
+                 */
 
+                const text =
+                    button.textContent.trim();
 
-                            const id =
-                                link.getAttribute(
-                                    "href"
-                                );
+                const aria =
+                    button.getAttribute(
+                        "aria-label"
+                    ) || "";
 
-
-                            if (
-                                !id ||
-                                id === "#"
-                            )
-                                return;
-
-
-                            const target =
-                                document.querySelector(
-                                    id
-                                );
-
-
-                            if (!target)
-                                return;
-
-
-                            event.preventDefault();
-
-
-                            target.scrollIntoView({
-
-                                behavior:
-                                    "smooth",
-
-                                block:
-                                    "start"
-
-                            });
-
-
-                        }
-                    );
-
+                if (
+                    /theme|dark|light/i.test(
+                        text + " " + aria
+                    )
+                ) {
+                    button.remove();
                 }
-            );
-
-
-
-        /* =====================================================
-           YEAR
-        ===================================================== */
-
-        const year =
-            document.getElementById(
-                "year"
-            );
-
-
-        if (year) {
-
-            year.textContent =
-                new Date()
-                    .getFullYear();
-
-        }
-
-
+            });
     }
-);
+
+
+    /* ---------------------------------------------------------
+       PREVENT BROKEN IMAGE ICONS
+       --------------------------------------------------------- */
+
+    function handleBrokenImages() {
+
+        document
+            .querySelectorAll(
+                "img"
+            )
+            .forEach(img => {
+
+                img.addEventListener(
+                    "error",
+                    () => {
+
+                        img.classList.add(
+                            "image-load-error"
+                        );
+
+                    }
+                );
+
+            });
+    }
+
+
+    /* ---------------------------------------------------------
+       LOAD EVERYTHING
+       --------------------------------------------------------- */
+
+    async function initializePortfolio() {
+
+        setupSystemTheme();
+
+        removeManualThemeControls();
+
+        removeOldNumberLabels();
+
+        setupInternalNavigation();
+
+        setupMobileMenu();
+
+        setupBackToTop();
+
+        setupActiveLogos();
+
+        setupClientFeedback();
+
+        handleBrokenImages();
+
+
+        /*
+         * Load repository file list ONCE.
+         */
+
+        const files =
+            await getRepositoryFiles();
+
+
+        /*
+         * Build every portfolio section.
+         */
+
+        buildPortfolioSection(
+            "book",
+            files
+        );
+
+        buildPortfolioSection(
+            "web",
+            files
+        );
+
+        buildPortfolioSection(
+            "social",
+            files
+        );
+
+        buildPortfolioSection(
+            "logo",
+            files
+        );
+
+        buildPortfolioSection(
+            "print",
+            files
+        );
+
+
+        /*
+         * Disable old portfolio links after
+         * dynamic content is inserted.
+         */
+
+        disablePortfolioLinks();
+
+
+        /*
+         * Remove old labels again because
+         * dynamic sections may have inserted them.
+         */
+
+        removeOldNumberLabels();
+
+
+        /*
+         * Make sure all dynamically inserted
+         * portfolio images are non-clickable.
+         */
+
+        document
+            .querySelectorAll(
+                ".portfolio-card img"
+            )
+            .forEach(img => {
+
+                img.addEventListener(
+                    "click",
+                    event => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                );
+
+            });
+    }
+
+
+    /* ---------------------------------------------------------
+       START
+       --------------------------------------------------------- */
+
+    initializePortfolio();
+
+});
