@@ -39,194 +39,195 @@ rel="stylesheet"
 
 
 <!-- =========================================================
-     FINAL FIXES — DO NOT CHANGE DESIGN
-     1. Light-theme social icons visible in black; orange on hover.
-     2. Remove numbered section eyebrows.
-========================================================== -->
+     FINAL POLISH — ONLY REQUESTED CHANGES
+========================================================= -->
 <style>
-html[data-theme="light"] .contact-socials .social-icon img {
-  filter: brightness(0) saturate(100%) !important;
+/* SC1 — keep the desktop typography on mobile; do not substitute fonts. */
+@media (max-width: 700px) {
+  .hero-content h1,
+  .design-category h2,
+  .clients-section h2,
+  .reason-section h2,
+  .profiles-section h2,
+  .contact-box h2 {
+    font-family: "Anton", sans-serif !important;
+    font-weight: 400 !important;
+  }
 }
 
-html[data-theme="light"] .contact-socials .social-icon svg {
-  color: #111111 !important;
+/* SC2 — center the small decorative arc on mobile. */
+@media (max-width: 700px) {
+  .decor-one {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
 }
 
-html[data-theme="light"] .contact-socials .social-icon:hover img,
-html[data-theme="light"] .contact-socials .social-icon:focus-visible img {
-  /* Light theme: orange button + WHITE logo on hover. */
-  filter: brightness(0) invert(1) !important;
-}
-
-html[data-theme="light"] .contact-socials .social-icon:hover svg,
-html[data-theme="light"] .contact-socials .social-icon:focus-visible svg {
-  color: #ffffff !important;
-}
-
-/* Remove only the 01 / 02 / 03 / 04 / 05 labels above portfolio sections. */
-.design-category .category-copy > div > .eyebrow {
+/* SC3 — remove the stray/empty red-line control under portfolio sections. */
+.design-category button:empty,
+.design-category .show-more:empty,
+.design-category .view-toggle:empty,
+.design-category .view-toggle-wrap:empty {
   display: none !important;
 }
 
-/* Remove the small VISUAL DESIGN EXPERT eyebrow above the hero name. */
-.hero-content > .eyebrow {
-  display: none !important;
-}
-
-/* =========================================================
-   CAROUSEL UPDATE — PORTFOLIO + CLIENT FEEDBACK
-   Keeps the existing visual design; only changes the gallery
-   behaviour to responsive horizontal navigation.
-========================================================= */
+/* Portfolio: exactly 3 visible initially; Show More appears only when >3. */
 .portfolio-carousel {
   position: relative;
   width: 100%;
   margin-top: 0;
 }
-
-.portfolio-carousel .portfolio-grid,
-.portfolio-carousel .clients-grid {
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
+.portfolio-carousel .portfolio-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   gap: 18px !important;
-  scroll-behavior: smooth !important;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  overflow: visible !important;
   padding: 2px 0 8px !important;
   margin: 0 !important;
 }
-
-.portfolio-carousel .portfolio-grid::-webkit-scrollbar,
-.portfolio-carousel .clients-grid::-webkit-scrollbar {
-  display: none;
-}
-
-.portfolio-carousel .portfolio-grid > .project-card,
-.portfolio-carousel .clients-grid > .client-card {
-  flex: 0 0 calc((100% - 54px) / 4) !important;
+.portfolio-carousel .portfolio-grid > .project-card {
   min-width: 0 !important;
-  scroll-snap-align: start;
+  width: 100% !important;
 }
-
-/* The old JS initially marks cards after the first three hidden.
-   The carousel controls visibility instead. */
-.portfolio-carousel .project-card.is-hidden,
-.portfolio-carousel .client-card.is-hidden,
-.portfolio-carousel .testimonial-card.is-hidden {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+.portfolio-carousel .project-card.is-hidden {
+  display: none !important;
 }
-
 .portfolio-carousel__arrow {
-  position: absolute;
-  z-index: 5;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--line, #333);
-  border-radius: 50%;
-  background: var(--surface, #141414);
-  color: var(--text, #f5f5f5);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  cursor: pointer;
-  font: 700 22px/1 Arial, sans-serif;
-  transition: color .25s ease, border-color .25s ease, background .25s ease, transform .25s ease;
-}
-
-.portfolio-carousel__arrow:hover,
-.portfolio-carousel__arrow:focus-visible {
-  color: var(--accent, #ff4d00);
-  border-color: var(--accent, #ff4d00);
-  outline: none;
-}
-
-.portfolio-carousel__arrow.prev { left: -22px; }
-.portfolio-carousel__arrow.next { right: -22px; }
-
-.portfolio-carousel.has-navigation .portfolio-carousel__arrow.is-visible {
-  display: flex;
-}
-
-/* Light theme: dark buttons, orange hover. */
-html[data-theme="light"] .portfolio-carousel__arrow {
-  background: #eee9df;
-  color: #111;
-  border-color: #bdb8ae;
-}
-
-html[data-theme="light"] .portfolio-carousel__arrow:hover,
-html[data-theme="light"] .portfolio-carousel__arrow:focus-visible {
-  color: #ff4d00;
-  border-color: #ff4d00;
-}
-
-/* Portfolio cards keep their existing hover effect. */
-.portfolio-carousel .project-card {
-  cursor: default;
-}
-
-.portfolio-carousel .project-card img {
-  max-width: 100%;
-}
-
-/* Hide the old See More / See Less controls completely. */
-#clientsMore,
-.view-toggle,
-.view-toggle-wrap,
-.show-more {
   display: none !important;
 }
 
-/* =========================================================
-   RESPONSIVE CAROUSEL
-========================================================= */
+.portfolio-more-button {
+  display: none;
+  margin: 18px auto 0;
+  padding: 11px 22px;
+  border: 1px solid var(--line, #333);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text, #f5f5f5);
+  font: 600 11px/1 "Space Mono", monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color .25s ease, border-color .25s ease, background .25s ease;
+}
+.portfolio-more-button.is-visible { display: block; }
+.portfolio-more-button:hover,
+.portfolio-more-button:focus-visible {
+  color: #fff;
+  background: #ff4d00;
+  border-color: #ff4d00;
+  outline: none;
+}
+html[data-theme="light"] .portfolio-more-button {
+  color: #111;
+  border-color: #bdb8ae;
+}
+html[data-theme="light"] .portfolio-more-button:hover,
+html[data-theme="light"] .portfolio-more-button:focus-visible {
+  color: #fff;
+  background: #ff4d00;
+  border-color: #ff4d00;
+}
+
+/* SC5 — compact, responsive, auto-sliding client feedback. */
+.clients-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.clients-carousel .clients-grid {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 14px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-behavior: smooth !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 2px 0 8px !important;
+}
+.clients-carousel .clients-grid::-webkit-scrollbar { display: none; }
+.clients-carousel .client-card {
+  flex: 0 0 calc((100% - 42px) / 4) !important;
+  min-width: 0 !important;
+  box-sizing: border-box;
+  padding: 22px !important;
+}
+.clients-carousel .client-review {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 8;
+  line-clamp: 8;
+}
+.clients-carousel .client-review.is-expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+}
+.client-more-button {
+  display: none;
+  margin-top: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text, #f5f5f5);
+  font: 600 10px/1 "Space Mono", monospace;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.client-more-button.is-visible { display: inline-block; }
+.client-more-button:hover,
+.client-more-button:focus-visible { color: #ff4d00; outline: none; }
+html[data-theme="light"] .client-more-button { color: #111; }
+html[data-theme="light"] .client-more-button:hover,
+html[data-theme="light"] .client-more-button:focus-visible { color: #ff4d00; }
+
+/* No client carousel arrows. */
+.clients-carousel__arrow,
+#clientsPrev, #clientsNext { display: none !important; }
+
+/* SC6 — active profiles remain display-only and auto-slide. */
+#profiles .slider-arrow,
+#profilePrev, #profileNext { display: none !important; }
+#profiles .profile-slider {
+  display: block !important;
+  width: 100%;
+}
+#profiles .profile-window {
+  width: 100% !important;
+  overflow: hidden !important;
+}
+#profiles .profile-track {
+  overflow: visible !important;
+}
+#profiles .profile-card {
+  cursor: default !important;
+}
+#profiles .profile-card:hover {
+  cursor: default !important;
+}
+
 @media (max-width: 1100px) {
-  .portfolio-carousel .portfolio-grid > .project-card,
-  .portfolio-carousel .clients-grid > .client-card {
-    flex-basis: calc((100% - 18px) / 2) !important;
+  .portfolio-carousel .portfolio-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  .clients-carousel .client-card {
+    flex-basis: calc((100% - 14px) / 2) !important;
   }
 }
 
 @media (max-width: 700px) {
-  .portfolio-carousel {
-    padding: 0 2px;
-  }
-
-  .portfolio-carousel .portfolio-grid,
-  .portfolio-carousel .clients-grid {
+  .portfolio-carousel .portfolio-grid {
+    grid-template-columns: 1fr !important;
     gap: 14px !important;
-    padding-bottom: 6px !important;
   }
-
-  .portfolio-carousel .portfolio-grid > .project-card,
-  .portfolio-carousel .clients-grid > .client-card {
+  .clients-carousel .client-card {
     flex-basis: 100% !important;
+    padding: 18px !important;
   }
-
-  .portfolio-carousel__arrow {
-    width: 38px;
-    height: 38px;
-    font-size: 19px;
-    background: var(--surface, #141414);
-  }
-
-  .portfolio-carousel__arrow.prev { left: 8px; }
-  .portfolio-carousel__arrow.next { right: 8px; }
 }
-
-@media (max-width: 420px) {
-  .portfolio-carousel__arrow.prev { left: 6px; }
-  .portfolio-carousel__arrow.next { right: 6px; }
-}
-
 </style>
 
 </head>
@@ -381,11 +382,6 @@ fetchpriority="high"
 
 
 <div class="hero-content reveal">
-
-
-<div class="eyebrow">
-VISUAL DESIGN EXPERT
-</div>
 
 
 <h1>
@@ -864,18 +860,6 @@ class="clients-grid"
 ></div>
 
 
-<!-- SHOW MORE -->
-<button
-id="clientsMore"
-class="outline-button"
-type="button"
-hidden
->
-SHOW MORE
-<span>+</span>
-</button>
-
-
 </div>
 
 </section>
@@ -1021,16 +1005,6 @@ ACTIVE
 <div class="profile-slider">
 
 
-<button
-id="profilePrev"
-class="slider-arrow"
-aria-label="Previous profile"
-type="button"
->
-←
-</button>
-
-
 <div
 id="profileWindow"
 class="profile-window"
@@ -1042,16 +1016,6 @@ class="profile-track"
 ></div>
 
 </div>
-
-
-<button
-id="profileNext"
-class="slider-arrow"
-aria-label="Next profile"
-type="button"
->
-→
-</button>
 
 
 </div>
@@ -1386,15 +1350,11 @@ defer
 
 <script defer>
 /* =========================================================
-   PORTFOLIO CAROUSEL ENGINE
-   - 4 cards on desktop
-   - 2 cards on tablet
-   - 1 card on mobile
-   - arrows appear only when there are more cards than fit
-   - old See More / See Less controls are removed
-   - clicking portfolio artwork does nothing
-   - Blogger is queried only for the 5th item initially;
-     the full section is loaded only when an arrow is used
+   REQUESTED BEHAVIOUR ONLY
+   - Portfolio: 3 visible; Show More only when >3.
+   - Client feedback: compact responsive auto-slider; per-card
+     Show More only when that review is actually truncated.
+   - Currently Working: display-only auto-slider; no arrows/clicks.
 ========================================================= */
 (function () {
   "use strict";
@@ -1408,48 +1368,44 @@ defer
     printGrid: "Print Media Design"
   };
 
-  var states = {};
-
   function esc(value) {
     return String(value || "").replace(/[&<>"']/g, function (c) {
-      return {
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;"
-      }[c];
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
     });
   }
 
   function firstImage(entry) {
     var src = "";
-
-    if (entry && entry.media$thumbnail && entry.media$thumbnail.url) {
-      src = entry.media$thumbnail.url;
-    }
-
+    if (entry && entry.media$thumbnail && entry.media$thumbnail.url) src = entry.media$thumbnail.url;
     if (!src && entry && entry.content && entry.content.$t) {
-      var match = entry.content.$t.match(/<img[^>]+src=["']([^"']+)["']/i);
-      if (match) src = match[1];
+      var m = entry.content.$t.match(/<img[^>]+src=["']([^"']+)["']/i);
+      if (m) src = m[1];
     }
-
     if (src) {
       src = src.replace(/\/s\d+(?:-c)?\//, "/s1200/");
       src = src.replace(/=s\d+(?:-c)?/, "=s1200");
     }
-
     return src;
   }
 
   function entryTitle(entry, fallback) {
-    return entry && entry.title && entry.title.$t
-      ? entry.title.$t
-      : fallback;
+    return entry && entry.title && entry.title.$t ? entry.title.$t : fallback;
+  }
+
+  function entryContent(entry) {
+    return entry && entry.content && entry.content.$t
+      ? entry.content.$t
+      : (entry && entry.summary && entry.summary.$t ? entry.summary.$t : "");
+  }
+
+  function stripHTML(html) {
+    var div = document.createElement("div");
+    div.innerHTML = html || "";
+    return (div.textContent || div.innerText || "").replace(/\s+/g, " ").trim();
   }
 
   function jsonp(label, startIndex, maxResults, done) {
-    var callbackName = "portfolioCarousel_" + Math.random().toString(36).slice(2);
+    var callbackName = "shakilFix_" + Math.random().toString(36).slice(2);
     var script = document.createElement("script");
     var finished = false;
 
@@ -1473,40 +1429,33 @@ defer
       done([]);
     };
 
-    script.src = BLOGGER_HOME +
-      "feeds/posts/default/-/" + encodeURIComponent(label) +
+    script.src = BLOGGER_HOME + "feeds/posts/default/-/" + encodeURIComponent(label) +
       "?alt=json-in-script&start-index=" + (startIndex || 1) +
-      "&max-results=" + (maxResults || 1) +
-      "&callback=" + callbackName;
-
+      "&max-results=" + (maxResults || 100) + "&callback=" + callbackName;
     document.body.appendChild(script);
   }
 
   function loadAll(label, done) {
     var all = [];
-    var pageSize = 100;
     var start = 1;
-
+    var size = 100;
     function next() {
-      jsonp(label, start, pageSize, function (entries) {
+      jsonp(label, start, size, function (entries) {
         all = all.concat(entries);
-
-        if (entries.length === pageSize) {
-          start += pageSize;
+        if (entries.length === size) {
+          start += size;
           next();
         } else {
           done(all);
         }
       });
     }
-
     next();
   }
 
   function buildProjectCard(entry, label) {
     var card = document.createElement("div");
     card.className = "project-card sample-display-only";
-
     var image = firstImage(entry);
     if (image) {
       var img = document.createElement("img");
@@ -1516,246 +1465,276 @@ defer
       img.decoding = "async";
       card.appendChild(img);
     }
-
-    var overlay = document.createElement("div");
-    overlay.className = "project-overlay";
-    overlay.innerHTML =
-      '<span class="project-category">' + esc(label) + '</span>' +
-      '<p class="project-title">' + esc(entryTitle(entry, label)) + '</p>';
-    card.appendChild(overlay);
-
     return card;
   }
 
-  function renderProjectEntries(grid, entries, label) {
-    grid.innerHTML = "";
-
-    entries.forEach(function (entry) {
-      grid.appendChild(buildProjectCard(entry, label));
-    });
-
-    setupCarouselForGrid(grid);
+  function ensurePortfolioMoreButton(section, grid) {
+    if (!section || !grid) return null;
+    var button = section.querySelector(".portfolio-more-button");
+    if (!button) {
+      button = document.createElement("button");
+      button.type = "button";
+      button.className = "portfolio-more-button";
+      button.textContent = "SHOW MORE +";
+      section.appendChild(button);
+    }
+    return button;
   }
 
-  function createCarousel(grid, type) {
-    if (!grid || grid.dataset.carouselReady === "true") return;
+  var portfolioLoaded = {};
+  var portfolioExpanded = {};
 
-    var wrapper = document.createElement("div");
-    wrapper.className = "portfolio-carousel";
-    wrapper.dataset.carouselType = type || "portfolio";
+  function setupPortfolio(grid) {
+    if (!grid || grid.dataset.finalBehaviourReady === "true") return;
+    grid.dataset.finalBehaviourReady = "true";
 
-    grid.parentNode.insertBefore(wrapper, grid);
-    wrapper.appendChild(grid);
-    grid.classList.add("carousel-grid");
-    grid.dataset.carouselReady = "true";
-
-    var prev = document.createElement("button");
-    prev.type = "button";
-    prev.className = "portfolio-carousel__arrow prev";
-    prev.setAttribute("aria-label", "Previous");
-    prev.innerHTML = "&#8592;";
-
-    var next = document.createElement("button");
-    next.type = "button";
-    next.className = "portfolio-carousel__arrow next";
-    next.setAttribute("aria-label", "Next");
-    next.innerHTML = "&#8594;";
-
-    wrapper.appendChild(prev);
-    wrapper.appendChild(next);
-
-    var state = {
-      wrapper: wrapper,
-      grid: grid,
-      prev: prev,
-      next: next,
-      allLoaded: type === "clients",
-      loading: false,
-      hasMore: false
-    };
-
-    states[grid.id] = state;
-
-    prev.addEventListener("click", function () {
-      moveCarousel(state, -1);
-    });
-
-    next.addEventListener("click", function () {
-      if (state.type === "portfolio" && state.hasMore && !state.allLoaded) {
-        loadMoreProjects(state);
-      } else {
-        moveCarousel(state, 1);
-      }
-    });
-
-    state.type = type || "portfolio";
-    updateArrows(state);
-    return state;
-  }
-
-  function visibleCount() {
-    if (window.innerWidth <= 700) return 1;
-    if (window.innerWidth <= 1100) return 2;
-    return 4;
-  }
-
-  function moveCarousel(state, direction) {
-    if (!state || !state.grid) return;
-
-    var first = state.grid.children[0];
-    if (!first) return;
-
-    var gap = parseFloat(getComputedStyle(state.grid).gap) || 0;
-    var amount = first.getBoundingClientRect().width + gap;
-    var distance = amount * visibleCount();
-
-    state.grid.scrollBy({
-      left: direction * distance,
-      behavior: "smooth"
-    });
-  }
-
-  function updateArrows(state) {
-    if (!state || !state.grid) return;
-
-    var count = state.grid.children.length;
-    var needNavigation = count > visibleCount() || state.hasMore;
-
-    state.wrapper.classList.toggle("has-navigation", needNavigation);
-    state.prev.classList.toggle("is-visible", needNavigation);
-    state.next.classList.toggle("is-visible", needNavigation);
-  }
-
-  function setupCarouselForGrid(grid) {
-    var state = states[grid.id];
-    if (!state) return;
-
-    /* Remove old hidden-card state from the previous renderer. */
-    Array.prototype.forEach.call(grid.children, function (card) {
-      card.classList.remove("is-hidden");
-      card.style.display = "";
-    });
-
-    updateArrows(state);
-  }
-
-  function probeForFifth(state) {
-    if (!state || state.type !== "portfolio") return;
-
-    var label = SECTION_LABELS[state.grid.id];
+    var section = grid.closest(".design-category");
+    if (!section) return;
+    var id = grid.id;
+    var label = SECTION_LABELS[id];
     if (!label) return;
 
-    jsonp(label, 5, 1, function (entries) {
-      state.hasMore = entries.length > 0;
-      updateArrows(state);
-    });
-  }
+    var button = ensurePortfolioMoreButton(section, grid);
 
-  function loadMoreProjects(state) {
-    if (!state || state.loading || state.allLoaded) {
-      moveCarousel(state, 1);
-      return;
-    }
-
-    var label = SECTION_LABELS[state.grid.id];
-    if (!label) {
-      moveCarousel(state, 1);
-      return;
-    }
-
-    state.loading = true;
-
-    loadAll(label, function (entries) {
-      state.loading = false;
-      state.allLoaded = true;
-      state.hasMore = entries.length > visibleCount();
-      renderProjectEntries(state.grid, entries, label);
-
-      /* Reconnect the state after render. */
-      var fresh = states[state.grid.id];
-      if (fresh) {
-        fresh.allLoaded = true;
-        fresh.hasMore = entries.length > visibleCount();
-        updateArrows(fresh);
-        moveCarousel(fresh, 1);
-      }
-    });
-  }
-
-  function initProjectGrid(grid) {
-    if (!grid) return;
-    var state = createCarousel(grid, "portfolio");
-    if (!state) return;
-
-    /* The existing loader gives the first four. Reveal those four. */
-    setupCarouselForGrid(grid);
-
-    /* Tiny one-item request only to determine whether a fifth exists. */
-    probeForFifth(state);
-  }
-
-  function initClientsGrid(grid) {
-    if (!grid) return;
-    var state = createCarousel(grid, "clients");
-
-    if (!state) return;
-
-    /* Existing Blogger JS starts with 3 reviews and has a hidden
-       Show More button. Expand it once so the carousel can contain
-       every review, then hide the old control permanently. */
-    var more = document.getElementById("clientsMore");
-
-    function expandClientsOnce() {
-      if (more && !more.dataset.carouselExpanded && !more.hidden) {
-        more.dataset.carouselExpanded = "true";
-        more.click();
-      }
-      updateArrows(state);
-    }
-
-    expandClientsOnce();
-
-    /* The Blogger loader may reveal the old button asynchronously.
-       Watch only this tiny control instead of polling the whole page. */
-    if (more) {
-      var moreObserver = new MutationObserver(expandClientsOnce);
-      moreObserver.observe(more, { attributes: true, attributeFilter: ["hidden"] });
-    }
-
-    updateArrows(state);
-  }
-
-  function initAll() {
-    ["bookGrid", "webGrid", "socialGrid", "logoGrid", "printGrid"].forEach(function (id) {
-      initProjectGrid(document.getElementById(id));
-    });
-
-    initClientsGrid(document.getElementById("clientsGrid"));
-
-    /* Portfolio previews never navigate/open a separate page. */
-    document.addEventListener("click", function (event) {
-      var link = event.target.closest(".project-card a");
-      if (link) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-    }, true);
-
-    window.addEventListener("resize", function () {
-      Object.keys(states).forEach(function (key) {
-        updateArrows(states[key]);
+    function refresh() {
+      var cards = Array.prototype.slice.call(grid.querySelectorAll(".project-card"));
+      cards.forEach(function (card, i) {
+        card.classList.toggle("is-hidden", !portfolioExpanded[id] && i >= 3);
       });
+      if (cards.length > 3 && !portfolioExpanded[id]) {
+        button.classList.add("is-visible");
+        button.textContent = "SHOW MORE +";
+      } else {
+        button.classList.remove("is-visible");
+      }
+    }
+
+    button.addEventListener("click", function () {
+      if (portfolioExpanded[id]) return;
+      button.disabled = true;
+      button.textContent = "LOADING...";
+
+      if (portfolioLoaded[id]) {
+        portfolioExpanded[id] = true;
+        refresh();
+        return;
+      }
+
+      loadAll(label, function (entries) {
+        grid.innerHTML = "";
+        entries.forEach(function (entry) {
+          grid.appendChild(buildProjectCard(entry, label));
+        });
+        portfolioLoaded[id] = true;
+        portfolioExpanded[id] = true;
+        button.disabled = false;
+        refresh();
+      });
+    });
+
+    var observer = new MutationObserver(function () {
+      refresh();
+    });
+    observer.observe(grid, { childList: true, subtree: false });
+    refresh();
+  }
+
+  /* ---------------- CLIENT FEEDBACK ---------------- */
+  var clientTimer = null;
+  var clientPaused = false;
+  var clientInitialized = false;
+
+  function makeClientCard(entry) {
+    var card = document.createElement("article");
+    card.className = "client-card";
+
+    var name = entryTitle(entry, "Client");
+    var text = stripHTML(entryContent(entry)).replace(/^[★☆\s]+/, "").trim();
+
+    var stars = document.createElement("div");
+    stars.className = "client-stars";
+    stars.textContent = "★★★★★";
+
+    var review = document.createElement("div");
+    review.className = "client-review";
+    review.textContent = text;
+
+    var more = document.createElement("button");
+    more.type = "button";
+    more.className = "client-more-button";
+    more.textContent = "SHOW MORE +";
+    more.setAttribute("aria-expanded", "false");
+
+    var clientName = document.createElement("div");
+    clientName.className = "client-name";
+    clientName.textContent = "— " + name;
+
+    card.appendChild(stars);
+    card.appendChild(review);
+    card.appendChild(more);
+    card.appendChild(clientName);
+
+    more.addEventListener("click", function () {
+      var expanded = review.classList.toggle("is-expanded");
+      more.textContent = expanded ? "SHOW LESS −" : "SHOW MORE +";
+      more.setAttribute("aria-expanded", expanded ? "true" : "false");
+    });
+
+    function checkOverflow() {
+      review.classList.remove("is-expanded");
+      var overflowing = review.scrollHeight > review.clientHeight + 2;
+      more.classList.toggle("is-visible", overflowing);
+    }
+
+    requestAnimationFrame(checkOverflow);
+    window.addEventListener("resize", checkOverflow, { passive: true });
+    return card;
+  }
+
+  function wrapClientsGrid(grid) {
+    if (!grid || grid.dataset.clientFinalReady === "true") return null;
+    grid.dataset.clientFinalReady = "true";
+    var wrapper = document.createElement("div");
+    wrapper.className = "clients-carousel";
+    grid.parentNode.insertBefore(wrapper, grid);
+    wrapper.appendChild(grid);
+    return wrapper;
+  }
+
+  function startClientAutoSlide(wrapper, grid) {
+    if (clientTimer) clearInterval(clientTimer);
+    function step() {
+      if (clientPaused) return;
+      var first = grid.querySelector(".client-card");
+      if (!first) return;
+      var gap = parseFloat(getComputedStyle(grid).gap) || 0;
+      var amount = first.getBoundingClientRect().width + gap;
+      var max = grid.scrollWidth - grid.clientWidth;
+      if (grid.scrollLeft + amount >= max - 4) {
+        grid.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        grid.scrollBy({ left: amount, behavior: "smooth" });
+      }
+    }
+    clientTimer = setInterval(step, 3500);
+    wrapper.addEventListener("mouseenter", function () { clientPaused = true; });
+    wrapper.addEventListener("mouseleave", function () { clientPaused = false; });
+    wrapper.addEventListener("touchstart", function () { clientPaused = true; }, { passive: true });
+    wrapper.addEventListener("touchend", function () {
+      setTimeout(function () { clientPaused = false; }, 1200);
     }, { passive: true });
   }
 
-  /* External script.js is a defer script and is loaded immediately before
-     this script. Give its JSONP callbacks a moment to populate the grids. */
+  function setupClients(grid) {
+    if (!grid || clientInitialized) return;
+    clientInitialized = true;
+    var wrapper = wrapClientsGrid(grid);
+    if (!wrapper) return;
+
+    /* Remove the old global Show More control permanently. */
+    var old = document.getElementById("clientsMore");
+    if (old) old.remove();
+
+    /* Existing loader may initially provide 3–4 cards. Keep them all in the slider. */
+    function prepare() {
+      var cards = Array.prototype.slice.call(grid.querySelectorAll(".client-card"));
+      if (!cards.length) return false;
+      cards.forEach(function (card) {
+        card.classList.remove("is-hidden");
+        card.style.display = "";
+      });
+      cards.forEach(function (card) {
+        var review = card.querySelector(".client-review");
+        if (!review) return;
+        if (!card.querySelector(".client-more-button")) {
+          var text = review.textContent || "";
+          var button = document.createElement("button");
+          button.type = "button";
+          button.className = "client-more-button";
+          button.textContent = "SHOW MORE +";
+          review.insertAdjacentElement("afterend", button);
+          button.addEventListener("click", function () {
+            var expanded = review.classList.toggle("is-expanded");
+            button.textContent = expanded ? "SHOW LESS −" : "SHOW MORE +";
+            button.setAttribute("aria-expanded", expanded ? "true" : "false");
+          });
+        }
+        requestAnimationFrame(function () {
+          var button = card.querySelector(".client-more-button");
+          review.classList.remove("is-expanded");
+          if (button) button.classList.toggle("is-visible", review.scrollHeight > review.clientHeight + 2);
+        });
+      });
+      return true;
+    }
+
+    var observer = new MutationObserver(function () {
+      prepare();
+      if (!clientTimer && grid.querySelector(".client-card")) startClientAutoSlide(wrapper, grid);
+    });
+    observer.observe(grid, { childList: true, subtree: true });
+    prepare();
+    startClientAutoSlide(wrapper, grid);
+  }
+
+  /* ---------------- CURRENTLY WORKING ---------------- */
+  var profileReady = false;
+
+  function setupProfiles() {
+    var track = document.getElementById("profileTrack");
+    var windowEl = document.getElementById("profileWindow");
+    if (!track || !windowEl || !track.children.length) return;
+
+    /* Remove navigation controls without touching the existing logo animation. */
+    var prev = document.getElementById("profilePrev");
+    var next = document.getElementById("profileNext");
+    if (prev) prev.remove();
+    if (next) next.remove();
+
+    /* Currently Working logos are display-only: never follow Blogger links. */
+    Array.prototype.forEach.call(track.querySelectorAll("a.profile-card"), function (card) {
+      if (card.dataset.displayOnlyFixed === "true") return;
+      card.dataset.displayOnlyFixed = "true";
+      card.removeAttribute("href");
+      card.removeAttribute("target");
+      card.removeAttribute("rel");
+      card.setAttribute("aria-disabled", "true");
+      card.setAttribute("tabindex", "-1");
+      card.addEventListener("click", function (e) { e.preventDefault(); }, true);
+    });
+  }
+  function removeUnwantedEyebrows() {
+    document.querySelectorAll(".design-category .category-copy .eyebrow").forEach(function (el) { el.remove(); });
+    var heroEyebrow = document.querySelector(".hero-content > .eyebrow");
+    if (heroEyebrow) heroEyebrow.remove();
+  }
+
+  function init() {
+    removeUnwantedEyebrows();
+    ["bookGrid", "webGrid", "socialGrid", "logoGrid", "printGrid"].forEach(function (id) {
+      setupPortfolio(document.getElementById(id));
+    });
+    setupClients(document.getElementById("clientsGrid"));
+    setupProfiles();
+
+    /* If the Blogger scripts populate asynchronously, retry briefly. */
+    var attempts = 0;
+    var timer = setInterval(function () {
+      attempts++;
+      removeUnwantedEyebrows();
+      ["bookGrid", "webGrid", "socialGrid", "logoGrid", "printGrid"].forEach(function (id) {
+        setupPortfolio(document.getElementById(id));
+      });
+      if (!clientInitialized) setupClients(document.getElementById("clientsGrid"));
+      setupProfiles();
+      if (attempts > 30) clearInterval(timer);
+    }, 300);
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () {
-      setTimeout(initAll, 80);
-    }, { once: true });
+    document.addEventListener("DOMContentLoaded", init, { once: true });
   } else {
-    setTimeout(initAll, 80);
+    init();
   }
 })();
 </script>
