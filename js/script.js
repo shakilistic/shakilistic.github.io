@@ -1,1024 +1,1343 @@
 /* =========================================================
-   SHAKILISTIC PORTFOLIO
-   Main JavaScript
-========================================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    const $ = (selector, element = document) =>
-        element.querySelector(selector);
-
-    const $$ = (selector, element = document) =>
-        [...element.querySelectorAll(selector)];
+   SHAKIL R. PORTFOLIO
+   COMPLETE JAVASCRIPT
+   ========================================================= */
 
 
-    /* =====================================================
-       SOCIAL LINKS
-    ===================================================== */
+/* =========================================================
+   PORTFOLIO CONFIGURATION
+   ========================================================= */
 
-    const socialLinks = [
-        {
-            name: "Behance",
-            url: "https://www.behance.net/shakilistic",
-            icon: "https://cdn.simpleicons.org/behance"
-        },
-        {
-            name: "X",
-            url: "https://x.com/shakilistic",
-            icon: "https://cdn.simpleicons.org/x"
-        },
-        {
-            name: "Pinterest",
-            url: "https://www.pinterest.com/shakilistic/",
-            icon: "https://cdn.simpleicons.org/pinterest"
-        },
-        {
-            name: "LinkedIn",
-            url: "https://www.linkedin.com/in/shakilistic/",
-            icon: "https://cdn.simpleicons.org/linkedin"
-        },
-        {
-            name: "GitHub",
-            url: "https://github.com/shakilistic",
-            icon: "https://cdn.simpleicons.org/github"
-        },
-        {
-            name: "Dribbble",
-            url: "https://dribbble.com/shakilistic",
-            icon: "https://cdn.simpleicons.org/dribbble"
-        }
-    ];
+const portfolioSections = [
 
+    {
+        id: "book-cover",
+        title: "BOOK COVER",
+        orange: "DESIGN.",
+        description:
+            "Your cover gives one chance to make a first impression. I design bold, genre-aware covers that speak clearly, communicate value instantly, and make the book impossible to ignore.",
+        prefix: "B",
+        maxImages: 50
+    },
 
-    const socialsContainer = $("#socials");
+    {
+        id: "static-web",
+        title: "STATIC WEB",
+        orange: "DESIGN & DEVELOP.",
+        description:
+            "A good website should look impressive and guide the visitor naturally. I build clean, responsive experiences that communicate clearly and turn attention into action.",
+        prefix: "W",
+        maxImages: 50
+    },
 
-    if (socialsContainer) {
+    {
+        id: "social-media",
+        title: "SOCIAL MEDIA",
+        orange: "POSTER.",
+        description:
+            "In a crowded feed, you have seconds to be noticed. I create sharp, brand-focused social visuals that stop the scroll, deliver the message fast, and make your business look instantly more credible.",
+        prefix: "S",
+        maxImages: 50
+    },
 
-        socialsContainer.innerHTML = socialLinks.map(link => {
+    {
+        id: "logo-design",
+        title: "LOGO",
+        orange: "DESIGN.",
+        description:
+            "A memorable identity starts with a mark that feels unmistakably yours. I create distinctive, versatile logos built to give brands confidence and recognizable visual presence.",
+        prefix: "L",
+        maxImages: 50
+    },
 
-            return `
-                <a
-                    class="social"
-                    href="${link.url}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="${link.name}"
-                    title="${link.name}"
-                >
-                    <img
-                        src="${link.icon}"
-                        alt="${link.name}"
-                    >
-                </a>
-            `;
-
-        }).join("");
-
+    {
+        id: "print-media",
+        title: "PRINT MEDIA",
+        orange: "DESIGN.",
+        description:
+            "From T-shirts and food packaging to menus, banners and promotional materials, I create print-ready designs that carry your brand confidently from the screen into the real world.",
+        prefix: "P",
+        maxImages: 50
     }
 
-
-    /* =====================================================
-       THEME
-       Automatically follows OS theme.
-       Manual button intentionally disabled/hidden.
-    ===================================================== */
-
-    const body = document.body;
-    const themeButton = $("#themeToggle");
-
-    const systemTheme = window.matchMedia(
-        "(prefers-color-scheme: light)"
-    );
+];
 
 
-    function applySystemTheme() {
+/* =========================================================
+   CLIENT FEEDBACK
+   ========================================================= */
 
-        if (systemTheme.matches) {
-            body.classList.add("light");
-        } else {
-            body.classList.remove("light");
-        }
+const clientFeedback = [
 
+    {
+        text:
+            "Hi Shakil, I just wanted to take a moment to sincerely thank you for the outstanding work you've done on the cover and design for my Balance Exercise for Seniors Simplified. The attention to detail, creativity, and professionalism you brought to this project truly exceeded my expectations. I've received many compliments on how beautiful and appealing the design is. It has made a big difference in the presentation of the book, and I couldn't be happier with the result. I also want you to know that I will definitely be working with you again on my upcoming projects. Your talent and reliability have made this an easy decision. Thank you once again for helping bring my vision to life. I look forward to collaborating with you on future books!",
+        author: "Linda Sabili"
+    },
+
+    {
+        text:
+            "Shakil is so easy to work with, responsive, and has a fantastic eye. This is our second project together, and it's getting better and better.",
+        author: "Client"
+    },
+
+    {
+        text:
+            "I am so pleased with my designer. They had creative ideas that were not quite like the rest in my niche. I look forward to working with this designer in the future.",
+        author: "Julie"
+    },
+
+    {
+        text:
+            "The best of the best - I've worked with Shakil for around a year now, give or take. He is one of the most helpful, responsive, and creatively quick freelancers I've ever worked with.",
+        author: "Anonymous Client"
+    },
+
+    {
+        text:
+            "I have worked with Shakil for around a year now. He is one of the most helpful, responsive, and creatively quick freelancers I've ever worked with.",
+        author: "Long-term Client"
+    },
+
+    {
+        text:
+            "Shakil is the best designer! He has an amazing eye for detail and is very responsive. I would highly recommend him to anyone looking for a professional designer.",
+        author: "Client"
+    },
+
+    {
+        text:
+            "Shakil is always great to work with, delivering quickly, creatively and always going above and beyond. He has created many designs for our business and has become an essential part of our team.",
+        author: "Client"
+    },
+
+    {
+        text:
+            "Shakil was amazing to work with in a very detailed, responsive, and professional way. I would recommend his services to anyone looking for a creative designer.",
+        author: "Client"
+    },
+
+    {
+        text:
+            "The best of the best when I cover design, don't go with anyone other than Shakil and I've been in this business since 2017.",
+        author: "Business Client"
+    },
+
+    {
+        text:
+            "I am more than satisfied with Shakil's design and highly recommend him to anybody that requires creative and professional design work.",
+        author: "Client"
+    },
+
+    {
+        text:
+            "Shakil is an excellent designer. He is very responsive and always understands exactly what I need. The quality of his work is consistently excellent.",
+        author: "Client"
+    },
+
+    {
+        text:
+            "I had an exceptional experience working with Shakil on the cover design for my book. His communication, creativity, and attention to detail were outstanding.",
+        author: "Author Client"
     }
 
-
-    applySystemTheme();
-
-
-    systemTheme.addEventListener(
-        "change",
-        applySystemTheme
-    );
+];
 
 
-    /*
-       Keep the button visually present if required by the
-       existing design, but theme always follows system.
-    */
+/* =========================================================
+   SOCIAL / ACTIVE PROFILE LINKS
+   ========================================================= */
 
-    if (themeButton) {
+const socialProfiles = [
 
-        themeButton.setAttribute(
-            "aria-label",
-            "Theme follows system preference"
-        );
+    {
+        name: "Behance",
+        url: "https://www.behance.net/shakilistic",
+        icon: "https://cdn.simpleicons.org/behance"
+    },
 
-        themeButton.addEventListener(
-            "click",
-            () => {
-                /*
-                   Intentionally no manual theme switching.
-                   Theme follows operating system/browser.
-                */
-            }
-        );
+    {
+        name: "X",
+        url: "https://x.com/shakilistic",
+        icon: "https://cdn.simpleicons.org/x"
+    },
 
+    {
+        name: "Pinterest",
+        url: "https://www.pinterest.com/shakilistic/",
+        icon: "https://cdn.simpleicons.org/pinterest"
+    },
+
+    {
+        name: "LinkedIn",
+        url: "https://www.linkedin.com/in/shakilistic/",
+        icon: "https://cdn.simpleicons.org/linkedin"
+    },
+
+    {
+        name: "GitHub",
+        url: "https://github.com/shakilistic",
+        icon: "https://cdn.simpleicons.org/github"
+    },
+
+    {
+        name: "Dribbble",
+        url: "https://dribbble.com/shakilistic",
+        icon: "https://cdn.simpleicons.org/dribbble"
     }
 
-
-    /* =====================================================
-       MOBILE MENU
-    ===================================================== */
-
-    const menuButton = $("#menuBtn");
-    const mainNav = $(".main-nav");
-
-    if (menuButton && mainNav) {
-
-        menuButton.addEventListener(
-            "click",
-            () => {
-
-                mainNav.classList.toggle("open");
-
-            }
-        );
+];
 
 
-        $$(".main-nav a").forEach(link => {
+/* =========================================================
+   FIND IMAGE FILE
+   ========================================================= */
 
-            link.addEventListener(
-                "click",
-                () => {
-                    mainNav.classList.remove("open");
-                }
-            );
+function imageExists(url) {
 
-        });
+    return new Promise(resolve => {
 
-    }
+        const image = new Image();
+
+        image.onload = () => resolve(true);
+
+        image.onerror = () => resolve(false);
+
+        image.src = url;
+
+    });
+
+}
 
 
-    /* =====================================================
-       PORTFOLIO IMAGE LOADING
-       
-       Naming:
-       B1, B2, B3...
-       W1, W2, W3...
-       S1, S2, S3...
-       L1, L2, L3...
-       P1, P2, P3...
+/* =========================================================
+   FIND ALL SECTION IMAGES
+   ========================================================= */
 
-       Location:
-       assets/images/
-    ===================================================== */
+async function findSectionImages(prefix, maxImages = 50) {
 
     const extensions = [
         "jpg",
         "jpeg",
         "png",
-        "webp"
+        "webp",
+        "JPG",
+        "JPEG",
+        "PNG",
+        "WEBP"
     ];
 
+    const found = [];
 
-    function findImage(prefix, number) {
+    for (let number = 1; number <= maxImages; number++) {
 
-        return new Promise(resolve => {
+        let foundThisNumber = false;
 
-            let index = 0;
+        for (const extension of extensions) {
 
-            function tryNext() {
+            const path =
+                `assets/images/${prefix}${number}.${extension}`;
 
-                if (index >= extensions.length) {
-                    resolve(null);
-                    return;
-                }
+            const exists = await imageExists(path);
 
-                const extension =
-                    extensions[index++];
+            if (exists) {
 
-                const src =
-                    `./assets/images/${prefix}${number}.${extension}`;
+                found.push(path);
 
-                const image =
-                    new Image();
+                foundThisNumber = true;
 
-                image.onload = () => {
-
-                    resolve(src);
-
-                };
-
-                image.onerror = () => {
-
-                    tryNext();
-
-                };
-
-                image.src = src;
-
+                break;
             }
 
-            tryNext();
+        }
 
+        /*
+           Continue searching even if one number is missing.
+           This means B1, B3, B7 can still work.
+        */
+
+        if (foundThisNumber) {
+            continue;
+        }
+    }
+
+    return found;
+}
+
+
+/* =========================================================
+   CREATE PORTFOLIO SECTION
+   ========================================================= */
+
+async function createPortfolioSection(config) {
+
+    const images =
+        await findSectionImages(
+            config.prefix,
+            config.maxImages
+        );
+
+    /*
+       If there are no images, automatically hide section.
+    */
+
+    if (!images.length) {
+        return null;
+    }
+
+    const section =
+        document.createElement("section");
+
+    section.className = "portfolio-section section";
+
+    section.id = config.id;
+
+    section.innerHTML = `
+
+        <div class="portfolio-heading">
+
+            <div>
+
+                <h2 class="portfolio-title">
+                    ${config.title}<br>
+                    <span>${config.orange}</span>
+                </h2>
+
+            </div>
+
+            <p class="portfolio-description">
+                ${config.description}
+            </p>
+
+        </div>
+
+
+        <div class="portfolio-carousel">
+
+            <button
+                class="carousel-button portfolio-prev hidden"
+                type="button"
+                aria-label="Previous"
+            >
+                ←
+            </button>
+
+
+            <div class="portfolio-window">
+
+                <div class="portfolio-track">
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="carousel-button portfolio-next hidden"
+                type="button"
+                aria-label="Next"
+            >
+                →
+            </button>
+
+        </div>
+
+    `;
+
+
+    const track =
+        section.querySelector(".portfolio-track");
+
+    const previous =
+        section.querySelector(".portfolio-prev");
+
+    const next =
+        section.querySelector(".portfolio-next");
+
+
+    images.forEach(imagePath => {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "portfolio-card";
+
+        card.innerHTML = `
+
+            <div class="portfolio-card-inner">
+
+                <img
+                    src="${imagePath}"
+                    alt="Portfolio project"
+                    loading="lazy"
+                    draggable="false"
+                >
+
+            </div>
+
+        `;
+
+        /*
+           IMPORTANT:
+           Images are NOT clickable.
+           No new tab.
+           No full-page image.
+        */
+
+        card.addEventListener("click", event => {
+            event.preventDefault();
         });
 
+        track.appendChild(card);
+
+    });
+
+
+    setupPortfolioCarousel(
+        section,
+        images.length
+    );
+
+
+    return section;
+}
+
+
+/* =========================================================
+   PORTFOLIO CAROUSEL
+   ========================================================= */
+
+function setupPortfolioCarousel(section, totalImages) {
+
+    const track =
+        section.querySelector(".portfolio-track");
+
+    const previous =
+        section.querySelector(".portfolio-prev");
+
+    const next =
+        section.querySelector(".portfolio-next");
+
+    let currentIndex = 0;
+
+
+    function visibleCards() {
+
+        if (window.innerWidth <= 700) {
+            return 1;
+        }
+
+        if (window.innerWidth <= 1000) {
+            return 2;
+        }
+
+        return 3;
     }
 
 
-    async function loadPortfolioSection(section) {
+    function update() {
 
-        const gallery =
-            $(".gallery", section);
+        const visible =
+            visibleCards();
 
-        if (!gallery) return;
+        const maxIndex =
+            Math.max(
+                0,
+                totalImages - visible
+            );
 
 
-        const prefix =
-            section.dataset.prefix;
-
-
-        const sources = [];
+        currentIndex =
+            Math.min(
+                currentIndex,
+                maxIndex
+            );
 
 
         /*
-           Search sequentially until there are 3 consecutive
-           missing numbers after at least one valid image.
-
-           This supports:
-           B1
-           B2
-           B3
-           B4
-           ...
+           No arrows if 3 or fewer designs.
         */
 
-        let emptyCount = 0;
+        if (totalImages <= visible) {
 
-        for (
-            let number = 1;
-            number <= 100;
-            number++
-        ) {
+            previous.classList.add("hidden");
+            next.classList.add("hidden");
 
-            const src =
-                await findImage(
-                    prefix,
-                    number
-                );
+        } else {
 
+            previous.classList.toggle(
+                "hidden",
+                currentIndex <= 0
+            );
 
-            if (src) {
-
-                sources.push(src);
-
-                emptyCount = 0;
-
-            } else {
-
-                emptyCount++;
-
-                /*
-                   Allows missing numbers without destroying
-                   the section too early.
-                */
-
-                if (
-                    sources.length > 0 &&
-                    emptyCount >= 3
-                ) {
-                    break;
-                }
-
-            }
+            next.classList.toggle(
+                "hidden",
+                currentIndex >= maxIndex
+            );
 
         }
 
 
-        /*
-           No images = automatically hide entire section.
-        */
-
-        if (sources.length === 0) {
-
-            section.style.display = "none";
-
-            return;
-
-        }
+        const cardWidth =
+            track.children[0]
+                ? track.children[0].getBoundingClientRect().width
+                : 0;
 
 
-        sources.forEach(
-            (src, index) => {
-
-                const card =
-                    document.createElement("div");
-
-                card.className =
-                    "gallery-card";
+        const gap =
+            parseFloat(
+                getComputedStyle(track).gap
+            ) || 0;
 
 
-                const image =
-                    document.createElement("img");
-
-                image.src = src;
-
-                image.alt =
-                    "Portfolio work";
-
-                image.loading =
-                    index < 3
-                        ? "eager"
-                        : "lazy";
+        const offset =
+            currentIndex *
+            (cardWidth + gap);
 
 
-                /*
-                   Clicking does NOTHING.
-                   No new window.
-                   No full-screen image.
-                */
-
-                card.appendChild(image);
-
-                gallery.appendChild(card);
-
-            }
-        );
-
-
-        setupPortfolioCarousel(
-            section
-        );
+        track.style.transform =
+            `translateX(-${offset}px)`;
 
     }
 
 
-    /* =====================================================
-       PORTFOLIO CAROUSEL
-       
-       First 3 visible on desktop.
-       Mobile automatically shows 1.
-       More than 3 = arrows.
-       3 or less = arrows hidden.
-    ===================================================== */
+    previous.addEventListener(
+        "click",
+        () => {
 
-    function setupPortfolioCarousel(section) {
+            if (currentIndex > 0) {
 
-        const gallery =
-            $(".gallery", section);
+                currentIndex--;
 
-        const cards =
-            $$(".gallery-card", gallery);
-
-        const previous =
-            $(".prev", section);
-
-        const next =
-            $(".next", section);
-
-
-        if (!gallery || cards.length === 0) {
-            return;
-        }
-
-
-        let currentIndex = 0;
-
-
-        function visibleCount() {
-
-            if (window.innerWidth <= 800) {
-                return 1;
-            }
-
-            return 3;
-
-        }
-
-
-        function render() {
-
-            const count =
-                visibleCount();
-
-
-            cards.forEach(card => {
-
-                card.style.display =
-                    "none";
-
-            });
-
-
-            for (
-                let i = 0;
-                i < count;
-                i++
-            ) {
-
-                const index =
-                    (currentIndex + i) %
-                    cards.length;
-
-                cards[index].style.display =
-                    "block";
+                update();
 
             }
-
-
-            /*
-               Arrow only when more than 3
-               desktop items exist.
-            */
-
-            if (
-                cards.length >
-                3
-            ) {
-
-                section.classList.add(
-                    "has-more"
-                );
-
-            } else {
-
-                section.classList.remove(
-                    "has-more"
-                );
-
-            }
-
-        }
-
-
-        if (previous) {
-
-            previous.addEventListener(
-                "click",
-                () => {
-
-                    currentIndex--;
-
-                    if (
-                        currentIndex < 0
-                    ) {
-
-                        currentIndex =
-                            Math.max(
-                                cards.length - visibleCount(),
-                                0
-                            );
-
-                    }
-
-                    render();
-
-                }
-            );
-
-        }
-
-
-        if (next) {
-
-            next.addEventListener(
-                "click",
-                () => {
-
-                    currentIndex++;
-
-                    if (
-                        currentIndex >=
-                        cards.length
-                    ) {
-
-                        currentIndex = 0;
-
-                    }
-
-                    render();
-
-                }
-            );
-
-        }
-
-
-        render();
-
-
-        window.addEventListener(
-            "resize",
-            render
-        );
-
-    }
-
-
-    /* =====================================================
-       LOAD ALL PORTFOLIO SECTIONS
-    ===================================================== */
-
-    $$(".image-section").forEach(
-        section => {
-
-            loadPortfolioSection(
-                section
-            );
 
         }
     );
 
 
-    /* =====================================================
-       CLIENT FEEDBACK
-    ===================================================== */
+    next.addEventListener(
+        "click",
+        () => {
 
-    const clients = [
+            const maxIndex =
+                Math.max(
+                    0,
+                    totalImages - visibleCards()
+                );
 
-        {
-            text:
-                "Hi Shakil, I just wanted to take a moment to sincerely thank you for the outstanding work you've done on the cover and design for my Balance Exercise for Seniors book. The attention to detail, creativity, and professionalism you brought to this project truly exceeded my expectations. I've received many compliments on how beautiful and impactful the design is. It has made a big difference in the presentation of the book, and I couldn't be happier with the result. I also want you to know that I will definitely be working with you again on my upcoming projects. Your talent and reliability have made this an easy decision. Thank you once again for helping bring my vision to life.",
-            name:
-                "Dr. Erlinda Asa Sabili, MD, FACP"
-        },
+            if (currentIndex < maxIndex) {
 
-        {
-            text:
-                "Shakil is so easy to work with, responsive, and has a fantastic eye. This is our second project together, and it's getting better and better.",
-            name:
-                "Client"
-        },
+                currentIndex++;
 
-        {
-            text:
-                "I am so pleased with my designer. They had creative ideas that were not quite like the rest in my niche. I look forward to working with this designer in the future.",
-            name:
-                "Juliekearl"
-        },
+                update();
 
-        {
-            text:
-                "The best of the best — I've worked with Shakil for around a year now, give or take. He is one of the most helpful, responsive, and creatively quick freelancers I've ever worked with.",
-            name:
-                "Anonymous Client"
-        },
+            }
 
-        {
-            text:
-                "Shakil is the best designer I've had on Fiverr. His work is always thoughtful, professional and creative. He understands what the project needs and delivers excellent results.",
-            name:
-                "Client"
-        },
-
-        {
-            text:
-                "Shakil is a fantastic designer and communicator. He understands the brief quickly and delivers polished work. Working with him is always smooth and professional.",
-            name:
-                "Client"
-        },
-
-        {
-            text:
-                "Working with Shakil was easy and professional. The results were exactly what I needed and the communication throughout the project was excellent.",
-            name:
-                "Client"
-        },
-
-        {
-            text:
-                "The design was beautiful, clean and professional. Shakil understood my vision and made it better. I would definitely recommend working with him.",
-            name:
-                "Anonymous Client"
-        },
-
-        {
-            text:
-                "Shakil always brings a strong creative eye to the project. He is responsive, reliable and genuinely cares about the final result.",
-            name:
-                "Client"
-        },
-
-        {
-            text:
-                "I am very happy with the quality of the work. Shakil delivered exactly what I was looking for and made the whole process very easy.",
-            name:
-                "Client"
         }
-
-    ];
-
-
-    const clientTrack =
-        $("#clientTrack");
+    );
 
 
-    if (clientTrack) {
+    window.addEventListener(
+        "resize",
+        update
+    );
 
-        clientTrack.innerHTML =
-            clients.map(client => {
 
-                return `
-                    <article class="client-card">
+    /*
+       Wait until images/layout are ready.
+    */
 
-                        <div class="stars">
-                            ★★★★★
-                        </div>
+    setTimeout(update, 100);
 
-                        <p>
-                            ${client.text}
-                        </p>
+}
 
-                        <small>
-                            — ${client.name}
-                        </small>
 
-                    </article>
-                `;
+/* =========================================================
+   CREATE CLIENT FEEDBACK SECTION
+   ========================================================= */
 
-            }).join("");
+function createClientSection() {
 
+    if (!clientFeedback.length) {
+        return null;
     }
 
+    const section =
+        document.createElement("section");
 
-    /* =====================================================
-       CLIENT SLIDER
-       
-       Automatic.
-       Stops when mouse is over it.
-       No arrows.
-    ===================================================== */
+    section.className =
+        "client-section section";
 
-    const clientSection =
-        $("#clients");
+    section.id =
+        "clients";
 
 
-    let clientIndex = 0;
+    section.innerHTML = `
 
-    let clientTimer = null;
+        <div class="client-heading">
+
+            <div>
+
+                <h2 class="portfolio-title">
+                    WHAT CLIENTS<br>
+                    <span>SAY.</span>
+                </h2>
+
+            </div>
+
+            <p class="client-description">
+                The strongest proof of great work is what the people
+                behind the project say after they receive it.
+                These are genuine client experiences collected from my work.
+            </p>
+
+        </div>
 
 
-    function clientVisibleCount() {
+        <div class="client-carousel">
 
-        if (
-            window.innerWidth <= 700
-        ) {
+            <button
+                class="carousel-button client-prev hidden"
+                type="button"
+                aria-label="Previous feedback"
+            >
+                ←
+            </button>
 
-            return 1;
+
+            <div class="client-window">
+
+                <div class="client-track">
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="carousel-button client-next hidden"
+                type="button"
+                aria-label="Next feedback"
+            >
+                →
+            </button>
+
+        </div>
+
+    `;
+
+
+    const track =
+        section.querySelector(".client-track");
+
+
+    clientFeedback.forEach((feedback, index) => {
+
+        const card =
+            document.createElement("article");
+
+        card.className =
+            "client-card";
+
+
+        const shortened =
+            feedback.text.length > 430;
+
+
+        card.innerHTML = `
+
+            <div class="client-stars">
+                ★★★★★
+            </div>
+
+            <p class="client-text">
+                ${feedback.text}
+            </p>
+
+            <button
+                class="client-see-more"
+                type="button"
+                ${shortened ? "" : "hidden"}
+            >
+                See More
+            </button>
+
+            <div class="client-author">
+                — ${feedback.author}
+            </div>
+
+        `;
+
+
+        /*
+           Only long feedback gets See More.
+        */
+
+        const seeMore =
+            card.querySelector(".client-see-more");
+
+        const text =
+            card.querySelector(".client-text");
+
+
+        if (shortened) {
+
+            const fullText =
+                feedback.text;
+
+            const shortText =
+                fullText.slice(0, 430) + "...";
+
+
+            text.textContent =
+                shortText;
+
+
+            seeMore.addEventListener(
+                "click",
+                () => {
+
+                    const expanded =
+                        card.classList.toggle(
+                            "expanded"
+                        );
+
+
+                    if (expanded) {
+
+                        text.textContent =
+                            fullText;
+
+                        seeMore.textContent =
+                            "See Less";
+
+                    } else {
+
+                        text.textContent =
+                            shortText;
+
+                        seeMore.textContent =
+                            "See More";
+
+                    }
+
+                }
+            );
 
         }
 
-        if (
-            window.innerWidth <= 1050
-        ) {
 
+        track.appendChild(card);
+
+    });
+
+
+    setupClientCarousel(section);
+
+    return section;
+}
+
+
+/* =========================================================
+   CLIENT CAROUSEL
+   ========================================================= */
+
+function setupClientCarousel(section) {
+
+    const track =
+        section.querySelector(".client-track");
+
+    const previous =
+        section.querySelector(".client-prev");
+
+    const next =
+        section.querySelector(".client-next");
+
+    let currentIndex = 0;
+
+    let autoTimer = null;
+
+
+    function visibleCards() {
+
+        if (window.innerWidth <= 700) {
+            return 1;
+        }
+
+        if (window.innerWidth <= 1000) {
             return 2;
-
         }
 
         return 4;
+    }
+
+
+    function maxIndex() {
+
+        return Math.max(
+            0,
+            clientFeedback.length -
+            visibleCards()
+        );
 
     }
 
 
-    function renderClients() {
+    function update() {
 
-        if (!clientTrack) return;
+        currentIndex =
+            Math.min(
+                currentIndex,
+                maxIndex()
+            );
 
 
         const cards =
-            $$(".client-card", clientTrack);
+            track.children;
 
 
-        if (
-            cards.length === 0
-        ) {
+        if (!cards.length) {
             return;
         }
 
 
-        const count =
-            clientVisibleCount();
+        const cardWidth =
+            cards[0]
+                .getBoundingClientRect()
+                .width;
 
 
-        cards.forEach(
-            card => {
+        const gap =
+            parseFloat(
+                getComputedStyle(track).gap
+            ) || 0;
 
-                card.style.display =
-                    "none";
 
-            }
-        );
+        const offset =
+            currentIndex *
+            (cardWidth + gap);
 
 
-        for (
-            let i = 0;
-            i < count;
-            i++
-        ) {
+        track.style.transform =
+            `translateX(-${offset}px)`;
 
-            const index =
-                (clientIndex + i) %
-                cards.length;
-
-            cards[index].style.display =
-                "flex";
-
-        }
-
-    }
-
-
-    function nextClients() {
-
-        if (!clientTrack) return;
-
-
-        const cards =
-            $$(".client-card", clientTrack);
-
-
-        if (
-            cards.length === 0
-        ) {
-            return;
-        }
-
-
-        clientIndex++;
-
-
-        if (
-            clientIndex >=
-            cards.length
-        ) {
-
-            clientIndex = 0;
-
-        }
-
-
-        renderClients();
-
-    }
-
-
-    function startClientSlider() {
-
-        if (clientTimer) {
-            clearInterval(clientTimer);
-        }
-
-
-        clientTimer =
-            setInterval(
-                nextClients,
-                3500
-            );
-
-    }
-
-
-    function stopClientSlider() {
-
-        if (clientTimer) {
-
-            clearInterval(
-                clientTimer
-            );
-
-            clientTimer = null;
-
-        }
-
-    }
-
-
-    if (
-        clientSection &&
-        clientTrack
-    ) {
-
-        renderClients();
-
-        startClientSlider();
-
-
-        clientSection.addEventListener(
-            "mouseenter",
-            stopClientSlider
-        );
-
-
-        clientSection.addEventListener(
-            "mouseleave",
-            startClientSlider
-        );
-
-
-        window.addEventListener(
-            "resize",
-            () => {
-
-                renderClients();
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       ACTIVE PLATFORM LOGOS
-       
-       No links.
-       Clicking does nothing.
-       Continuous automatic loop.
-       Stops on mouse hover.
-    ===================================================== */
-
-    const platforms = [
-
-        {
-            name: "Upwork",
-            image:
-                "https://cdn.simpleicons.org/upwork"
-        },
-
-        {
-            name: "Fiverr",
-            image:
-                "https://cdn.simpleicons.org/fiverr"
-        },
-
-        {
-            name: "99designs",
-            image:
-                "https://cdn.simpleicons.org/99designs"
-        },
-
-        {
-            name: "Dribbble",
-            image:
-                "https://cdn.simpleicons.org/dribbble"
-        },
-
-        {
-            name: "Behance",
-            image:
-                "https://cdn.simpleicons.org/behance"
-        },
-
-        {
-            name: "Freelancer",
-            image:
-                "https://cdn.simpleicons.org/freelancer"
-        }
-
-    ];
-
-
-    const logoMarquee =
-        $("#logoMarquee");
-
-
-    if (logoMarquee) {
 
         /*
-           Duplicate the logos so the continuous movement
-           has no visible gap.
+           User requested arrows removed.
         */
 
-        const allPlatforms =
-            [
-                ...platforms,
-                ...platforms,
-                ...platforms
-            ];
-
-
-        logoMarquee.innerHTML =
-            allPlatforms.map(
-                platform => {
-
-                    return `
-                        <div
-                            class="platform"
-                            title="${platform.name}"
-                            aria-label="${platform.name}"
-                        >
-                            <img
-                                src="${platform.image}"
-                                alt="${platform.name}"
-                            >
-                        </div>
-                    `;
-
-                }
-            ).join("");
-
-
-        let position = 0;
-
-        let animationFrame = null;
-
-        let logoPaused = false;
-
-
-        function animateLogos() {
-
-            if (!logoPaused) {
-
-                position -= 0.35;
-
-                /*
-                   Reset periodically.
-                   The duplicated logos make this invisible.
-                */
-
-                if (
-                    Math.abs(position) >=
-                    logoMarquee.scrollWidth / 3
-                ) {
-
-                    position = 0;
-
-                }
-
-                logoMarquee.style.transform =
-                    `translateX(${position}px)`;
-
-            }
-
-
-            animationFrame =
-                requestAnimationFrame(
-                    animateLogos
-                );
-
-        }
-
-
-        logoMarquee.addEventListener(
-            "mouseenter",
-            () => {
-
-                logoPaused = true;
-
-            }
-        );
-
-
-        logoMarquee.addEventListener(
-            "mouseleave",
-            () => {
-
-                logoPaused = false;
-
-            }
-        );
-
-
-        animateLogos();
+        previous.classList.add("hidden");
+        next.classList.add("hidden");
 
     }
 
 
-    /* =====================================================
-       BACK TO TOP
-    ===================================================== */
+    function nextSlide() {
 
-    const backTop =
-        $("#backTop");
+        if (currentIndex >= maxIndex()) {
+
+            currentIndex = 0;
+
+        } else {
+
+            currentIndex++;
+
+        }
+
+        update();
+
+    }
 
 
-    function updateBackTop() {
+    /*
+       Automatic sliding.
+    */
 
-        if (!backTop) return;
+    function startAutoSlide() {
+
+        stopAutoSlide();
+
+        autoTimer =
+            setInterval(
+                nextSlide,
+                4000
+            );
+
+    }
 
 
-        if (
-            window.scrollY > 500
-        ) {
+    function stopAutoSlide() {
 
-            backTop.classList.add(
-                "show"
+        if (autoTimer) {
+
+            clearInterval(autoTimer);
+
+            autoTimer = null;
+
+        }
+
+    }
+
+
+    /*
+       Stop while mouse is over client feedback.
+    */
+
+    section.addEventListener(
+        "mouseenter",
+        stopAutoSlide
+    );
+
+
+    section.addEventListener(
+        "mouseleave",
+        startAutoSlide
+    );
+
+
+    previous.addEventListener(
+        "click",
+        () => {
+
+            if (currentIndex > 0) {
+
+                currentIndex--;
+
+            } else {
+
+                currentIndex =
+                    maxIndex();
+
+            }
+
+            update();
+
+        }
+    );
+
+
+    next.addEventListener(
+        "click",
+        nextSlide
+    );
+
+
+    window.addEventListener(
+        "resize",
+        update
+    );
+
+
+    setTimeout(() => {
+
+        update();
+
+        startAutoSlide();
+
+    }, 300);
+
+}
+
+
+/* =========================================================
+   CREATE SOCIAL LINKS
+   ========================================================= */
+
+function createSocialLinks(containerId) {
+
+    const container =
+        document.getElementById(containerId);
+
+    if (!container) {
+        return;
+    }
+
+
+    socialProfiles.forEach(profile => {
+
+        const link =
+            document.createElement("a");
+
+        link.className =
+            "social-link";
+
+        link.href =
+            profile.url;
+
+        link.target =
+            "_blank";
+
+        link.rel =
+            "noopener noreferrer";
+
+        link.setAttribute(
+            "aria-label",
+            profile.name
+        );
+
+
+        link.innerHTML = `
+
+            <img
+                src="${profile.icon}"
+                alt="${profile.name}"
+            >
+
+            <span
+                class="social-fallback"
+                style="display:none;"
+            >
+                ${profile.name.charAt(0)}
+            </span>
+
+        `;
+
+
+        const image =
+            link.querySelector("img");
+
+        const fallback =
+            link.querySelector(
+                ".social-fallback"
+            );
+
+
+        image.addEventListener(
+            "error",
+            () => {
+
+                image.style.display =
+                    "none";
+
+                fallback.style.display =
+                    "block";
+
+            }
+        );
+
+
+        container.appendChild(link);
+
+    });
+
+}
+
+
+/* =========================================================
+   ACTIVE PROFILE LOGOS
+   ========================================================= */
+
+function createActiveProfiles() {
+
+    const track =
+        document.getElementById(
+            "profiles-track"
+        );
+
+    if (!track) {
+        return;
+    }
+
+
+    /*
+       Two copies create a continuous loop.
+       Clicking logos does NOTHING.
+    */
+
+    const logos =
+        [
+            ...socialProfiles,
+            ...socialProfiles
+        ];
+
+
+    logos.forEach(profile => {
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "profile-logo";
+
+
+        item.innerHTML = `
+
+            <img
+                src="${profile.icon}"
+                alt="${profile.name}"
+            >
+
+        `;
+
+
+        /*
+           No link.
+           No Blogger.
+           No external page.
+        */
+
+        item.addEventListener(
+            "click",
+            event => {
+                event.preventDefault();
+            }
+        );
+
+
+        track.appendChild(item);
+
+    });
+
+}
+
+
+/* =========================================================
+   LOAD PORTFOLIO
+   ========================================================= */
+
+async function loadPortfolio() {
+
+    const container =
+        document.getElementById(
+            "portfolio-sections"
+        );
+
+    if (!container) {
+        return;
+    }
+
+
+    for (const config of portfolioSections) {
+
+        const section =
+            await createPortfolioSection(
+                config
+            );
+
+
+        if (section) {
+
+            container.appendChild(
+                section
+            );
+
+        }
+
+    }
+
+
+    /*
+       Client feedback appears after portfolio sections.
+    */
+
+    const clientSection =
+        createClientSection();
+
+
+    if (clientSection) {
+
+        /*
+           Put client section before reason section.
+        */
+
+        const reason =
+            document.querySelector(
+                ".reason-section"
+            );
+
+        if (reason) {
+
+            reason.parentNode.insertBefore(
+                clientSection,
+                reason
             );
 
         } else {
 
-            backTop.classList.remove(
-                "show"
+            container.appendChild(
+                clientSection
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   URL-SAFE INTERNAL NAVIGATION
+   ========================================================= */
+
+function setupNavigation() {
+
+    const links =
+        document.querySelectorAll(
+            "[data-scroll]"
+        );
+
+
+    links.forEach(link => {
+
+        link.addEventListener(
+            "click",
+            event => {
+
+                event.preventDefault();
+
+
+                const targetId =
+                    link.getAttribute("href");
+
+
+                const target =
+                    document.querySelector(
+                        targetId
+                    );
+
+
+                if (target) {
+
+                    target.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                }
+
+
+                /*
+                   Keep URL exactly:
+                   https://shakilistic.github.io/
+                */
+
+                history.replaceState(
+                    null,
+                    "",
+                    "/"
+                );
+
+
+                const mobileMenu =
+                    document.querySelector(
+                        ".mobile-menu"
+                    );
+
+                if (mobileMenu) {
+
+                    mobileMenu.classList.remove(
+                        "open"
+                    );
+
+                }
+
+            }
+        );
+
+    });
+
+
+    const home =
+        document.querySelector(
+            "[data-home]"
+        );
+
+
+    if (home) {
+
+        home.addEventListener(
+            "click",
+            event => {
+
+                event.preventDefault();
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+                history.replaceState(
+                    null,
+                    "",
+                    "/"
+                );
+
+            }
+        );
+
+    }
+
+
+    const viewWork =
+        document.querySelector(
+            "[data-scroll-to='work']"
+        );
+
+
+    if (viewWork) {
+
+        viewWork.addEventListener(
+            "click",
+            () => {
+
+                const work =
+                    document.getElementById(
+                        "work"
+                    );
+
+                if (work) {
+
+                    work.scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+                }
+
+                history.replaceState(
+                    null,
+                    "",
+                    "/"
+                );
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   BACK TO TOP
+   ========================================================= */
+
+function setupBackToTop() {
+
+    const button =
+        document.getElementById(
+            "back-to-top"
+        );
+
+
+    if (!button) {
+        return;
+    }
+
+
+    function updateVisibility() {
+
+        if (window.scrollY > 450) {
+
+            button.classList.add(
+                "visible"
+            );
+
+        } else {
+
+            button.classList.remove(
+                "visible"
             );
 
         }
@@ -1028,113 +1347,160 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener(
         "scroll",
-        updateBackTop,
+        updateVisibility,
         {
             passive: true
         }
     );
 
 
-    if (backTop) {
+    button.addEventListener(
+        "click",
+        () => {
 
-        backTop.addEventListener(
-            "click",
-            () => {
-
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
-
-            }
-        );
-
-    }
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
 
 
-    updateBackTop();
+            /*
+               URL remains root.
+            */
 
-
-    /* =====================================================
-       CONTACT FORM
-    ===================================================== */
-
-    const contactForm =
-        $("#contactForm");
-
-
-    if (contactForm) {
-
-        contactForm.addEventListener(
-            "submit",
-            event => {
-
-                event.preventDefault();
-
-                alert(
-                    "Thank you. Your enquiry has been received."
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       PREVENT HASH URL CHANGES
-       
-       Navigation stays on:
-       https://shakilistic.github.io/
-       
-       instead of:
-       /home
-       /work
-       /about
-       etc.
-    ===================================================== */
-
-    $$(".main-nav a, .cta").forEach(
-        link => {
-
-            const href =
-                link.getAttribute("href");
-
-
-            if (
-                href &&
-                href.startsWith("#")
-            ) {
-
-                link.addEventListener(
-                    "click",
-                    event => {
-
-                        event.preventDefault();
-
-
-                        const target =
-                            document.querySelector(
-                                href
-                            );
-
-
-                        if (target) {
-
-                            target.scrollIntoView({
-                                behavior: "smooth",
-                                block: "start"
-                            });
-
-                        }
-
-                    }
-                );
-
-            }
+            history.replaceState(
+                null,
+                "",
+                "/"
+            );
 
         }
     );
 
 
-});
+    updateVisibility();
+
+}
+
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+function setupMobileMenu() {
+
+    const button =
+        document.querySelector(
+            ".mobile-menu-button"
+        );
+
+    const menu =
+        document.querySelector(
+            ".mobile-menu"
+        );
+
+
+    if (!button || !menu) {
+        return;
+    }
+
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            menu.classList.toggle(
+                "open"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+function setupForm() {
+
+    const form =
+        document.getElementById(
+            "contact-form"
+        );
+
+
+    if (!form) {
+        return;
+    }
+
+
+    form.addEventListener(
+        "submit",
+        () => {
+
+            /*
+               FormSubmit handles submission.
+               Nothing is intercepted here.
+            */
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   REMOVE URL HASH
+   ========================================================= */
+
+function removeHashFromUrl() {
+
+    if (
+        window.location.hash
+    ) {
+
+        history.replaceState(
+            null,
+            "",
+            window.location.pathname
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async () => {
+
+        removeHashFromUrl();
+
+        setupNavigation();
+
+        setupMobileMenu();
+
+        setupBackToTop();
+
+        setupForm();
+
+        createSocialLinks(
+            "contact-socials"
+        );
+
+        createSocialLinks(
+            "footer-socials"
+        );
+
+        createActiveProfiles();
+
+        await loadPortfolio();
+
+    }
+);
