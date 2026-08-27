@@ -54,16 +54,22 @@ html[data-theme="light"] .contact-socials .social-icon svg {
 
 html[data-theme="light"] .contact-socials .social-icon:hover img,
 html[data-theme="light"] .contact-socials .social-icon:focus-visible img {
-  filter: brightness(0) saturate(100%) invert(31%) sepia(99%) saturate(3500%) hue-rotate(3deg) brightness(103%) contrast(104%) !important;
+  /* Light theme: orange button + WHITE logo on hover. */
+  filter: brightness(0) invert(1) !important;
 }
 
 html[data-theme="light"] .contact-socials .social-icon:hover svg,
 html[data-theme="light"] .contact-socials .social-icon:focus-visible svg {
-  color: #ff4d00 !important;
+  color: #ffffff !important;
 }
 
 /* Remove only the 01 / 02 / 03 / 04 / 05 labels above portfolio sections. */
 .design-category .category-copy > div > .eyebrow {
+  display: none !important;
+}
+
+/* Remove the small VISUAL DESIGN EXPERT eyebrow above the hero name. */
+.hero-content > .eyebrow {
   display: none !important;
 }
 
