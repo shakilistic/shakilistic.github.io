@@ -35,200 +35,10 @@ rel="stylesheet"
 >
 
 
-<link rel="stylesheet" href="https://shakilistic.github.io/css/style.css">
+<link rel="stylesheet" href="css/style.css">
 
 
-<!-- =========================================================
-     FINAL POLISH — ONLY REQUESTED CHANGES
-========================================================= -->
-<style>
-/* SC1 — keep the desktop typography on mobile; do not substitute fonts. */
-@media (max-width: 700px) {
-  .hero-content h1,
-  .design-category h2,
-  .clients-section h2,
-  .reason-section h2,
-  .profiles-section h2,
-  .contact-box h2 {
-    font-family: "Anton", sans-serif !important;
-    font-weight: 400 !important;
-  }
-}
 
-/* SC2 — center the small decorative arc on mobile. */
-@media (max-width: 700px) {
-  .decor-one {
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-  }
-}
-
-/* SC3 — remove the stray/empty red-line control under portfolio sections. */
-.design-category button:empty,
-.design-category .show-more:empty,
-.design-category .view-toggle:empty,
-.design-category .view-toggle-wrap:empty {
-  display: none !important;
-}
-
-/* Portfolio: exactly 3 visible initially; Show More appears only when >3. */
-.portfolio-carousel {
-  position: relative;
-  width: 100%;
-  margin-top: 0;
-}
-.portfolio-carousel .portfolio-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 18px !important;
-  overflow: visible !important;
-  padding: 2px 0 8px !important;
-  margin: 0 !important;
-}
-.portfolio-carousel .portfolio-grid > .project-card {
-  min-width: 0 !important;
-  width: 100% !important;
-}
-.portfolio-carousel .project-card.is-hidden {
-  display: none !important;
-}
-.portfolio-carousel__arrow {
-  display: none !important;
-}
-
-.portfolio-more-button {
-  display: none;
-  margin: 18px auto 0;
-  padding: 11px 22px;
-  border: 1px solid var(--line, #333);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--text, #f5f5f5);
-  font: 600 11px/1 "Space Mono", monospace;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: color .25s ease, border-color .25s ease, background .25s ease;
-}
-.portfolio-more-button.is-visible { display: block; }
-.portfolio-more-button:hover,
-.portfolio-more-button:focus-visible {
-  color: #fff;
-  background: #ff4d00;
-  border-color: #ff4d00;
-  outline: none;
-}
-html[data-theme="light"] .portfolio-more-button {
-  color: #111;
-  border-color: #bdb8ae;
-}
-html[data-theme="light"] .portfolio-more-button:hover,
-html[data-theme="light"] .portfolio-more-button:focus-visible {
-  color: #fff;
-  background: #ff4d00;
-  border-color: #ff4d00;
-}
-
-/* SC5 — compact, responsive, auto-sliding client feedback. */
-.clients-carousel {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-.clients-carousel .clients-grid {
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  gap: 14px !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  scroll-behavior: smooth !important;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  padding: 2px 0 8px !important;
-}
-.clients-carousel .clients-grid::-webkit-scrollbar { display: none; }
-.clients-carousel .client-card {
-  flex: 0 0 calc((100% - 42px) / 4) !important;
-  min-width: 0 !important;
-  box-sizing: border-box;
-  padding: 22px !important;
-}
-.clients-carousel .client-review {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 8;
-  line-clamp: 8;
-}
-.clients-carousel .client-review.is-expanded {
-  display: block;
-  -webkit-line-clamp: unset;
-  line-clamp: unset;
-}
-.client-more-button {
-  display: none;
-  margin-top: 12px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: var(--text, #f5f5f5);
-  font: 600 10px/1 "Space Mono", monospace;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-.client-more-button.is-visible { display: inline-block; }
-.client-more-button:hover,
-.client-more-button:focus-visible { color: #ff4d00; outline: none; }
-html[data-theme="light"] .client-more-button { color: #111; }
-html[data-theme="light"] .client-more-button:hover,
-html[data-theme="light"] .client-more-button:focus-visible { color: #ff4d00; }
-
-/* No client carousel arrows. */
-.clients-carousel__arrow,
-#clientsPrev, #clientsNext { display: none !important; }
-
-/* SC6 — active profiles remain display-only and auto-slide. */
-#profiles .slider-arrow,
-#profilePrev, #profileNext { display: none !important; }
-#profiles .profile-slider {
-  display: block !important;
-  width: 100%;
-}
-#profiles .profile-window {
-  width: 100% !important;
-  overflow: hidden !important;
-}
-#profiles .profile-track {
-  overflow: visible !important;
-}
-#profiles .profile-card {
-  cursor: default !important;
-}
-#profiles .profile-card:hover {
-  cursor: default !important;
-}
-
-@media (max-width: 1100px) {
-  .portfolio-carousel .portfolio-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-  .clients-carousel .client-card {
-    flex-basis: calc((100% - 14px) / 2) !important;
-  }
-}
-
-@media (max-width: 700px) {
-  .portfolio-carousel .portfolio-grid {
-    grid-template-columns: 1fr !important;
-    gap: 14px !important;
-  }
-  .clients-carousel .client-card {
-    flex-basis: 100% !important;
-    padding: 18px !important;
-  }
-}
-</style>
 
 </head>
 
@@ -251,7 +61,7 @@ html[data-theme="light"] .client-more-button:focus-visible { color: #ff4d00; }
 
 
 <a
-href="https://shakilistic.github.io/#home"
+href="/" data-nav-target="home"
 class="brand"
 >
 SHAKIL <span>R.</span>
@@ -260,47 +70,27 @@ SHAKIL <span>R.</span>
 
 <nav class="desktop-nav">
 
-<a href="https://shakilistic.github.io/#home">
+<a href="/" data-nav-target="home">
 HOME
 </a>
 
-<a href="https://shakilistic.github.io/#work">
+<a href="/" data-nav-target="work">
 WORK
 </a>
 
-<a href="https://shakilistic.github.io/#about">
+<a href="/" data-nav-target="about">
 ABOUT
 </a>
 
-<a href="https://shakilistic.github.io/#profiles">
+<a href="/" data-nav-target="profiles">
 PROFILES
 </a>
 
-<a href="https://shakilistic.github.io/#contact">
+<a href="/" data-nav-target="contact">
 CONTACT
 </a>
 
 </nav>
-
-
-<!-- Theme button -->
-
-<button
-id="themeToggle"
-class="theme-toggle"
-aria-label="Toggle theme"
-type="button"
->
-
-<span class="theme-sun">
-☼
-</span>
-
-<span class="theme-moon">
-◐
-</span>
-
-</button>
 
 
 <!-- Mobile menu -->
@@ -326,23 +116,23 @@ id="mobileNav"
 class="mobile-nav"
 >
 
-<a href="https://shakilistic.github.io/#home">
+<a href="/" data-nav-target="home">
 HOME
 </a>
 
-<a href="https://shakilistic.github.io/#work">
+<a href="/" data-nav-target="work">
 WORK
 </a>
 
-<a href="https://shakilistic.github.io/#about">
+<a href="/" data-nav-target="about">
 ABOUT
 </a>
 
-<a href="https://shakilistic.github.io/#profiles">
+<a href="/" data-nav-target="profiles">
 PROFILES
 </a>
 
-<a href="https://shakilistic.github.io/#contact">
+<a href="/" data-nav-target="contact">
 CONTACT
 </a>
 
@@ -369,7 +159,7 @@ CONTACT
 <div class="hero-image-frame">
 
 <img
-src="https://shakilistic.github.io/assets/images/profile.jpg"
+src="assets/images/profile.jpg"
 alt="Shakil R."
 loading="eager"
 fetchpriority="high"
@@ -460,7 +250,7 @@ PLATFORM EXPERIENCE
 
 
 <a
-href="https://shakilistic.github.io/#work"
+href="/" data-nav-target="work"
 class="button magnetic"
 >
 
@@ -474,33 +264,6 @@ VIEW MY WORK
 
 
 </div>
-
-</div>
-
-</section>
-
-
-
-<!-- ================= WORK INTRO ================= -->
-
-<section class="work-intro">
-
-<div class="container intro-grid">
-
-
-<div class="eyebrow">
-SELECTED WORK
-</div>
-
-
-<p>
-
-A curated selection of visual identities,
-campaigns, digital experiences and print work
-crafted with clarity, character and purpose.
-
-</p>
-
 
 </div>
 
@@ -531,9 +294,6 @@ id="book-covers"
 
 <div>
 
-<div class="eyebrow">
-01 / BOOK COVERS
-</div>
 
 
 <h2>
@@ -587,9 +347,6 @@ id="web-design"
 
 <div>
 
-<div class="eyebrow">
-02 / WEB DESIGN
-</div>
 
 
 <h2>
@@ -643,9 +400,6 @@ id="social-design"
 
 <div>
 
-<div class="eyebrow">
-03 / SOCIAL MEDIA
-</div>
 
 
 <h2>
@@ -700,9 +454,6 @@ id="logo-design"
 
 <div>
 
-<div class="eyebrow">
-04 / IDENTITY
-</div>
 
 
 <h2>
@@ -756,9 +507,6 @@ id="print-design"
 
 <div>
 
-<div class="eyebrow">
-05 / PRINT
-</div>
 
 
 <h2>
@@ -820,9 +568,6 @@ class="clients-section"
 
 <div>
 
-<div class="eyebrow">
-06 / CLIENT FEEDBACK
-</div>
 
 
 <h2>
@@ -981,9 +726,6 @@ class="profiles-section"
 <div class="profiles-heading">
 
 
-<div class="eyebrow">
-CURRENTLY WORKING ON
-</div>
 
 
 <h2>
@@ -1341,403 +1083,13 @@ type="button"
 </button>
 
 
-<script
-src="https://shakilistic.github.io/js/script.js"
-defer
-></script>
 
 
 
-<script defer>
-/* =========================================================
-   REQUESTED BEHAVIOUR ONLY
-   - Portfolio: 3 visible; Show More only when >3.
-   - Client feedback: compact responsive auto-slider; per-card
-     Show More only when that review is actually truncated.
-   - Currently Working: display-only auto-slider; no arrows/clicks.
-========================================================= */
-(function () {
-  "use strict";
 
-  var BLOGGER_HOME = "https://createwithshakil.blogspot.com/";
-  var SECTION_LABELS = {
-    bookGrid: "Book Cover Design",
-    webGrid: "Web Design & Develop",
-    socialGrid: "Social Media Poster",
-    logoGrid: "Logo Design",
-    printGrid: "Print Media Design"
-  };
 
-  function esc(value) {
-    return String(value || "").replace(/[&<>"']/g, function (c) {
-      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
-    });
-  }
 
-  function firstImage(entry) {
-    var src = "";
-    if (entry && entry.media$thumbnail && entry.media$thumbnail.url) src = entry.media$thumbnail.url;
-    if (!src && entry && entry.content && entry.content.$t) {
-      var m = entry.content.$t.match(/<img[^>]+src=["']([^"']+)["']/i);
-      if (m) src = m[1];
-    }
-    if (src) {
-      src = src.replace(/\/s\d+(?:-c)?\//, "/s1200/");
-      src = src.replace(/=s\d+(?:-c)?/, "=s1200");
-    }
-    return src;
-  }
-
-  function entryTitle(entry, fallback) {
-    return entry && entry.title && entry.title.$t ? entry.title.$t : fallback;
-  }
-
-  function entryContent(entry) {
-    return entry && entry.content && entry.content.$t
-      ? entry.content.$t
-      : (entry && entry.summary && entry.summary.$t ? entry.summary.$t : "");
-  }
-
-  function stripHTML(html) {
-    var div = document.createElement("div");
-    div.innerHTML = html || "";
-    return (div.textContent || div.innerText || "").replace(/\s+/g, " ").trim();
-  }
-
-  function jsonp(label, startIndex, maxResults, done) {
-    var callbackName = "shakilFix_" + Math.random().toString(36).slice(2);
-    var script = document.createElement("script");
-    var finished = false;
-
-    window[callbackName] = function (data) {
-      if (finished) return;
-      finished = true;
-      var entries = data && data.feed && data.feed.entry ? data.feed.entry : [];
-      cleanup();
-      done(entries);
-    };
-
-    function cleanup() {
-      if (script.parentNode) script.parentNode.removeChild(script);
-      try { delete window[callbackName]; } catch (e) { window[callbackName] = undefined; }
-    }
-
-    script.onerror = function () {
-      if (finished) return;
-      finished = true;
-      cleanup();
-      done([]);
-    };
-
-    script.src = BLOGGER_HOME + "feeds/posts/default/-/" + encodeURIComponent(label) +
-      "?alt=json-in-script&start-index=" + (startIndex || 1) +
-      "&max-results=" + (maxResults || 100) + "&callback=" + callbackName;
-    document.body.appendChild(script);
-  }
-
-  function loadAll(label, done) {
-    var all = [];
-    var start = 1;
-    var size = 100;
-    function next() {
-      jsonp(label, start, size, function (entries) {
-        all = all.concat(entries);
-        if (entries.length === size) {
-          start += size;
-          next();
-        } else {
-          done(all);
-        }
-      });
-    }
-    next();
-  }
-
-  function buildProjectCard(entry, label) {
-    var card = document.createElement("div");
-    card.className = "project-card sample-display-only";
-    var image = firstImage(entry);
-    if (image) {
-      var img = document.createElement("img");
-      img.src = image;
-      img.alt = entryTitle(entry, label);
-      img.loading = "lazy";
-      img.decoding = "async";
-      card.appendChild(img);
-    }
-    return card;
-  }
-
-  function ensurePortfolioMoreButton(section, grid) {
-    if (!section || !grid) return null;
-    var button = section.querySelector(".portfolio-more-button");
-    if (!button) {
-      button = document.createElement("button");
-      button.type = "button";
-      button.className = "portfolio-more-button";
-      button.textContent = "SHOW MORE +";
-      section.appendChild(button);
-    }
-    return button;
-  }
-
-  var portfolioLoaded = {};
-  var portfolioExpanded = {};
-
-  function setupPortfolio(grid) {
-    if (!grid || grid.dataset.finalBehaviourReady === "true") return;
-    grid.dataset.finalBehaviourReady = "true";
-
-    var section = grid.closest(".design-category");
-    if (!section) return;
-    var id = grid.id;
-    var label = SECTION_LABELS[id];
-    if (!label) return;
-
-    var button = ensurePortfolioMoreButton(section, grid);
-
-    function refresh() {
-      var cards = Array.prototype.slice.call(grid.querySelectorAll(".project-card"));
-      cards.forEach(function (card, i) {
-        card.classList.toggle("is-hidden", !portfolioExpanded[id] && i >= 3);
-      });
-      if (cards.length > 3 && !portfolioExpanded[id]) {
-        button.classList.add("is-visible");
-        button.textContent = "SHOW MORE +";
-      } else {
-        button.classList.remove("is-visible");
-      }
-    }
-
-    button.addEventListener("click", function () {
-      if (portfolioExpanded[id]) return;
-      button.disabled = true;
-      button.textContent = "LOADING...";
-
-      if (portfolioLoaded[id]) {
-        portfolioExpanded[id] = true;
-        refresh();
-        return;
-      }
-
-      loadAll(label, function (entries) {
-        grid.innerHTML = "";
-        entries.forEach(function (entry) {
-          grid.appendChild(buildProjectCard(entry, label));
-        });
-        portfolioLoaded[id] = true;
-        portfolioExpanded[id] = true;
-        button.disabled = false;
-        refresh();
-      });
-    });
-
-    var observer = new MutationObserver(function () {
-      refresh();
-    });
-    observer.observe(grid, { childList: true, subtree: false });
-    refresh();
-  }
-
-  /* ---------------- CLIENT FEEDBACK ---------------- */
-  var clientTimer = null;
-  var clientPaused = false;
-  var clientInitialized = false;
-
-  function makeClientCard(entry) {
-    var card = document.createElement("article");
-    card.className = "client-card";
-
-    var name = entryTitle(entry, "Client");
-    var text = stripHTML(entryContent(entry)).replace(/^[★☆\s]+/, "").trim();
-
-    var stars = document.createElement("div");
-    stars.className = "client-stars";
-    stars.textContent = "★★★★★";
-
-    var review = document.createElement("div");
-    review.className = "client-review";
-    review.textContent = text;
-
-    var more = document.createElement("button");
-    more.type = "button";
-    more.className = "client-more-button";
-    more.textContent = "SHOW MORE +";
-    more.setAttribute("aria-expanded", "false");
-
-    var clientName = document.createElement("div");
-    clientName.className = "client-name";
-    clientName.textContent = "— " + name;
-
-    card.appendChild(stars);
-    card.appendChild(review);
-    card.appendChild(more);
-    card.appendChild(clientName);
-
-    more.addEventListener("click", function () {
-      var expanded = review.classList.toggle("is-expanded");
-      more.textContent = expanded ? "SHOW LESS −" : "SHOW MORE +";
-      more.setAttribute("aria-expanded", expanded ? "true" : "false");
-    });
-
-    function checkOverflow() {
-      review.classList.remove("is-expanded");
-      var overflowing = review.scrollHeight > review.clientHeight + 2;
-      more.classList.toggle("is-visible", overflowing);
-    }
-
-    requestAnimationFrame(checkOverflow);
-    window.addEventListener("resize", checkOverflow, { passive: true });
-    return card;
-  }
-
-  function wrapClientsGrid(grid) {
-    if (!grid || grid.dataset.clientFinalReady === "true") return null;
-    grid.dataset.clientFinalReady = "true";
-    var wrapper = document.createElement("div");
-    wrapper.className = "clients-carousel";
-    grid.parentNode.insertBefore(wrapper, grid);
-    wrapper.appendChild(grid);
-    return wrapper;
-  }
-
-  function startClientAutoSlide(wrapper, grid) {
-    if (clientTimer) clearInterval(clientTimer);
-    function step() {
-      if (clientPaused) return;
-      var first = grid.querySelector(".client-card");
-      if (!first) return;
-      var gap = parseFloat(getComputedStyle(grid).gap) || 0;
-      var amount = first.getBoundingClientRect().width + gap;
-      var max = grid.scrollWidth - grid.clientWidth;
-      if (grid.scrollLeft + amount >= max - 4) {
-        grid.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        grid.scrollBy({ left: amount, behavior: "smooth" });
-      }
-    }
-    clientTimer = setInterval(step, 3500);
-    wrapper.addEventListener("mouseenter", function () { clientPaused = true; });
-    wrapper.addEventListener("mouseleave", function () { clientPaused = false; });
-    wrapper.addEventListener("touchstart", function () { clientPaused = true; }, { passive: true });
-    wrapper.addEventListener("touchend", function () {
-      setTimeout(function () { clientPaused = false; }, 1200);
-    }, { passive: true });
-  }
-
-  function setupClients(grid) {
-    if (!grid || clientInitialized) return;
-    clientInitialized = true;
-    var wrapper = wrapClientsGrid(grid);
-    if (!wrapper) return;
-
-    /* Remove the old global Show More control permanently. */
-    var old = document.getElementById("clientsMore");
-    if (old) old.remove();
-
-    /* Existing loader may initially provide 3–4 cards. Keep them all in the slider. */
-    function prepare() {
-      var cards = Array.prototype.slice.call(grid.querySelectorAll(".client-card"));
-      if (!cards.length) return false;
-      cards.forEach(function (card) {
-        card.classList.remove("is-hidden");
-        card.style.display = "";
-      });
-      cards.forEach(function (card) {
-        var review = card.querySelector(".client-review");
-        if (!review) return;
-        if (!card.querySelector(".client-more-button")) {
-          var text = review.textContent || "";
-          var button = document.createElement("button");
-          button.type = "button";
-          button.className = "client-more-button";
-          button.textContent = "SHOW MORE +";
-          review.insertAdjacentElement("afterend", button);
-          button.addEventListener("click", function () {
-            var expanded = review.classList.toggle("is-expanded");
-            button.textContent = expanded ? "SHOW LESS −" : "SHOW MORE +";
-            button.setAttribute("aria-expanded", expanded ? "true" : "false");
-          });
-        }
-        requestAnimationFrame(function () {
-          var button = card.querySelector(".client-more-button");
-          review.classList.remove("is-expanded");
-          if (button) button.classList.toggle("is-visible", review.scrollHeight > review.clientHeight + 2);
-        });
-      });
-      return true;
-    }
-
-    var observer = new MutationObserver(function () {
-      prepare();
-      if (!clientTimer && grid.querySelector(".client-card")) startClientAutoSlide(wrapper, grid);
-    });
-    observer.observe(grid, { childList: true, subtree: true });
-    prepare();
-    startClientAutoSlide(wrapper, grid);
-  }
-
-  /* ---------------- CURRENTLY WORKING ---------------- */
-  var profileReady = false;
-
-  function setupProfiles() {
-    var track = document.getElementById("profileTrack");
-    var windowEl = document.getElementById("profileWindow");
-    if (!track || !windowEl || !track.children.length) return;
-
-    /* Remove navigation controls without touching the existing logo animation. */
-    var prev = document.getElementById("profilePrev");
-    var next = document.getElementById("profileNext");
-    if (prev) prev.remove();
-    if (next) next.remove();
-
-    /* Currently Working logos are display-only: never follow Blogger links. */
-    Array.prototype.forEach.call(track.querySelectorAll("a.profile-card"), function (card) {
-      if (card.dataset.displayOnlyFixed === "true") return;
-      card.dataset.displayOnlyFixed = "true";
-      card.removeAttribute("href");
-      card.removeAttribute("target");
-      card.removeAttribute("rel");
-      card.setAttribute("aria-disabled", "true");
-      card.setAttribute("tabindex", "-1");
-      card.addEventListener("click", function (e) { e.preventDefault(); }, true);
-    });
-  }
-  function removeUnwantedEyebrows() {
-    document.querySelectorAll(".design-category .category-copy .eyebrow").forEach(function (el) { el.remove(); });
-    var heroEyebrow = document.querySelector(".hero-content > .eyebrow");
-    if (heroEyebrow) heroEyebrow.remove();
-  }
-
-  function init() {
-    removeUnwantedEyebrows();
-    ["bookGrid", "webGrid", "socialGrid", "logoGrid", "printGrid"].forEach(function (id) {
-      setupPortfolio(document.getElementById(id));
-    });
-    setupClients(document.getElementById("clientsGrid"));
-    setupProfiles();
-
-    /* If the Blogger scripts populate asynchronously, retry briefly. */
-    var attempts = 0;
-    var timer = setInterval(function () {
-      attempts++;
-      removeUnwantedEyebrows();
-      ["bookGrid", "webGrid", "socialGrid", "logoGrid", "printGrid"].forEach(function (id) {
-        setupPortfolio(document.getElementById(id));
-      });
-      if (!clientInitialized) setupClients(document.getElementById("clientsGrid"));
-      setupProfiles();
-      if (attempts > 30) clearInterval(timer);
-    }, 300);
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init, { once: true });
-  } else {
-    init();
-  }
-})();
-</script>
+<script src="js/script.js" defer></script>
 
 </body>
 
