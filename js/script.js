@@ -1,22 +1,10 @@
 /* ==========================================================
-   SHAKIL R.
-   VISUAL DESIGN EXPERT
+   SHAKILSTIC PORTFOLIO
 ========================================================== */
 
 
 /*
-==========================================================
-GOOGLE SHEET CONNECTION
-==========================================================
-
-Google Apps Script deploy করার পর
-যে URL পাবে সেটা এখানে বসাবে।
-
-Example:
-
-const GOOGLE_SCRIPT_URL =
-"https://script.google.com/macros/s/XXXXX/exec";
-
+    GOOGLE SHEETS URL
 */
 
 const GOOGLE_SCRIPT_URL =
@@ -25,53 +13,39 @@ const GOOGLE_SCRIPT_URL =
 
 
 /* ==========================================================
-   PORTFOLIO CATEGORIES
+   CATEGORIES
 ========================================================== */
 
 const categories = [
 
     {
-
         key: "book",
-
-        title: "Book Cover Design"
-
+        orange: "Book Cover",
+        normal: "Design"
     },
 
-
     {
-
         key: "web",
-
-        title: "Web Design & Development"
-
+        orange: "Web Design",
+        normal: "& Development"
     },
 
-
     {
-
         key: "social",
-
-        title: "Social Media Design"
-
+        orange: "Social Media",
+        normal: "Design"
     },
 
-
     {
-
         key: "logo",
-
-        title: "Logo Design"
-
+        orange: "Logo",
+        normal: "Design"
     },
 
-
     {
-
         key: "print",
-
-        title: "Print Media"
-
+        orange: "Print",
+        normal: "Media"
     }
 
 ];
@@ -81,89 +55,66 @@ const categories = [
 /* ==========================================================
    WHERE I'M ACTIVE
 
-   IMPORTANT:
-   These logos are intentionally NOT clickable.
+   NOTE:
+   Logos are NOT clickable.
 ========================================================== */
 
 const activePlatforms = [
 
     {
-
-        name: "Behance",
-
-        icon:
-        "https://cdn.simpleicons.org/behance"
-
-    },
-
-
-    {
-
-        name: "LinkedIn",
-
-        icon:
-        "https://cdn.simpleicons.org/linkedin"
-
-    },
-
-
-    {
-
-        name: "X",
-
-        icon:
-        "https://cdn.simpleicons.org/x"
-
-    },
-
-
-    {
-
-        name: "Pinterest",
-
-        icon:
-        "https://cdn.simpleicons.org/pinterest"
-
-    },
-
-
-    {
-
-        name: "GitHub",
-
-        icon:
-        "https://cdn.simpleicons.org/github"
-
-    },
-
-
-    {
-
-        name: "Dribbble",
-
-        icon:
-        "https://cdn.simpleicons.org/dribbble"
-
-    },
-
-
-    {
-
         name: "Adobe",
-
         icon:
-        "https://cdn.simpleicons.org/adobe"
-
+        "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/adobe.svg",
+        fallback: "A"
     },
 
+    {
+        name: "Figma",
+        icon:
+        "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/figma.svg",
+        fallback: "F"
+    },
 
     {
-
-        name: "Figma",
-
+        name: "Behance",
         icon:
-        "https://cdn.simpleicons.org/figma"
+        "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/behance.svg",
+        fallback: "Bē"
+    },
 
+    {
+        name: "LinkedIn",
+        icon:
+        "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linkedin.svg",
+        fallback: "in"
+    },
+
+    {
+        name: "X",
+        icon:
+        "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/x.svg",
+        fallback: "X"
+    },
+
+    {
+        name: "Pinterest",
+        icon:
+        "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/pinterest.svg",
+        fallback: "P"
+    },
+
+    {
+        name: "GitHub",
+        icon:
+        "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg",
+        fallback: "GH"
+    },
+
+    {
+        name: "Dribbble",
+        icon:
+        "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/dribbble.svg",
+        fallback: "D"
     }
 
 ];
@@ -171,86 +122,51 @@ const activePlatforms = [
 
 
 /* ==========================================================
-   YOUR EXACT SOCIAL LINKS
+   SOCIAL LINKS
 ========================================================== */
 
 const socialProfiles = [
 
     {
-
         name: "Behance",
-
         url:
         "https://www.behance.net/shakilistic",
-
-        icon:
-        "behance"
-
+        icon: "behance"
     },
 
-
     {
-
         name: "X",
-
         url:
         "https://x.com/shakilistic",
-
-        icon:
-        "x"
-
+        icon: "x"
     },
 
-
     {
-
         name: "Pinterest",
-
         url:
         "https://www.pinterest.com/shakilistic/",
-
-        icon:
-        "pinterest"
-
+        icon: "pinterest"
     },
 
-
     {
-
         name: "LinkedIn",
-
         url:
         "https://www.linkedin.com/in/shakilistic/",
-
-        icon:
-        "linkedin"
-
+        icon: "linkedin"
     },
 
-
     {
-
         name: "GitHub",
-
         url:
         "https://github.com/shakilistic",
-
-        icon:
-        "github"
-
+        icon: "github"
     },
 
-
     {
-
         name: "Dribbble",
-
         url:
         "https://dribbble.com/shakilistic",
-
-        icon:
-        "dribbble"
-
+        icon: "dribbble"
     }
 
 ];
@@ -258,76 +174,45 @@ const socialProfiles = [
 
 
 /* ==========================================================
-   TESTIMONIALS
-
-   Change these texts later with your real client reviews.
+   TESTIMONIAL DATA
 ========================================================== */
 
 const testimonials = [
 
     [
-
         "★★★★★",
-
         "Very clean, thoughtful and professional execution. The design feels polished and easy to understand.",
-
         "BOOK COVER CLIENT"
-
     ],
 
-
     [
-
         "★★★★★",
-
         "Excellent communication and attention to detail. Revisions were handled carefully and quickly.",
-
         "DESIGN CLIENT"
-
     ],
 
-
     [
-
         "★★★★★",
-
         "A strong visual direction with a premium finish. Exactly the kind of designer I wanted to work with.",
-
         "BRAND CLIENT"
-
     ],
 
-
     [
-
         "★★★★★",
-
         "The final result felt distinctive without being over-designed. Great balance and hierarchy.",
-
         "CREATIVE CLIENT"
-
     ],
 
-
     [
-
         "★★★★★",
-
         "Reliable, responsive and creative from beginning to end. I would gladly collaborate again.",
-
         "RETURNING CLIENT"
-
     ],
 
-
     [
-
         "★★★★★",
-
         "The work immediately looked more professional. Strong taste, typography and presentation.",
-
         "DIGITAL CLIENT"
-
     ]
 
 ];
@@ -335,11 +220,10 @@ const testimonials = [
 
 
 /* ==========================================================
-   SOCIAL SVG ICONS
+   SOCIAL ICONS
 ========================================================== */
 
-const icons = {
-
+const socialIcons = {
 
 
 behance:
@@ -350,7 +234,8 @@ behance:
 <path d="
 M6.5 11.1H3.2V7.4h3.1
 c1.4 0 2.2.5 2.2 1.8
-0 1.2-.8 1.9-2 1.9Zm.2 5.4H3.2v-4.1h3.6
+0 1.2-.8 1.9-2 1.9Zm.2 5.4
+H3.2v-4.1h3.6
 c1.6 0 2.5.7 2.5 2.1
 0 1.5-1 2-2.6 2ZM9.8 11.7
 c1.3-.7 2-1.7 2-3.2
@@ -361,10 +246,7 @@ c-3.6 0-5.9 2.5-5.9 6s2.2 6 6 6
 c2.8 0 4.7-1.2 5.4-3.8h-2.8
 c-.2.8-1.2 1.3-2.5 1.3
 -1.8 0-2.8-.9-2.9-2.9h8.4
-c.2-3.5-1.8-6.6-5.7-6.6Zm-2.7 4.6
-c.2-1.5 1-2.3 2.6-2.3
-1.4 0 2.4.8 2.5 2.3h-5.1ZM15.8 4.8
-h5.8v1.7h-5.8V4.8Z
+c.2-3.5-1.8-6.6-5.7-6.6Z
 "/>
 
 </svg>
@@ -385,9 +267,7 @@ l-5.214-6.817
 l7.73-8.835
 L1.254 2.25H8.08
 l4.713 6.231
-5.45-6.231Zm-1.161 17.52h1.833
-L7.084 4.126H5.117
-L17.083 19.77Z
+5.45-6.231Z
 "/>
 
 </svg>
@@ -418,10 +298,7 @@ c-.06.24-.19.29-.44.17
 0-4.13 3-7.92 8.65-7.92
 4.54 0 8.07 3.24 8.07 7.56
 0 4.51-2.84 8.14-6.79 8.14
--1.33 0-2.57-.69-3-1.5
-l-.82 3.1
-c-.29 1.14-1.09 2.57-1.62 3.44
-A12 12 0 1 0 12 0Z
+-1.33 0-2.57-.69-3-1.5Z
 "/>
 
 </svg>
@@ -496,21 +373,7 @@ c-.29-.06-3.18-.65-6.1-.28
 c2.54 0 4.87.95 6.64 2.52
 -.15.2-1.46 1.94-4.46 3.07
 A50.6 50.6 0 0 0 11.01 2.1
-c.33-.05.66-.08.99-.08ZM8.86 2.5
-a42.8 42.8 0 0 1 3.21 5.4
-c-3.95 1.05-7.44 1.03-7.82 1.02
-A10.05 10.05 0 0 1 8.86 2.5ZM2 12v-.3
-c.2.01 4.3.08 9.02-1.24
-.25.5.49 1 .71 1.51
--4.25 1.2-6.49 4.49-6.72 4.84
-A9.95 9.95 0 0 1 2 12Zm10 10
-a9.96 9.96 0 0 1-5.5-1.65
-c.18-.3 1.84-2.93 5.99-4.05
-1.12 2.91 1.58 5.35 1.69 6
-A10.3 10.3 0 0 1 12 22Zm4.12-1.5
-c-.08-.48-.5-2.8-1.54-5.59
-2.75-.44 5.16.28 5.45.37
-a10.03 10.03 0 0 1-3.91 5.22Z
+c.33-.05.66-.08.99-.08Z
 "/>
 
 </svg>
@@ -521,7 +384,121 @@ a10.03 10.03 0 0 1-3.91 5.22Z
 
 
 /* ==========================================================
-   ACTIVE LOGOS
+   RENDER ACTIVE LOGO GROUP
+========================================================== */
+
+function createLogoGroup() {
+
+
+    const group =
+        document.createElement(
+            "div"
+        );
+
+
+    group.className =
+        "logo-group";
+
+
+    activePlatforms.forEach(
+
+        platform => {
+
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "active-logo";
+
+
+            item.title =
+                platform.name;
+
+
+            const image =
+                document.createElement(
+                    "img"
+                );
+
+
+            image.src =
+                platform.icon;
+
+
+            image.alt =
+                platform.name;
+
+
+            image.loading =
+                "eager";
+
+
+
+            const fallback =
+                document.createElement(
+                    "span"
+                );
+
+
+            fallback.className =
+                "logo-fallback";
+
+
+            fallback.textContent =
+                platform.fallback;
+
+
+
+            image.addEventListener(
+
+                "error",
+
+                function () {
+
+
+                    item.classList.add(
+                        "logo-error"
+                    );
+
+
+                }
+
+            );
+
+
+
+            item.appendChild(
+                image
+            );
+
+
+            item.appendChild(
+                fallback
+            );
+
+
+            group.appendChild(
+                item
+            );
+
+
+        }
+
+    );
+
+
+    return group;
+
+}
+
+
+
+/* ==========================================================
+   ENDLESS LOGOS
 ========================================================== */
 
 function renderActiveLogos() {
@@ -533,47 +510,26 @@ function renderActiveLogos() {
         );
 
 
+    track.innerHTML =
+        "";
+
+
     /*
-        Duplicate items so animation
-        becomes continuous.
+        TWO EXACT GROUPS.
+
+        This allows seamless:
+        1 → 2 → 1 → 2 forever.
     */
 
-    const repeatedPlatforms = [
 
-        ...activePlatforms,
-
-        ...activePlatforms
-
-    ];
+    track.appendChild(
+        createLogoGroup()
+    );
 
 
-    track.innerHTML =
-
-        repeatedPlatforms
-
-        .map(
-
-            platform => `
-
-                <div
-                    class="active-logo"
-                    title="${platform.name}"
-                    aria-label="${platform.name}"
-                >
-
-                    <img
-                        src="${platform.icon}"
-                        alt="${platform.name}"
-                        loading="lazy"
-                    >
-
-                </div>
-
-            `
-
-        )
-
-        .join("");
+    track.appendChild(
+        createLogoGroup()
+    );
 
 
 }
@@ -587,14 +543,13 @@ function renderActiveLogos() {
 function renderSocialLinks() {
 
 
-    const socialContainer =
-
+    const container =
         document.getElementById(
             "socialLinks"
         );
 
 
-    socialContainer.innerHTML =
+    container.innerHTML =
 
         socialProfiles
 
@@ -607,11 +562,11 @@ function renderSocialLinks() {
                     href="${social.url}"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="${social.name}"
                     title="${social.name}"
+                    aria-label="${social.name}"
                 >
 
-                    ${icons[social.icon]}
+                    ${socialIcons[social.icon]}
 
                 </a>
 
@@ -627,21 +582,21 @@ function renderSocialLinks() {
 
 
 /* ==========================================================
-   CREATE PROJECT SECTION
+   PROJECT SECTION
 ========================================================== */
 
-function createProjectSection(category) {
+function createProjectSection(
+    category
+) {
 
 
-    const projectContainer =
-
+    const wrapper =
         document.getElementById(
             "projectSections"
         );
 
 
     const section =
-
         document.createElement(
             "section"
         );
@@ -651,42 +606,33 @@ function createProjectSection(category) {
         "project-section";
 
 
-    section.id =
-        category.key;
-
-
     section.innerHTML = `
-
 
         <div class="project-header">
 
-
             <h3>
 
-                ${category.title}
+                <span class="accent-text">
+                    ${category.orange}
+                </span>
+
+                <span class="normal-text">
+                    ${category.normal}
+                </span>
 
             </h3>
-
-
-            <p>
-
-                01 — 20
-
-            </p>
-
 
         </div>
 
 
-
         <div
             class="project-grid"
-            id="${category.key}Grid"
         ></div>
 
 
-
-        <div class="more-wrap">
+        <div
+            class="more-wrap"
+        >
 
             <button
                 class="more-btn"
@@ -699,62 +645,35 @@ function createProjectSection(category) {
 
         </div>
 
-
     `;
 
 
-    projectContainer.appendChild(
+    wrapper.appendChild(
         section
     );
 
 
-
     const grid =
-
         section.querySelector(
             ".project-grid"
         );
 
 
     const moreButton =
-
         section.querySelector(
             ".more-btn"
         );
 
 
 
-    /*
-    ======================================================
-    AUTOMATIC IMAGE GENERATION
-    ======================================================
-
-    book1.jpg → book20.jpg
-
-    web1.jpg → web20.jpg
-
-    social1.jpg → social20.jpg
-
-    logo1.jpg → logo20.jpg
-
-    print1.jpg → print20.jpg
-
-    */
-
-
     for (
-
-        let imageNumber = 1;
-
-        imageNumber <= 20;
-
-        imageNumber++
-
+        let i = 1;
+        i <= 20;
+        i++
     ) {
 
 
         const card =
-
             document.createElement(
                 "article"
             );
@@ -764,56 +683,37 @@ function createProjectSection(category) {
             "project-card";
 
 
-
-        /*
-            Initial display:
-            only 8 images
-        */
-
-        if (imageNumber > 8) {
+        if (i > 8) {
 
             card.hidden = true;
 
         }
 
 
-
         const image =
-
             document.createElement(
                 "img"
             );
 
 
-
         image.src =
-
-            `assets/images/${category.key}${imageNumber}.jpg`;
-
+            `./assets/images/${category.key}${i}.jpg`;
 
 
         image.alt =
-
-            `${category.title} project ${imageNumber}`;
-
+            `${category.orange} ${category.normal} ${i}`;
 
 
         image.loading =
             "lazy";
 
 
+        image.onerror =
+            function () {
 
-        /*
-            If image file does not exist,
-            automatically remove card.
-        */
+                card.remove();
 
-        image.onerror = function () {
-
-            card.remove();
-
-        };
-
+            };
 
 
         card.appendChild(
@@ -829,10 +729,6 @@ function createProjectSection(category) {
     }
 
 
-
-    /* ======================================================
-       SEE MORE
-    ====================================================== */
 
     let expanded =
         false;
@@ -850,14 +746,9 @@ function createProjectSection(category) {
                 !expanded;
 
 
-
-            const cards =
-
-                grid.children;
-
-
-
-            Array.from(cards)
+            Array.from(
+                grid.children
+            )
 
             .forEach(
 
@@ -867,7 +758,9 @@ function createProjectSection(category) {
                 ) {
 
 
-                    if (index >= 8) {
+                    if (
+                        index >= 8
+                    ) {
 
                         card.hidden =
                             !expanded;
@@ -878,7 +771,6 @@ function createProjectSection(category) {
                 }
 
             );
-
 
 
             moreButton.textContent =
@@ -895,11 +787,6 @@ function createProjectSection(category) {
     );
 
 
-
-    /*
-        If there are <= 8 images
-        hide SEE MORE button.
-    */
 
     setTimeout(
 
@@ -921,7 +808,7 @@ function createProjectSection(category) {
 
         },
 
-        1300
+        1500
 
     );
 
@@ -931,7 +818,7 @@ function createProjectSection(category) {
 
 
 /* ==========================================================
-   RENDER ALL PROJECTS
+   PROJECTS
 ========================================================== */
 
 function renderProjects() {
@@ -949,82 +836,103 @@ function renderProjects() {
 
 
 /* ==========================================================
-   TESTIMONIALS
+   TESTIMONIAL GROUP
+========================================================== */
+
+function createTestimonialGroup() {
+
+
+    const group =
+        document.createElement(
+            "div"
+        );
+
+
+    group.className =
+        "testimonial-group";
+
+
+    testimonials.forEach(
+
+        testimonial => {
+
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "review-card";
+
+
+            card.innerHTML = `
+
+                <div class="stars">
+
+                    ${testimonial[0]}
+
+                </div>
+
+
+                <p>
+
+                    “${testimonial[1]}”
+
+                </p>
+
+
+                <strong>
+
+                    ${testimonial[2]}
+
+                </strong>
+
+            `;
+
+
+            group.appendChild(
+                card
+            );
+
+
+        }
+
+    );
+
+
+    return group;
+
+}
+
+
+
+/* ==========================================================
+   ENDLESS TESTIMONIAL
 ========================================================== */
 
 function renderTestimonials() {
 
 
-    const testimonialTrack =
-
+    const track =
         document.getElementById(
             "testimonialTrack"
         );
 
 
-
-    /*
-        Duplicate testimonials
-        for endless continuous movement.
-    */
-
-    const repeatedTestimonials = [
-
-        ...testimonials,
-
-        ...testimonials
-
-    ];
+    track.innerHTML =
+        "";
 
 
-
-    testimonialTrack.innerHTML =
-
-        repeatedTestimonials
-
-        .map(
-
-            testimonial => `
+    track.appendChild(
+        createTestimonialGroup()
+    );
 
 
-                <article
-                    class="review-card"
-                >
-
-
-                    <div
-                        class="stars"
-                    >
-
-                        ${testimonial[0]}
-
-                    </div>
-
-
-
-                    <p>
-
-                        “${testimonial[1]}”
-
-                    </p>
-
-
-
-                    <strong>
-
-                        ${testimonial[2]}
-
-                    </strong>
-
-
-                </article>
-
-
-            `
-
-        )
-
-        .join("");
+    track.appendChild(
+        createTestimonialGroup()
+    );
 
 
 }
@@ -1032,67 +940,31 @@ function renderTestimonials() {
 
 
 /* ==========================================================
-   THEME SYSTEM
+   NAVIGATION WITHOUT #HOME/#WORK ETC
 ========================================================== */
 
-function initializeTheme() {
+function initializeCleanNavigation() {
 
 
-    const themeButton =
-        document.getElementById(
-            "themeSwitch"
-        );
+    /*
+        Remove any existing hash
+        when page opens.
+    */
+
+    if (
+        window.location.hash
+    ) {
 
 
-    const mobileThemeButton =
-        document.getElementById(
-            "mobileThemeSwitch"
-        );
+        history.replaceState(
 
+            null,
 
-    const systemTheme =
+            "",
 
-        window.matchMedia(
-            "(prefers-color-scheme: dark)"
-        );
-
-
-
-    function toggleTheme() {
-
-
-        const currentTheme =
-
-            document
-            .documentElement
-            .dataset
-            .theme;
-
-
-
-        const newTheme =
-
-            currentTheme === "dark"
-
-            ? "light"
-
-            : "dark";
-
-
-
-        document
-        .documentElement
-        .dataset
-        .theme =
-        newTheme;
-
-
-
-        localStorage.setItem(
-
-            "portfolio-theme",
-
-            newTheme
+            window.location.pathname
+            +
+            window.location.search
 
         );
 
@@ -1101,30 +973,175 @@ function initializeTheme() {
 
 
 
-    themeButton.addEventListener(
+    document
+    .querySelectorAll(
+        "[data-scroll]"
+    )
 
-        "click",
+    .forEach(
 
-        toggleTheme
+        button => {
+
+
+            button.addEventListener(
+
+                "click",
+
+                function () {
+
+
+                    const targetID =
+                        button.dataset.scroll;
+
+
+                    const target =
+                        document.getElementById(
+                            targetID
+                        );
+
+
+                    if (!target) {
+
+                        return;
+
+                    }
+
+
+                    target.scrollIntoView(
+
+                        {
+
+                            behavior:
+                                "smooth",
+
+                            block:
+                                "start"
+
+                        }
+
+                    );
+
+
+                    /*
+                        KEEP CLEAN URL
+                    */
+
+                    history.replaceState(
+
+                        null,
+
+                        "",
+
+                        window.location.pathname
+                        +
+                        window.location.search
+
+                    );
+
+
+                    closeMobileMenu();
+
+
+                }
+
+            );
+
+
+        }
 
     );
 
 
-    mobileThemeButton.addEventListener(
+}
 
-        "click",
 
-        toggleTheme
+
+/* ==========================================================
+   THEME
+========================================================== */
+
+function initializeTheme() {
+
+
+    const buttons = [
+
+        document.getElementById(
+            "themeSwitch"
+        ),
+
+        document.getElementById(
+            "mobileThemeSwitch"
+        )
+
+    ];
+
+
+    function toggleTheme() {
+
+
+        const current =
+            document
+            .documentElement
+            .dataset
+            .theme;
+
+
+        const next =
+            current === "dark"
+            ?
+            "light"
+            :
+            "dark";
+
+
+        document
+        .documentElement
+        .dataset
+        .theme =
+            next;
+
+
+        localStorage.setItem(
+
+            "portfolio-theme",
+
+            next
+
+        );
+
+
+    }
+
+
+    buttons.forEach(
+
+        button => {
+
+
+            if (button) {
+
+                button.addEventListener(
+
+                    "click",
+
+                    toggleTheme
+
+                );
+
+            }
+
+
+        }
 
     );
 
 
 
-    /*
-        Follow browser automatically
-        unless user manually selected
-        light/dark previously.
-    */
+    const systemTheme =
+        window.matchMedia(
+            "(prefers-color-scheme: dark)"
+        );
+
 
     systemTheme.addEventListener(
 
@@ -1133,14 +1150,11 @@ function initializeTheme() {
         function (event) {
 
 
-            const savedTheme =
-
-                localStorage.getItem(
+            if (
+                !localStorage.getItem(
                     "portfolio-theme"
-                );
-
-
-            if (!savedTheme) {
+                )
+            ) {
 
 
                 document
@@ -1148,11 +1162,11 @@ function initializeTheme() {
                 .dataset
                 .theme =
 
-                event.matches
-
-                ? "dark"
-
-                : "light";
+                    event.matches
+                    ?
+                    "dark"
+                    :
+                    "light";
 
 
             }
@@ -1174,22 +1188,19 @@ function initializeTheme() {
 function initializeMenu() {
 
 
-    const menuButton =
-
+    const button =
         document.getElementById(
             "menuBtn"
         );
 
 
-    const mobileMenu =
-
+    const menu =
         document.getElementById(
             "mobileMenu"
         );
 
 
-
-    menuButton.addEventListener(
+    button.addEventListener(
 
         "click",
 
@@ -1197,88 +1208,27 @@ function initializeMenu() {
 
 
             const open =
-
-                mobileMenu
+                menu
                 .classList
                 .toggle(
                     "open"
                 );
 
 
-
-            menuButton.setAttribute(
+            button.setAttribute(
 
                 "aria-expanded",
 
-                open
+                String(open)
 
             );
 
 
-            mobileMenu.setAttribute(
+            menu.setAttribute(
 
                 "aria-hidden",
 
-                !open
-
-            );
-
-
-        }
-
-    );
-
-
-
-    const mobileLinks =
-
-        mobileMenu
-        .querySelectorAll(
-            "a"
-        );
-
-
-
-    mobileLinks.forEach(
-
-        function (link) {
-
-
-            link.addEventListener(
-
-                "click",
-
-                function () {
-
-
-                    mobileMenu
-                    .classList
-                    .remove(
-                        "open"
-                    );
-
-
-                    menuButton
-                    .setAttribute(
-
-                        "aria-expanded",
-
-                        "false"
-
-                    );
-
-
-                    mobileMenu
-                    .setAttribute(
-
-                        "aria-hidden",
-
-                        "true"
-
-                    );
-
-
-                }
+                String(!open)
 
             );
 
@@ -1292,30 +1242,58 @@ function initializeMenu() {
 
 
 
+function closeMobileMenu() {
+
+
+    const button =
+        document.getElementById(
+            "menuBtn"
+        );
+
+
+    const menu =
+        document.getElementById(
+            "mobileMenu"
+        );
+
+
+    if (!menu) {
+
+        return;
+
+    }
+
+
+    menu.classList.remove(
+        "open"
+    );
+
+
+    button.setAttribute(
+
+        "aria-expanded",
+
+        "false"
+
+    );
+
+
+    menu.setAttribute(
+
+        "aria-hidden",
+
+        "true"
+
+    );
+
+
+}
+
+
+
 /* ==========================================================
-   EMAIL VALIDATION
+   EMAIL DOMAIN VALIDATION
 ========================================================== */
-
-
-/*
-    This checks whether the email DOMAIN
-    has MX records.
-
-    Example:
-
-    someone@gmail.com
-
-    gmail.com → mail server exists.
-
-    IMPORTANT:
-
-    Browser-based static GitHub Pages
-    cannot reliably know whether the exact
-    mailbox "someone@gmail.com" exists.
-
-    For exact mailbox verification,
-    OTP / verification email API is required.
-*/
 
 async function emailDomainLooksValid(
     email
@@ -1323,12 +1301,9 @@ async function emailDomainLooksValid(
 
 
     const domain =
-
         email
         .split("@")[1]
-        ?.trim()
-        .toLowerCase();
-
+        ?.trim();
 
 
     if (!domain) {
@@ -1338,12 +1313,10 @@ async function emailDomainLooksValid(
     }
 
 
-
     try {
 
 
         const response =
-
             await fetch(
 
                 "https://dns.google/resolve?name="
@@ -1361,38 +1334,29 @@ async function emailDomainLooksValid(
             );
 
 
-
-        const result =
-
+        const data =
             await response.json();
-
 
 
         return (
 
             Array.isArray(
-                result.Answer
+                data.Answer
             )
 
             &&
 
-            result.Answer.length > 0
+            data.Answer.length > 0
 
         );
 
 
     }
 
-    catch (error) {
+    catch {
 
-
-        /*
-            DNS service unavailable হলে
-            legitimate user-কে block করবো না.
-        */
 
         return true;
-
 
     }
 
@@ -1405,29 +1369,25 @@ async function emailDomainLooksValid(
    CONTACT FORM
 ========================================================== */
 
-function initializeContactForm() {
+function initializeForm() {
 
 
     const form =
-
         document.getElementById(
             "contactForm"
         );
 
 
-    const formStatus =
-
+    const status =
         document.getElementById(
             "formStatus"
         );
 
 
-    const submitButton =
-
+    const button =
         document.getElementById(
             "submitBtn"
         );
-
 
 
     form.addEventListener(
@@ -1440,45 +1400,36 @@ function initializeContactForm() {
             event.preventDefault();
 
 
-
-            formStatus.className =
+            status.className =
                 "form-status";
 
 
-            formStatus.textContent =
+            status.textContent =
                 "";
 
 
-
-            /* Browser validation */
-
-            if (!form.checkValidity()) {
+            if (
+                !form.checkValidity()
+            ) {
 
 
                 form.reportValidity();
 
-
                 return;
-
 
             }
 
 
-
             const formData =
-
                 new FormData(
                     form
                 );
 
 
-
-            /*
-                Honeypot spam protection
-            */
-
             if (
-                formData.get("website")
+                formData.get(
+                    "website"
+                )
             ) {
 
                 return;
@@ -1486,56 +1437,44 @@ function initializeContactForm() {
             }
 
 
-
             const email =
-
                 String(
+
                     formData.get(
                         "email"
                     )
+
                     || ""
-                )
 
-                .trim();
-
+                ).trim();
 
 
-            submitButton.disabled =
+            button.disabled =
                 true;
 
 
-
-            formStatus.textContent =
-
+            status.textContent =
                 "Checking email...";
 
 
-
-            /* Validate MX */
-
-            const emailOkay =
-
+            const valid =
                 await emailDomainLooksValid(
                     email
                 );
 
 
+            if (!valid) {
 
-            if (!emailOkay) {
 
-
-                formStatus.className =
-
+                status.className =
                     "form-status error";
 
 
-                formStatus.textContent =
-
-                    "This email domain does not appear able to receive email.";
-
+                status.textContent =
+                    "Please enter a valid email address.";
 
 
-                submitButton.disabled =
+                button.disabled =
                     false;
 
 
@@ -1544,11 +1483,6 @@ function initializeContactForm() {
 
             }
 
-
-
-            /*
-                Script URL missing
-            */
 
             if (
 
@@ -1563,18 +1497,15 @@ function initializeContactForm() {
             ) {
 
 
-                formStatus.className =
-
+                status.className =
                     "form-status error";
 
 
-                formStatus.textContent =
+                status.textContent =
+                    "Google Sheet connection is not configured yet.";
 
-                    "Google Sheet connection has not been configured yet.";
 
-
-                submitButton.disabled =
-
+                button.disabled =
                     false;
 
 
@@ -1584,59 +1515,35 @@ function initializeContactForm() {
             }
 
 
-
-            formStatus.textContent =
-
+            status.textContent =
                 "Sending...";
 
 
 
             const payload = {
 
-
                 name:
-
                     formData.get(
                         "name"
                     ),
 
-
                 email:
-
                     email,
 
-
                 projectType:
-
                     formData.get(
                         "projectType"
                     ),
 
-
                 budget:
-
                     formData.get(
                         "budget"
                     ),
 
-
                 message:
-
                     formData.get(
                         "message"
-                    ),
-
-
-                page:
-
-                    window.location.href,
-
-
-                submittedAt:
-
-                    new Date()
-                    .toISOString()
-
+                    )
 
             };
 
@@ -1645,88 +1552,65 @@ function initializeContactForm() {
             try {
 
 
-                /*
-                    no-cors is used because
-                    Google Apps Script
-                    redirects requests.
-                */
-
                 await fetch(
 
                     GOOGLE_SCRIPT_URL,
 
                     {
 
-
                         method:
                             "POST",
-
 
                         mode:
                             "no-cors",
 
-
                         headers: {
 
                             "Content-Type":
-
                             "text/plain;charset=utf-8"
 
                         },
 
-
                         body:
-
                             JSON.stringify(
                                 payload
                             )
-
 
                     }
 
                 );
 
 
-
                 form.reset();
 
 
-
-                formStatus.className =
-
+                status.className =
                     "form-status success";
 
 
-
-                formStatus.textContent =
-
-                    "Thanks — your inquiry has been sent successfully.";
+                status.textContent =
+                    "Thanks — your inquiry has been sent.";
 
 
             }
 
+            catch {
 
-            catch (error) {
 
-
-                formStatus.className =
-
+                status.className =
                     "form-status error";
 
 
-                formStatus.textContent =
-
-                    "Could not send your inquiry. Please try again.";
+                status.textContent =
+                    "Could not send your message. Please try again.";
 
 
             }
-
 
             finally {
 
 
-                submitButton.disabled =
-
+                button.disabled =
                     false;
 
 
@@ -1746,27 +1630,18 @@ function initializeContactForm() {
    SCROLL REVEAL
 ========================================================== */
 
-function initializeRevealAnimation() {
-
-
-    const revealElements =
-
-        document.querySelectorAll(
-            ".reveal"
-        );
-
+function initializeReveal() {
 
 
     const observer =
-
         new IntersectionObserver(
 
-            function (entries) {
+            entries => {
 
 
                 entries.forEach(
 
-                    function (entry) {
+                    entry => {
 
 
                         if (
@@ -1781,8 +1656,7 @@ function initializeRevealAnimation() {
                             );
 
 
-                            observer
-                            .unobserve(
+                            observer.unobserve(
                                 entry.target
                             );
 
@@ -1799,23 +1673,25 @@ function initializeRevealAnimation() {
 
             {
 
-                threshold: 0.12
+                threshold: .12
 
             }
 
         );
 
 
+    document
+    .querySelectorAll(
+        ".reveal"
+    )
 
-    revealElements.forEach(
+    .forEach(
 
-        function (element) {
-
+        element => {
 
             observer.observe(
                 element
             );
-
 
         }
 
@@ -1834,11 +1710,9 @@ function initializeBackToTop() {
 
 
     const button =
-
         document.getElementById(
             "backToTop"
         );
-
 
 
     window.addEventListener(
@@ -1860,13 +1734,10 @@ function initializeBackToTop() {
         },
 
         {
-
             passive: true
-
         }
 
     );
-
 
 
     button.addEventListener(
@@ -1890,6 +1761,19 @@ function initializeBackToTop() {
             );
 
 
+            history.replaceState(
+
+                null,
+
+                "",
+
+                window.location.pathname
+                +
+                window.location.search
+
+            );
+
+
         }
 
     );
@@ -1900,72 +1784,69 @@ function initializeBackToTop() {
 
 
 /* ==========================================================
-   PROFILE IMAGE FALLBACK
+   PROFILE FALLBACK
 ========================================================== */
 
 const profileImage =
-
     document.getElementById(
         "profileImage"
     );
 
 
-
-profileImage.addEventListener(
-
-    "error",
-
-    function () {
+if (profileImage) {
 
 
-        profileImage.style.display =
-            "none";
+    profileImage.addEventListener(
+
+        "error",
+
+        function () {
 
 
-    }
+            profileImage.style.display =
+                "none";
 
-);
+
+        }
+
+    );
+
+
+}
 
 
 
 /* ==========================================================
-   FOOTER YEAR
+   YEAR
 ========================================================== */
 
 document.getElementById(
     "year"
 ).textContent =
-
-new Date().getFullYear();
+    new Date().getFullYear();
 
 
 
 /* ==========================================================
-   INITIALIZE EVERYTHING
+   START EVERYTHING
 ========================================================== */
 
 renderActiveLogos();
 
-
 renderSocialLinks();
-
 
 renderProjects();
 
-
 renderTestimonials();
 
+initializeCleanNavigation();
 
 initializeTheme();
 
-
 initializeMenu();
 
+initializeForm();
 
-initializeContactForm();
-
-
-initializeRevealAnimation();
-
+initializeReveal();
 
 initializeBackToTop();
