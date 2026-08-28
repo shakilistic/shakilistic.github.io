@@ -9,7 +9,7 @@ const GOOGLE_SCRIPT_URL =
 
 
 /* ==========================================================
-   PROJECT CATEGORIES + ORIGINAL DESCRIPTION TEXTS
+   PROJECT CATEGORIES
 ========================================================== */
 
 const categories = [
@@ -103,7 +103,7 @@ const categories = [
 
 
 /* ==========================================================
-   INLINE LOGOS
+   INLINE PLATFORM LOGOS
 ========================================================== */
 
 const platformLogos = {
@@ -320,72 +320,44 @@ const platformLogos = {
 
 
 /* ==========================================================
-   WHERE I'M ACTIVE
-   FIGMA REMOVED — NOTHING ELSE REMOVED
+   ACTIVE PLATFORMS
 ========================================================== */
 
 const activePlatforms = [
 
     {
-        name:
-            "Adobe",
-
-        key:
-            "adobe"
+        name: "Adobe",
+        key: "adobe"
     },
 
-
     {
-        name:
-            "Behance",
-
-        key:
-            "behance"
+        name: "Behance",
+        key: "behance"
     },
 
-
     {
-        name:
-            "LinkedIn",
-
-        key:
-            "linkedin"
+        name: "LinkedIn",
+        key: "linkedin"
     },
 
-
     {
-        name:
-            "X",
-
-        key:
-            "x"
+        name: "X",
+        key: "x"
     },
 
-
     {
-        name:
-            "Pinterest",
-
-        key:
-            "pinterest"
+        name: "Pinterest",
+        key: "pinterest"
     },
 
-
     {
-        name:
-            "GitHub",
-
-        key:
-            "github"
+        name: "GitHub",
+        key: "github"
     },
 
-
     {
-        name:
-            "Dribbble",
-
-        key:
-            "dribbble"
+        name: "Dribbble",
+        key: "dribbble"
     }
 
 ];
@@ -393,13 +365,12 @@ const activePlatforms = [
 
 
 /* ==========================================================
-   SOCIAL PROFILES
+   SOCIAL LINKS
 ========================================================== */
 
 const socialProfiles = [
 
     {
-
         name:
             "Behance",
 
@@ -408,12 +379,10 @@ const socialProfiles = [
 
         key:
             "behance"
-
     },
 
 
     {
-
         name:
             "X",
 
@@ -422,12 +391,10 @@ const socialProfiles = [
 
         key:
             "x"
-
     },
 
 
     {
-
         name:
             "Pinterest",
 
@@ -436,12 +403,10 @@ const socialProfiles = [
 
         key:
             "pinterest"
-
     },
 
 
     {
-
         name:
             "LinkedIn",
 
@@ -450,12 +415,10 @@ const socialProfiles = [
 
         key:
             "linkedin"
-
     },
 
 
     {
-
         name:
             "GitHub",
 
@@ -464,12 +427,10 @@ const socialProfiles = [
 
         key:
             "github"
-
     },
 
 
     {
-
         name:
             "Dribbble",
 
@@ -478,7 +439,6 @@ const socialProfiles = [
 
         key:
             "dribbble"
-
     }
 
 ];
@@ -487,73 +447,62 @@ const socialProfiles = [
 
 /* ==========================================================
    TESTIMONIALS
+   ALL CLIENT NAMES = ANONYMOUS CLIENT
 ========================================================== */
 
 const testimonials = [
 
     [
-
         "★★★★★",
 
         "Very clean, thoughtful and professional execution. The design feels polished and easy to understand.",
 
-        "BOOK COVER CLIENT"
-
+        "ANONYMOUS CLIENT"
     ],
 
 
     [
-
         "★★★★★",
 
         "Excellent communication and attention to detail. Revisions were handled carefully and quickly.",
 
-        "DESIGN CLIENT"
-
+        "ANONYMOUS CLIENT"
     ],
 
 
     [
-
         "★★★★★",
 
         "A strong visual direction with a premium finish. Exactly the kind of designer I wanted to work with.",
 
-        "BRAND CLIENT"
-
+        "ANONYMOUS CLIENT"
     ],
 
 
     [
-
         "★★★★★",
 
         "The final result felt distinctive without being over-designed. Great balance and hierarchy.",
 
-        "CREATIVE CLIENT"
-
+        "ANONYMOUS CLIENT"
     ],
 
 
     [
-
         "★★★★★",
 
         "Reliable, responsive and creative from beginning to end. I would gladly collaborate again.",
 
-        "RETURNING CLIENT"
-
+        "ANONYMOUS CLIENT"
     ],
 
 
     [
-
         "★★★★★",
 
         "The work immediately looked more professional. Strong taste, typography and presentation.",
 
-        "DIGITAL CLIENT"
-
+        "ANONYMOUS CLIENT"
     ]
 
 ];
@@ -638,10 +587,6 @@ let logoLoopPaused =
     false;
 
 
-let logoLoopFrame =
-    null;
-
-
 
 function renderActiveLogos() {
 
@@ -674,10 +619,6 @@ function renderActiveLogos() {
 }
 
 
-
-/* ==========================================================
-   START LOGO LOOP
-========================================================== */
 
 function startLogoLoop() {
 
@@ -735,44 +676,6 @@ function startLogoLoop() {
 
 
 
-    marquee.addEventListener(
-
-        "touchstart",
-
-        function () {
-
-            logoLoopPaused =
-                true;
-
-        },
-
-        {
-            passive: true
-        }
-
-    );
-
-
-
-    marquee.addEventListener(
-
-        "touchend",
-
-        function () {
-
-            logoLoopPaused =
-                false;
-
-        },
-
-        {
-            passive: true
-        }
-
-    );
-
-
-
     function animate() {
 
 
@@ -787,10 +690,9 @@ function startLogoLoop() {
         ) {
 
 
-            logoLoopFrame =
-                requestAnimationFrame(
-                    animate
-                );
+            requestAnimationFrame(
+                animate
+            );
 
 
             return;
@@ -837,10 +739,9 @@ function startLogoLoop() {
 
 
 
-        logoLoopFrame =
-            requestAnimationFrame(
-                animate
-            );
+        requestAnimationFrame(
+            animate
+        );
 
 
     }
@@ -858,13 +759,18 @@ function startLogoLoop() {
    SOCIAL LINKS
 ========================================================== */
 
-function renderSocialLinks() {
+function createSocialLinks(
+    container
+) {
 
 
-    const container =
-        document.getElementById(
-            "socialLinks"
-        );
+    if (
+        !container
+    ) {
+
+        return;
+
+    }
 
 
     container.innerHTML =
@@ -927,6 +833,31 @@ function renderSocialLinks() {
 
 
         }
+
+    );
+
+
+}
+
+
+
+function renderSocialLinks() {
+
+
+    createSocialLinks(
+
+        document.getElementById(
+            "socialLinks"
+        )
+
+    );
+
+
+    createSocialLinks(
+
+        document.getElementById(
+            "mobileSocialLinks"
+        )
 
     );
 
@@ -1078,10 +1009,6 @@ function createProjectSection(
 
         card.className =
             "project-card";
-
-
-        card.dataset.order =
-            String(i);
 
 
         card.hidden =
@@ -1239,14 +1166,6 @@ function createProjectSection(
 
 
 
-        /*
-           3 OR LESS:
-           NO BUTTON
-
-           MORE THAN 3:
-           SHOW BUTTON
-        */
-
         if (
             loadedCount > 3
         ) {
@@ -1332,7 +1251,7 @@ function createProjectSection(
 
 
 /* ==========================================================
-   RENDER PROJECTS
+   PROJECTS
 ========================================================== */
 
 function renderProjects() {
@@ -1427,7 +1346,7 @@ function createTestimonialGroup() {
 
 
 /* ==========================================================
-   TESTIMONIAL LOOP
+   TESTIMONIAL RENDER
 ========================================================== */
 
 function renderTestimonials() {
@@ -1443,6 +1362,11 @@ function renderTestimonials() {
         "";
 
 
+    /*
+       3 copies provide enough content
+       for smooth manual dragging + loop.
+    */
+
     track.appendChild(
         createTestimonialGroup()
     );
@@ -1451,6 +1375,456 @@ function renderTestimonials() {
     track.appendChild(
         createTestimonialGroup()
     );
+
+
+    track.appendChild(
+        createTestimonialGroup()
+    );
+
+
+}
+
+
+
+/* ==========================================================
+   TESTIMONIAL:
+   AUTO LOOP + HOVER PAUSE + MOUSE DRAG + MOBILE SWIPE
+========================================================== */
+
+function initializeTestimonialControl() {
+
+
+    const marquee =
+        document.getElementById(
+            "testimonialMarquee"
+        );
+
+
+    const track =
+        document.getElementById(
+            "testimonialTrack"
+        );
+
+
+    if (
+        !marquee ||
+        !track
+    ) {
+
+        return;
+
+    }
+
+
+
+    let offset =
+        0;
+
+
+    let paused =
+        false;
+
+
+    let dragging =
+        false;
+
+
+    let startX =
+        0;
+
+
+    let startOffset =
+        0;
+
+
+
+    function getGroupWidth() {
+
+
+        const group =
+            track.querySelector(
+                ".testimonial-group"
+            );
+
+
+        return group
+            ?
+            group.offsetWidth
+            :
+            0;
+
+
+    }
+
+
+
+    function normalizeOffset() {
+
+
+        const groupWidth =
+            getGroupWidth();
+
+
+        if (
+            !groupWidth
+        ) {
+
+            return;
+
+        }
+
+
+
+        while (
+            offset >= groupWidth
+        ) {
+
+
+            offset -=
+                groupWidth;
+
+
+        }
+
+
+
+        while (
+            offset < 0
+        ) {
+
+
+            offset +=
+                groupWidth;
+
+
+        }
+
+
+    }
+
+
+
+    function draw() {
+
+
+        normalizeOffset();
+
+
+        track.style.transform =
+
+            `translate3d(-${offset}px,0,0)`;
+
+
+    }
+
+
+
+    marquee.addEventListener(
+
+        "mouseenter",
+
+        function () {
+
+            paused =
+                true;
+
+        }
+
+    );
+
+
+
+    marquee.addEventListener(
+
+        "mouseleave",
+
+        function () {
+
+
+            if (
+                !dragging
+            ) {
+
+
+                paused =
+                    false;
+
+
+            }
+
+
+        }
+
+    );
+
+
+
+    marquee.addEventListener(
+
+        "pointerdown",
+
+        function (event) {
+
+
+            dragging =
+                true;
+
+
+            paused =
+                true;
+
+
+            startX =
+                event.clientX;
+
+
+            startOffset =
+                offset;
+
+
+            marquee
+                .classList
+                .add(
+                    "dragging"
+                );
+
+
+            marquee.setPointerCapture(
+                event.pointerId
+            );
+
+
+        }
+
+    );
+
+
+
+    marquee.addEventListener(
+
+        "pointermove",
+
+        function (event) {
+
+
+            if (
+                !dragging
+            ) {
+
+                return;
+
+            }
+
+
+
+            const movement =
+                event.clientX
+                -
+                startX;
+
+
+
+            offset =
+                startOffset
+                -
+                movement;
+
+
+
+            draw();
+
+
+        }
+
+    );
+
+
+
+    function stopDragging(
+        event
+    ) {
+
+
+        if (
+            !dragging
+        ) {
+
+            return;
+
+        }
+
+
+        dragging =
+            false;
+
+
+        marquee
+            .classList
+            .remove(
+                "dragging"
+            );
+
+
+        try {
+
+
+            marquee.releasePointerCapture(
+                event.pointerId
+            );
+
+
+        }
+
+        catch (
+            error
+        ) {}
+
+
+        /*
+           Desktop mouse:
+           if pointer remains over section,
+           keep paused.
+
+           Otherwise resume.
+        */
+
+        const rect =
+            marquee
+                .getBoundingClientRect();
+
+
+        const inside =
+            event.clientX >= rect.left
+            &&
+            event.clientX <= rect.right
+            &&
+            event.clientY >= rect.top
+            &&
+            event.clientY <= rect.bottom;
+
+
+        paused =
+            inside;
+
+
+    }
+
+
+
+    marquee.addEventListener(
+
+        "pointerup",
+
+        stopDragging
+
+    );
+
+
+
+    marquee.addEventListener(
+
+        "pointercancel",
+
+        stopDragging
+
+    );
+
+
+
+    /*
+       Mouse wheel horizontal control.
+       Shift + wheel OR trackpad horizontal motion.
+    */
+
+    marquee.addEventListener(
+
+        "wheel",
+
+        function (event) {
+
+
+            const horizontalMovement =
+                Math.abs(event.deltaX)
+                >
+                Math.abs(event.deltaY)
+                ?
+                event.deltaX
+                :
+                (
+                    event.shiftKey
+                    ?
+                    event.deltaY
+                    :
+                    0
+                );
+
+
+            if (
+                horizontalMovement === 0
+            ) {
+
+                return;
+
+            }
+
+
+            event.preventDefault();
+
+
+            paused =
+                true;
+
+
+            offset +=
+                horizontalMovement;
+
+
+            draw();
+
+
+        },
+
+        {
+            passive:
+                false
+        }
+
+    );
+
+
+
+    function animate() {
+
+
+        if (
+            !paused
+            &&
+            !dragging
+        ) {
+
+
+            offset +=
+                0.45;
+
+
+            draw();
+
+
+        }
+
+
+        requestAnimationFrame(
+            animate
+        );
+
+
+    }
+
+
+
+    draw();
+
+    animate();
 
 
 }
@@ -1823,7 +2197,7 @@ function closeMobileMenu() {
 
 
 /* ==========================================================
-   EMAIL DOMAIN VALIDATION
+   EMAIL VALIDATION
 ========================================================== */
 
 async function emailDomainLooksValid(
@@ -2351,7 +2725,7 @@ function initializeBackToTop() {
 
 
 /* ==========================================================
-   PROFILE IMAGE FALLBACK
+   PROFILE FALLBACK
 ========================================================== */
 
 const profileImage =
@@ -2412,6 +2786,8 @@ renderSocialLinks();
 renderProjects();
 
 renderTestimonials();
+
+initializeTestimonialControl();
 
 initializeCleanNavigation();
 
