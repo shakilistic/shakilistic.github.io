@@ -86,12 +86,12 @@ a{color:inherit;text-decoration:none}
 .profiles-section{width:100%;padding:110px 0;border-bottom:1px solid var(--line);overflow:hidden}
 .profiles-heading{width:min(var(--max),calc(100% - 48px));margin:auto;text-align:center}
 .profiles-heading h2{margin-top:14px;font-family:var(--display);font-size:clamp(58px,7vw,100px);line-height:.86;font-weight:400;letter-spacing:-.025em;text-transform:uppercase}.profiles-heading h2 span{color:var(--orange)}
-.profiles-slider{margin-top:72px;width:100%;overflow:hidden}.profiles-track{width:max-content;display:flex;gap:22px;animation:profileLoop 25s linear infinite;will-change:transform}
+.profiles-slider{margin-top:72px;width:100%;overflow:hidden}.profiles-track{width:max-content;display:flex;gap:22px;will-change:transform;animation:profileLoop 24s linear infinite}
 .profiles-slider:hover .profiles-track{animation-play-state:paused}
 .profile-logo{width:108px;height:108px;flex:0 0 108px;border-radius:50%;border:1px solid rgba(245,242,235,.22);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--text);overflow:hidden;transition:.3s}
 .profile-logo:hover{transform:scale(1.05);border-color:var(--orange)}
 .profile-logo svg{width:64%;height:64%;display:block}
-@keyframes profileLoop{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@keyframes profileLoop{from{transform:translate3d(0,0,0)}to{transform:translate3d(calc(-50% - 11px),0,0)}}
 
 .contact-section{padding:90px 0}.contact-card{display:grid;grid-template-columns:1fr 1fr;gap:75px;padding:58px;border:1px solid var(--line);border-radius:28px;background:var(--surface)}
 .contact-title{margin-top:15px;font-family:var(--display);font-size:clamp(65px,7vw,100px);line-height:.86;font-weight:400;letter-spacing:-.025em}.contact-title span{color:var(--orange)}
@@ -103,8 +103,8 @@ a{color:inherit;text-decoration:none}
 .form-group input,.form-group textarea{width:100%;padding:17px 19px;border:1px solid var(--line);border-radius:13px;background:transparent;color:var(--text);outline:none}.form-group input{height:58px}.form-group textarea{min-height:165px;resize:vertical}
 .form-group input:focus,.form-group textarea:focus{border-color:var(--orange)}.form-group input::placeholder,.form-group textarea::placeholder{color:#777}.submit-button{min-height:58px}
 
-.site-footer{border-top:1px solid var(--line);padding:25px 0}.footer-inner{width:min(var(--max),calc(100% - 48px));margin:auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px}
-.footer-socials{display:flex;gap:8px}.footer-socials .social-link{width:32px;height:32px}.footer-socials .social-link svg{width:15px;height:15px}
+.site-footer{border-top:1px solid var(--line);padding:25px 0}.footer-inner{width:min(var(--max),calc(100% - 48px));margin:auto;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px}
+.footer-socials{display:none!important}.footer-socials .social-link{width:32px;height:32px}.footer-socials .social-link svg{width:15px;height:15px}
 .footer-copy,.footer-role{font-family:var(--mono);font-size:7px;letter-spacing:.08em;color:#777}.footer-role{text-align:right}
 .back-to-top{position:fixed;right:25px;bottom:25px;z-index:999;width:47px;height:47px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--text);font-size:19px;opacity:0;visibility:hidden;transform:translateY(12px);transition:.25s}
 .back-to-top.visible{opacity:1;visibility:visible;transform:translateY(0)}.back-to-top:hover{background:var(--orange);border-color:var(--orange);color:#fff}
@@ -134,9 +134,9 @@ html{scroll-padding-top:72px}.section,.design-section,.client-section{width:calc
 .portfolio-grid{grid-template-columns:1fr;gap:14px;margin-top:38px}.show-more{margin-top:18px}
 .client-carousel{margin-top:38px}.client-card{flex-basis:100%;min-height:245px;padding:19px}
 .reason-section{padding:75px 0}.reason-grid{grid-template-columns:1fr;gap:25px}.reason-copy{padding-top:8px}
-.profiles-section{padding:80px 0}.profiles-heading{width:calc(100% - 34px)}.profiles-track{gap:15px}.profile-logo{width:82px;height:82px;flex-basis:82px}
+.profiles-section{padding:80px 0}.profiles-heading{width:calc(100% - 34px)}.profiles-track{gap:15px}.active-set{gap:15px!important}.profile-logo{width:82px;height:82px;flex-basis:82px}
 .contact-section{padding:55px 0}.contact-card{grid-template-columns:1fr;gap:45px;padding:28px 20px;border-radius:22px}.contact-title{font-size:clamp(62px,19vw,105px)}
-.contact-copy>p{margin-top:34px;font-size:13px}.footer-inner{width:calc(100% - 34px);grid-template-columns:1fr;gap:14px}.footer-role{text-align:left}.back-to-top{right:18px;bottom:18px}
+.contact-copy>p{margin-top:34px;font-size:13px}.footer-inner{width:calc(100% - 34px);grid-template-columns:1fr;gap:10px}.footer-role{text-align:left}.back-to-top{right:18px;bottom:18px}
 }
 @media(max-width:390px){.hero-name{font-size:63px}.category-copy h2,.client-heading h2{font-size:51px}.contact-title{font-size:59px}}
 </style>
@@ -180,7 +180,7 @@ html{scroll-padding-top:72px}.section,.design-section,.client-section{width:calc
 </section>
 
 <!-- Intentionally empty: the previous "A curated selection..." line is removed. -->
-<section class="work-intro section" id="work"></section>
+<div id="work"></div>
 
 <section class="design-section">
 
@@ -252,7 +252,7 @@ html{scroll-padding-top:72px}.section,.design-section,.client-section{width:calc
 
 </main>
 
-<footer class="site-footer"><div class="footer-inner"><div class="footer-socials" id="footer-socials"></div><div class="footer-copy">© 2026 Shakilistic. All Rights Reserved.</div><div class="footer-role">VISUAL DESIGN EXPERT</div></div></footer>
+<footer class="site-footer"><div class="footer-inner"><div class="footer-copy">© 2026 Shakilistic. All Rights Reserved.</div><div class="footer-role">VISUAL DESIGN EXPERT</div></div></footer>
 <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
 
 <script>
@@ -265,12 +265,47 @@ html{scroll-padding-top:72px}.section,.design-section,.client-section{width:calc
    This prevents the previous "everything disappeared" issue.
    ========================================================= */
 const portfolioFiles={
-  book:["book-1.jpg","book-2.jpg","book-3.jpg","book-4.jpg","book-5.jpg","book-6.jpg"],
-  web:["web-1.jpg","web-2.jpg","web-3.jpg","web-4.jpg"],
-  social:["social-1.jpg","social-2.jpg","social-3.jpg","social-4.jpg"],
-  logo:["logo-1.jpg","logo-2.jpg","logo-3.jpg","logo-4.jpg"],
-  print:["print-1.jpg","print-2.jpg","print-3.jpg","print-4.jpg"]
+  book:["B1.jpg","B2.jpg","B3.jpg","B4.jpg","B5.jpg","B6.jpg","B7.jpg","B8.jpg","B9.jpg","B10.jpg"],
+  web:["W1.jpg","W2.jpg","W3.jpg","W4.jpg","W5.jpg","W6.jpg","W7.jpg","W8.jpg","W9.jpg","W10.jpg"],
+  social:["S1.jpg","S2.jpg","S3.jpg","S4.jpg","S5.jpg","S6.jpg","S7.jpg","S8.jpg","S9.jpg","S10.jpg"],
+  logo:["L1.jpg","L2.jpg","L3.jpg","L4.jpg","L5.jpg","L6.jpg","L7.jpg","L8.jpg","L9.jpg","L10.jpg"],
+  print:["P1.jpg","P2.jpg","P3.jpg","P4.jpg","P5.jpg","P6.jpg","P7.jpg","P8.jpg","P9.jpg","P10.jpg"]
 };
+
+/* Each uploaded design can use the simple B1/W1/S1/L1/P1 naming.
+   The loader checks the new naming first and also keeps compatibility
+   with the older book-1/web-1/... structure. Missing numbers stay blank. */
+function imageCandidates(prefix,index){
+  const n=index+1;
+  const base={
+    B:["B"+n+".jpg","B"+n+".jpeg","B"+n+".png","B"+n+".webp","book-"+n+".jpg","book-"+n+".jpeg","book-"+n+".png","book-"+n+".webp"],
+    W:["W"+n+".jpg","W"+n+".jpeg","W"+n+".png","W"+n+".webp","web-"+n+".jpg","web-"+n+".jpeg","web-"+n+".png","web-"+n+".webp"],
+    S:["S"+n+".jpg","S"+n+".jpeg","S"+n+".png","S"+n+".webp","social-"+n+".jpg","social-"+n+".jpeg","social-"+n+".png","social-"+n+".webp"],
+    L:["L"+n+".jpg","L"+n+".jpeg","L"+n+".png","L"+n+".webp","logo-"+n+".jpg","logo-"+n+".jpeg","logo-"+n+".png","logo-"+n+".webp"],
+    P:["P"+n+".jpg","P"+n+".jpeg","P"+n+".png","P"+n+".webp","print-"+n+".jpg","print-"+n+".jpeg","print-"+n+".png","print-"+n+".webp"]
+  }[prefix] || [];
+
+  const paths=[];
+  base.forEach(file=>{
+    paths.push("assets/images/"+file);
+    paths.push("assets/images/projects/"+file);
+  });
+  return paths;
+}
+
+function resolveImage(prefix,index,done){
+  const candidates=imageCandidates(prefix,index);
+  let i=0;
+  function next(){
+    if(i>=candidates.length){done(null);return;}
+    const img=new Image();
+    const path=candidates[i++];
+    img.onload=()=>done(path);
+    img.onerror=next;
+    img.src=path;
+  }
+  next();
+}
 
 const portfolioGrids=document.querySelectorAll(".portfolio-grid");
 
@@ -280,14 +315,14 @@ function createProjectCard(src,title,index){
   const box=document.createElement("div");
   box.className="project-image";
   const img=document.createElement("img");
-  img.src=src;
   img.alt=title+" "+(index+1);
   img.loading=index<3?"eager":"lazy";
   img.decoding="async";
+  img.src=src;
   box.appendChild(img);
   card.appendChild(box);
 
-  /* Never open the artwork in a new window. */
+  /* Portfolio samples are display-only. They never open a new tab/window. */
   card.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();});
   return card;
 }
@@ -298,44 +333,32 @@ function loadPortfolioGrid(grid){
   const files=portfolioFiles[prefix]||[];
   const section=grid.closest(".design-category");
   const button=section.querySelector(".show-more");
-  let loaded=0;
+  let found=0;
 
   files.forEach((file,index)=>{
-    const card=createProjectCard("assets/images/projects/"+file,title,index);
-    const img=card.querySelector("img");
+    resolveImage(prefix,index,(src)=>{
+      if(!src)return;
+      found++;
+      const card=createProjectCard(src,title,index);
+      grid.appendChild(card);
+      section.classList.remove("is-empty");
 
-    img.addEventListener("load",()=>{
-      loaded++;
-      if(loaded>0)section.classList.remove("is-empty");
-    });
+      if(found>3) card.classList.add("is-hidden");
 
-    img.addEventListener("error",()=>{
-      card.remove();
-      if(!grid.querySelector(".project-card")){
-        section.classList.add("is-empty");
+      if(found>3){
+        button.classList.add("visible");
       }
     });
-
-    grid.appendChild(card);
   });
 
-  if(files.length>3){
-    button.classList.add("visible");
-    button.addEventListener("click",()=>{
-      const expanded=button.dataset.expanded==="true";
-      grid.querySelectorAll(".project-card").forEach((card,index)=>{
-        if(index>=3)card.classList.toggle("is-hidden",expanded);
-      });
-      button.dataset.expanded=expanded?"false":"true";
-      button.textContent=expanded?"SHOW MORE +":"SHOW LESS −";
+  button.addEventListener("click",()=>{
+    const expanded=button.dataset.expanded==="true";
+    grid.querySelectorAll(".project-card").forEach((card,index)=>{
+      if(index>=3)card.classList.toggle("is-hidden",expanded);
     });
-  }
-
-  /* If fewer than 4 files actually load, the button disappears. */
-  setTimeout(()=>{
-    const count=grid.querySelectorAll(".project-card").length;
-    if(count<=3)button.classList.remove("visible");
-  },1500);
+    button.dataset.expanded=expanded?"false":"true";
+    button.textContent=expanded?"SHOW MORE +":"SHOW LESS −";
+  });
 }
 
 portfolioGrids.forEach(loadPortfolioGrid);
@@ -422,24 +445,30 @@ clientCarousel.addEventListener("touchend",()=>setTimeout(()=>clientPaused=false
    ========================================================= */
 const profilesTrack=document.getElementById("profiles-track");
 
-function socialMark(key){
-  const v='viewBox="0 0 24 24" aria-hidden="true"';
-  if(key==="behance")return `<svg ${v}><text x="2" y="16" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="currentColor">Bē</text></svg>`;
-  if(key==="x")return `<svg ${v}><path d="M5 4l14 16M19 4L5 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>`;
-  if(key==="pinterest")return `<svg ${v}><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 18.5c.9-2.2 1.1-3.1 1.1-3.1m0 0c-2.1-.5-3.3-2.1-3.3-4.3 0-3.2 2.5-5.4 5.8-5.4 2.8 0 4.8 1.9 4.8 4.6 0 3.1-1.7 5.7-4.2 5.7-1 0-1.9-.5-2.2-1.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`;
-  if(key==="linkedin")return `<svg ${v}><rect x="3" y="3" width="18" height="18" rx="2" fill="currentColor"/><text x="6" y="16.2" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="var(--surface)">in</text></svg>`;
-  if(key==="github")return `<svg ${v}><path d="M12 2.7a9.3 9.3 0 0 0-2.94 18.12c.47.09.64-.2.64-.45v-1.6c-2.61.57-3.16-1.11-3.16-1.11-.43-1.1-1.05-1.39-1.05-1.39-.86-.59.07-.58.07-.58.95.07 1.45.98 1.45.98.84 1.44 2.21 1.02 2.75.78.08-.61.33-1.02.6-1.26-2.08-.24-4.27-1.04-4.27-4.63 0-1.02.36-1.85.96-2.5-.1-.24-.42-1.2.09-2.49 0 0 .78-.25 2.56.95a8.86 8.86 0 0 1 4.66 0c1.78-1.2 2.56-.95 2.56-.95.51 1.29.19 2.25.09 2.49.6.65.96 1.48.96 2.5 0 3.6-2.19 4.38-4.28 4.62.34.3.64.88.64 1.78v2.64c0 .25.17.54.65.45A9.3 9.3 0 0 0 12 2.7Z" fill="currentColor"/></svg>`;
-  return `<svg ${v}><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="16" cy="12" r="1.2" fill="currentColor"/></svg>`;
+/* EXACTLY ONE visible sequence, duplicated once for a seamless loop.
+   No footer icons are involved here. */
+const activeKeys=["behance","x","pinterest","linkedin","github","dribbble"];
+
+function buildActiveSet(){
+  const set=document.createElement("div");
+  set.className="active-set";
+  set.style.display="flex";
+  set.style.gap="22px";
+  set.style.flex="none";
+
+  activeKeys.forEach(key=>{
+    const d=document.createElement("div");
+    d.className="profile-logo";
+    d.setAttribute("aria-hidden","true");
+    d.innerHTML=socialMark(key);
+    set.appendChild(d);
+  });
+  return set;
 }
-const profileKeys=["behance","x","pinterest","linkedin","github","dribbble"];
-function addProfile(key){
-  const d=document.createElement("div");
-  d.className="profile-logo";
-  d.setAttribute("aria-hidden","true");
-  d.innerHTML=socialMark(key);
-  profilesTrack.appendChild(d);
-}
-profileKeys.forEach(addProfile);
+
+profilesTrack.innerHTML="";
+profilesTrack.appendChild(buildActiveSet());
+profilesTrack.appendChild(buildActiveSet());
 profileKeys.forEach(addProfile);
 
 /* =========================================================
@@ -469,7 +498,7 @@ function fillSocials(id){
   });
 }
 fillSocials("contact-socials");
-fillSocials("footer-socials");
+
 
 /* =========================================================
    NAVIGATION — always keeps URL at /
