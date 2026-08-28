@@ -139,6 +139,128 @@ html{scroll-padding-top:72px}.section,.design-section,.client-section{width:calc
 .contact-copy>p{margin-top:34px;font-size:13px}.footer-inner{width:calc(100% - 34px);grid-template-columns:1fr;gap:10px}.footer-role{text-align:left}.back-to-top{right:18px;bottom:18px}
 }
 @media(max-width:390px){.hero-name{font-size:63px}.category-copy h2,.client-heading h2{font-size:51px}.contact-title{font-size:59px}}
+
+/* ===== WHERE I'M ACTIVE ===== */
+.profiles-section{
+  position:relative;
+  overflow:hidden;
+  padding:120px 0 110px;
+  background:var(--bg);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.profiles-heading{
+  width:min(var(--max),calc(100% - 48px));
+  margin:0 auto 70px;
+  text-align:center;
+}
+
+.profiles-heading .eyebrow{
+  margin-bottom:12px;
+}
+
+.profiles-heading h2{
+  margin:0;
+  font-family:var(--display);
+  font-size:clamp(56px,7vw,108px);
+  line-height:.82;
+  letter-spacing:-.045em;
+  color:var(--text);
+}
+
+.profiles-heading h2 span{
+  color:var(--accent);
+}
+
+.profiles-marquee{
+  width:100%;
+  overflow:hidden;
+  position:relative;
+  padding:8px 0 18px;
+}
+
+.profiles-track{
+  display:flex;
+  width:max-content;
+  gap:22px;
+  will-change:transform;
+  animation:profileLoop 24s linear infinite;
+}
+
+.profiles-marquee:hover .profiles-track{
+  animation-play-state:paused;
+}
+
+.active-set{
+  display:flex;
+  flex:none;
+  gap:22px;
+}
+
+.profile-logo{
+  width:104px;
+  height:104px;
+  flex:0 0 104px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:var(--surface);
+  color:var(--text);
+  overflow:hidden;
+  transition:transform .25s ease,border-color .25s ease,color .25s ease;
+}
+
+.profile-logo svg,
+.profile-logo img{
+  width:62%;
+  height:62%;
+  object-fit:contain;
+  display:block;
+}
+
+.profile-logo:hover{
+  transform:translateY(-4px);
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+@keyframes profileLoop{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(calc(-50% - 11px),0,0)}
+}
+
+@media(max-width:700px){
+  .profiles-section{
+    padding:80px 0 75px;
+  }
+
+  .profiles-heading{
+    width:calc(100% - 34px);
+    margin-bottom:48px;
+  }
+
+  .profiles-heading h2{
+    font-size:clamp(48px,15vw,72px);
+  }
+
+  .profiles-track{
+    gap:14px;
+    animation-duration:20s;
+  }
+
+  .active-set{
+    gap:14px;
+  }
+
+  .profile-logo{
+    width:78px;
+    height:78px;
+    flex-basis:78px;
+  }
+}
+
 </style>
 </head>
 
@@ -230,6 +352,18 @@ html{scroll-padding-top:72px}.section,.design-section,.client-section{width:calc
 <section class="profiles-section" id="profiles">
 <div class="profiles-heading"><div class="section-kicker">CURRENTLY WORKING ON</div><h2>WHERE I'M<br><span>ACTIVE</span></h2></div>
 <div class="profiles-slider"><div class="profiles-track" id="profiles-track"></div></div>
+</section>
+
+
+<section class="profiles-section section" id="profiles">
+  <div class="profiles-heading">
+    <div class="eyebrow">CURRENTLY WORKING ON</div>
+    <h2>WHERE I'M<br><span>ACTIVE</span></h2>
+  </div>
+
+  <div class="profiles-marquee" aria-label="Platforms where Shakil is active">
+    <div class="profiles-track" id="profiles-track"></div>
+  </div>
 </section>
 
 <section class="contact-section section" id="contact">
