@@ -3,51 +3,99 @@
 ========================================================== */
 
 
-/*
-    GOOGLE APPS SCRIPT URL
-
-    তোমার existing URL এখানে রাখবে।
-*/
-
 const GOOGLE_SCRIPT_URL =
     "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
 
 
 
 /* ==========================================================
-   PROJECT CATEGORIES
+   PROJECT CATEGORIES + ORIGINAL DESCRIPTION TEXTS
 ========================================================== */
 
 const categories = [
 
     {
-        key: "book",
-        orange: "Book Cover",
-        normal: "Design"
+
+        key:
+            "book",
+
+        orange:
+            "Book Cover",
+
+        normal:
+            "Design",
+
+        description:
+            "Your cover gets one chance to make a first impression. I design bold, genre-aware covers that spark curiosity, communicate value instantly, and make the right reader want to pick up your book."
+
     },
 
-    {
-        key: "web",
-        orange: "Web Design",
-        normal: "& Development"
-    },
 
     {
-        key: "social",
-        orange: "Social Media",
-        normal: "Design"
+
+        key:
+            "web",
+
+        orange:
+            "Web Design",
+
+        normal:
+            "& Development",
+
+        description:
+            "A good website should look impressive and quietly do the selling for you. I build clean, responsive experiences that guide visitors naturally, strengthen trust, and turn attention into action."
+
     },
 
-    {
-        key: "logo",
-        orange: "Logo",
-        normal: "Design"
-    },
 
     {
-        key: "print",
-        orange: "Print",
-        normal: "Media"
+
+        key:
+            "social",
+
+        orange:
+            "Social Media",
+
+        normal:
+            "Design",
+
+        description:
+            "In a crowded feed, you have seconds to be noticed. I create sharp, brand-focused social visuals that stop the scroll, deliver the message fast, and make your business look instantly more credible."
+
+    },
+
+
+    {
+
+        key:
+            "logo",
+
+        orange:
+            "Logo",
+
+        normal:
+            "Design",
+
+        description:
+            "A memorable identity starts with a mark that feels unmistakably yours. I create distinctive, versatile logos built to give brands a confident and recognizable visual presence."
+
+    },
+
+
+    {
+
+        key:
+            "print",
+
+        orange:
+            "Print",
+
+        normal:
+            "Media",
+
+        description:
+            "From T-shirts and food packaging to menus, banners, and promotional materials, I create print-ready designs that carry your brand confidently from the screen into the real world."
+
     }
 
 ];
@@ -55,13 +103,11 @@ const categories = [
 
 
 /* ==========================================================
-   OFFICIAL INLINE LOGOS
-
-   External image links নেই।
-   তাই broken logo problem থাকবে না।
+   INLINE LOGOS
 ========================================================== */
 
 const platformLogos = {
+
 
 
     adobe: `
@@ -83,24 +129,6 @@ const platformLogos = {
 
     `,
 
-
-    figma: `
-
-        <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-        >
-
-            <path
-                fill="currentColor"
-                d="
-                M8 2a4 4 0 0 0 0 8h4V2H8Zm0 8a4 4 0 1 0 0 8h4v-8H8Zm4-8v8h4a4 4 0 1 0 0-8h-4Zm0 8v8h4a4 4 0 1 0 0-8h-4Zm-4 8a4 4 0 1 0 4 4v-4H8Z
-                "
-            />
-
-        </svg>
-
-    `,
 
 
     behance: `
@@ -132,6 +160,7 @@ const platformLogos = {
     `,
 
 
+
     linkedin: `
 
         <svg
@@ -156,6 +185,7 @@ const platformLogos = {
     `,
 
 
+
     x: `
 
         <svg
@@ -178,6 +208,7 @@ const platformLogos = {
         </svg>
 
     `,
+
 
 
     pinterest: `
@@ -212,6 +243,7 @@ const platformLogos = {
     `,
 
 
+
     github: `
 
         <svg
@@ -241,6 +273,7 @@ const platformLogos = {
         </svg>
 
     `,
+
 
 
     dribbble: `
@@ -287,49 +320,72 @@ const platformLogos = {
 
 
 /* ==========================================================
-   ACTIVE PLATFORM DATA
+   WHERE I'M ACTIVE
+   FIGMA REMOVED — NOTHING ELSE REMOVED
 ========================================================== */
 
 const activePlatforms = [
 
     {
-        name: "Adobe",
-        key: "adobe"
+        name:
+            "Adobe",
+
+        key:
+            "adobe"
     },
 
-    {
-        name: "Figma",
-        key: "figma"
-    },
 
     {
-        name: "Behance",
-        key: "behance"
+        name:
+            "Behance",
+
+        key:
+            "behance"
     },
 
-    {
-        name: "LinkedIn",
-        key: "linkedin"
-    },
 
     {
-        name: "X",
-        key: "x"
+        name:
+            "LinkedIn",
+
+        key:
+            "linkedin"
     },
 
-    {
-        name: "Pinterest",
-        key: "pinterest"
-    },
 
     {
-        name: "GitHub",
-        key: "github"
+        name:
+            "X",
+
+        key:
+            "x"
     },
 
+
     {
-        name: "Dribbble",
-        key: "dribbble"
+        name:
+            "Pinterest",
+
+        key:
+            "pinterest"
+    },
+
+
+    {
+        name:
+            "GitHub",
+
+        key:
+            "github"
+    },
+
+
+    {
+        name:
+            "Dribbble",
+
+        key:
+            "dribbble"
     }
 
 ];
@@ -337,57 +393,92 @@ const activePlatforms = [
 
 
 /* ==========================================================
-   SOCIAL LINKS
+   SOCIAL PROFILES
 ========================================================== */
 
 const socialProfiles = [
 
     {
-        name: "Behance",
+
+        name:
+            "Behance",
+
         url:
             "https://www.behance.net/shakilistic",
+
         key:
             "behance"
+
     },
 
+
     {
-        name: "X",
+
+        name:
+            "X",
+
         url:
             "https://x.com/shakilistic",
+
         key:
             "x"
+
     },
 
+
     {
-        name: "Pinterest",
+
+        name:
+            "Pinterest",
+
         url:
             "https://www.pinterest.com/shakilistic/",
+
         key:
             "pinterest"
+
     },
 
+
     {
-        name: "LinkedIn",
+
+        name:
+            "LinkedIn",
+
         url:
             "https://www.linkedin.com/in/shakilistic/",
+
         key:
             "linkedin"
+
     },
 
+
     {
-        name: "GitHub",
+
+        name:
+            "GitHub",
+
         url:
             "https://github.com/shakilistic",
+
         key:
             "github"
+
     },
 
+
     {
-        name: "Dribbble",
+
+        name:
+            "Dribbble",
+
         url:
             "https://dribbble.com/shakilistic",
+
         key:
             "dribbble"
+
     }
 
 ];
@@ -401,51 +492,68 @@ const socialProfiles = [
 const testimonials = [
 
     [
+
         "★★★★★",
 
         "Very clean, thoughtful and professional execution. The design feels polished and easy to understand.",
 
         "BOOK COVER CLIENT"
+
     ],
 
+
     [
+
         "★★★★★",
 
         "Excellent communication and attention to detail. Revisions were handled carefully and quickly.",
 
         "DESIGN CLIENT"
+
     ],
 
+
     [
+
         "★★★★★",
 
         "A strong visual direction with a premium finish. Exactly the kind of designer I wanted to work with.",
 
         "BRAND CLIENT"
+
     ],
 
+
     [
+
         "★★★★★",
 
         "The final result felt distinctive without being over-designed. Great balance and hierarchy.",
 
         "CREATIVE CLIENT"
+
     ],
 
+
     [
+
         "★★★★★",
 
         "Reliable, responsive and creative from beginning to end. I would gladly collaborate again.",
 
         "RETURNING CLIENT"
+
     ],
 
+
     [
+
         "★★★★★",
 
         "The work immediately looked more professional. Strong taste, typography and presentation.",
 
         "DIGITAL CLIENT"
+
     ]
 
 ];
@@ -519,14 +627,19 @@ function createLogoGroup() {
 
 
 /* ==========================================================
-   TRUE ENDLESS ACTIVE LOGO LOOP
+   ACTIVE LOGO LOOP
 ========================================================== */
 
-let logoLoopOffset = 0;
+let logoLoopOffset =
+    0;
 
-let logoLoopPaused = false;
 
-let logoLoopFrame = null;
+let logoLoopPaused =
+    false;
+
+
+let logoLoopFrame =
+    null;
 
 
 
@@ -542,14 +655,6 @@ function renderActiveLogos() {
     track.innerHTML =
         "";
 
-
-    /*
-        তিনটা identical group ব্যবহার করছি।
-
-        প্রথম group screen থেকে বের হওয়ার
-        সাথে সাথে offset reset হলেও
-        visually কোনো jump দেখা যাবে না।
-    */
 
     track.appendChild(
         createLogoGroup()
@@ -571,7 +676,7 @@ function renderActiveLogos() {
 
 
 /* ==========================================================
-   START ENDLESS LOOP
+   START LOGO LOOP
 ========================================================== */
 
 function startLogoLoop() {
@@ -606,7 +711,8 @@ function startLogoLoop() {
 
         function () {
 
-            logoLoopPaused = true;
+            logoLoopPaused =
+                true;
 
         }
 
@@ -620,7 +726,8 @@ function startLogoLoop() {
 
         function () {
 
-            logoLoopPaused = false;
+            logoLoopPaused =
+                false;
 
         }
 
@@ -628,17 +735,14 @@ function startLogoLoop() {
 
 
 
-    /*
-        Mobile touch করলে temporary pause.
-    */
-
     marquee.addEventListener(
 
         "touchstart",
 
         function () {
 
-            logoLoopPaused = true;
+            logoLoopPaused =
+                true;
 
         },
 
@@ -656,7 +760,8 @@ function startLogoLoop() {
 
         function () {
 
-            logoLoopPaused = false;
+            logoLoopPaused =
+                false;
 
         },
 
@@ -677,12 +782,16 @@ function startLogoLoop() {
             );
 
 
-        if (!firstGroup) {
+        if (
+            !firstGroup
+        ) {
+
 
             logoLoopFrame =
                 requestAnimationFrame(
                     animate
                 );
+
 
             return;
 
@@ -700,23 +809,10 @@ function startLogoLoop() {
         ) {
 
 
-            /*
-                speed
-
-                0.55 = smooth
-                slow enough to inspect
-            */
-
             logoLoopOffset +=
                 0.55;
 
 
-
-            /*
-                First complete group left
-                হয়ে গেলে আমরা same visual
-                position-এ reset করি।
-            */
 
             if (
                 logoLoopOffset >=
@@ -733,6 +829,7 @@ function startLogoLoop() {
 
 
             track.style.transform =
+
                 `translate3d(-${logoLoopOffset}px,0,0)`;
 
 
@@ -758,7 +855,7 @@ function startLogoLoop() {
 
 
 /* ==========================================================
-   SOCIAL LINKS — ORIGINAL ICON VERSION
+   SOCIAL LINKS
 ========================================================== */
 
 function renderSocialLinks() {
@@ -786,6 +883,7 @@ function renderSocialLinks() {
 
 
             link.className =
+
                 "social-link social-"
                 +
                 social.key;
@@ -808,12 +906,16 @@ function renderSocialLinks() {
 
 
             link.setAttribute(
+
                 "aria-label",
+
                 social.name
+
             );
 
 
             link.innerHTML =
+
                 platformLogos[
                     social.key
                 ];
@@ -834,12 +936,7 @@ function renderSocialLinks() {
 
 
 /* ==========================================================
-   PROJECT SECTION
-
-   IMPORTANT:
-   - First 3 visible
-   - More than 3 = SEE MORE
-   - 3 or less = button hidden
+   PROJECT SECTIONS
 ========================================================== */
 
 function createProjectSection(
@@ -865,9 +962,12 @@ function createProjectSection(
 
     section.innerHTML = `
 
+
         <div class="project-header">
 
+
             <h3>
+
 
                 <span class="accent-text">
 
@@ -875,15 +975,27 @@ function createProjectSection(
 
                 </span>
 
+
                 <span class="normal-text">
 
                     ${category.normal}
 
                 </span>
 
+
             </h3>
 
+
+
+            <p class="project-note">
+
+                ${category.description}
+
+            </p>
+
+
         </div>
+
 
 
         <div
@@ -891,9 +1003,11 @@ function createProjectSection(
         ></div>
 
 
+
         <div
             class="more-wrap is-hidden"
         >
+
 
             <button
                 class="more-btn"
@@ -904,7 +1018,9 @@ function createProjectSection(
 
             </button>
 
+
         </div>
+
 
     `;
 
@@ -934,20 +1050,18 @@ function createProjectSection(
 
 
 
-    let loadedCount = 0;
-
-    let finishedCount = 0;
-
-    let expanded = false;
+    let loadedCount =
+        0;
 
 
+    let finishedCount =
+        0;
 
-    /*
-        Detect actual existing images.
 
-        Broken/non-existing images
-        do not count.
-    */
+    let expanded =
+        false;
+
+
 
     for (
         let i = 1;
@@ -970,15 +1084,8 @@ function createProjectSection(
             String(i);
 
 
-        /*
-            Everything hidden first.
-
-            After actual image count
-            has been checked,
-            first 3 will display.
-        */
-
-        card.hidden = true;
+        card.hidden =
+            true;
 
 
 
@@ -989,10 +1096,12 @@ function createProjectSection(
 
 
         image.src =
+
             `./assets/images/${category.key}${i}.jpg`;
 
 
         image.alt =
+
             `${category.orange} ${category.normal} ${i}`;
 
 
@@ -1009,6 +1118,7 @@ function createProjectSection(
 
 
                 loadedCount++;
+
 
                 finishedCount++;
 
@@ -1066,9 +1176,11 @@ function createProjectSection(
 
 
         return Array
+
             .from(
                 grid.children
             )
+
             .filter(
 
                 card =>
@@ -1077,6 +1189,7 @@ function createProjectSection(
                     "true"
 
             );
+
 
     }
 
@@ -1109,12 +1222,9 @@ function createProjectSection(
 
                 }
 
+
                 else {
 
-
-                    /*
-                        Only first 3
-                    */
 
                     card.hidden =
                         index >= 3;
@@ -1130,9 +1240,11 @@ function createProjectSection(
 
 
         /*
-            ONLY SHOW BUTTON
-            IF MORE THAN 3
-            ACTUAL IMAGES EXIST
+           3 OR LESS:
+           NO BUTTON
+
+           MORE THAN 3:
+           SHOW BUTTON
         */
 
         if (
@@ -1140,29 +1252,29 @@ function createProjectSection(
         ) {
 
 
-            moreWrap.classList.remove(
-                "is-hidden"
-            );
+            moreWrap
+                .classList
+                .remove(
+                    "is-hidden"
+                );
 
 
         }
+
 
         else {
 
 
-            moreWrap.classList.add(
-                "is-hidden"
-            );
+            moreWrap
+                .classList
+                .add(
+                    "is-hidden"
+                );
 
 
         }
 
 
-
-        /*
-            Once all 20 checked,
-            final state guaranteed.
-        */
 
         if (
             finishedCount >= 20
@@ -1171,9 +1283,11 @@ function createProjectSection(
         ) {
 
 
-            moreWrap.classList.add(
-                "is-hidden"
-            );
+            moreWrap
+                .classList
+                .add(
+                    "is-hidden"
+                );
 
 
         }
@@ -1194,6 +1308,7 @@ function createProjectSection(
                 !expanded;
 
 
+
             moreButton.textContent =
 
                 expanded
@@ -1201,6 +1316,7 @@ function createProjectSection(
                 "SHOW LESS"
                 :
                 "SEE MORE";
+
 
 
             updateProjectVisibility();
@@ -1267,11 +1383,13 @@ function createTestimonialGroup() {
 
             card.innerHTML = `
 
+
                 <div class="stars">
 
                     ${testimonial[0]}
 
                 </div>
+
 
 
                 <p>
@@ -1281,11 +1399,13 @@ function createTestimonialGroup() {
                 </p>
 
 
+
                 <strong>
 
                     ${testimonial[2]}
 
                 </strong>
+
 
             `;
 
@@ -1339,7 +1459,6 @@ function renderTestimonials() {
 
 /* ==========================================================
    CLEAN NAVIGATION
-   NO #HOME / #WORK / #ABOUT
 ========================================================== */
 
 function initializeCleanNavigation() {
@@ -1368,9 +1487,11 @@ function initializeCleanNavigation() {
 
 
     document
+
         .querySelectorAll(
             "[data-scroll]"
         )
+
         .forEach(
 
             button => {
@@ -1387,13 +1508,16 @@ function initializeCleanNavigation() {
                             button.dataset.scroll;
 
 
+
                         const target =
                             document.getElementById(
                                 targetID
                             );
 
 
-                        if (!target) {
+                        if (
+                            !target
+                        ) {
 
                             return;
 
@@ -1404,11 +1528,13 @@ function initializeCleanNavigation() {
                         target.scrollIntoView(
 
                             {
+
                                 behavior:
                                     "smooth",
 
                                 block:
                                     "start"
+
                             }
 
                         );
@@ -1470,6 +1596,7 @@ function initializeTheme() {
 
 
         const current =
+
             document
                 .documentElement
                 .dataset
@@ -1477,6 +1604,7 @@ function initializeTheme() {
 
 
         const next =
+
             current === "dark"
             ?
             "light"
@@ -1533,9 +1661,11 @@ function initializeTheme() {
 
 
     const systemTheme =
+
         window.matchMedia(
             "(prefers-color-scheme: dark)"
         );
+
 
 
     systemTheme.addEventListener(
@@ -1603,6 +1733,7 @@ function initializeMenu() {
 
 
             const open =
+
                 menu
                     .classList
                     .toggle(
@@ -1662,9 +1793,11 @@ function closeMobileMenu() {
     }
 
 
-    menu.classList.remove(
-        "open"
-    );
+    menu
+        .classList
+        .remove(
+            "open"
+        );
 
 
     button.setAttribute(
@@ -1699,9 +1832,11 @@ async function emailDomainLooksValid(
 
 
     const domain =
+
         email
             .split("@")[1]
             ?.trim();
+
 
 
     if (
@@ -1713,10 +1848,12 @@ async function emailDomainLooksValid(
     }
 
 
+
     try {
 
 
         const response =
+
             await fetch(
 
                 "https://dns.google/resolve?name="
@@ -1730,8 +1867,10 @@ async function emailDomainLooksValid(
             );
 
 
+
         const data =
             await response.json();
+
 
 
         return (
@@ -1748,6 +1887,7 @@ async function emailDomainLooksValid(
 
 
     }
+
 
     catch {
 
@@ -1786,6 +1926,7 @@ function initializeForm() {
         );
 
 
+
     form.addEventListener(
 
         "submit",
@@ -1796,12 +1937,14 @@ function initializeForm() {
             event.preventDefault();
 
 
+
             status.className =
                 "form-status";
 
 
             status.textContent =
                 "";
+
 
 
             if (
@@ -1823,6 +1966,7 @@ function initializeForm() {
                 );
 
 
+
             if (
                 formData.get(
                     "website"
@@ -1836,6 +1980,7 @@ function initializeForm() {
 
 
             const email =
+
                 String(
 
                     formData.get(
@@ -1858,6 +2003,7 @@ function initializeForm() {
 
 
             const valid =
+
                 await emailDomainLooksValid(
                     email
                 );
@@ -2009,6 +2155,7 @@ function initializeForm() {
 
             }
 
+
             catch {
 
 
@@ -2021,6 +2168,7 @@ function initializeForm() {
 
 
             }
+
 
             finally {
 
@@ -2049,6 +2197,7 @@ function initializeReveal() {
 
 
     const observer =
+
         new IntersectionObserver(
 
             entries => {
@@ -2087,7 +2236,8 @@ function initializeReveal() {
             },
 
             {
-                threshold: .12
+                threshold:
+                    .12
             }
 
         );
@@ -2148,7 +2298,8 @@ function initializeBackToTop() {
         },
 
         {
-            passive: true
+            passive:
+                true
         }
 
     );
@@ -2165,8 +2316,13 @@ function initializeBackToTop() {
             window.scrollTo(
 
                 {
-                    top: 0,
-                    behavior: "smooth"
+
+                    top:
+                        0,
+
+                    behavior:
+                        "smooth"
+
                 }
 
             );
@@ -2199,6 +2355,7 @@ function initializeBackToTop() {
 ========================================================== */
 
 const profileImage =
+
     document.getElementById(
         "profileImage"
     );
@@ -2236,7 +2393,9 @@ if (
 document.getElementById(
     "year"
 ).textContent =
-    new Date().getFullYear();
+
+    new Date()
+        .getFullYear();
 
 
 
