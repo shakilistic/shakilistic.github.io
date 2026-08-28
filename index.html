@@ -1,81 +1,234 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Shakil R. — Visual Design Expert">
 <title>Shakil R. — Visual Design Expert</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-:root{--bg:#080808;--surface:#101010;--text:#f5f2eb;--muted:#aaa7a1;--orange:#ff5708;--line:rgba(245,242,235,.14);--display:"Anton",Impact,"Arial Narrow",sans-serif;--body:"DM Sans",Arial,sans-serif;--mono:"Space Mono",monospace;--max:1200px}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:80px}body{background:var(--bg);color:var(--text);font-family:var(--body);overflow-x:hidden}img{display:block;max-width:100%}button,input,textarea{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}
-.site-header{position:sticky;top:0;z-index:1000;height:66px;background:rgba(8,8,8,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}.header-inner{width:min(var(--max),calc(100% - 48px));height:100%;margin:auto;display:flex;align-items:center;justify-content:space-between}.brand{font-size:18px;font-weight:700;letter-spacing:-.04em}.brand span{color:var(--orange)}.desktop-nav{display:flex;gap:40px}.desktop-nav a{font-size:10px;font-weight:700;letter-spacing:.05em;transition:.25s}.desktop-nav a:hover{color:var(--orange)}.mobile-menu-button{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:none;color:var(--text);align-items:center;justify-content:center;flex-direction:column;gap:5px}.mobile-menu-button span{width:17px;height:1px;background:currentColor}.mobile-menu{display:none}
-.section{width:min(var(--max),calc(100% - 48px));margin:auto}.section-kicker,.work-intro-label{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.24em;color:var(--orange);text-transform:uppercase}
-.hero{min-height:calc(100vh - 66px);padding:70px 0 90px;display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:center}.hero-image-wrap{width:100%;max-width:540px;aspect-ratio:.78;margin:auto;overflow:hidden;border:1px solid var(--line);border-radius:25px;background:#000}.hero-image{width:100%;height:100%;object-fit:cover;object-position:center;filter:grayscale(100%)}.hero-name{font-family:var(--display);font-size:clamp(78px,9vw,145px);font-weight:400;line-height:.83;letter-spacing:-.035em}.hero-name span{color:var(--orange)}.hero-title{margin-top:28px;font-size:clamp(24px,2.4vw,40px);line-height:1;font-weight:700;letter-spacing:-.04em}.hero-lead{margin-top:36px;max-width:680px;font-size:clamp(18px,1.9vw,28px);line-height:1.23;font-weight:700}.hero-description{margin-top:26px;max-width:680px;color:var(--muted);font-size:15px;line-height:1.75}.hero-stats{display:flex;gap:52px;margin-top:36px}.stat{display:flex;flex-direction:column}.stat strong{font-family:var(--display);font-size:36px;font-weight:400;line-height:1}.stat span{margin-top:7px;font-family:var(--mono);font-size:7px;letter-spacing:.1em;color:var(--muted)}.primary-button,.submit-button{border:0;border-radius:999px;background:var(--orange);color:#fff;font-size:12px;font-weight:700;transition:transform .25s}.primary-button{margin-top:34px;padding:16px 27px}.primary-button span,.submit-button span{margin-left:10px}.primary-button:hover,.submit-button:hover{transform:translateY(-3px)}
-.work-intro{padding:62px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.work-intro p{max-width:720px;margin-left:auto;color:var(--muted);font-size:14px;line-height:1.7}
-.portfolio-section,.client-section{padding:96px 0 105px;border-bottom:1px solid var(--line)}.portfolio-heading,.client-heading{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:end}.portfolio-title{font-family:var(--display);font-size:clamp(56px,6vw,90px);line-height:.87;font-weight:400;letter-spacing:-.02em;text-transform:uppercase}.portfolio-title span{color:var(--orange)}.portfolio-description,.client-description{max-width:600px;color:var(--muted);font-size:14px;line-height:1.75}
-.portfolio-carousel{position:relative;margin-top:58px}.portfolio-window,.client-window{overflow:hidden;width:100%}.portfolio-track,.client-track{display:flex;gap:20px;transition:transform .5s cubic-bezier(.22,.61,.36,1)}.portfolio-card{flex:0 0 calc((100% - 40px)/3);overflow:hidden;border-radius:14px;background:var(--surface);border:1px solid var(--line);cursor:default}.portfolio-card-inner{aspect-ratio:1}.portfolio-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.portfolio-card:hover img{transform:scale(1.045)}
-.carousel-button{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:48px;height:48px;border-radius:50%;border:1px solid rgba(245,242,235,.25);background:transparent;color:var(--text);display:flex;align-items:center;justify-content:center;font-size:18px;transition:.25s}.carousel-button:hover{background:var(--orange);border-color:var(--orange);color:#fff}.carousel-button.hidden{display:none!important}.portfolio-prev,.client-prev{left:-70px}.portfolio-next,.client-next{right:-70px}
-.client-carousel{position:relative;margin-top:55px}.client-track{gap:18px}.client-card{flex:0 0 calc((100% - 54px)/4);min-height:260px;padding:25px;border:1px solid var(--line);border-radius:12px;background:var(--surface);display:flex;flex-direction:column}.client-stars{color:var(--orange);font-size:12px;letter-spacing:2px;margin-bottom:22px}.client-text{font-size:12px;line-height:1.7;color:var(--text);flex:1}.client-author{margin-top:22px;font-family:var(--mono);font-size:8px;color:#999;text-transform:uppercase}.client-see-more{display:none;margin-top:15px;align-self:flex-start;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:none;color:var(--text);font-size:9px;font-weight:700}.client-card.long .client-see-more{display:block}.client-card.expanded .client-see-more{color:var(--orange);border-color:var(--orange)}
-.reason-section{padding:110px 0;border-bottom:1px solid var(--line)}.reason-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px}.display-title{margin-top:14px;font-family:var(--display);font-size:clamp(58px,7vw,100px);line-height:.86;font-weight:400;letter-spacing:-.025em;text-transform:uppercase}.display-title span{color:var(--orange)}.reason-copy{padding-top:38px}.reason-copy p{margin-bottom:24px;color:var(--muted);font-size:14px;line-height:1.8}.reason-stats{display:flex;gap:55px;margin-top:32px}.reason-stats div{display:flex;flex-direction:column}.reason-stats strong{font-family:var(--display);font-size:36px;font-weight:400}.reason-stats span{margin-top:5px;font-family:var(--mono);font-size:7px;color:#999;letter-spacing:.12em}
-.profiles-section{width:100%;padding:110px 0;border-bottom:1px solid var(--line);overflow:hidden}.profiles-heading{width:min(var(--max),calc(100% - 48px));margin:auto;text-align:center}.centered{text-align:center}.profiles-slider{margin-top:72px;width:100%;overflow:hidden}.profiles-track{width:max-content;display:flex;gap:22px;animation:profileLoop 24s linear infinite;will-change:transform}.profiles-slider:hover .profiles-track{animation-play-state:paused}.profile-logo{width:108px;height:108px;flex:0 0 108px;border-radius:50%;border:1px solid rgba(245,242,235,.22);background:var(--surface);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:.3s}.profile-logo:hover{transform:scale(1.06);border-color:var(--orange)}.profile-logo svg{width:64%;height:64%;color:currentColor}.profile-logo .mark-text{font-size:13px;font-weight:700;letter-spacing:-.04em}.profile-logo .mark-in{font-size:11px;font-weight:800}@keyframes profileLoop{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
-.contact-section{padding:90px 0}.contact-card{display:grid;grid-template-columns:1fr 1fr;gap:75px;padding:58px;border:1px solid var(--line);border-radius:28px;background:var(--surface)}.contact-title{margin-top:15px;font-family:var(--display);font-size:clamp(65px,7vw,100px);line-height:.86;font-weight:400;letter-spacing:-.025em}.contact-title span{color:var(--orange)}.contact-copy>p{margin-top:43px;max-width:580px;color:var(--muted);font-size:14px;line-height:1.8}.social-links{display:flex;gap:12px;align-items:center}.contact-socials{margin-top:32px}.social-link{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;background:transparent;transition:.25s}.social-link:hover{background:var(--orange);border-color:var(--orange);transform:translateY(-3px)}.social-link svg{width:20px;height:20px;color:currentColor}.contact-form{display:flex;flex-direction:column;gap:24px}.form-group{display:flex;flex-direction:column;gap:9px}.form-group label{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.12em}.form-group input,.form-group textarea{width:100%;padding:17px 19px;border:1px solid var(--line);border-radius:13px;background:transparent;color:var(--text);outline:none}.form-group input{height:58px}.form-group textarea{min-height:165px;resize:vertical}.form-group input:focus,.form-group textarea:focus{border-color:var(--orange)}.form-group input::placeholder,.form-group textarea::placeholder{color:#777}.submit-button{min-height:58px}
-.site-footer{border-top:1px solid var(--line);padding:25px 0}.footer-inner{width:min(var(--max),calc(100% - 48px));margin:auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px}.footer-socials{display:flex;gap:8px}.footer-socials .social-link{width:32px;height:32px}.footer-socials .social-link svg{width:15px;height:15px}.footer-copy,.footer-role{font-family:var(--mono);font-size:7px;letter-spacing:.08em;color:#777}.footer-role{text-align:right}.back-to-top{position:fixed;right:25px;bottom:25px;z-index:999;width:47px;height:47px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--text);font-size:19px;opacity:0;visibility:hidden;transform:translateY(12px);transition:.25s}.back-to-top.visible{opacity:1;visibility:visible;transform:translateY(0)}.back-to-top:hover{background:var(--orange);border-color:var(--orange);color:#fff}
-@media(prefers-color-scheme:light){:root{--bg:#f1ede3;--surface:#e8e3d8;--text:#111;--muted:#5b5650;--line:rgba(17,17,17,.16)}.site-header{background:rgba(241,237,227,.96)}.carousel-button{color:#111;border-color:rgba(17,17,17,.25)}.profile-logo{background:#f1ede3}.social-link{background:#f1ede3}.contact-card,.client-card,.portfolio-card{background:#e8e3d8}.form-group input,.form-group textarea{color:#111}.back-to-top{background:#e8e3d8;color:#111}}
-@media(max-width:1000px){.hero{grid-template-columns:1fr 1fr;gap:45px}.portfolio-card{flex-basis:calc((100% - 20px)/2)}.client-card{flex-basis:calc((100% - 18px)/2)}.contact-card{gap:45px;padding:42px}}
-@media(max-width:700px){html{scroll-padding-top:72px}.section{width:calc(100% - 34px)}.header-inner{width:calc(100% - 34px)}.desktop-nav{display:none}.mobile-menu-button{display:flex}.mobile-menu{position:absolute;top:66px;left:0;width:100%;padding:24px 25px 28px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:20px;transform:translateY(-120%);opacity:0;pointer-events:none;transition:.3s}.mobile-menu.open{transform:translateY(0);opacity:1;pointer-events:auto}.mobile-menu a{font-size:11px;font-weight:700}.hero{width:100%;min-height:auto;padding:45px 17px 70px;display:flex;flex-direction:column;gap:40px}.hero-image-wrap{width:100%;max-width:none;border-radius:22px}.hero-content{padding:0 2px}.hero-name{font-family:var(--display);font-size:clamp(66px,18vw,105px)}.hero-title{font-size:24px}.hero-lead{font-size:19px}.hero-description{font-size:14px}.hero-stats{gap:28px;flex-wrap:wrap}.stat strong{font-size:31px}.work-intro{padding:45px 0}.portfolio-section,.client-section{padding:68px 0 75px}.portfolio-heading,.client-heading{grid-template-columns:1fr;gap:24px}.portfolio-title{font-size:clamp(54px,17vw,90px)}.portfolio-description,.client-description{font-size:13px}.portfolio-carousel,.client-carousel{margin-top:38px}.portfolio-card,.client-card{flex-basis:100%}.portfolio-prev,.client-prev{left:6px}.portfolio-next,.client-next{right:6px}.carousel-button{width:38px;height:38px;font-size:15px}.reason-section{padding:75px 0}.reason-grid{grid-template-columns:1fr;gap:25px}.reason-copy{padding-top:8px}.profiles-section{padding:80px 0}.profiles-heading{width:calc(100% - 34px)}.profiles-track{gap:15px}.profile-logo{width:82px;height:82px;flex-basis:82px}.contact-section{padding:55px 0}.contact-card{grid-template-columns:1fr;gap:45px;padding:28px 20px;border-radius:22px}.contact-title{font-size:clamp(62px,19vw,105px)}.contact-copy>p{margin-top:34px;font-size:13px}.footer-inner{width:calc(100% - 34px);grid-template-columns:1fr;gap:14px}.footer-role{text-align:left}.back-to-top{right:18px;bottom:18px}}
-@media(max-width:390px){.hero-name{font-size:63px}.portfolio-title{font-size:51px}.contact-title{font-size:59px}}
+:root{
+  --bg:#080808;--surface:#111111;--text:#f5f2eb;--muted:#aaa7a1;
+  --orange:#ff5708;--line:rgba(245,242,235,.14);
+  --display:"Anton",Impact,"Arial Narrow",sans-serif;
+  --body:"Work Sans",Arial,sans-serif;--mono:"Space Mono",monospace;
+  --max:1200px
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{background:var(--bg);color:var(--text);font-family:var(--body);overflow-x:hidden}
+img{display:block;max-width:100%}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+
+.site-header{position:sticky;top:0;z-index:1000;height:66px;background:rgba(8,8,8,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
+.header-inner{width:min(var(--max),calc(100% - 48px));height:100%;margin:auto;display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:18px;font-weight:700;letter-spacing:-.04em}.brand span{color:var(--orange)}
+.desktop-nav{display:flex;gap:40px}.desktop-nav a{font-size:10px;font-weight:700;letter-spacing:.06em;transition:.25s}.desktop-nav a:hover{color:var(--orange)}
+.mobile-menu-button{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:none;color:var(--text);align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.mobile-menu-button span{width:17px;height:1px;background:currentColor}.mobile-menu{display:none}
+.section{width:min(var(--max),calc(100% - 48px));margin:auto}
+.eyebrow,.section-kicker{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.24em;color:var(--orange);text-transform:uppercase}
+
+.hero{min-height:calc(100vh - 66px);padding:70px 0 90px;display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:center}
+.hero-image-wrap{width:100%;max-width:540px;aspect-ratio:.78;margin:auto;overflow:hidden;border:1px solid var(--line);border-radius:25px;background:#000}
+.hero-image{width:100%;height:100%;object-fit:cover;object-position:center;filter:grayscale(100%)}
+.hero-name{font-family:var(--display);font-size:clamp(78px,9vw,145px);font-weight:400;line-height:.83;letter-spacing:-.035em}
+.hero-name span{color:var(--orange)}.hero-title{margin-top:28px;font-size:clamp(24px,2.4vw,40px);line-height:1;font-weight:700;letter-spacing:-.04em}
+.hero-lead{margin-top:36px;max-width:680px;font-size:clamp(18px,1.9vw,28px);line-height:1.23;font-weight:700}
+.hero-description{margin-top:26px;max-width:680px;color:var(--muted);font-size:15px;line-height:1.75}
+.hero-stats{display:flex;gap:52px;margin-top:36px}.stat{display:flex;flex-direction:column}
+.stat strong{font-family:var(--display);font-size:36px;font-weight:400;line-height:1}.stat span{margin-top:7px;font-family:var(--mono);font-size:7px;letter-spacing:.1em;color:var(--muted)}
+.primary-button,.submit-button{border:0;border-radius:999px;background:var(--orange);color:#fff;font-size:12px;font-weight:700;transition:transform .25s}
+.primary-button{margin-top:34px;padding:16px 27px}.primary-button span,.submit-button span{margin-left:10px}.primary-button:hover,.submit-button:hover{transform:translateY(-3px)}
+
+.work-intro{padding:62px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.work-intro p{max-width:720px;margin-left:auto;color:var(--muted);font-size:14px;line-height:1.7}
+
+.design-section{width:min(var(--max),calc(100% - 48px));margin:auto}
+.design-category{padding:96px 0 105px;border-bottom:1px solid var(--line)}
+.category-copy{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:end}
+.category-copy h2,.client-heading h2{font-family:var(--display);font-size:clamp(56px,6vw,90px);line-height:.87;font-weight:400;letter-spacing:-.02em;text-transform:uppercase}
+.category-copy h2 span,.client-heading h2 span{color:var(--orange)}
+.category-copy>p{max-width:600px;color:var(--muted);font-size:14px;line-height:1.75}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:58px}
+.project-card{overflow:hidden;border-radius:14px;background:var(--surface);border:1px solid var(--line);cursor:default}
+.project-image{aspect-ratio:1;overflow:hidden;background:#111}.project-image img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.project-card:hover .project-image img{transform:scale(1.045)}
+.project-card.is-hidden{display:none}
+.show-more{display:none;margin:22px auto 0;padding:11px 22px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--text);font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;transition:.25s}
+.show-more.visible{display:block}.show-more:hover{background:var(--orange);border-color:var(--orange);color:#fff}
+
+.client-section{width:min(var(--max),calc(100% - 48px));margin:auto;padding:96px 0 105px;border-bottom:1px solid var(--line)}
+.client-heading{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:end}
+.client-description{color:var(--muted);font-size:14px;line-height:1.75}
+.client-carousel{margin-top:55px;overflow:hidden}
+.client-track{display:flex;gap:18px;transition:transform .7s cubic-bezier(.22,.7,.2,1)}
+.client-card{flex:0 0 calc((100% - 54px)/4);min-height:230px;padding:23px;border:1px solid var(--line);border-radius:12px;background:var(--surface);display:flex;flex-direction:column}
+.client-stars{color:var(--orange);font-size:12px;letter-spacing:2px;margin-bottom:19px}
+.client-review{font-size:12px;line-height:1.65;color:var(--text);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:8;overflow:hidden}
+.client-review.expanded{display:block}
+.client-more-button{display:none;margin-top:12px;align-self:flex-start;padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--text);font-family:var(--mono);font-size:8px;font-weight:700}
+.client-more-button.visible{display:block}.client-more-button:hover{background:var(--orange);border-color:var(--orange);color:#fff}
+.client-name{margin-top:auto;padding-top:18px;font-family:var(--mono);font-size:8px;color:#888;text-transform:uppercase}
+
+.reason-section{padding:110px 0;border-bottom:1px solid var(--line)}
+.reason-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px}
+.display-title{margin-top:14px;font-family:var(--display);font-size:clamp(58px,7vw,100px);line-height:.86;font-weight:400;letter-spacing:-.025em;text-transform:uppercase}
+.display-title span{color:var(--orange)}.reason-copy{padding-top:38px}.reason-copy p{margin-bottom:24px;color:var(--muted);font-size:14px;line-height:1.8}
+.reason-stats{display:flex;gap:55px;margin-top:32px}.reason-stats div{display:flex;flex-direction:column}.reason-stats strong{font-family:var(--display);font-size:36px;font-weight:400}.reason-stats span{margin-top:5px;font-family:var(--mono);font-size:7px;color:#999;letter-spacing:.12em}
+
+.profiles-section{width:100%;padding:110px 0;border-bottom:1px solid var(--line);overflow:hidden}
+.profiles-heading{width:min(var(--max),calc(100% - 48px));margin:auto;text-align:center}
+.profiles-heading h2{margin-top:14px;font-family:var(--display);font-size:clamp(58px,7vw,100px);line-height:.86;font-weight:400;letter-spacing:-.025em;text-transform:uppercase}.profiles-heading h2 span{color:var(--orange)}
+.profiles-slider{margin-top:72px;width:100%;overflow:hidden}.profiles-track{width:max-content;display:flex;gap:22px;animation:profileLoop 25s linear infinite;will-change:transform}
+.profiles-slider:hover .profiles-track{animation-play-state:paused}
+.profile-logo{width:108px;height:108px;flex:0 0 108px;border-radius:50%;border:1px solid rgba(245,242,235,.22);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--text);overflow:hidden;transition:.3s}
+.profile-logo:hover{transform:scale(1.05);border-color:var(--orange)}
+.profile-logo svg{width:64%;height:64%;display:block}
+@keyframes profileLoop{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+
+.contact-section{padding:90px 0}.contact-card{display:grid;grid-template-columns:1fr 1fr;gap:75px;padding:58px;border:1px solid var(--line);border-radius:28px;background:var(--surface)}
+.contact-title{margin-top:15px;font-family:var(--display);font-size:clamp(65px,7vw,100px);line-height:.86;font-weight:400;letter-spacing:-.025em}.contact-title span{color:var(--orange)}
+.contact-copy>p{margin-top:43px;max-width:580px;color:var(--muted);font-size:14px;line-height:1.8}
+.social-links{display:flex;gap:12px;align-items:center}.contact-socials{margin-top:32px}
+.social-link{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;background:transparent;color:var(--text);transition:.25s}
+.social-link:hover{background:var(--orange);border-color:var(--orange);color:#fff;transform:translateY(-3px)}.social-link svg{width:20px;height:20px}
+.contact-form{display:flex;flex-direction:column;gap:24px}.form-group{display:flex;flex-direction:column;gap:9px}.form-group label{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.12em}
+.form-group input,.form-group textarea{width:100%;padding:17px 19px;border:1px solid var(--line);border-radius:13px;background:transparent;color:var(--text);outline:none}.form-group input{height:58px}.form-group textarea{min-height:165px;resize:vertical}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--orange)}.form-group input::placeholder,.form-group textarea::placeholder{color:#777}.submit-button{min-height:58px}
+
+.site-footer{border-top:1px solid var(--line);padding:25px 0}.footer-inner{width:min(var(--max),calc(100% - 48px));margin:auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px}
+.footer-socials{display:flex;gap:8px}.footer-socials .social-link{width:32px;height:32px}.footer-socials .social-link svg{width:15px;height:15px}
+.footer-copy,.footer-role{font-family:var(--mono);font-size:7px;letter-spacing:.08em;color:#777}.footer-role{text-align:right}
+.back-to-top{position:fixed;right:25px;bottom:25px;z-index:999;width:47px;height:47px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--text);font-size:19px;opacity:0;visibility:hidden;transform:translateY(12px);transition:.25s}
+.back-to-top.visible{opacity:1;visibility:visible;transform:translateY(0)}.back-to-top:hover{background:var(--orange);border-color:var(--orange);color:#fff}
+
+@media(prefers-color-scheme:light){
+:root{--bg:#f1ede3;--surface:#e8e3d8;--text:#111;--muted:#5b5650;--line:rgba(17,17,17,.16)}
+.site-header{background:rgba(241,237,227,.96)}.project-card{background:#e8e3d8}.project-image{background:#e8e3d8}
+.client-card,.contact-card{background:#e8e3d8}.social-link{background:#f1ede3;color:#111}.profile-logo{background:#f1ede3}
+.carousel-button{color:#111}.back-to-top{background:#e8e3d8;color:#111}
+.form-group input,.form-group textarea{color:#111}.client-review{color:#111}
+}
+
+@media(max-width:1000px){
+.hero{grid-template-columns:1fr 1fr;gap:45px}.portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.client-card{flex-basis:calc((100% - 18px)/2)}.contact-card{gap:45px;padding:42px}
+}
+@media(max-width:700px){
+html{scroll-padding-top:72px}.section,.design-section,.client-section{width:calc(100% - 34px)}
+.header-inner{width:calc(100% - 34px)}.desktop-nav{display:none}.mobile-menu-button{display:flex}
+.mobile-menu{position:absolute;top:66px;left:0;width:100%;padding:24px 25px 28px;background:var(--bg);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:20px;transform:translateY(-120%);opacity:0;pointer-events:none;transition:.3s}
+.mobile-menu.open{transform:translateY(0);opacity:1;pointer-events:auto}.mobile-menu a{font-size:11px;font-weight:700}
+.hero{width:100%;min-height:auto;padding:45px 17px 70px;display:flex;flex-direction:column;gap:40px}.hero-image-wrap{width:100%;max-width:none;border-radius:22px}.hero-content{padding:0 2px}
+.hero-name{font-family:var(--display);font-size:clamp(66px,18vw,105px)}.hero-title{font-size:24px}.hero-lead{font-size:19px}.hero-description{font-size:14px}
+.hero-stats{gap:28px;flex-wrap:wrap}.stat strong{font-size:31px}
+.work-intro{display:none}.design-category,.client-section{padding:68px 0 75px}.category-copy,.client-heading{grid-template-columns:1fr;gap:24px}
+.category-copy h2,.client-heading h2{font-size:clamp(54px,17vw,90px)}.category-copy>p,.client-description{font-size:13px}
+.portfolio-grid{grid-template-columns:1fr;gap:14px;margin-top:38px}.show-more{margin-top:18px}
+.client-carousel{margin-top:38px}.client-card{flex-basis:100%;min-height:245px;padding:19px}
+.reason-section{padding:75px 0}.reason-grid{grid-template-columns:1fr;gap:25px}.reason-copy{padding-top:8px}
+.profiles-section{padding:80px 0}.profiles-heading{width:calc(100% - 34px)}.profiles-track{gap:15px}.profile-logo{width:82px;height:82px;flex-basis:82px}
+.contact-section{padding:55px 0}.contact-card{grid-template-columns:1fr;gap:45px;padding:28px 20px;border-radius:22px}.contact-title{font-size:clamp(62px,19vw,105px)}
+.contact-copy>p{margin-top:34px;font-size:13px}.footer-inner{width:calc(100% - 34px);grid-template-columns:1fr;gap:14px}.footer-role{text-align:left}.back-to-top{right:18px;bottom:18px}
+}
+@media(max-width:390px){.hero-name{font-size:63px}.category-copy h2,.client-heading h2{font-size:51px}.contact-title{font-size:59px}}
 </style>
 </head>
+
 <body>
 
 <header class="site-header">
 <div class="header-inner">
-<a href="/" class="brand" id="home-link">SHAKIL <span>R.</span></a>
+<a href="/" class="brand">SHAKIL <span>R.</span></a>
 <nav class="desktop-nav">
-<a href="#home" data-scroll>HOME</a><a href="#work" data-scroll>WORK</a><a href="#about" data-scroll>ABOUT</a><a href="#profiles" data-scroll>PROFILES</a><a href="#contact" data-scroll>CONTACT</a>
+<a href="/" data-target="home">HOME</a>
+<a href="/" data-target="work">WORK</a>
+<a href="/" data-target="about">ABOUT</a>
+<a href="/" data-target="profiles">PROFILES</a>
+<a href="/" data-target="contact">CONTACT</a>
 </nav>
 <button class="mobile-menu-button" type="button" aria-label="Menu"><span></span><span></span><span></span></button>
 </div>
 <div class="mobile-menu">
-<a href="#home" data-scroll>HOME</a><a href="#work" data-scroll>WORK</a><a href="#about" data-scroll>ABOUT</a><a href="#profiles" data-scroll>PROFILES</a><a href="#contact" data-scroll>CONTACT</a>
+<a href="/" data-target="home">HOME</a><a href="/" data-target="work">WORK</a><a href="/" data-target="about">ABOUT</a><a href="/" data-target="profiles">PROFILES</a><a href="/" data-target="contact">CONTACT</a>
 </div>
 </header>
 
 <main>
+
 <section class="hero section" id="home">
-<div class="hero-image-wrap"><img class="hero-image" src="assets/images/profile.jpg" alt="Shakil R."></div>
+<div class="hero-image-wrap"><img class="hero-image" src="assets/images/profile.jpg" alt="Shakil R." loading="eager"></div>
 <div class="hero-content">
 <h1 class="hero-name">SHAKIL <span>R.</span></h1>
 <h2 class="hero-title">VISUAL DESIGN EXPERT</h2>
 <h3 class="hero-lead">Turning ideas into bold brands, compelling visuals, and digital experiences built to be remembered.</h3>
 <p class="hero-description">From visual identity and campaign design to responsive websites, I combine strategy, clarity, and strong aesthetics to create work that feels premium and performs with purpose.</p>
-<div class="hero-stats"><div class="stat"><strong>07+</strong><span>YEARS EXPERIENCE</span></div><div class="stat"><strong>150+</strong><span>PROJECTS</span></div><div class="stat"><strong>MULTI</strong><span>PLATFORM EXPERIENCE</span></div></div>
+<div class="hero-stats">
+<div class="stat"><strong>07+</strong><span>YEARS EXPERIENCE</span></div>
+<div class="stat"><strong>150+</strong><span>PROJECTS</span></div>
+<div class="stat"><strong>MULTI</strong><span>PLATFORM EXPERIENCE</span></div>
+</div>
 <button class="primary-button" id="view-work">VIEW MY WORK <span>↗</span></button>
 </div>
 </section>
 
-<section class="work-intro section" id="work">
-<p>A curated selection of visual identities, campaigns, digital experiences and print work crafted with clarity, character and purpose.</p>
+<!-- Intentionally empty: the previous "A curated selection..." line is removed. -->
+<section class="work-intro section" id="work"></section>
+
+<section class="design-section">
+
+<section class="design-category" id="book-covers">
+<div class="category-copy"><div><h2>BOOK COVER<br><span>DESIGN.</span></h2></div><p>Your cover gives one chance to make a first impression. I design bold, genre-aware covers that speak clearly, communicate value instantly, and make the book impossible to ignore.</p></div>
+<div class="portfolio-grid" data-prefix="book" data-title="Book Cover"></div><button class="show-more" type="button">SHOW MORE +</button>
 </section>
 
-<div id="portfolio-sections"></div>
+<section class="design-category" id="web-design">
+<div class="category-copy"><div><h2>STATIC WEB DESIGN<br><span>&amp; DEVELOP.</span></h2></div><p>A good website should look impressive and guide the visitor naturally. I build clean, responsive experiences that feel intuitive, perform well, and turn attention into action.</p></div>
+<div class="portfolio-grid" data-prefix="web" data-title="Web Design"></div><button class="show-more" type="button">SHOW MORE +</button>
+</section>
+
+<section class="design-category" id="social-design">
+<div class="category-copy"><div><h2>SOCIAL MEDIA<br><span>POSTER.</span></h2></div><p>In a crowded feed, you have seconds to be noticed. I create sharp, brand-focused social visuals that stop the scroll, deliver the message fast, and make your business look instantly more credible.</p></div>
+<div class="portfolio-grid" data-prefix="social" data-title="Social Media"></div><button class="show-more" type="button">SHOW MORE +</button>
+</section>
+
+<section class="design-category" id="logo-design">
+<div class="category-copy"><div><h2>LOGO<br><span>DESIGN.</span></h2></div><p>A memorable identity starts with a mark that feels unmistakably yours. I create distinctive, versatile logos built to give brands confidence and recognizable visual presence.</p></div>
+<div class="portfolio-grid" data-prefix="logo" data-title="Logo Design"></div><button class="show-more" type="button">SHOW MORE +</button>
+</section>
+
+<section class="design-category" id="print-design">
+<div class="category-copy"><div><h2>PRINT MEDIA<br><span>DESIGN.</span></h2></div><p>From T-shirts and food packaging to menus, banners and promotional materials, I create print-ready designs that carry your brand confidently from screen into the real world.</p></div>
+<div class="portfolio-grid" data-prefix="print" data-title="Print Media"></div><button class="show-more" type="button">SHOW MORE +</button>
+</section>
+
+</section>
+
+<section class="client-section" id="clients">
+<div class="client-heading"><div><h2>WHAT CLIENTS<br><span>SAY.</span></h2></div><p class="client-description">The strongest proof of great work is what the people behind the project say after they receive it. These are genuine client experiences collected from my work.</p></div>
+<div class="client-carousel"><div class="client-track" id="client-track"></div></div>
+</section>
 
 <section class="reason-section section" id="about">
 <div class="reason-grid">
 <div><div class="section-kicker">BEYOND THE PIXELS</div><h2 class="display-title">DESIGN THAT<br>HAS A<br><span>REASON.</span></h2></div>
 <div class="reason-copy">
 <p>I'm a multidisciplinary designer with an obsessive focus on quality. I don't just design visuals — I build digital landmarks. My philosophy is simple: if it doesn't evoke emotion, it's just pixels.</p>
-<p>With over 7 years of experience working with startups, established brands, and independent creatives, I've learned that the best design is invisible — it simply works, feels right, and leaves a lasting impression.</p>
+<p>With over 7 years of experience working with startups, established brands and independent creators, I've learned that the best design is invisible — it simply works, feels right, and leaves a lasting impression.</p>
 <div class="reason-stats"><div><strong>07+</strong><span>YEARS</span></div><div><strong>150+</strong><span>PROJECTS</span></div></div>
 </div>
 </div>
 </section>
 
 <section class="profiles-section" id="profiles">
-<div class="profiles-heading"><div class="section-kicker">CURRENTLY WORKING ON</div><h2 class="display-title centered">WHERE I'M<br><span>ACTIVE</span></h2></div>
+<div class="profiles-heading"><div class="section-kicker">CURRENTLY WORKING ON</div><h2>WHERE I'M<br><span>ACTIVE</span></h2></div>
 <div class="profiles-slider"><div class="profiles-track" id="profiles-track"></div></div>
 </section>
 
@@ -84,7 +237,7 @@
 <div class="contact-copy">
 <div class="section-kicker">LET'S WORK TOGETHER</div>
 <h2 class="contact-title">LET'S BUILD<br>SOMETHING<br><span>GREAT.</span></h2>
-<p>Have an idea, a brand to build, or a website that needs a stronger presence? I'm open to creative collaborations across graphic design, visual identity, and website design & development. Let's create something people remember.</p>
+<p>Have an idea, a brand to build, or a website that needs a stronger presence? I'm open to creative collaborations across graphic design, visual identity, and website design &amp; development. Let's create something people remember.</p>
 <div class="social-links contact-socials" id="contact-socials"></div>
 </div>
 <form class="contact-form" action="https://formsubmit.co/tuku.co.bd@gmail.com" method="POST">
@@ -96,6 +249,7 @@
 </form>
 </div>
 </section>
+
 </main>
 
 <footer class="site-footer"><div class="footer-inner"><div class="footer-socials" id="footer-socials"></div><div class="footer-copy">© 2026 Shakilistic. All Rights Reserved.</div><div class="footer-role">VISUAL DESIGN EXPERT</div></div></footer>
@@ -104,211 +258,248 @@
 <script>
 "use strict";
 
-/*
-  IMAGE PATHS
-  The previous broken version depended on one naming convention.
-  This version supports BOTH structures without using the GitHub API.
+/* =========================================================
+   IMPORTANT FIX:
+   Portfolio files are listed directly instead of probing
+   hundreds of nonexistent URLs or using GitHub API.
+   This prevents the previous "everything disappeared" issue.
+   ========================================================= */
+const portfolioFiles={
+  book:["book-1.jpg","book-2.jpg","book-3.jpg","book-4.jpg","book-5.jpg","book-6.jpg"],
+  web:["web-1.jpg","web-2.jpg","web-3.jpg","web-4.jpg"],
+  social:["social-1.jpg","social-2.jpg","social-3.jpg","social-4.jpg"],
+  logo:["logo-1.jpg","logo-2.jpg","logo-3.jpg","logo-4.jpg"],
+  print:["print-1.jpg","print-2.jpg","print-3.jpg","print-4.jpg"]
+};
 
-  Preferred original structure:
-  assets/images/projects/book-1.jpg
-  assets/images/projects/web-1.jpg
-  assets/images/projects/social-1.jpg
-  assets/images/projects/logo-1.jpg
-  assets/images/projects/print-1.jpg
+const portfolioGrids=document.querySelectorAll(".portfolio-grid");
 
-  Also supported:
-  assets/images/B1.jpg, W1.jpg, S1.jpg, L1.jpg, P1.jpg
-*/
+function createProjectCard(src,title,index){
+  const card=document.createElement("article");
+  card.className="project-card"+(index>=3?" is-hidden":"");
+  const box=document.createElement("div");
+  box.className="project-image";
+  const img=document.createElement("img");
+  img.src=src;
+  img.alt=title+" "+(index+1);
+  img.loading=index<3?"eager":"lazy";
+  img.decoding="async";
+  box.appendChild(img);
+  card.appendChild(box);
 
-const sectionConfig=[
- {id:"book-cover",title:"BOOK COVER",orange:"DESIGN.",prefix:"B",base:"book",description:"Your cover gives one chance to make a first impression. I design bold, genre-aware covers that speak clearly, communicate value instantly, and make the book impossible to ignore."},
- {id:"web-design",title:"STATIC WEB",orange:"DESIGN & DEVELOP.",prefix:"W",base:"web",description:"A good website should look impressive and guide the visitor naturally. I build clean, responsive experiences that communicate clearly and turn attention into action."},
- {id:"social-poster",title:"SOCIAL MEDIA",orange:"POSTER.",prefix:"S",base:"social",description:"In a crowded feed, you have seconds to be noticed. I create sharp, brand-focused social visuals that stop the scroll, deliver the message fast, and make your business look instantly more credible."},
- {id:"logo-design",title:"LOGO",orange:"DESIGN.",prefix:"L",base:"logo",description:"A memorable identity starts with a mark that feels unmistakably yours. I create distinctive, versatile logos built to give brands confidence and recognizable visual presence."},
- {id:"print-media",title:"PRINT MEDIA",orange:"DESIGN.",prefix:"P",base:"print",description:"From T-shirts and food packaging to menus, banners and promotional materials, I create print-ready designs that carry your brand confidently from the screen into the real world."}
-];
+  /* Never open the artwork in a new window. */
+  card.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();});
+  return card;
+}
 
+function loadPortfolioGrid(grid){
+  const prefix=grid.dataset.prefix;
+  const title=grid.dataset.title;
+  const files=portfolioFiles[prefix]||[];
+  const section=grid.closest(".design-category");
+  const button=section.querySelector(".show-more");
+  let loaded=0;
+
+  files.forEach((file,index)=>{
+    const card=createProjectCard("assets/images/projects/"+file,title,index);
+    const img=card.querySelector("img");
+
+    img.addEventListener("load",()=>{
+      loaded++;
+      if(loaded>0)section.classList.remove("is-empty");
+    });
+
+    img.addEventListener("error",()=>{
+      card.remove();
+      if(!grid.querySelector(".project-card")){
+        section.classList.add("is-empty");
+      }
+    });
+
+    grid.appendChild(card);
+  });
+
+  if(files.length>3){
+    button.classList.add("visible");
+    button.addEventListener("click",()=>{
+      const expanded=button.dataset.expanded==="true";
+      grid.querySelectorAll(".project-card").forEach((card,index)=>{
+        if(index>=3)card.classList.toggle("is-hidden",expanded);
+      });
+      button.dataset.expanded=expanded?"false":"true";
+      button.textContent=expanded?"SHOW MORE +":"SHOW LESS −";
+    });
+  }
+
+  /* If fewer than 4 files actually load, the button disappears. */
+  setTimeout(()=>{
+    const count=grid.querySelectorAll(".project-card").length;
+    if(count<=3)button.classList.remove("visible");
+  },1500);
+}
+
+portfolioGrids.forEach(loadPortfolioGrid);
+
+/* =========================================================
+   CLIENT FEEDBACK — all reviews, automatic slide,
+   pauses on hover. Show More exists only for long reviews.
+   ========================================================= */
 const feedback=[
- {text:"Hi Shakil, I just wanted to take a moment to sincerely thank you for the outstanding work you've done on the cover and design for my Balance Exercise for Seniors Simplified. The attention to detail, creativity, and professionalism you brought to this project truly exceeded my expectations. I've received many compliments on how beautiful and appealing the design is. It has made a big difference in the presentation of the book, and I couldn't be happier with the result. I also want you to know that I will definitely be working with you again on my upcoming projects. Your talent and reliability have made this an easy decision. Thank you once again for helping bring my vision to life.",author:"Linda Sabili"},
- {text:"Shakil is so easy to work with, responsive, and has a fantastic eye. This is our second project together, and it's getting better and better.",author:"Client"},
- {text:"I am so pleased with my designer. They had creative ideas that were not quite like the rest in my niche. I look forward to working with this designer in the future.",author:"Julie"},
- {text:"The best of the best — I've worked with Shakil for around a year now, give or take. He is one of the most helpful, responsive, and creatively quick freelancers I've ever worked with.",author:"Anonymous Client"},
- {text:"Shakil is always great to work with, delivering quickly, creatively and always going above and beyond. He has created many designs for our business and has become an essential part of our team.",author:"Client"},
- {text:"I had an exceptional experience working with Shakil on the cover design for my book. His communication, creativity, and attention to detail were outstanding.",author:"Author Client"},
- {text:"Shakil is an excellent designer. He is very responsive and always understands exactly what I need. The quality of his work is consistently excellent.",author:"Client"},
- {text:"Shakil was amazing to work with in a very detailed, responsive, and professional way. I would recommend his services to anyone looking for a creative designer.",author:"Client"},
- {text:"I am more than satisfied with Shakil's design and highly recommend him to anybody that requires creative and professional design work.",author:"Client"}
+["Hi Shakil, I just wanted to take a moment to sincerely thank you for the outstanding work you've done on the cover and design for my Balance Exercise for Seniors Simplified. The attention to detail, creativity, and professionalism you brought to this project truly exceeded my expectations. I've received many compliments on how beautiful and appealing the design is. It has made a big difference in the presentation of the book, and I couldn't be happier with the result. I also want you to know that I will definitely be working with you again on my upcoming projects. Your talent and reliability have made this an easy decision. Thank you once again for helping bring my vision to life.","Linda Sabili"],
+["Shakil is so easy to work with, responsive, and has a fantastic eye. This is our second project together, and it's getting better and better.","Client"],
+["I am so pleased with my designer. They had creative ideas that were not quite like the rest in my niche. I look forward to working with this designer in the future.","Julie"],
+["The best of the best — I've worked with Shakil for around a year now, give or take. He is one of the most helpful, responsive, and creatively quick freelancers I've ever worked with.","Anonymous Client"],
+["Shakil is always great to work with, delivering quickly, creatively and always going above and beyond. He has created many designs for our business and has become an essential part of our team.","Client"],
+["I had an exceptional experience working with Shakil on the cover design for my book. His communication, creativity, and attention to detail were outstanding.","Author Client"],
+["Shakil is an excellent designer. He is very responsive and always understands exactly what I need. The quality of his work is consistently excellent.","Client"],
+["Shakil was amazing to work with in a very detailed, responsive, and professional way. I would recommend his services to anyone looking for a creative designer.","Client"],
+["I am more than satisfied with Shakil's design and highly recommend him to anybody that requires creative and professional design work.","Client"]
 ];
 
-const socials=[
- {name:"Behance",url:"https://www.behance.net/shakilistic",key:"behance"},
- {name:"X",url:"https://x.com/shakilistic",key:"x"},
- {name:"Pinterest",url:"https://www.pinterest.com/shakilistic/",key:"pinterest"},
- {name:"LinkedIn",url:"https://www.linkedin.com/in/shakilistic/",key:"linkedin"},
- {name:"GitHub",url:"https://github.com/shakilistic",key:"github"},
- {name:"Dribbble",url:"https://dribbble.com/shakilistic",key:"dribbble"}
+const clientTrack=document.getElementById("client-track");
+
+feedback.forEach((item)=>{
+  const card=document.createElement("article");
+  card.className="client-card";
+  const stars=document.createElement("div");stars.className="client-stars";stars.textContent="★★★★★";
+  const review=document.createElement("div");review.className="client-review";review.textContent=item[0];
+  const more=document.createElement("button");more.className="client-more-button";more.type="button";more.textContent="SHOW MORE +";
+  const name=document.createElement("div");name.className="client-name";name.textContent="— "+item[1];
+  card.append(stars,review,more,name);
+  clientTrack.appendChild(card);
+
+  requestAnimationFrame(()=>{
+    if(review.scrollHeight>review.clientHeight+3){
+      more.classList.add("visible");
+    }
+  });
+
+  more.addEventListener("click",()=>{
+    const open=review.classList.toggle("expanded");
+    more.textContent=open?"SHOW LESS −":"SHOW MORE +";
+  });
+});
+
+/* Duplicate cards only for the seamless automatic loop. */
+const originalCards=Array.from(clientTrack.children);
+originalCards.forEach(card=>clientTrack.appendChild(card.cloneNode(true)));
+
+let clientPosition=0,clientPaused=false;
+function clientVisible(){
+  if(innerWidth<=700)return 1;
+  if(innerWidth<=1000)return 2;
+  return 4;
+}
+function clientStep(){
+  if(clientPaused||!clientTrack.children.length)return;
+  const first=clientTrack.children[0];
+  const gap=parseFloat(getComputedStyle(clientTrack).gap)||0;
+  const amount=first.getBoundingClientRect().width+gap;
+  const oneSet=originalCards.length*amount;
+  clientPosition+=amount;
+  clientTrack.style.transform="translate3d("+(-clientPosition)+"px,0,0)";
+  if(clientPosition>=oneSet){
+    setTimeout(()=>{
+      clientPosition-=oneSet;
+      clientTrack.style.transition="none";
+      clientTrack.style.transform="translate3d("+(-clientPosition)+"px,0,0)";
+      void clientTrack.offsetWidth;
+      clientTrack.style.transition="";
+    },720);
+  }
+}
+setInterval(clientStep,3800);
+
+const clientCarousel=document.querySelector(".client-carousel");
+clientCarousel.addEventListener("mouseenter",()=>clientPaused=true);
+clientCarousel.addEventListener("mouseleave",()=>clientPaused=false);
+clientCarousel.addEventListener("touchstart",()=>clientPaused=true,{passive:true});
+clientCarousel.addEventListener("touchend",()=>setTimeout(()=>clientPaused=false,1200),{passive:true});
+
+/* =========================================================
+   ACTIVE PLATFORMS
+   Display-only. No links. Six logos. Continuous loop.
+   ========================================================= */
+const profilesTrack=document.getElementById("profiles-track");
+
+function socialMark(key){
+  const v='viewBox="0 0 24 24" aria-hidden="true"';
+  if(key==="behance")return `<svg ${v}><text x="2" y="16" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="currentColor">Bē</text></svg>`;
+  if(key==="x")return `<svg ${v}><path d="M5 4l14 16M19 4L5 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>`;
+  if(key==="pinterest")return `<svg ${v}><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 18.5c.9-2.2 1.1-3.1 1.1-3.1m0 0c-2.1-.5-3.3-2.1-3.3-4.3 0-3.2 2.5-5.4 5.8-5.4 2.8 0 4.8 1.9 4.8 4.6 0 3.1-1.7 5.7-4.2 5.7-1 0-1.9-.5-2.2-1.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`;
+  if(key==="linkedin")return `<svg ${v}><rect x="3" y="3" width="18" height="18" rx="2" fill="currentColor"/><text x="6" y="16.2" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="var(--surface)">in</text></svg>`;
+  if(key==="github")return `<svg ${v}><path d="M12 2.7a9.3 9.3 0 0 0-2.94 18.12c.47.09.64-.2.64-.45v-1.6c-2.61.57-3.16-1.11-3.16-1.11-.43-1.1-1.05-1.39-1.05-1.39-.86-.59.07-.58.07-.58.95.07 1.45.98 1.45.98.84 1.44 2.21 1.02 2.75.78.08-.61.33-1.02.6-1.26-2.08-.24-4.27-1.04-4.27-4.63 0-1.02.36-1.85.96-2.5-.1-.24-.42-1.2.09-2.49 0 0 .78-.25 2.56.95a8.86 8.86 0 0 1 4.66 0c1.78-1.2 2.56-.95 2.56-.95.51 1.29.19 2.25.09 2.49.6.65.96 1.48.96 2.5 0 3.6-2.19 4.38-4.28 4.62.34.3.64.88.64 1.78v2.64c0 .25.17.54.65.45A9.3 9.3 0 0 0 12 2.7Z" fill="currentColor"/></svg>`;
+  return `<svg ${v}><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="16" cy="12" r="1.2" fill="currentColor"/></svg>`;
+}
+const profileKeys=["behance","x","pinterest","linkedin","github","dribbble"];
+function addProfile(key){
+  const d=document.createElement("div");
+  d.className="profile-logo";
+  d.setAttribute("aria-hidden","true");
+  d.innerHTML=socialMark(key);
+  profilesTrack.appendChild(d);
+}
+profileKeys.forEach(addProfile);
+profileKeys.forEach(addProfile);
+
+/* =========================================================
+   CONTACT / FOOTER SOCIALS — clickable links only here.
+   ========================================================= */
+const socialLinks=[
+["Behance","https://www.behance.net/shakilistic","behance"],
+["X","https://x.com/shakilistic","x"],
+["Pinterest","https://www.pinterest.com/shakilistic/","pinterest"],
+["LinkedIn","https://www.linkedin.com/in/shakilistic/","linkedin"],
+["GitHub","https://github.com/shakilistic","github"],
+["Dribbble","https://dribbble.com/shakilistic","dribbble"]
 ];
 
-/* Inline marks: no CDN, no broken LinkedIn, no external logo loading. */
-function icon(key){
- const c='viewBox="0 0 24 24" aria-hidden="true"';
- if(key==="x")return `<svg ${c}><path d="M5 4l14 16M19 4L5 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>`;
- if(key==="linkedin")return `<svg ${c}><rect x="3" y="3" width="18" height="18" rx="2" fill="currentColor"/><text x="6" y="16.2" font-family="Arial" font-size="9" font-weight="700" fill="var(--surface)">in</text></svg>`;
- if(key==="github")return `<svg ${c}><path d="M12 2.7a9.3 9.3 0 0 0-2.94 18.12c.47.09.64-.2.64-.45v-1.6c-2.61.57-3.16-1.11-3.16-1.11-.43-1.1-1.05-1.39-1.05-1.39-.86-.59.07-.58.07-.58.95.07 1.45.98 1.45.98.84 1.44 2.21 1.02 2.75.78.08-.61.33-1.02.6-1.26-2.08-.24-4.27-1.04-4.27-4.63 0-1.02.36-1.85.96-2.5-.1-.24-.42-1.2.09-2.49 0 0 .78-.25 2.56.95a8.86 8.86 0 0 1 4.66 0c1.78-1.2 2.56-.95 2.56-.95.51 1.29.19 2.25.09 2.49.6.65.96 1.48.96 2.5 0 3.6-2.19 4.38-4.28 4.62.34.3.64.88.64 1.78v2.64c0 .25.17.54.65.45A9.3 9.3 0 0 0 12 2.7Z" fill="currentColor"/></svg>`;
- if(key==="behance")return `<svg ${c}><text x="2" y="16" font-family="Arial" font-size="10" font-weight="700">Bē</text></svg>`;
- if(key==="pinterest")return `<svg ${c}><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 18.5c.9-2.2 1.1-3.1 1.1-3.1m0 0c-2.1-.5-3.3-2.1-3.3-4.3 0-3.2 2.5-5.4 5.8-5.4 2.8 0 4.8 1.9 4.8 4.6 0 3.1-1.7 5.7-4.2 5.7-1 0-1.9-.5-2.2-1.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`;
- return `<svg ${c}><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="16" cy="12" r="1.2" fill="currentColor"/></svg>`;
+function fillSocials(id){
+  const box=document.getElementById(id);
+  if(!box)return;
+  socialLinks.forEach(([name,url,key])=>{
+    const a=document.createElement("a");
+    a.className="social-link";
+    a.href=url;
+    a.target="_blank";
+    a.rel="noopener noreferrer";
+    a.setAttribute("aria-label",name);
+    a.innerHTML=socialMark(key);
+    box.appendChild(a);
+  });
 }
+fillSocials("contact-socials");
+fillSocials("footer-socials");
 
-/* Find files without GitHub API/rate limits. */
-const exts=["jpg","jpeg","png","webp","gif","JPG","JPEG","PNG","WEBP","GIF"];
-
-function imageOK(src){
- return new Promise(resolve=>{
-   const i=new Image();
-   i.onload=()=>resolve(true);
-   i.onerror=()=>resolve(false);
-   i.src=src;
- });
+/* =========================================================
+   NAVIGATION — always keeps URL at /
+   ========================================================= */
+function go(id){
+  const el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:"smooth",block:"start"});
+  try{history.replaceState(null,"","/")}catch(e){}
 }
+document.querySelectorAll("[data-target]").forEach(link=>{
+  link.addEventListener("click",e=>{
+    e.preventDefault();
+    go(link.dataset.target);
+    document.querySelector(".mobile-menu")?.classList.remove("open");
+  });
+});
+document.getElementById("view-work").addEventListener("click",()=>go("work"));
 
-async function findImages(cfg){
- const found=[];
- for(let n=1;n<=50;n++){
-   const candidates=[];
-   for(const e of exts){
-     candidates.push(`assets/images/projects/${cfg.base}-${n}.${e}`);
-     candidates.push(`assets/images/${cfg.prefix}${n}.${e}`);
-   }
-   let got=null;
-   for(const p of candidates){
-     if(await imageOK(p)){got=p;break;}
-   }
-   if(got)found.push(got);
- }
- return found;
-}
+const menuButton=document.querySelector(".mobile-menu-button");
+const mobileMenu=document.querySelector(".mobile-menu");
+menuButton.addEventListener("click",()=>mobileMenu.classList.toggle("open"));
 
-function buildSection(cfg,images){
- const s=document.createElement("section");
- s.className="portfolio-section section";
- s.id=cfg.id;
- s.innerHTML=`<div class="portfolio-heading"><div><h2 class="portfolio-title">${cfg.title}<br><span>${cfg.orange}</span></h2></div><p class="portfolio-description">${cfg.description}</p></div><div class="portfolio-carousel"><button class="carousel-button portfolio-prev hidden" type="button">←</button><div class="portfolio-window"><div class="portfolio-track"></div></div><button class="carousel-button portfolio-next hidden" type="button">→</button></div>`;
- const track=s.querySelector(".portfolio-track"),prev=s.querySelector(".portfolio-prev"),next=s.querySelector(".portfolio-next");
- images.forEach((src,i)=>{
-   const card=document.createElement("div");
-   card.className="portfolio-card";
-   card.innerHTML=`<div class="portfolio-card-inner"><img src="${src}" alt="${cfg.title} project ${i+1}" loading="lazy" draggable="false"></div>`;
-   /* Deliberately not a link. */
-   track.appendChild(card);
- });
- let index=0;
- function visible(){return innerWidth<=700?1:innerWidth<=1000?2:3}
- function update(){
-   const v=visible(),max=Math.max(0,images.length-v);index=Math.min(index,max);
-   prev.classList.toggle("hidden",images.length<=v||index===0);
-   next.classList.toggle("hidden",images.length<=v||index===max);
-   const card=track.children[0];if(!card)return;
-   const w=card.getBoundingClientRect().width,gap=parseFloat(getComputedStyle(track).gap)||0;
-   track.style.transform=`translateX(-${index*(w+gap)}px)`;
- }
- prev.onclick=()=>{if(index>0){index--;update()}};
- next.onclick=()=>{if(index<Math.max(0,images.length-visible())){index++;update()}};
- addEventListener("resize",update);
- setTimeout(update,100);
- return s;
-}
+const backTop=document.getElementById("back-to-top");
+window.addEventListener("scroll",()=>{
+  backTop.classList.toggle("visible",scrollY>450);
+},{passive:true});
+backTop.addEventListener("click",()=>go("home"));
 
-function buildClients(){
- const s=document.createElement("section");
- s.className="client-section section";
- s.id="clients";
- s.innerHTML=`<div class="client-heading"><div><h2 class="portfolio-title">WHAT CLIENTS<br><span>SAY.</span></h2></div><p class="client-description">The strongest proof of great work is what clients say after the project is finished. These are words from people who trusted me with their ideas, brands, and launches.</p></div><div class="client-carousel"><button class="carousel-button client-prev hidden" type="button">←</button><div class="client-window"><div class="client-track"></div></div><button class="carousel-button client-next hidden" type="button">→</button></div>`;
- const track=s.querySelector(".client-track");
- feedback.forEach(f=>{
-   const long=f.text.length>430,short=f.text.slice(0,430)+"...";
-   const c=document.createElement("article");
-   c.className="client-card"+(long?" long":"");
-   c.innerHTML=`<div class="client-stars">★★★★★</div><p class="client-text">${long?short:f.text}</p>${long?'<button class="client-see-more" type="button">SEE MORE</button>':''}<div class="client-author">— ${f.author}</div>`;
-   if(long){
-     const b=c.querySelector(".client-see-more"),t=c.querySelector(".client-text");
-     b.onclick=()=>{const open=c.classList.toggle("expanded");t.textContent=open?f.text:short;b.textContent=open?"SEE LESS":"SEE MORE"};
-   }
-   track.appendChild(c);
- });
- let index=0,timer=null;
- function visible(){return innerWidth<=700?1:innerWidth<=1000?2:4}
- function max(){return Math.max(0,feedback.length-visible())}
- function update(){
-   index=Math.min(index,max());
-   const card=track.children[0];if(!card)return;
-   const w=card.getBoundingClientRect().width,gap=parseFloat(getComputedStyle(track).gap)||0;
-   track.style.transform=`translateX(-${index*(w+gap)}px)`;
- }
- function next(){index=index>=max()?0:index+1;update()}
- function start(){stop();timer=setInterval(next,4000)}
- function stop(){if(timer){clearInterval(timer);timer=null}}
- s.addEventListener("mouseenter",stop);s.addEventListener("mouseleave",start);
- addEventListener("resize",update);setTimeout(()=>{update();start()},300);
- return s;
-}
-
-function buildSocials(id){
- const box=document.getElementById(id);if(!box)return;
- socials.forEach(x=>{
-   const a=document.createElement("a");
-   a.className="social-link";a.href=x.url;a.target="_blank";a.rel="noopener noreferrer";a.title=x.name;
-   a.innerHTML=icon(x.key);box.appendChild(a);
- });
-}
-
-function buildActive(){
- const track=document.getElementById("profiles-track");
- if(!track)return;
- /* Two identical sets = continuous marquee. These are NOT links. */
- [...socials,...socials].forEach(x=>{
-   const d=document.createElement("div");
-   d.className="profile-logo";d.title=x.name;
-   d.innerHTML=icon(x.key);
-   d.onclick=e=>e.preventDefault();
-   track.appendChild(d);
- });
-}
-
-function setupNav(){
- document.querySelectorAll("[data-scroll]").forEach(a=>a.onclick=e=>{
-   e.preventDefault();
-   const t=document.getElementById(a.getAttribute("href").slice(1));
-   if(t)t.scrollIntoView({behavior:"smooth",block:"start"});
-   history.replaceState(null,"","/");
-   document.querySelector(".mobile-menu")?.classList.remove("open");
- });
- document.getElementById("home-link").onclick=e=>{e.preventDefault();scrollTo({top:0,behavior:"smooth"});history.replaceState(null,"","/")};
- document.getElementById("view-work").onclick=()=>document.getElementById("work").scrollIntoView({behavior:"smooth"});
-}
-
-function setupMenu(){
- const b=document.querySelector(".mobile-menu-button"),m=document.querySelector(".mobile-menu");
- b.onclick=()=>m.classList.toggle("open");
-}
-
-function setupTop(){
- const b=document.getElementById("back-to-top");
- addEventListener("scroll",()=>b.classList.toggle("visible",scrollY>450),{passive:true});
- b.onclick=()=>{scrollTo({top:0,behavior:"smooth"});history.replaceState(null,"","/")};
-}
-
-async function init(){
- setupNav();setupMenu();setupTop();buildActive();buildSocials("contact-socials");buildSocials("footer-socials");
- const wrap=document.getElementById("portfolio-sections");
- for(const cfg of sectionConfig){
-   const imgs=await findImages(cfg);
-   if(imgs.length)wrap.appendChild(buildSection(cfg,imgs));
- }
- wrap.appendChild(buildClients());
- if(location.pathname!="/")history.replaceState(null,"","/");
-}
-document.addEventListener("DOMContentLoaded",init);
+/* Keep root URL even after browser restores a hash/path. */
+try{history.replaceState(null,"","/")}catch(e){}
 </script>
 </body>
 </html>
