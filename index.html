@@ -1,987 +1,992 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Shakil R. — Visual Design Expert, Graphic Designer and Web Creator.">
-<title>Shakil R. — Visual Design Expert</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
 
-<style>
-:root{
-  --bg:#0d0e11;
-  --bg2:#14161a;
-  --card:#17191e;
-  --card2:#1d2026;
-  --text:#f4f2ed;
-  --muted:#9a9da5;
-  --line:rgba(255,255,255,.11);
-  --accent:#ff4d00;
-  --accent-soft:rgba(255,77,0,.12);
-  --max:1320px;
-  --display:'Anton',sans-serif;
-  --mono:'Space Mono',monospace;
-  --body:'Work Sans',sans-serif;
-  --shadow:0 24px 80px rgba(0,0,0,.28);
-}
-html[data-theme="light"]{
-  --bg:#f3efe6;
-  --bg2:#e9e3d6;
-  --card:#fbf8f1;
-  --card2:#f0eadf;
-  --text:#17181c;
-  --muted:#686d76;
-  --line:rgba(22,24,29,.12);
-  --shadow:0 24px 70px rgba(26,31,44,.10);
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:86px}
-body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);overflow-x:hidden}
-body.no-scroll{overflow:hidden}
-a{color:inherit;text-decoration:none}
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-img{display:block;max-width:100%}
-.container{width:min(var(--max),calc(100% - 64px));margin:auto}
-.eyebrow{font:700 10px var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
-.orange{color:var(--accent)}
-.section{padding:110px 0;border-bottom:1px solid var(--line)}
-.loading{min-height:130px;display:grid;place-items:center;color:var(--muted);font:11px var(--mono);letter-spacing:.08em}
-.hidden{display:none!important}
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
 
-/* HEADER */
-.site-header{
-  position:sticky;top:0;z-index:1000;
-  background:color-mix(in srgb,var(--bg) 86%,transparent);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--line);
-}
-.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{font:27px var(--display);letter-spacing:.02em;white-space:nowrap}
-.brand span{color:var(--accent)}
-.nav-links{display:flex;align-items:center;gap:4px}
-.nav-links a,.mobile-nav a{
-  padding:10px 13px;border-radius:999px;
-  font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;
-  transition:.25s ease;
-}
-.nav-links a:hover,.mobile-nav a:hover{background:var(--bg2);color:var(--accent)}
-.nav-actions{display:flex;align-items:center;gap:8px}
-.icon-btn{
-  width:40px;height:40px;border:1px solid var(--line);border-radius:50%;
-  background:transparent;color:var(--text);display:grid;place-items:center;
-  transition:.25s ease;
-}
-.icon-btn:hover{background:var(--accent);border-color:var(--accent);color:#fff;transform:translateY(-2px)}
-.mobile-toggle{display:none}
-.mobile-nav{
-  display:none;padding:10px 0 16px;border-top:1px solid var(--line);
-  background:var(--bg);
-}
-.mobile-nav.open{display:grid}
-.mobile-nav a{border-radius:10px;padding:14px 4px}
+    <meta
+        name="description"
+        content="SHAKIL R. — Visual Design Expert. Book Cover Design, Web Design, Social Media Design, Logo Design and Print Media."
+    >
 
-/* HERO */
-.hero{padding:74px 0 88px;position:relative;overflow:hidden}
-.hero:before{
-  content:"";position:absolute;width:520px;height:520px;right:-180px;top:-220px;
-  background:radial-gradient(circle,rgba(255,77,0,.14),transparent 68%);pointer-events:none;
-}
-.hero-grid{display:grid;grid-template-columns:minmax(300px,.72fr) minmax(0,1.28fr);gap:72px;align-items:center}
-.hero-photo-wrap{position:relative}
-.hero-photo{
-  aspect-ratio:4/5;border-radius:30px;overflow:hidden;background:var(--card);
-  border:1px solid var(--line);box-shadow:var(--shadow);position:relative;
-}
-.hero-photo:after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.08);border-radius:30px;pointer-events:none}
-.hero-photo img{width:100%;height:100%;object-fit:cover}
-.photo-note{margin-top:14px;padding:13px 16px;border:1px solid var(--line);border-radius:15px;background:var(--card);font:700 10px var(--mono);letter-spacing:.06em;text-align:center;color:var(--muted)}
-.hero-name{font:clamp(70px,9.8vw,150px);line-height:.82;font-family:var(--display);margin:0 0 18px;letter-spacing:-.025em}
-.hero-role{font:700 12px var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
-.hero-tagline{font-size:clamp(22px,2.4vw,34px);line-height:1.18;font-weight:700;max-width:760px;margin:0 0 18px}
-.hero-bio{font-size:16px;line-height:1.8;color:var(--muted);max-width:700px}
-.hero-proof{display:flex;gap:34px;flex-wrap:wrap;margin:28px 0}
-.hero-proof div{display:flex;flex-direction:column;gap:5px}
-.hero-proof strong{font:42px var(--display);line-height:1}
-.hero-proof span{font:700 9px var(--mono);letter-spacing:.1em;color:var(--muted)}
-.actions{display:flex;gap:10px;flex-wrap:wrap}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:12px;
-  padding:14px 21px;border-radius:999px;border:1px solid var(--line);
-  background:transparent;color:var(--text);font:700 10px var(--mono);
-  letter-spacing:.08em;text-transform:uppercase;transition:.25s ease;
-}
-.btn:hover,.btn:focus-visible{background:var(--accent);border-color:var(--accent);color:#fff;transform:translateY(-3px);box-shadow:0 14px 30px rgba(255,77,0,.22);outline:none}
-.btn-primary{background:var(--text);border-color:var(--text);color:var(--bg)}
+    <meta
+        name="theme-color"
+        content="#f5f3ef"
+        media="(prefers-color-scheme: light)"
+    >
 
-/* ACTIVE / LOGOS */
-.logo-section{padding:38px 0;border-bottom:1px solid var(--line);background:var(--bg2)}
-.logo-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:20px}
-.logo-head h3{font:38px var(--display);margin:5px 0 0;text-transform:uppercase}
-.marquee{overflow:hidden;position:relative;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.marquee-track{display:flex;gap:10px;width:max-content;align-items:center}
-.logo-card{
-  width:76px;height:76px;flex:0 0 76px;display:grid;place-items:center;
-  padding:7px;border:1px solid var(--line);border-radius:50%;background:var(--card);
-  overflow:hidden;transition:.25s ease;
-}
-.logo-card:hover{
-  transform:translateY(-3px);border-color:var(--accent);
-  box-shadow:0 10px 24px rgba(0,0,0,.16);
-}
-.logo-card img{
-  width:100%;height:100%;object-fit:contain;border-radius:50%;display:block;
-}
-.logo-card .logo-fallback{
-  width:100%;height:100%;border-radius:50%;display:grid;place-items:center;
-  font:700 8px var(--mono);letter-spacing:.05em;text-align:center;color:var(--muted);
-}
+    <meta
+        name="theme-color"
+        content="#0c0c0c"
+        media="(prefers-color-scheme: dark)"
+    >
 
-/* SECTION HEADINGS */
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:38px}
-.section-title{font:clamp(48px,7vw,92px)/.86 var(--display);text-transform:uppercase;margin:7px 0 0;letter-spacing:-.015em}
-.section-copy{max-width:540px;color:var(--muted);line-height:1.7;font-size:14px}
+    <title>SHAKIL R. — Visual Design Expert</title>
 
-/* PORTFOLIO */
-.category{padding:0 0 95px}
-.category:last-child{padding-bottom:0}
-.category-top{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:28px}
-.category-title{font:clamp(34px,4vw,56px)/.92 var(--display);text-transform:uppercase;margin:6px 0 0}
-.category-title span{color:var(--accent)}
-.category-note{max-width:480px;color:var(--muted);line-height:1.65;font-size:13px}
-.portfolio-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.project-card{
-  position:relative;border:1px solid var(--line);border-radius:22px;overflow:hidden;
-  background:var(--card);box-shadow:var(--shadow);transition:transform .35s ease,border-color .35s ease;
-}
-.project-card:hover{transform:translateY(-7px);border-color:rgba(255,77,0,.55)}
-.project-card.is-hidden{display:none}
-.project-image{position:relative;aspect-ratio:4/3;background:var(--card2);overflow:hidden}
-.project-image img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
-.project-card:hover .project-image img{transform:scale(1.045)}
-.project-meta{padding:15px 17px 18px}
-.project-meta strong{display:block;font-size:13px;margin-bottom:5px}
-.project-meta span{font:9px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.project-number{
-  position:absolute;top:12px;left:12px;width:34px;height:34px;border-radius:50%;
-  display:grid;place-items:center;background:rgba(0,0,0,.55);color:#fff;
-  font:700 9px var(--mono);z-index:2;backdrop-filter:blur(8px);
-}
-.more-wrap{text-align:center;margin-top:24px}
-.more-btn{min-width:145px}
-.web-grid .project-image{aspect-ratio:4/5;align-items:flex-start}
-.print-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-.print-grid .project-image{aspect-ratio:auto;height:auto}
-.print-grid .project-image img{height:auto;object-fit:contain}
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-/* CLIENTS */
-.clients-section{background:var(--bg2)}
-.clients-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.client-card{
-  padding:25px;border:1px solid var(--line);border-radius:20px;background:var(--card);
-  min-height:220px;display:flex;flex-direction:column;transition:.3s ease;
-}
-.client-card:hover{transform:translateY(-5px);border-color:rgba(255,77,0,.45)}
-.client-stars{color:var(--accent);font-size:14px;letter-spacing:2px;margin-bottom:18px}
-.client-review{color:var(--text);line-height:1.7;font-size:14px}
-.client-review.clamped{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:6;overflow:hidden}
-.client-name{margin-top:auto;padding-top:20px;font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.client-more{display:none;margin-top:12px;border:0;background:none;padding:0;color:var(--accent);font:700 9px var(--mono);text-transform:uppercase}
-.client-more.visible{display:inline-block}
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
-/* ABOUT */
-.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px}
-.about-title{font:clamp(50px,7vw,90px)/.88 var(--display);text-transform:uppercase;margin:8px 0}
-.about-title span{color:var(--accent)}
-.about-copy p{font-size:17px;line-height:1.8;color:var(--muted);margin-top:0;margin-bottom:20px}
-.mini-stats{display:flex;gap:50px;margin-top:30px}
-.mini-stats strong{display:block;font:50px var(--display)}
-.mini-stats small{font:700 9px var(--mono);letter-spacing:.1em;color:var(--muted)}
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
-/* CONTACT */
-.contact-box{
-  display:grid;grid-template-columns:1fr 1fr;gap:55px;padding:55px;
-  border:1px solid var(--line);border-radius:30px;background:var(--card);box-shadow:var(--shadow);
-}
-.contact-title{font:clamp(55px,7vw,100px)/.84 var(--display);margin:10px 0 25px;text-transform:uppercase}
-.contact-title span{color:var(--accent)}
-.contact-copy p{max-width:540px;color:var(--muted);line-height:1.75}
-.socials{display:flex;gap:8px;flex-wrap:wrap;margin-top:25px}
-.socials a{
-  width:42px;height:42px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;
-  font:700 10px var(--mono);transition:.25s ease;
-}
-.socials a:hover{background:var(--accent);border-color:var(--accent);color:#fff;transform:translateY(-3px)}
-.contact-form{display:grid;gap:16px}
-.form-group label{display:block;margin-bottom:7px;font:700 9px var(--mono);letter-spacing:.12em;color:var(--muted)}
-.form-group input,.form-group textarea{
-  width:100%;border:1px solid var(--line);border-radius:13px;background:var(--bg2);
-  color:var(--text);padding:14px 15px;outline:none;transition:.2s ease;
-}
-.form-group textarea{min-height:150px;resize:vertical}
-.form-group input:focus,.form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
-.submit{width:100%;margin-top:4px}
+    <link rel="stylesheet" href="style.css">
 
-/* FOOTER / TOP */
-.site-footer{padding:28px 0}
-.footer-inner{width:min(var(--max),calc(100% - 64px));margin:auto;display:flex;justify-content:space-between;gap:20px;color:var(--muted);font:9px var(--mono);letter-spacing:.08em;text-transform:uppercase}
-.back-top{
-  position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;
-  border:1px solid var(--line);background:var(--card);color:var(--text);z-index:900;
-  opacity:0;pointer-events:none;transform:translateY(10px);transition:.25s ease;
-}
-.back-top.visible{opacity:1;pointer-events:auto;transform:none}
-.back-top:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+    <!--
+        Load theme before page appears
+        so there is no white/dark flash.
+    -->
+    <script>
 
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
-.reveal.visible{opacity:1;transform:none}
+        (function () {
 
-/* RESPONSIVE */
-@media(max-width:1050px){
-  .container,.footer-inner{width:min(var(--max),calc(100% - 40px))}
-  .hero-grid{grid-template-columns:1fr;gap:42px}
-  .hero-photo{max-width:470px}
-  .portfolio-grid,.clients-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .about-grid{grid-template-columns:1fr;gap:35px}
-  .contact-box{grid-template-columns:1fr;padding:38px}
-}
-@media(max-width:760px){
-  .nav{height:66px}
-  .nav-links{display:none}
-  .mobile-toggle{display:grid;width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:transparent;place-items:center;padding:9px;gap:4px}
-  .mobile-toggle span{display:block;width:16px;height:1px;background:var(--text);transition:.25s}
-  .mobile-toggle.active span:nth-child(1){transform:translateY(5px) rotate(45deg)}
-  .mobile-toggle.active span:nth-child(2){opacity:0}
-  .mobile-toggle.active span:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
-  .hero{padding:48px 0 65px}
-  .hero-name{font-size:clamp(70px,20vw,125px)}
-  .section{padding:78px 0}
-  .section-head,.category-top,.logo-head{display:block}
-  .section-copy,.category-note{margin-top:17px}
-  .portfolio-grid,.clients-grid,.print-grid{grid-template-columns:1fr}
-  .logo-card{width:68px;height:68px;flex-basis:68px}
-  .contact-box{padding:27px 20px;border-radius:22px}
-  .footer-inner{display:block}
-  .footer-role{margin-top:8px}
-}
-@media(max-width:430px){
-  .container,.footer-inner{width:calc(100% - 30px)}
-  .hero-proof{gap:20px}
-  .hero-proof strong{font-size:34px}
-  .btn{width:100%}
-  .actions{display:grid}
-  .profile-card{flex-basis:165px}
-}
-@media(prefers-reduced-motion:reduce){
-  *,html{scroll-behavior:auto!important;transition:none!important;animation:none!important}
-}
-</style>
+            const savedTheme =
+                localStorage.getItem("portfolio-theme");
+
+            const prefersDark =
+                window.matchMedia(
+                    "(prefers-color-scheme: dark)"
+                ).matches;
+
+            if (savedTheme) {
+
+                document.documentElement.dataset.theme =
+                    savedTheme;
+
+            } else {
+
+                document.documentElement.dataset.theme =
+                    prefersDark
+                        ? "dark"
+                        : "light";
+
+            }
+
+        })();
+
+    </script>
+
 </head>
+
 
 <body>
 
-<header class="site-header">
-  <div class="container nav">
-    <a class="brand" href="#home">SHAKIL <span>R.</span></a>
 
-    <nav class="nav-links" aria-label="Primary navigation">
-      <a href="#home">Home</a>
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#active">Profiles</a>
-      <a href="#contact">Contact</a>
+<!-- ========================================
+     SKIP LINK
+========================================= -->
+
+<a class="skip-link" href="#main">
+    Skip to content
+</a>
+
+
+
+<!-- ========================================
+     HEADER
+========================================= -->
+
+<header class="site-header" id="top">
+
+
+    <!-- Logo -->
+
+    <a
+        href="#home"
+        class="brand"
+        aria-label="SHAKIL R. home"
+    >
+        SHAKIL <span>R.</span>
+    </a>
+
+
+
+    <!-- Desktop Navigation -->
+
+    <nav
+        class="desktop-nav"
+        aria-label="Primary navigation"
+    >
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#work">
+            Work
+        </a>
+
+        <a href="#about">
+            About
+        </a>
+
+        <a href="#contact">
+            Contact
+        </a>
+
+
+        <!-- Theme Switch -->
+
+        <button
+            class="theme-switch"
+            id="themeSwitch"
+            type="button"
+            aria-label="Switch light and dark theme"
+        >
+
+            <span>
+                LIGHT
+            </span>
+
+            <i></i>
+
+            <span>
+                DARK
+            </span>
+
+        </button>
+
+
     </nav>
 
-    <div class="nav-actions">
-      <button id="themeToggle" class="icon-btn" type="button" aria-label="Toggle theme">☼</button>
-      <button id="mobileToggle" class="mobile-toggle" type="button" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
 
-  <nav id="mobileNav" class="mobile-nav container" aria-label="Mobile navigation">
-    <a href="#home">Home</a>
-    <a href="#work">Work</a>
-    <a href="#about">About</a>
-    <a href="#active">Profiles</a>
-    <a href="#contact">Contact</a>
-  </nav>
+
+    <!-- Mobile Menu Button -->
+
+    <button
+        class="menu-btn"
+        id="menuBtn"
+        type="button"
+        aria-label="Open navigation"
+        aria-expanded="false"
+    >
+
+        <span></span>
+
+        <span></span>
+
+    </button>
+
+
 </header>
 
-<main id="home">
 
-<section class="hero">
-  <div class="container hero-grid">
-    <div class="hero-photo-wrap reveal">
-      <div class="hero-photo" id="heroPhoto">
-        <img src="assets/images/profile.jpg" alt="Shakil R." loading="eager" fetchpriority="high">
-      </div>
-      <div class="photo-note">VISUAL DESIGN EXPERT · GRAPHIC DESIGN · WEB</div>
+
+<!-- ========================================
+     MOBILE NAVIGATION
+========================================= -->
+
+<div
+    class="mobile-menu"
+    id="mobileMenu"
+    aria-hidden="true"
+>
+
+    <nav>
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#work">
+            Work
+        </a>
+
+        <a href="#about">
+            About
+        </a>
+
+        <a href="#contact">
+            Contact
+        </a>
+
+    </nav>
+
+
+    <button
+        class="theme-switch mobile-theme"
+        id="mobileThemeSwitch"
+        type="button"
+    >
+
+        <span>
+            LIGHT
+        </span>
+
+        <i></i>
+
+        <span>
+            DARK
+        </span>
+
+    </button>
+
+</div>
+
+
+
+<!-- ========================================
+     MAIN
+========================================= -->
+
+<main id="main">
+
+
+
+<!-- ========================================
+     HERO
+========================================= -->
+
+<section
+    class="hero section-pad"
+    id="home"
+>
+
+
+    <div class="hero-grid">
+
+
+        <!-- Hero Text -->
+
+        <div class="hero-copy">
+
+
+            <p class="eyebrow reveal">
+
+                VISUAL DESIGN EXPERT
+                /
+                AVAILABLE FOR SELECTED PROJECTS
+
+            </p>
+
+
+
+            <h1 class="hero-title reveal">
+
+                I TURN
+
+                <br>
+
+                <span>
+                    IDEAS
+                </span>
+
+                INTO
+
+                <br>
+
+                VISUAL IMPACT.
+
+            </h1>
+
+
+
+            <p class="hero-intro reveal">
+
+                Strategic visual design for brands,
+                books and digital experiences —
+                created to look sharp,
+                communicate clearly
+                and work everywhere.
+
+            </p>
+
+
+
+            <div class="hero-actions reveal">
+
+
+                <a
+                    class="btn btn-primary"
+                    href="#work"
+                >
+
+                    Explore Work
+
+                    <span>
+                        ↘
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    class="btn btn-ghost"
+                    href="#contact"
+                >
+
+                    Start a Project
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- Profile -->
+
+        <div
+            class="profile-wrap reveal"
+            id="about"
+        >
+
+
+            <div class="profile-frame">
+
+                <img
+                    src="assets/images/profile.jpg"
+                    alt="Profile portrait"
+                    id="profileImage"
+                >
+
+            </div>
+
+
+
+            <div class="profile-note">
+
+                <span
+                    class="availability-dot"
+                ></span>
+
+                <p>
+                    DESIGN /
+                    ART DIRECTION /
+                    DIGITAL
+                </p>
+
+            </div>
+
+
+        </div>
+
+
     </div>
 
-    <div class="reveal">
-      <div class="hero-role">Multidisciplinary Designer</div>
-      <h1 class="hero-name">SHAKIL <span class="orange">R.</span></h1>
-      <p class="hero-tagline">Turning ideas into bold brands, compelling visuals, and digital experiences built to be remembered.</p>
-      <p class="hero-bio">From visual identity and campaign design to responsive websites, I combine strategy, clarity, and strong aesthetics to create work that feels premium and performs with purpose.</p>
 
-      <div class="hero-proof">
-        <div><strong>07+</strong><span>Years Experience</span></div>
-        <div><strong>150+</strong><span>Projects</span></div>
-        <div><strong>Multi</strong><span>Platform Experience</span></div>
-      </div>
-
-      <div class="actions">
-        <a href="#work" class="btn btn-primary">View My Work <span>↗</span></a>
-        <a href="#contact" class="btn">Let's Work <span>↗</span></a>
-      </div>
-    </div>
-  </div>
 </section>
 
-<section class="logo-section" id="active">
-  <div class="container">
-    <div class="logo-head">
-      <div>
-        <div class="eyebrow">Currently Working</div>
-        <h3>WHERE I'M <span class="orange">ACTIVE.</span></h3>
-      </div>
-    </div>
-    <div class="marquee">
-      <div id="activeTrack" class="marquee-track">
-        <div class="loading">Loading active profiles…</div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section id="work" class="section">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">Selected Work</div>
-        <h2 class="section-title">THE<br><span class="orange">WORK.</span></h2>
-      </div>
-      <p class="section-copy">A curated selection of visual identities, campaign visuals, digital experiences and print work crafted with clarity, character and purpose.</p>
-    </div>
 
-    <div id="portfolioSections">
+<!-- ========================================
+     WHERE I'M ACTIVE
+========================================= -->
 
-      <section class="category" data-key="book">
-        <div class="category-top">
-          <div><div class="eyebrow">BOOK COVERS</div><h3 class="category-title">BOOK COVER <span>DESIGN.</span></h3></div>
-          <p class="category-note">Bold, genre-aware covers designed to communicate value instantly and make the book impossible to ignore.</p>
-        </div>
-        <div id="bookGrid" class="portfolio-grid"></div>
-        <div class="more-wrap"><button class="btn more-btn hidden" data-target="book" type="button">Show More <span>+</span></button></div>
-      </section>
+<section class="active-section section-pad">
 
-      <section class="category" data-key="web">
-        <div class="category-top">
-          <div><div class="eyebrow">WEB DESIGN</div><h3 class="category-title">STATIC WEB <span>DESIGN.</span></h3></div>
-          <p class="category-note">Clean, responsive digital experiences shaped around hierarchy, usability, and effortless navigation.</p>
-        </div>
-        <div id="webGrid" class="portfolio-grid web-grid"></div>
-        <div class="more-wrap"><button class="btn more-btn hidden" data-target="web" type="button">Show More <span>+</span></button></div>
-      </section>
 
-      <section class="category" data-key="social">
-        <div class="category-top">
-          <div><div class="eyebrow">SOCIAL MEDIA</div><h3 class="category-title">SOCIAL MEDIA <span>POSTER.</span></h3></div>
-          <p class="category-note">Scroll-stopping campaign visuals built to communicate fast and give brands a stronger presence across busy feeds.</p>
-        </div>
-        <div id="socialGrid" class="portfolio-grid"></div>
-        <div class="more-wrap"><button class="btn more-btn hidden" data-target="social" type="button">Show More <span>+</span></button></div>
-      </section>
+    <div class="section-heading compact">
 
-      <section class="category" data-key="logo">
-        <div class="category-top">
-          <div><div class="eyebrow">IDENTITY</div><h3 class="category-title">LOGO <span>DESIGN.</span></h3></div>
-          <p class="category-note">Identity systems and marks designed to stay recognizable, flexible, and visually confident.</p>
-        </div>
-        <div id="logoGrid" class="portfolio-grid"></div>
-        <div class="more-wrap"><button class="btn more-btn hidden" data-target="logo" type="button">Show More <span>+</span></button></div>
-      </section>
 
-      <section class="category" data-key="print">
-        <div class="category-top">
-          <div><div class="eyebrow">PRINT</div><h3 class="category-title">PRINT MEDIA <span>DESIGN.</span></h3></div>
-          <p class="category-note">Print-ready work for apparel, packaging, menus, banners and promotional materials.</p>
-        </div>
-        <div id="printGrid" class="portfolio-grid print-grid"></div>
-        <div class="more-wrap"><button class="btn more-btn hidden" data-target="print" type="button">Show More <span>+</span></button></div>
-      </section>
+        <p class="kicker">
+            PLATFORMS
+        </p>
+
+
+        <h2>
+
+            WHERE I'M ACTIVE
+
+        </h2>
+
 
     </div>
-  </div>
-</section>
 
-<section id="clients" class="section clients-section">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">06 / CLIENT FEEDBACK</div>
-        <h2 class="section-title">WHAT CLIENTS<br><span class="orange">SAY.</span></h2>
-      </div>
-      <p class="section-copy">The strongest proof is what the people behind the project say after they receive it. These are genuine client experiences collected directly from the Blogger feedback source.</p>
+
+
+    <!--
+        These logos are NOT clickable.
+
+        JS will automatically duplicate them
+        for endless marquee animation.
+    -->
+
+    <div
+        class="logo-marquee"
+        aria-label="Platforms"
+    >
+
+        <div
+            class="logo-track"
+            id="activeLogoTrack"
+        ></div>
+
     </div>
 
-    <div id="clientsGrid" class="clients-grid">
-      <div class="loading">Loading client feedback…</div>
-    </div>
-    <div class="more-wrap"><button id="clientsMore" class="btn more-btn hidden" type="button">Show More <span>+</span></button></div>
-  </div>
-</section>
 
-<section id="about" class="section">
-  <div class="container about-grid">
-    <div>
-      <div class="eyebrow">Beyond The Pixels</div>
-      <h2 class="about-title">DESIGN THAT<br>HAS A<br><span>REASON.</span></h2>
-    </div>
-    <div class="about-copy">
-      <p>I’m a multidisciplinary designer with an obsessive focus on quality. I don't just design visuals — I build digital landmarks. My philosophy is simple: if it doesn't evoke emotion, it's just pixels.</p>
-      <p>With over 7 years of experience working with startups, established brands and independent creators, I've learned that the best design is invisible — it simply works, feels right, and leaves a lasting impression.</p>
-      <div class="mini-stats">
-        <div><strong>07+</strong><small>YEARS EXPERIENCE</small></div>
-        <div><strong>150+</strong><small>PROJECTS</small></div>
-      </div>
-    </div>
-  </div>
 </section>
 
 
 
-<section id="contact" class="section">
-  <div class="container">
-    <div class="contact-box">
-      <div class="contact-copy">
-        <div class="eyebrow">Let's Work Together</div>
-        <h2 class="contact-title">LET'S BUILD<br>SOMETHING<br><span>GREAT.</span></h2>
-        <p>Have an idea, a brand to build, or a website that needs a stronger presence? I'm open to creative collaborations across graphic design, visual identity, and website design &amp; development.</p>
+<!-- ========================================
+     WORK INTRO
+========================================= -->
 
-        <div class="socials">
-          <a href="mailto:tuku.co.bd@gmail.com" aria-label="Email">✉</a>
-          <a href="https://www.behance.net/shakilistic" target="_blank" rel="noopener" aria-label="Behance">Bē</a>
-          <a href="https://www.linkedin.com/in/shakilistic/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
-          <a href="https://x.com/shakilistic" target="_blank" rel="noopener" aria-label="X">𝕏</a>
-          <a href="https://www.pinterest.com/shakilistic/" target="_blank" rel="noopener" aria-label="Pinterest">P</a>
-        </div>
-      </div>
+<section
+    class="work-intro section-pad"
+    id="work"
+>
 
-      <form class="contact-form" action="https://formsubmit.co/tuku.co.bd@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="New Portfolio Enquiry">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
-        <div class="form-group"><label for="name">NAME</label><input id="name" name="name" type="text" placeholder="Your name" required></div>
-        <div class="form-group"><label for="email">EMAIL</label><input id="email" name="email" type="email" placeholder="you@email.com" required></div>
-        <div class="form-group"><label for="message">PROJECT / MESSAGE</label><textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea></div>
-        <button class="btn btn-primary submit" type="submit">SEND ENQUIRY <span>↗</span></button>
-      </form>
+
+    <div class="section-heading">
+
+
+        <p class="kicker">
+
+            SELECTED PROJECTS
+
+        </p>
+
+
+
+        <h2>
+
+            WORK THAT
+
+            <span>
+                EARNS ATTENTION.
+            </span>
+
+        </h2>
+
+
+
+        <p>
+
+            A curated collection of visual design
+            projects presented in a clean,
+            responsive square-based gallery.
+
+        </p>
+
+
     </div>
-  </div>
+
+
 </section>
+
+
+
+<!-- ========================================
+     DYNAMIC PROJECT SECTIONS
+========================================= -->
+
+<div id="projectSections"></div>
+
+
+
+<!-- ========================================
+     CLIENT TESTIMONIALS
+========================================= -->
+
+<section
+    class="testimonial-section section-pad"
+    id="testimonials"
+>
+
+
+    <div class="section-heading compact">
+
+
+        <p class="kicker">
+
+            FEEDBACK
+
+        </p>
+
+
+        <h2>
+
+            WHAT CLIENTS SAY
+
+        </h2>
+
+
+    </div>
+
+
+
+    <!--
+        Testimonial cards will continuously move
+        and never stop automatically.
+    -->
+
+    <div class="testimonial-marquee">
+
+        <div
+            class="testimonial-track"
+            id="testimonialTrack"
+        ></div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ========================================
+     CONTACT
+========================================= -->
+
+<section
+    class="contact-section section-pad"
+    id="contact"
+>
+
+
+    <div class="contact-grid">
+
+
+
+        <!-- Contact Left -->
+
+        <div class="contact-copy">
+
+
+            <p class="kicker">
+
+                HAVE A PROJECT?
+
+            </p>
+
+
+
+            <h2>
+
+                LET'S BUILD
+
+                <br>
+
+                <span>
+
+                    SOMETHING GREAT.
+
+                </span>
+
+            </h2>
+
+
+
+            <p>
+
+                Tell me what you're working on,
+                your project scope
+                and what you want the final result
+                to achieve.
+
+            </p>
+
+
+
+            <!-- Social Links -->
+
+            <div class="social-block">
+
+
+                <p class="social-label">
+
+                    FIND ME ONLINE
+
+                </p>
+
+
+
+                <div
+                    class="social-links"
+                    id="socialLinks"
+                ></div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- Contact Form -->
+
+        <div class="form-card">
+
+
+            <form
+                id="contactForm"
+                novalidate
+            >
+
+
+
+                <!-- Name + Email -->
+
+                <div class="field two-col">
+
+
+                    <label>
+
+                        <span>
+                            Name *
+                        </span>
+
+                        <input
+                            type="text"
+                            name="name"
+                            autocomplete="name"
+                            required
+                            minlength="2"
+                            placeholder="Your name"
+                        >
+
+                    </label>
+
+
+
+                    <label>
+
+                        <span>
+                            Email *
+                        </span>
+
+                        <input
+                            type="email"
+                            name="email"
+                            autocomplete="email"
+                            required
+                            placeholder="you@company.com"
+                        >
+
+                    </label>
+
+
+                </div>
+
+
+
+                <!-- Type + Budget -->
+
+                <div class="field two-col">
+
+
+                    <label>
+
+                        <span>
+                            Project Type
+                        </span>
+
+                        <select name="projectType">
+
+
+                            <option>
+
+                                Book Cover Design
+
+                            </option>
+
+
+                            <option>
+
+                                Web Design & Development
+
+                            </option>
+
+
+                            <option>
+
+                                Social Media Design
+
+                            </option>
+
+
+                            <option>
+
+                                Logo Design
+
+                            </option>
+
+
+                            <option>
+
+                                Print Media
+
+                            </option>
+
+
+                            <option>
+
+                                Other
+
+                            </option>
+
+
+                        </select>
+
+
+                    </label>
+
+
+
+                    <label>
+
+                        <span>
+                            Budget
+                        </span>
+
+
+                        <select name="budget">
+
+
+                            <option>
+
+                                Not specified
+
+                            </option>
+
+
+                            <option>
+
+                                Under $250
+
+                            </option>
+
+
+                            <option>
+
+                                $250 – $500
+
+                            </option>
+
+
+                            <option>
+
+                                $500 – $1,000
+
+                            </option>
+
+
+                            <option>
+
+                                $1,000+
+
+                            </option>
+
+
+                        </select>
+
+
+                    </label>
+
+
+                </div>
+
+
+
+                <!-- Message -->
+
+                <label class="field">
+
+
+                    <span>
+
+                        Message *
+
+                    </span>
+
+
+                    <textarea
+                        name="message"
+                        required
+                        minlength="10"
+                        rows="7"
+                        placeholder="Tell me about your project..."
+                    ></textarea>
+
+
+                </label>
+
+
+
+                <!-- Anti Spam -->
+
+                <label
+                    class="hp-field"
+                    aria-hidden="true"
+                >
+
+                    Website
+
+                    <input
+                        type="text"
+                        name="website"
+                        tabindex="-1"
+                        autocomplete="off"
+                    >
+
+                </label>
+
+
+
+                <!-- Consent -->
+
+                <label class="consent">
+
+
+                    <input
+                        type="checkbox"
+                        name="consent"
+                        required
+                    >
+
+
+                    <span>
+
+                        I confirm these contact
+                        details belong to me.
+
+                    </span>
+
+
+                </label>
+
+
+
+                <!-- Status -->
+
+                <span
+                    class="form-status"
+                    id="formStatus"
+                    role="status"
+                    aria-live="polite"
+                ></span>
+
+
+
+                <!-- Submit -->
+
+                <button
+                    class="submit-btn"
+                    id="submitBtn"
+                    type="submit"
+                >
+
+
+                    <span>
+
+                        SEND INQUIRY
+
+                    </span>
+
+
+                    <b>
+
+                        ↗
+
+                    </b>
+
+
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
 
 </main>
 
+
+
+<!-- ========================================
+     FOOTER
+========================================= -->
+
 <footer class="site-footer">
-  <div class="footer-inner">
-    <div>© 2026 Shakilistic. All Rights Reserved.</div>
-    <div>Visual Design Expert</div>
-  </div>
+
+
+    <a
+        class="brand footer-brand"
+        href="#top"
+    >
+
+        SHAKIL
+
+        <span>
+
+            R.
+
+        </span>
+
+    </a>
+
+
+
+    <p>
+
+        VISUAL DESIGN EXPERT
+
+    </p>
+
+
+
+    <p>
+
+        ©
+
+        <span id="year"></span>
+
+        ALL RIGHTS RESERVED.
+
+    </p>
+
+
 </footer>
 
-<button id="backTop" class="back-top" type="button" aria-label="Back to top">↑</button>
 
-<script>
-"use strict";
 
-/* =========================================================
-   1. REFRESH ALWAYS RETURNS TO HERO / PROFILE IMAGE
-   This intentionally ignores the previous scroll position/hash
-   when the page is loaded/reloaded.
-========================================================= */
-(function(){
-  if("scrollRestoration" in history) history.scrollRestoration="manual";
-  const isReload = performance.getEntriesByType("navigation")[0]?.type === "reload";
-  if(isReload){
-    history.replaceState(null,"",location.pathname+location.search);
-    window.scrollTo(0,0);
-  }
-  window.addEventListener("pageshow",function(e){
-    if(e.persisted || isReload){
-      window.scrollTo({top:0,left:0,behavior:"instant"});
-    }
-  });
-})();
+<!-- ========================================
+     BACK TO TOP
+========================================= -->
 
-/* =========================================================
-   2. THEME
-========================================================= */
-const root=document.documentElement;
-const themeToggle=document.getElementById("themeToggle");
-const savedTheme=localStorage.getItem("shakilistic-theme");
-root.dataset.theme=savedTheme || "dark";
+<button
+    class="back-to-top"
+    id="backToTop"
+    type="button"
+    aria-label="Back to top"
+>
 
-function updateThemeIcon(){
-  themeToggle.textContent=root.dataset.theme==="dark" ? "☼" : "◐";
-}
-updateThemeIcon();
+    ↑
 
-themeToggle.addEventListener("click",()=>{
-  root.dataset.theme=root.dataset.theme==="dark" ? "light" : "dark";
-  localStorage.setItem("shakilistic-theme",root.dataset.theme);
-  updateThemeIcon();
-});
+</button>
 
-/* =========================================================
-   3. MOBILE MENU
-========================================================= */
-const mobileToggle=document.getElementById("mobileToggle");
-const mobileNav=document.getElementById("mobileNav");
 
-mobileToggle.addEventListener("click",()=>{
-  const open=mobileNav.classList.toggle("open");
-  mobileToggle.classList.toggle("active",open);
-  mobileToggle.setAttribute("aria-expanded",String(open));
-});
 
-mobileNav.querySelectorAll("a").forEach(a=>{
-  a.addEventListener("click",()=>{
-    mobileNav.classList.remove("open");
-    mobileToggle.classList.remove("active");
-    mobileToggle.setAttribute("aria-expanded","false");
-  });
-});
+<!-- Main JavaScript -->
 
-/* =========================================================
-   4. BACK TO TOP
-========================================================= */
-const backTop=document.getElementById("backTop");
-window.addEventListener("scroll",()=>{
-  backTop.classList.toggle("visible",window.scrollY>600);
-},{passive:true});
-backTop.addEventListener("click",()=>{
-  window.scrollTo({top:0,behavior:"smooth"});
-});
+<script src="script.js"></script>
 
-/* =========================================================
-   5. SCROLL REVEAL
-========================================================= */
-const revealObserver=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("visible");
-      revealObserver.unobserve(entry.target);
-    }
-  });
-},{threshold:.08});
-document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
 
-/* =========================================================
-   6. STATIC PORTFOLIO ASSETS
-   IMPORTANT:
-   GitHub Pages cannot automatically "discover" arbitrary files
-   in a folder. The file list therefore explicitly supports the
-   naming system already used in your uploaded assets.
-
-   Supported examples:
-   assets/images/B1.jpg
-   assets/images/projects/B1.jpg
-   assets/images/book-1.jpg
-   assets/images/projects/book-1.jpg
-   Same logic for W/S/L/P.
-========================================================= */
-const portfolioFiles={
-  book:["B1","B2","B3","B4","B5","B6","B7","B8","B9","B10","B11","B12","B13","B14","B15","B16","B17","B18","B19","B20"],
-  web:["W1","W2","W3","W4","W5","W6","W7","W8","W9","W10","W11","W12","W13","W14","W15","W16","W17","W18","W19","W20"],
-  social:["S1","S2","S3","S4","S5","S6","S7","S8","S9","S10","S11","S12","S13","S14","S15","S16","S17","S18","S19","S20"],
-  logo:["L1","L2","L3","L4","L5","L6","L7","L8","L9","L10","L11","L12","L13","L14","L15","L16","L17","L18","L19","L20"],
-  print:["P1","P2","P3","P4","P5","P6","P7","P8","P9","P10","P11","P12","P13","P14","P15","P16","P17","P18","P19","P20"]
-};
-
-const titles={
-  book:"Book Cover Design",
-  web:"Web Design & Develop",
-  social:"Social Media Poster",
-  logo:"Logo Design",
-  print:"Print Media Design"
-};
-
-function assetCandidates(key,token){
-  const n=token.replace(/^[A-Z]/,"");
-  const prefix=token[0];
-  const base={
-    B:["B"+n,"book-"+n,"book_"+n,"book"+n],
-    W:["W"+n,"web-"+n,"web_"+n,"web"+n],
-    S:["S"+n,"social-"+n,"social_"+n,"social"+n,"poster-"+n],
-    L:["L"+n,"logo-"+n,"logo_"+n,"logo"+n],
-    P:["P"+n,"print-"+n,"print_"+n,"print"+n]
-  }[prefix] || [];
-
-  const exts=["jpg","jpeg","png","webp","JPG","JPEG","PNG","WEBP"];
-  const paths=[];
-  base.forEach(name=>{
-    exts.forEach(ext=>{
-      paths.push("assets/images/"+name+"."+ext);
-      paths.push("assets/images/projects/"+name+"."+ext);
-      paths.push("assets/"+name+"."+ext);
-      paths.push("assets/projects/"+name+"."+ext);
-    });
-  });
-  return paths;
-}
-
-function findImage(paths){
-  return new Promise(resolve=>{
-    let i=0;
-    function next(){
-      if(i>=paths.length){resolve(null);return;}
-      const img=new Image();
-      const src=paths[i++];
-      img.onload=()=>resolve(src);
-      img.onerror=next;
-      img.src=src;
-    }
-    next();
-  });
-}
-
-function makeProjectCard(src,key,index){
-  const article=document.createElement("article");
-  article.className="project-card reveal"+(index>=3?" is-hidden":"");
-  article.innerHTML=`
-    <div class="project-image">
-      <span class="project-number">${String(index+1).padStart(2,"0")}</span>
-      <img src="${src}" alt="${titles[key]} ${index+1}" loading="${index<3?"eager":"lazy"}" decoding="async">
-    </div>
-    <div class="project-meta">
-      <strong>${titles[key]} / ${String(index+1).padStart(2,"0")}</strong>
-      <span>${titles[key]}</span>
-    </div>`;
-  return article;
-}
-
-async function loadPortfolio(key){
-  const grid=document.getElementById(key+"Grid");
-  if(!grid)return;
-  const section=grid.closest(".category");
-  const button=section.querySelector(".more-btn");
-  const tokens=portfolioFiles[key];
-  const results=[];
-
-  /* Resolve sequentially so card order always stays correct. */
-  for(const token of tokens){
-    const src=await findImage(assetCandidates(key,token));
-    if(src)results.push(src);
-  }
-
-  if(!results.length){
-    grid.innerHTML='<div class="loading">No uploaded images found for this section.</div>';
-    return;
-  }
-
-  results.forEach((src,i)=>{
-    const card=makeProjectCard(src,key,i);
-    grid.appendChild(card);
-    revealObserver.observe(card);
-  });
-
-  if(results.length>3){
-    button.classList.remove("hidden");
-  }
-
-  button.addEventListener("click",()=>{
-    const hidden=[...grid.querySelectorAll(".project-card.is-hidden")];
-    const expanded=hidden.length===0;
-
-    if(expanded){
-      grid.querySelectorAll(".project-card").forEach((card,i)=>{
-        if(i>=3)card.classList.add("is-hidden");
-      });
-      button.innerHTML='Show More <span>+</span>';
-    }else{
-      hidden.forEach(card=>card.classList.remove("is-hidden"));
-      button.innerHTML='Show Less <span>−</span>';
-    }
-  });
-}
-
-["book","web","social","logo","print"].forEach(loadPortfolio);
-
-/* =========================================================
-   7. BLOGGER JSONP
-   Source: createwithshakil.blogspot.com
-========================================================= */
-const BLOGGER="https://createwithshakil.blogspot.com";
-let jsonpId=0;
-
-function bloggerFeed(label,maxResults=100){
-  return new Promise((resolve,reject)=>{
-    const callback="portfolioJSONP_"+(++jsonpId);
-    const script=document.createElement("script");
-    let finished=false;
-
-    function cleanup(){
-      if(script.parentNode)script.parentNode.removeChild(script);
-      try{delete window[callback]}catch(e){window[callback]=undefined}
-    }
-
-    window[callback]=data=>{
-      if(finished)return;
-      finished=true;
-      const entries=data?.feed?.entry || [];
-      cleanup();
-      resolve(entries);
-    };
-
-    script.onerror=()=>{
-      if(finished)return;
-      finished=true;
-      cleanup();
-      reject(new Error("Blogger feed failed"));
-    };
-
-    script.src=`${BLOGGER}/feeds/posts/default/-/${encodeURIComponent(label)}?alt=json-in-script&max-results=${maxResults}&callback=${callback}`;
-    document.body.appendChild(script);
-  });
-}
-
-function entryTitle(entry){
-  return entry?.title?.$t || "Client";
-}
-
-function entryContent(entry){
-  return entry?.content?.$t || entry?.summary?.$t || "";
-}
-
-function stripHTML(html){
-  const div=document.createElement("div");
-  div.innerHTML=html||"";
-  return (div.textContent||div.innerText||"").replace(/\s+/g," ").trim();
-}
-
-function firstImage(entry){
-  if(entry?.media$thumbnail?.url){
-    return entry.media$thumbnail.url
-      .replace(/\/s\d+(?:-c)?\//,"/s1200/")
-      .replace(/=s\d+(?:-c)?/,"=s1200");
-  }
-  const match=entryContent(entry).match(/<img[^>]+src=["']([^"']+)["']/i);
-  return match ? match[1] : "";
-}
-
-function entryURL(entry){
-  const link=(entry?.link||[]).find(x=>x.rel==="alternate");
-  return link?.href || "#";
-}
-
-/* =========================================================
-   8. CURRENTLY WORKING — ACTUAL BLOGGER LOGOS
-   First image in each Blogger post is treated as the logo.
-========================================================= */
-function makeLogo(entry){
-  const src=firstImage(entry);
-  const name=entryTitle(entry);
-  const card=document.createElement("a");
-  card.className="logo-card";
-  card.href=entryURL(entry);
-  card.target="_blank";
-  card.rel="noopener noreferrer";
-  if(src){
-    card.innerHTML=`<img src="${src}" alt="${escapeHTML(name)}" loading="lazy">`;
-  }else{
-    card.innerHTML=`<span class="logo-fallback">${escapeHTML(name)}</span>`;
-  }
-  return card;
-}
-
-function escapeHTML(text){
-  const div=document.createElement("div");
-  div.textContent=text||"";
-  return div.innerHTML;
-}
-
-let activeEntries=[];
-
-async function loadActive(){
-  const track=document.getElementById("activeTrack");
-  try{
-    activeEntries=await bloggerFeed("Currently Working",100);
-    if(!activeEntries.length){
-      track.innerHTML='<div class="loading">No Currently Working posts found.</div>';
-      return;
-    }
-
-    track.innerHTML="";
-
-    /* Duplicate set = seamless visual loop. */
-    const source=[...activeEntries,...activeEntries];
-    source.forEach(entry=>{
-      track.appendChild(makeLogo(entry));
-    });
-
-    startMarquee(track);
-  }catch(e){
-    track.innerHTML='<div class="loading">Unable to load active profiles.</div>';
-  }
-}
-
-function startMarquee(track){
-  let x=0;
-  let paused=false;
-  let last=performance.now();
-
-  const parent=track.parentElement;
-  parent.addEventListener("mouseenter",()=>paused=true);
-  parent.addEventListener("mouseleave",()=>paused=false);
-
-  function tick(now){
-    const dt=Math.min(40,now-last);
-    last=now;
-    if(!paused && track.scrollWidth>parent.clientWidth){
-      x-=dt*0.035;
-      const half=track.scrollWidth/2;
-      if(Math.abs(x)>=half)x=0;
-      track.style.transform=`translate3d(${x}px,0,0)`;
-    }
-    requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-}
-
-
-loadActive();
-
-/* =========================================================
-   9. CLIENT FEEDBACK — ACTUAL BLOGGER COMMENTS
-========================================================= */
-const clientsGrid=document.getElementById("clientsGrid");
-const clientsMore=document.getElementById("clientsMore");
-let clients=[];
-let clientsExpanded=false;
-
-function makeClientCard(entry,index){
-  const name=entryTitle(entry);
-  const raw=stripHTML(entryContent(entry));
-  const cleaned=raw.replace(/^[★☆\s]+/,"").trim();
-
-  const article=document.createElement("article");
-  article.className="client-card";
-
-  const review=document.createElement("div");
-  review.className="client-review";
-  review.textContent=cleaned;
-
-  const needsMore=cleaned.length>360;
-  if(needsMore)review.classList.add("clamped");
-
-  article.innerHTML=`<div class="client-stars">★★★★★</div>`;
-  article.appendChild(review);
-
-  if(needsMore){
-    const more=document.createElement("button");
-    more.className="client-more visible";
-    more.type="button";
-    more.textContent="Read More";
-    more.addEventListener("click",()=>{
-      const expanded=review.classList.toggle("clamped");
-      more.textContent=expanded?"Read More":"Read Less";
-    });
-    article.appendChild(more);
-  }
-
-  const who=document.createElement("div");
-  who.className="client-name";
-  who.textContent="— "+name;
-  article.appendChild(who);
-
-  return article;
-}
-
-function renderClients(){
-  clientsGrid.innerHTML="";
-  const visible=clientsExpanded ? clients : clients.slice(0,3);
-  visible.forEach((entry,i)=>{
-    const card=makeClientCard(entry,i);
-    clientsGrid.appendChild(card);
-    revealObserver.observe(card);
-  });
-
-  if(clients.length>3){
-    clientsMore.classList.remove("hidden");
-    clientsMore.innerHTML=clientsExpanded?'Show Less <span>−</span>':'Show More <span>+</span>';
-  }
-}
-
-clientsMore.addEventListener("click",()=>{
-  clientsExpanded=!clientsExpanded;
-  renderClients();
-});
-
-(async function(){
-  try{
-    clients=await bloggerFeed("Client Feedback",100);
-    if(!clients.length){
-      clientsGrid.innerHTML='<div class="loading">No Client Feedback posts found.</div>';
-      return;
-    }
-    renderClients();
-  }catch(e){
-    clientsGrid.innerHTML='<div class="loading">Unable to load client feedback.</div>';
-  }
-})();
-
-/* =========================================================
-   10. HERO PROFILE PHOTO — BLOGGER OVERRIDES LOCAL FALLBACK
-   Blogger label: Profile Photo
-========================================================= */
-(async function(){
-  try{
-    const entries=await bloggerFeed("Profile Photo",5);
-    const src=entries.length ? firstImage(entries[0]) : "";
-    const box=document.getElementById("heroPhoto");
-    if(src && box){
-      box.innerHTML=`<img src="${src}" alt="Shakil R." loading="eager" fetchpriority="high">`;
-    }
-  }catch(e){
-    /* Keep local assets/images/profile.jpg fallback. */
-  }
-})();
-
-/* =========================================================
-   11. NAV ACTIVE STATE
-========================================================= */
-const sections=[...document.querySelectorAll("main section[id]")];
-const navLinks=[...document.querySelectorAll(".nav-links a")];
-
-const navObserver=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      navLinks.forEach(a=>a.classList.remove("active"));
-      const link=navLinks.find(a=>a.getAttribute("href")==="#"+entry.target.id);
-      if(link)link.classList.add("active");
-    }
-  });
-},{rootMargin:"-35% 0px -55% 0px",threshold:0});
-
-sections.forEach(section=>navObserver.observe(section));
-
-/* Prevent accidental # navigation from causing strange refresh positions. */
-document.querySelectorAll('a[href^="#"]').forEach(link=>{
-  link.addEventListener("click",e=>{
-    const id=link.getAttribute("href");
-    if(id==="#" || !document.querySelector(id))return;
-    e.preventDefault();
-    document.querySelector(id).scrollIntoView({behavior:"smooth",block:"start"});
-    history.pushState(null,"",id);
-  });
-});
-</script>
 </body>
 </html>
