@@ -116,8 +116,7 @@ a {
 
 .site-header {
 
-    position:
-        sticky;
+    position: sticky;
 
     top: 0;
 
@@ -129,8 +128,7 @@ a {
 
     align-items: center;
 
-    justify-content:
-        space-between;
+    justify-content: space-between;
 
     padding:
         0
@@ -162,7 +160,8 @@ a {
         "Anton",
         sans-serif;
 
-    font-size: 28px;
+    font-size:
+        28px;
 
     letter-spacing:
         .5px;
@@ -208,7 +207,8 @@ a {
 
     border: 0;
 
-    padding: 5px 0;
+    padding:
+        5px 0;
 
     background: none;
 
@@ -218,9 +218,11 @@ a {
         "Space Mono",
         monospace;
 
-    font-size: 10px;
+    font-size:
+        10px;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
 }
 
@@ -232,7 +234,7 @@ a {
 
 
 /* =========================================================
-   THEME SWITCH
+   THEME
 ========================================================= */
 
 .theme-switch {
@@ -259,13 +261,15 @@ a {
     background:
         var(--surface);
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
     font-family:
         "Space Mono",
         monospace;
 
-    font-size: 8px;
+    font-size:
+        8px;
 
 }
 
@@ -275,9 +279,11 @@ a {
     position:
         relative;
 
-    width: 28px;
+    width:
+        28px;
 
-    height: 15px;
+    height:
+        15px;
 
     background:
         var(--text);
@@ -295,13 +301,17 @@ a {
     position:
         absolute;
 
-    top: 2px;
+    top:
+        2px;
 
-    left: 2px;
+    left:
+        2px;
 
-    width: 11px;
+    width:
+        11px;
 
-    height: 11px;
+    height:
+        11px;
 
     background:
         var(--bg);
@@ -331,26 +341,34 @@ html[data-theme="dark"]
 
 .menu-btn {
 
-    display: none;
+    display:
+        none;
 
-    border: 0;
+    border:
+        0;
 
-    background: none;
+    background:
+        none;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
 }
 
 
 .menu-btn span {
 
-    display: block;
+    display:
+        block;
 
-    width: 26px;
+    width:
+        26px;
 
-    height: 2px;
+    height:
+        2px;
 
-    margin: 6px;
+    margin:
+        6px;
 
     background:
         currentColor;
@@ -373,23 +391,28 @@ html[data-theme="dark"]
     min-height:
         calc(100vh - 82px);
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
 }
 
 
 .hero-grid {
 
-    width: 100%;
+    width:
+        100%;
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
         .72fr 1.28fr;
 
-    align-items: center;
+    align-items:
+        center;
 
     gap:
         clamp(
@@ -413,7 +436,8 @@ html[data-theme="dark"]
 
 .profile-frame {
 
-    width: 100%;
+    width:
+        100%;
 
     aspect-ratio:
         1 / 1;
@@ -432,8 +456,11 @@ html[data-theme="dark"]
 
 .profile-frame img {
 
-    width: 100%;
-    height: 100%;
+    width:
+        100%;
+
+    height:
+        100%;
 
     object-fit:
         cover;
@@ -475,8 +502,11 @@ html[data-theme="dark"]
 
 .price-dot {
 
-    width: 8px;
-    height: 8px;
+    width:
+        8px;
+
+    height:
+        8px;
 
     border-radius:
         50%;
@@ -505,7 +535,10 @@ html[data-theme="dark"]
         grid;
 
     grid-template-columns:
-        repeat(3,1fr);
+        repeat(
+            3,
+            1fr
+        );
 
     gap:
         20px;
@@ -620,7 +653,8 @@ html[data-theme="dark"]
 
 .hero-title {
 
-    margin: 0;
+    margin:
+        0;
 
     color:
         var(--heading-normal);
@@ -663,9 +697,9 @@ html[data-theme="dark"]
 
     font-size:
         clamp(
-            17px,
-            1.35vw,
-            21px
+            15px,
+            1.15vw,
+            18px
         );
 
     line-height:
@@ -676,7 +710,8 @@ html[data-theme="dark"]
 
 .hero-actions {
 
-    display: flex;
+    display:
+        flex;
 
     flex-wrap:
         wrap;
@@ -762,7 +797,7 @@ html[data-theme="dark"]
 
 
 /* =========================================================
-   SECTION HEADINGS
+   HEADINGS
 ========================================================= */
 
 .section-heading {
@@ -789,7 +824,8 @@ html[data-theme="dark"]
 .section-heading h2,
 .contact-copy h2 {
 
-    margin: 0;
+    margin:
+        0;
 
     color:
         var(--heading-normal);
@@ -1039,10 +1075,6 @@ html[data-theme="dark"]
 }
 
 
-/*
-   Heading + original description side-by-side
-*/
-
 .project-header {
 
     display:
@@ -1070,7 +1102,8 @@ html[data-theme="dark"]
 
 .project-header h3 {
 
-    margin: 0;
+    margin:
+        0;
 
     color:
         var(--heading-normal);
@@ -1106,10 +1139,6 @@ html[data-theme="dark"]
     color: var(--heading-normal);
 }
 
-
-/*
-    Original HTML section description.
-*/
 
 .project-note {
 
@@ -1170,6 +1199,22 @@ html[data-theme="dark"]
     background:
         var(--surface-2);
 
+    box-shadow:
+        inset 0 0 0 0
+        var(--accent);
+
+    transition:
+        box-shadow .22s ease;
+
+}
+
+
+.project-card:hover {
+
+    box-shadow:
+        inset 0 0 0 1px
+        var(--accent);
+
 }
 
 
@@ -1198,59 +1243,12 @@ html[data-theme="dark"]
 }
 
 
+/*
+   VIEW REMOVED
+*/
+
 .project-card::after {
-
-    content:
-        "VIEW";
-
-    position:
-        absolute;
-
-    right:
-        12px;
-
-    bottom:
-        12px;
-
-    padding:
-        8px 11px;
-
-    background:
-        rgba(0,0,0,.75);
-
-    color:
-        #ffffff;
-
-    border-radius:
-        25px;
-
-    font-family:
-        "Space Mono",
-        monospace;
-
-    font-size:
-        8px;
-
-    opacity:
-        0;
-
-    transform:
-        translateY(8px);
-
-    transition:
-        .25s;
-
-}
-
-
-.project-card:hover::after {
-
-    opacity:
-        1;
-
-    transform:
-        translateY(0);
-
+    display: none;
 }
 
 
@@ -1338,6 +1336,15 @@ html[data-theme="dark"]
     overflow:
         hidden;
 
+    cursor:
+        grab;
+
+    user-select:
+        none;
+
+    touch-action:
+        pan-y;
+
     -webkit-mask-image:
         linear-gradient(
             to right,
@@ -1359,6 +1366,11 @@ html[data-theme="dark"]
 }
 
 
+.testimonial-marquee.dragging {
+    cursor: grabbing;
+}
+
+
 .testimonial-track {
 
     display:
@@ -1369,21 +1381,6 @@ html[data-theme="dark"]
 
     will-change:
         transform;
-
-    animation:
-        testimonialLoop
-        34s
-        linear
-        infinite;
-
-}
-
-
-.testimonial-marquee:hover
-.testimonial-track {
-
-    animation-play-state:
-        paused;
 
 }
 
@@ -1473,17 +1470,140 @@ html[data-theme="dark"]
 }
 
 
-@keyframes testimonialLoop {
 
-    from {
-        transform:
-            translate3d(0,0,0);
-    }
+/* =========================================================
+   BEYOND THE PIXELS
+========================================================= */
 
-    to {
-        transform:
-            translate3d(-50%,0,0);
-    }
+.beyond-section {
+
+    border-top:
+        1px
+        solid
+        var(--line);
+
+}
+
+
+.beyond-content {
+
+    max-width:
+        1060px;
+
+}
+
+
+.beyond-content h2 {
+
+    margin:
+        0 0 28px;
+
+    color:
+        var(--heading-normal);
+
+    font-family:
+        "Anton",
+        sans-serif;
+
+    font-size:
+        clamp(
+            48px,
+            5vw,
+            82px
+        );
+
+    font-weight:
+        400;
+
+    line-height:
+        .95;
+
+}
+
+
+.beyond-content p {
+
+    max-width:
+        950px;
+
+    margin:
+        0 0 22px;
+
+    color:
+        var(--muted);
+
+    font-size:
+        18px;
+
+    line-height:
+        1.7;
+
+}
+
+
+.beyond-stats {
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        70px;
+
+    margin-top:
+        38px;
+
+}
+
+
+.beyond-stat strong {
+
+    display:
+        block;
+
+    color:
+        var(--heading-normal);
+
+    font-family:
+        "Anton",
+        sans-serif;
+
+    font-size:
+        52px;
+
+    line-height:
+        1;
+
+}
+
+
+.beyond-stat:first-child strong {
+    color: var(--accent);
+}
+
+
+.beyond-stat span {
+
+    display:
+        block;
+
+    margin-top:
+        8px;
+
+    color:
+        var(--muted);
+
+    font-family:
+        "Space Mono",
+        monospace;
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        .1em;
 
 }
 
@@ -1538,7 +1658,10 @@ html[data-theme="dark"]
 ========================================================= */
 
 .social-block {
-    margin-top: 48px;
+
+    margin-top:
+        48px;
+
 }
 
 
@@ -1654,6 +1777,16 @@ html[data-theme="dark"]
 
 .social-dribbble {
     color: #ea4c89;
+}
+
+
+/*
+   DESKTOP:
+   keep original social position.
+*/
+
+.mobile-social-block {
+    display: none;
 }
 
 
@@ -2054,9 +2187,11 @@ html[data-theme="dark"]
         top:
             82px;
 
-        left: 0;
+        left:
+            0;
 
-        right: 0;
+        right:
+            0;
 
         z-index:
             999;
@@ -2102,11 +2237,14 @@ html[data-theme="dark"]
 
     .mobile-menu nav button {
 
-        border: 0;
+        border:
+            0;
 
-        padding: 0;
+        padding:
+            0;
 
-        background: none;
+        background:
+            none;
 
         text-align:
             left;
@@ -2168,10 +2306,7 @@ html[data-theme="dark"]
 
 
     .contact-grid {
-
-        grid-template-columns:
-            1fr;
-
+        grid-template-columns: 1fr;
     }
 
 }
@@ -2288,15 +2423,12 @@ html[data-theme="dark"]
 
 
     .hero-intro {
-        font-size: 16px;
+        font-size: 15px;
     }
 
 
     .project-header {
-
-        display:
-            block;
-
+        display: block;
     }
 
 
@@ -2329,10 +2461,7 @@ html[data-theme="dark"]
 
 
     .two-col {
-
-        grid-template-columns:
-            1fr;
-
+        grid-template-columns: 1fr;
     }
 
 
@@ -2384,6 +2513,46 @@ html[data-theme="dark"]
         font-size: 7px;
     }
 
+
+    /*
+       MOBILE SOCIAL FIX
+
+       Original social disappears.
+       Duplicate social under form appears.
+    */
+
+    .desktop-social-block {
+        display: none;
+    }
+
+
+    .mobile-social-block {
+
+        display: block;
+
+        margin-top:
+            0;
+
+        padding-top:
+            28px;
+
+    }
+
+
+    .contact-grid {
+        gap: 35px;
+    }
+
+
+    .beyond-content p {
+        font-size: 16px;
+    }
+
+
+    .beyond-stats {
+        gap: 45px;
+    }
+
 }
 
 
@@ -2407,7 +2576,8 @@ html[data-theme="dark"]
 
 
     .section-heading h2,
-    .contact-copy h2 {
+    .contact-copy h2,
+    .beyond-content h2 {
 
         font-size:
             48px;
@@ -2417,6 +2587,11 @@ html[data-theme="dark"]
 
     .stat strong {
         font-size: 31px;
+    }
+
+
+    .beyond-stat strong {
+        font-size: 42px;
     }
 
 }
