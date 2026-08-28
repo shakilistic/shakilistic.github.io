@@ -87,6 +87,7 @@ a{color:inherit;text-decoration:none}
 .profiles-heading{width:min(var(--max),calc(100% - 48px));margin:auto;text-align:center}
 .profiles-heading h2{margin-top:14px;font-family:var(--display);font-size:clamp(58px,7vw,100px);line-height:.86;font-weight:400;letter-spacing:-.025em;text-transform:uppercase}.profiles-heading h2 span{color:var(--orange)}
 .profiles-slider{margin-top:60px;width:100%;overflow:hidden}.profiles-track{width:max-content;display:flex;gap:0;will-change:transform;animation:profileLoop 22s linear infinite}
+.active-set{display:flex;flex:0 0 auto;gap:0}
 .profiles-slider:hover .profiles-track{animation-play-state:paused}
 .profile-logo{width:88px;height:88px;flex:0 0 88px;border-radius:50%;border:1px solid rgba(245,242,235,.22);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--text);overflow:hidden;transition:.3s}
 .profile-logo:hover{transform:scale(1.05);border-color:var(--orange)}
@@ -134,7 +135,7 @@ html{scroll-padding-top:72px}.section,.design-section,.client-section{width:calc
 .portfolio-grid{grid-template-columns:1fr;gap:14px;margin-top:38px}.show-more{margin-top:18px}
 .client-carousel{margin-top:38px}.client-card{flex-basis:100%;min-height:245px;padding:19px}
 .reason-section{padding:75px 0}.reason-grid{grid-template-columns:1fr;gap:25px}.reason-copy{padding-top:8px}
-.profiles-section{padding:80px 0}.profiles-heading{width:calc(100% - 34px)}.profiles-track{gap:0}.active-set{gap:0!important}.profile-logo{width:68px;height:68px;flex-basis:68px}
+.profiles-section{padding:80px 0}.profiles-heading{width:calc(100% - 34px)}.profiles-track{gap:0}.active-set{display:flex!important;flex-direction:row!important;flex:0 0 auto!important;gap:0!important}.profile-logo{width:68px;height:68px;flex:0 0 68px}
 .contact-section{padding:55px 0}.contact-card{grid-template-columns:1fr;gap:45px;padding:28px 20px;border-radius:22px}.contact-title{font-size:clamp(62px,19vw,105px)}
 .contact-copy>p{margin-top:34px;font-size:13px}.footer-inner{width:calc(100% - 34px);grid-template-columns:1fr;gap:10px}.footer-role{text-align:left}.back-to-top{right:18px;bottom:18px}
 }
