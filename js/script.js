@@ -4,7 +4,7 @@
 
 
 /* =========================================================
-   GOOGLE SHEET URL
+   GOOGLE APPS SCRIPT URL
 ========================================================= */
 
 const GOOGLE_SCRIPT_URL =
@@ -12,7 +12,7 @@ const GOOGLE_SCRIPT_URL =
 
 
 /* =========================================================
-   PROJECT DATA
+   PROJECT CATEGORIES
 ========================================================= */
 
 const categories = [
@@ -68,131 +68,117 @@ const platformLogos = {
 
     adobe: `
         <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-                fill="currentColor"
-                d="M15.1 2H24v20L15.1 2ZM8.9 2H0v20L8.9 2Zm3.1 7.4
-                5.7 12.6h-3.8l-1.7-4.2H8.1L12 9.4Z"
-            />
+            <path fill="currentColor"
+            d="M15.1 2H24v20L15.1 2ZM8.9 2H0v20L8.9 2Zm3.1 7.4
+            5.7 12.6h-3.8l-1.7-4.2H8.1L12 9.4Z"/>
         </svg>
     `,
 
     behance: `
         <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-                fill="currentColor"
-                d="M6.5 11.1H3.2V7.4h3.1c1.4 0 2.2.5 2.2 1.8
-                0 1.2-.8 1.9-2 1.9Zm.2 5.4H3.2v-4.1h3.6
-                c1.6 0 2.5.7 2.5 2.1 0 1.5-1 2-2.6 2ZM9.8
-                11.7c1.3-.7 2-1.7 2-3.2 0-2.8-2.1-4.2-5-4.2
-                H0v15.2h7.1c3.4 0 5.5-1.6 5.5-4.7
-                0-1.9-.9-3.2-2.8-4.1Zm9-3.8c-3.6 0-5.9
-                2.5-5.9 6s2.2 6 6 6c2.8 0 4.7-1.2 5.4-3.8
-                h-2.8c-.2.8-1.2 1.3-2.5 1.3-1.8
-                0-2.8-.9-2.9-2.9h8.4c.2-3.5-1.8-6.6-5.7-6.6Zm-2.7
-                4.6c.2-1.5 1-2.3 2.6-2.3 1.4 0 2.4.8
-                2.5 2.3h-5.1ZM15.8 4.8h5.8v1.7h-5.8V4.8Z"
-            />
+            <path fill="currentColor"
+            d="M6.5 11.1H3.2V7.4h3.1c1.4 0 2.2.5 2.2 1.8
+            0 1.2-.8 1.9-2 1.9Zm.2 5.4H3.2v-4.1h3.6
+            c1.6 0 2.5.7 2.5 2.1 0 1.5-1 2-2.6 2ZM9.8
+            11.7c1.3-.7 2-1.7 2-3.2 0-2.8-2.1-4.2-5-4.2
+            H0v15.2h7.1c3.4 0 5.5-1.6 5.5-4.7
+            0-1.9-.9-3.2-2.8-4.1Zm9-3.8c-3.6 0-5.9
+            2.5-5.9 6s2.2 6 6 6c2.8 0 4.7-1.2 5.4-3.8
+            h-2.8c-.2.8-1.2 1.3-2.5 1.3-1.8
+            0-2.8-.9-2.9-2.9h8.4c.2-3.5-1.8-6.6-5.7-6.6Zm-2.7
+            4.6c.2-1.5 1-2.3 2.6-2.3 1.4 0 2.4.8
+            2.5 2.3h-5.1ZM15.8 4.8h5.8v1.7h-5.8V4.8Z"/>
         </svg>
     `,
 
     linkedin: `
         <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-                fill="currentColor"
-                d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04
-                -1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V8.98h3.41
-                v1.57h.05c.48-.9 1.64-1.85 3.37-1.85
-                3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.32 7.41
-                A2.06 2.06 0 1 1 5.32 3.3a2.06 2.06 0 0 1
-                0 4.12ZM7.1 20.45H3.54V8.98H7.1v11.47Z"
-            />
+            <path fill="currentColor"
+            d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04
+            -1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V8.98h3.41
+            v1.57h.05c.48-.9 1.64-1.85 3.37-1.85
+            3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.32 7.41
+            A2.06 2.06 0 1 1 5.32 3.3a2.06 2.06 0 0 1
+            0 4.12ZM7.1 20.45H3.54V8.98H7.1v11.47Z"/>
         </svg>
     `,
 
     x: `
         <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-                fill="currentColor"
-                d="M18.244 2.25h3.308l-7.227 8.26
-                8.502 11.24h-6.657l-5.214-6.817
-                -5.967 6.817H1.68l7.73-8.835L1.254
-                2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161
-                17.52h1.833L7.084 4.126H5.117L17.083
-                19.77Z"
-            />
+            <path fill="currentColor"
+            d="M18.244 2.25h3.308l-7.227 8.26
+            8.502 11.24h-6.657l-5.214-6.817
+            -5.967 6.817H1.68l7.73-8.835L1.254
+            2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161
+            17.52h1.833L7.084 4.126H5.117L17.083
+            19.77Z"/>
         </svg>
     `,
 
     pinterest: `
         <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-                fill="currentColor"
-                d="M12 0a12 12 0 0 0-4.37 23.17c-.1-1.87-.02-4.12
-                .47-6.18l1.54-6.52s-.39-.78-.39-1.94
-                c0-1.82 1.05-3.18 2.36-3.18 1.11 0
-                1.65.84 1.65 1.84 0 1.12-.71 2.8-1.08
-                4.36-.31 1.3.65 2.36 1.93 2.36
-                2.32 0 4.1-2.45 4.1-5.98 0-3.13-2.25-5.31-5.46-5.31
-                -3.72 0-5.9 2.79-5.9 5.68 0 1.12.43
-                2.33.97 2.99.11.13.12.24.09.37l-.36
-                1.48c-.06.24-.19.29-.44.17-1.64-.76-2.66-3.15-2.66-5.07
-                0-4.13 3-7.92 8.65-7.92 4.54 0 8.07
-                3.24 8.07 7.56 0 4.51-2.84 8.14-6.79
-                8.14-1.33 0-2.57-.69-3-1.5l-.82 3.1
-                c-.29 1.14-1.09 2.57-1.62 3.44A12 12
-                0 1 0 12 0Z"
-            />
+            <path fill="currentColor"
+            d="M12 0a12 12 0 0 0-4.37 23.17c-.1-1.87-.02-4.12
+            .47-6.18l1.54-6.52s-.39-.78-.39-1.94
+            c0-1.82 1.05-3.18 2.36-3.18 1.11 0
+            1.65.84 1.65 1.84 0 1.12-.71 2.8-1.08
+            4.36-.31 1.3.65 2.36 1.93 2.36
+            2.32 0 4.1-2.45 4.1-5.98 0-3.13-2.25-5.31-5.46-5.31
+            -3.72 0-5.9 2.79-5.9 5.68 0 1.12.43
+            2.33.97 2.99.11.13.12.24.09.37l-.36
+            1.48c-.06.24-.19.29-.44.17-1.64-.76-2.66-3.15-2.66-5.07
+            0-4.13 3-7.92 8.65-7.92 4.54 0 8.07
+            3.24 8.07 7.56 0 4.51-2.84 8.14-6.79
+            8.14-1.33 0-2.57-.69-3-1.5l-.82 3.1
+            c-.29 1.14-1.09 2.57-1.62 3.44A12 12
+            0 1 0 12 0Z"/>
         </svg>
     `,
 
     github: `
         <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-                fill="currentColor"
-                d="M12 .3a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58
-                v-2.24c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39
-                -1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73
-                1.2.09 1.84 1.24 1.84 1.24 1.07 1.84
-                2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61
-                -2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38
-                1.23-3.22-.12-.3-.53-1.53.12-3.18
-                0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6
-                0c2.29-1.55 3.3-1.23 3.3-1.23.65
-                1.65.24 2.88.12 3.18.76.84 1.23
-                1.91 1.23 3.22 0 4.61-2.81 5.62-5.48
-                5.92.43.37.81 1.1.81 2.22v3.29c0
-                .32.22.7.83.58A12 12 0 0 0 12 .3Z"
-            />
+            <path fill="currentColor"
+            d="M12 .3a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58
+            v-2.24c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39
+            -1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73
+            1.2.09 1.84 1.24 1.84 1.24 1.07 1.84
+            2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61
+            -2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38
+            1.23-3.22-.12-.3-.53-1.53.12-3.18
+            0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6
+            0c2.29-1.55 3.3-1.23 3.3-1.23.65
+            1.65.24 2.88.12 3.18.76.84 1.23
+            1.91 1.23 3.22 0 4.61-2.81 5.62-5.48
+            5.92.43.37.81 1.1.81 2.22v3.29c0
+            .32.22.7.83.58A12 12 0 0 0 12 .3Z"/>
         </svg>
     `,
 
     dribbble: `
         <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-                fill="currentColor"
-                d="M12 0a12 12 0 1 0 0 24 12 12
-                0 0 0 0-24Zm7.94 5.54a10 10
-                0 0 1 2.01 6.15c-.29-.06-3.18-.65-6.1-.28
-                -.24-.58-.5-1.16-.78-1.73 3.22-1.32
-                4.69-3.25 4.87-4.14ZM12 2c2.54 0
-                4.87.95 6.64 2.52-.15.2-1.46
-                1.94-4.46 3.07A50.6 50.6 0 0
-                0 11.01 2.1c.33-.05.66-.08.99-.08ZM8.86
-                2.5a42.8 42.8 0 0 1 3.21
-                5.4c-3.95 1.05-7.44 1.03-7.82
-                1.02A10.05 10.05 0 0 1 8.86
-                2.5ZM2 12v-.3c.2.01 4.3.08
-                9.02-1.24.25.5.49 1 .71
-                1.51-4.25 1.2-6.49 4.49-6.72
-                4.84A9.95 9.95 0 0 1 2 12Zm10
-                10a9.96 9.96 0 0 1-5.5-1.65
-                c.18-.3 1.84-2.93 5.99-4.05
-                1.12 2.91 1.58 5.35 1.69
-                6A10.3 10.3 0 0 1 12 22Zm4.12-1.5
-                c-.08-.48-.5-2.8-1.54-5.59
-                2.75-.44 5.16.28 5.45.37
-                a10.03 10.03 0 0 1-3.91 5.22Z"
-            />
+            <path fill="currentColor"
+            d="M12 0a12 12 0 1 0 0 24 12 12
+            0 0 0 0-24Zm7.94 5.54a10 10
+            0 0 1 2.01 6.15c-.29-.06-3.18-.65-6.1-.28
+            -.24-.58-.5-1.16-.78-1.73 3.22-1.32
+            4.69-3.25 4.87-4.14ZM12 2c2.54 0
+            4.87.95 6.64 2.52-.15.2-1.46
+            1.94-4.46 3.07A50.6 50.6 0 0
+            0 11.01 2.1c.33-.05.66-.08.99-.08ZM8.86
+            2.5a42.8 42.8 0 0 1 3.21
+            5.4c-3.95 1.05-7.44 1.03-7.82
+            1.02A10.05 10.05 0 0 1 8.86
+            2.5ZM2 12v-.3c.2.01 4.3.08
+            9.02-1.24.25.5.49 1 .71
+            1.51-4.25 1.2-6.49 4.49-6.72
+            4.84A9.95 9.95 0 0 1 2 12Zm10
+            10a9.96 9.96 0 0 1-5.5-1.65
+            c.18-.3 1.84-2.93 5.99-4.05
+            1.12 2.91 1.58 5.35 1.69
+            6A10.3 10.3 0 0 1 12 22Zm4.12-1.5
+            c-.08-.48-.5-2.8-1.54-5.59
+            2.75-.44 5.16.28 5.45.37
+            a10.03 10.03 0 0 1-3.91 5.22Z"/>
         </svg>
     `
 
@@ -200,7 +186,7 @@ const platformLogos = {
 
 
 /* =========================================================
-   ACTIVE PLATFORMS
+   PLATFORMS
 ========================================================= */
 
 const activePlatforms = [
@@ -217,7 +203,7 @@ const activePlatforms = [
 
 
 /* =========================================================
-   SOCIAL LINKS
+   SOCIAL PROFILES
 ========================================================= */
 
 const socialProfiles = [
@@ -307,13 +293,15 @@ const testimonials = [
 
 
 /* =========================================================
-   FORCE PAGE TO TOP
+   PAGE TOP ON INITIAL LOAD ONLY
 ========================================================= */
 
 function forcePageToTop() {
 
     if ("scrollRestoration" in history) {
-        history.scrollRestoration = "manual";
+
+        history.scrollRestoration =
+            "manual";
     }
 
     if (window.location.hash) {
@@ -326,7 +314,11 @@ function forcePageToTop() {
         );
     }
 
-    window.scrollTo(0, 0);
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto"
+    });
 }
 
 
@@ -342,38 +334,42 @@ function createLogoGroup() {
     group.className =
         "logo-group";
 
-    activePlatforms.forEach(platform => {
 
-        const item =
-            document.createElement("div");
+    activePlatforms.forEach(
+        platform => {
 
-        item.className =
-            "active-logo logo-" +
-            platform.key;
+            const item =
+                document.createElement("div");
 
-        item.title =
-            platform.name;
+            item.className =
+                "active-logo logo-" +
+                platform.key;
 
-        item.setAttribute(
-            "aria-label",
-            platform.name
-        );
+            item.title =
+                platform.name;
 
-        item.innerHTML =
-            platformLogos[
-                platform.key
-            ];
+            item.setAttribute(
+                "aria-label",
+                platform.name
+            );
 
-        group.appendChild(item);
+            item.innerHTML =
+                platformLogos[
+                    platform.key
+                ];
 
-    });
+            group.appendChild(
+                item
+            );
+        }
+    );
 
     return group;
 }
 
 
 /* =========================================================
-   RENDER ACTIVE LOGOS
+   ACTIVE LOGOS
 ========================================================= */
 
 function renderActiveLogos() {
@@ -387,7 +383,8 @@ function renderActiveLogos() {
         return;
     }
 
-    track.innerHTML = "";
+    track.innerHTML =
+        "";
 
     track.appendChild(
         createLogoGroup()
@@ -404,7 +401,7 @@ function renderActiveLogos() {
 
 
 /* =========================================================
-   ENDLESS LOGO LOOP
+   LOGO LOOP
 ========================================================= */
 
 let logoLoopOffset = 0;
@@ -423,30 +420,24 @@ function startLogoLoop() {
             "logoMarquee"
         );
 
-    if (
-        !track ||
-        !marquee
-    ) {
+
+    if (!track || !marquee) {
         return;
     }
 
 
     marquee.addEventListener(
         "mouseenter",
-        function () {
-
-            logoLoopPaused =
-                true;
+        () => {
+            logoLoopPaused = true;
         }
     );
 
 
     marquee.addEventListener(
         "mouseleave",
-        function () {
-
-            logoLoopPaused =
-                false;
+        () => {
+            logoLoopPaused = false;
         }
     );
 
@@ -466,9 +457,7 @@ function startLogoLoop() {
             const groupWidth =
                 firstGroup.offsetWidth;
 
-            if (
-                groupWidth > 0
-            ) {
+            if (groupWidth > 0) {
 
                 logoLoopOffset +=
                     0.55;
@@ -508,7 +497,9 @@ function createSocialLinks(
         return;
     }
 
-    container.innerHTML = "";
+    container.innerHTML =
+        "";
+
 
     socialProfiles.forEach(
         social => {
@@ -569,7 +560,15 @@ function renderSocialLinks() {
 
 
 /* =========================================================
-   PROJECT SECTION
+   CREATE PROJECT SECTION
+
+   FILE NAMES:
+
+   book1.jpg - book20.jpg
+   web1.jpg - web20.jpg
+   social1.jpg - social20.jpg
+   logo1.jpg - logo20.jpg
+   print1.jpg - print20.jpg
 ========================================================= */
 
 function createProjectSection(
@@ -653,9 +652,14 @@ function createProjectSection(
         );
 
 
-    let loadedCount = 0;
-    let finishedCount = 0;
-    let expanded = false;
+    let loadedCount =
+        0;
+
+    let finishedCount =
+        0;
+
+    let expanded =
+        false;
 
 
     for (
@@ -681,14 +685,23 @@ function createProjectSection(
                 "img"
             );
 
+
+        /*
+        IMPORTANT IMAGE NAMING
+        */
+
         image.src =
             `./assets/images/${category.key}${i}.jpg`;
+
 
         image.alt =
             `${category.orange} ${category.normal} ${i}`;
 
         image.loading =
             "lazy";
+
+        image.decoding =
+            "async";
 
 
         image.addEventListener(
@@ -790,15 +803,19 @@ function createProjectSection(
 
     moreButton.addEventListener(
         "click",
-        function () {
+        function (event) {
+
+            event.preventDefault();
 
             expanded =
                 !expanded;
+
 
             moreButton.textContent =
                 expanded
                     ? "SHOW LESS"
                     : "SEE MORE";
+
 
             updateVisibility();
         }
@@ -812,6 +829,18 @@ function createProjectSection(
 
 function renderProjects() {
 
+    const wrapper =
+        document.getElementById(
+            "projectSections"
+        );
+
+    if (wrapper) {
+
+        wrapper.innerHTML =
+            "";
+    }
+
+
     categories.forEach(
         createProjectSection
     );
@@ -819,7 +848,7 @@ function renderProjects() {
 
 
 /* =========================================================
-   TESTIMONIAL GROUP
+   TESTIMONIALS
 ========================================================= */
 
 function createTestimonialGroup() {
@@ -873,10 +902,6 @@ function createTestimonialGroup() {
 }
 
 
-/* =========================================================
-   RENDER TESTIMONIALS
-========================================================= */
-
 function renderTestimonials() {
 
     const track =
@@ -908,7 +933,7 @@ function renderTestimonials() {
 
 
 /* =========================================================
-   TESTIMONIAL CONTROL
+   TESTIMONIAL MOVEMENT
 ========================================================= */
 
 function initializeTestimonialControl() {
@@ -923,10 +948,8 @@ function initializeTestimonialControl() {
             "testimonialTrack"
         );
 
-    if (
-        !marquee ||
-        !track
-    ) {
+
+    if (!marquee || !track) {
         return;
     }
 
@@ -991,7 +1014,7 @@ function initializeTestimonialControl() {
 
     marquee.addEventListener(
         "mouseenter",
-        function () {
+        () => {
 
             paused =
                 true;
@@ -1001,7 +1024,7 @@ function initializeTestimonialControl() {
 
     marquee.addEventListener(
         "mouseleave",
-        function () {
+        () => {
 
             if (!dragging) {
 
@@ -1014,7 +1037,7 @@ function initializeTestimonialControl() {
 
     marquee.addEventListener(
         "pointerdown",
-        function (event) {
+        event => {
 
             dragging =
                 true;
@@ -1046,7 +1069,7 @@ function initializeTestimonialControl() {
 
     marquee.addEventListener(
         "pointermove",
-        function (event) {
+        event => {
 
             if (!dragging) {
                 return;
@@ -1057,16 +1080,20 @@ function initializeTestimonialControl() {
                 event.clientX -
                 startX;
 
+
             offset =
                 startOffset -
                 movement;
+
 
             draw();
         }
     );
 
 
-    function stopDrag(event) {
+    function stopDrag(
+        event
+    ) {
 
         if (!dragging) {
             return;
@@ -1075,6 +1102,7 @@ function initializeTestimonialControl() {
 
         dragging =
             false;
+
 
         marquee.classList.remove(
             "dragging"
@@ -1106,60 +1134,10 @@ function initializeTestimonialControl() {
         stopDrag
     );
 
+
     marquee.addEventListener(
         "pointercancel",
         stopDrag
-    );
-
-
-    marquee.addEventListener(
-        "wheel",
-        function (event) {
-
-            let movement =
-                0;
-
-
-            if (
-                Math.abs(
-                    event.deltaX
-                ) >
-                Math.abs(
-                    event.deltaY
-                )
-            ) {
-
-                movement =
-                    event.deltaX;
-
-            } else if (
-                event.shiftKey
-            ) {
-
-                movement =
-                    event.deltaY;
-            }
-
-
-            if (
-                movement === 0
-            ) {
-                return;
-            }
-
-
-            event.preventDefault();
-
-            offset +=
-                movement;
-
-            draw();
-        },
-
-        {
-            passive:
-                false
-        }
     );
 
 
@@ -1189,9 +1167,7 @@ function initializeTestimonialControl() {
 
 
 /* =========================================================
-   CLEAN NAVIGATION
-   FIXED:
-   CONTACT FORM BUTTON WILL NOT TRIGGER NAVIGATION
+   NAVIGATION
 ========================================================= */
 
 function initializeCleanNavigation() {
@@ -1203,29 +1179,37 @@ function initializeCleanNavigation() {
         .forEach(
             button => {
 
+                /*
+                Never use form buttons
+                as navigation buttons.
+                */
+
+                if (
+                    button.closest(
+                        "#contactForm"
+                    )
+                ) {
+
+                    return;
+                }
+
+
                 button.addEventListener(
                     "click",
                     function (event) {
 
-                        /*
-                        IMPORTANT:
-                        Never run page navigation
-                        from anything inside contact form.
-                        */
+                        const targetID =
+                            button.dataset.scroll;
 
-                        if (
-                            button.closest(
-                                "#contactForm"
-                            )
-                        ) {
 
+                        if (!targetID) {
                             return;
                         }
 
 
                         const target =
                             document.getElementById(
-                                button.dataset.scroll
+                                targetID
                             );
 
 
@@ -1237,15 +1221,13 @@ function initializeCleanNavigation() {
                         event.preventDefault();
 
 
-                        target.scrollIntoView(
-                            {
-                                behavior:
-                                    "smooth",
+                        target.scrollIntoView({
+                            behavior:
+                                "smooth",
 
-                                block:
-                                    "start"
-                            }
-                        );
+                            block:
+                                "start"
+                        });
 
 
                         history.replaceState(
@@ -1322,45 +1304,17 @@ function initializeTheme() {
                 "click",
                 function (event) {
 
+                    event.preventDefault();
+
                     event.stopPropagation();
 
                     toggleTheme();
+
+                    closeMobileMenu();
                 }
             );
         }
     );
-
-
-    const systemTheme =
-        window.matchMedia(
-            "(prefers-color-scheme: dark)"
-        );
-
-
-    if (
-        systemTheme.addEventListener
-    ) {
-
-        systemTheme.addEventListener(
-            "change",
-            function (event) {
-
-                if (
-                    !localStorage.getItem(
-                        "portfolio-theme"
-                    )
-                ) {
-
-                    document.documentElement
-                        .dataset
-                        .theme =
-                        event.matches
-                            ? "dark"
-                            : "light";
-                }
-            }
-        );
-    }
 }
 
 
@@ -1381,10 +1335,7 @@ function initializeMenu() {
         );
 
 
-    if (
-        !button ||
-        !menu
-    ) {
+    if (!button || !menu) {
         return;
     }
 
@@ -1392,6 +1343,8 @@ function initializeMenu() {
     button.addEventListener(
         "click",
         function (event) {
+
+            event.preventDefault();
 
             event.stopPropagation();
 
@@ -1425,25 +1378,18 @@ function initializeMenu() {
                     "open"
                 )
             ) {
+
                 return;
             }
 
 
-            const clickedInsideMenu =
-                menu.contains(
-                    event.target
-                );
-
-
-            const clickedMenuButton =
-                button.contains(
-                    event.target
-                );
-
-
             if (
-                !clickedInsideMenu &&
-                !clickedMenuButton
+                !menu.contains(
+                    event.target
+                ) &&
+                !button.contains(
+                    event.target
+                )
             ) {
 
                 closeMobileMenu();
@@ -1459,21 +1405,6 @@ function initializeMenu() {
             if (
                 event.key ===
                 "Escape"
-            ) {
-
-                closeMobileMenu();
-            }
-        }
-    );
-
-
-    window.addEventListener(
-        "resize",
-        function () {
-
-            if (
-                window.innerWidth >
-                1050
             ) {
 
                 closeMobileMenu();
@@ -1496,10 +1427,7 @@ function closeMobileMenu() {
         );
 
 
-    if (
-        !button ||
-        !menu
-    ) {
+    if (!button || !menu) {
         return;
     }
 
@@ -1523,7 +1451,7 @@ function closeMobileMenu() {
 
 
 /* =========================================================
-   EMAIL FORMAT CHECK
+   EMAIL VALIDATION
 ========================================================= */
 
 function emailFormatLooksValid(
@@ -1531,12 +1459,14 @@ function emailFormatLooksValid(
 ) {
 
     return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
-        .test(email);
+        .test(
+            email
+        );
 }
 
 
 /* =========================================================
-   EMAIL DOMAIN / MX CHECK
+   EMAIL DOMAIN CHECK
 ========================================================= */
 
 async function emailDomainLooksValid(
@@ -1551,6 +1481,7 @@ async function emailDomainLooksValid(
 
 
     if (!domain) {
+
         return false;
     }
 
@@ -1575,6 +1506,7 @@ async function emailDomainLooksValid(
 
 
         if (!response.ok) {
+
             return true;
         }
 
@@ -1593,6 +1525,11 @@ async function emailDomainLooksValid(
 
     } catch (error) {
 
+        /*
+        DNS checking failure should
+        NOT stop the visitor.
+        */
+
         return true;
     }
 }
@@ -1600,8 +1537,11 @@ async function emailDomainLooksValid(
 
 /* =========================================================
    CONTACT FORM
-   FIXED:
-   SUBMIT WILL STAY AT CONTACT SECTION
+
+   IMPORTANT FIX:
+   - NO PAGE RELOAD
+   - NO HEADER JUMP
+   - NO FORM ACTION NAVIGATION
 ========================================================= */
 
 function initializeForm() {
@@ -1611,12 +1551,10 @@ function initializeForm() {
             "contactForm"
         );
 
-
     const status =
         document.getElementById(
             "formStatus"
         );
-
 
     const button =
         document.getElementById(
@@ -1624,383 +1562,408 @@ function initializeForm() {
         );
 
 
-    if (
-        !form ||
-        !status ||
-        !button
-    ) {
+    if (!form || !status || !button) {
+
         return;
     }
 
 
     /*
-    Prevent contact form clicks from
-    accidentally triggering other page navigation.
+    Disable browser's normal form navigation.
     */
 
-    form.addEventListener(
-        "click",
-        function (event) {
+    form.removeAttribute(
+        "action"
+    );
 
-            event.stopPropagation();
-        }
+    form.removeAttribute(
+        "target"
+    );
+
+    form.setAttribute(
+        "method",
+        "post"
     );
 
 
-    form.addEventListener(
-        "submit",
-        async function (event) {
+    /*
+    Make sure SEND button is submit.
+    */
 
-            event.preventDefault();
-            event.stopPropagation();
-
-
-            /*
-            Remember current position.
-            SEND করার পর এখানেই থাকবে।
-            */
-
-            const savedScrollY =
-                window.scrollY;
+    button.setAttribute(
+        "type",
+        "submit"
+    );
 
 
-            status.className =
-                "form-status";
+    async function submitPortfolioForm(
+        event
+    ) {
+
+        event.preventDefault();
+
+        event.stopPropagation();
+
+        if (
+            typeof event.stopImmediatePropagation ===
+            "function"
+        ) {
+
+            event.stopImmediatePropagation();
+        }
 
 
-            status.textContent =
-                "";
+        /*
+        Save exact contact position.
+        */
+
+        const formRect =
+            form.getBoundingClientRect();
+
+        const savedScrollY =
+            window.pageYOffset ||
+            document.documentElement.scrollTop ||
+            0;
 
 
-            if (
-                !form.checkValidity()
-            ) {
+        status.className =
+            "form-status";
 
-                form.reportValidity();
-
-                return;
-            }
+        status.textContent =
+            "";
 
 
-            const formData =
-                new FormData(
-                    form
-                );
+        if (
+            !form.checkValidity()
+        ) {
+
+            form.reportValidity();
+
+            return false;
+        }
 
 
-            /*
-            Honeypot
-            */
+        const formData =
+            new FormData(
+                form
+            );
 
-            if (
+
+        /*
+        Honeypot.
+        */
+
+        if (
+            String(
                 formData.get(
                     "website"
-                )
-            ) {
+                ) || ""
+            ).trim()
+        ) {
 
-                return;
-            }
-
-
-            const email =
-                String(
-                    formData.get(
-                        "email"
-                    ) || ""
-                )
-                .trim()
-                .toLowerCase();
+            return false;
+        }
 
 
-            if (
-                !emailFormatLooksValid(
-                    email
-                )
-            ) {
-
-                status.className =
-                    "form-status error";
-
-
-                status.textContent =
-                    "Please enter a valid email address.";
+        const email =
+            String(
+                formData.get(
+                    "email"
+                ) || ""
+            )
+            .trim()
+            .toLowerCase();
 
 
-                window.scrollTo(
-                    0,
-                    savedScrollY
-                );
+        if (
+            !emailFormatLooksValid(
+                email
+            )
+        ) {
 
-
-                return;
-            }
-
-
-            button.disabled =
-                true;
+            status.className =
+                "form-status error";
 
 
             status.textContent =
-                "Checking email...";
+                "Please enter a valid email address.";
 
 
-            const emailDomainValid =
-                await emailDomainLooksValid(
-                    email
-                );
+            return false;
+        }
 
 
-            /*
-            Restore position after async check.
-            */
-
-            window.scrollTo(
-                0,
-                savedScrollY
-            );
+        button.disabled =
+            true;
 
 
-            if (
-                !emailDomainValid
-            ) {
-
-                status.className =
-                    "form-status error";
+        status.textContent =
+            "Checking email...";
 
 
-                status.textContent =
-                    "That email domain does not appear to accept email.";
-
-
-                button.disabled =
-                    false;
-
-
-                window.scrollTo(
-                    0,
-                    savedScrollY
-                );
-
-
-                return;
-            }
-
-
-            if (
-                !GOOGLE_SCRIPT_URL ||
-                GOOGLE_SCRIPT_URL.includes(
-                    "PASTE_YOUR"
-                )
-            ) {
-
-                status.className =
-                    "form-status error";
-
-
-                status.textContent =
-                    "Google Sheet connection is not configured yet.";
-
-
-                button.disabled =
-                    false;
-
-
-                window.scrollTo(
-                    0,
-                    savedScrollY
-                );
-
-
-                return;
-            }
-
-
-            status.textContent =
-                "Sending...";
-
-
-            const payload =
-                new URLSearchParams();
-
-
-            payload.append(
-                "name",
-                String(
-                    formData.get(
-                        "name"
-                    ) || ""
-                ).trim()
-            );
-
-
-            payload.append(
-                "email",
+        const emailDomainValid =
+            await emailDomainLooksValid(
                 email
             );
 
 
-            payload.append(
-                "projectType",
-                String(
-                    formData.get(
-                        "projectType"
-                    ) || ""
-                )
-            );
+        if (
+            !emailDomainValid
+        ) {
+
+            status.className =
+                "form-status error";
 
 
-            payload.append(
-                "budget",
-                String(
-                    formData.get(
-                        "budget"
-                    ) || ""
-                )
-            );
+            status.textContent =
+                "That email domain does not appear to accept email.";
 
 
-            payload.append(
-                "message",
-                String(
-                    formData.get(
-                        "message"
-                    ) || ""
-                ).trim()
-            );
+            button.disabled =
+                false;
 
 
-            payload.append(
-                "website",
-                ""
-            );
-
-
-            payload.append(
-                "page",
-                window.location.href
-            );
-
-
-            try {
-
-                await fetch(
-                    GOOGLE_SCRIPT_URL,
-                    {
-                        method:
-                            "POST",
-
-                        mode:
-                            "no-cors",
-
-                        headers: {
-
-                            "Content-Type":
-                                "application/x-www-form-urlencoded;charset=UTF-8"
-
-                        },
-
-                        body:
-                            payload.toString()
-                    }
-                );
-
-
-                /*
-                Do not let browser jump after reset.
-                */
-
-                form.reset();
-
-
-                window.scrollTo(
-                    0,
-                    savedScrollY
-                );
-
-
-                requestAnimationFrame(
-                    function () {
-
-                        window.scrollTo(
-                            0,
-                            savedScrollY
-                        );
-                    }
-                );
-
-
-                setTimeout(
-                    function () {
-
-                        window.scrollTo(
-                            0,
-                            savedScrollY
-                        );
-                    },
-                    50
-                );
-
-
-                status.className =
-                    "form-status success";
-
-
-                status.textContent =
-                    "Thanks — your inquiry has been sent.";
-
-
-            } catch (error) {
-
-
-                console.error(
-                    "Form submission error:",
-                    error
-                );
-
-
-                status.className =
-                    "form-status error";
-
-
-                status.textContent =
-                    "Could not send your message. Please try again.";
-
-
-                window.scrollTo(
-                    0,
-                    savedScrollY
-                );
-
-
-            } finally {
-
-
-                button.disabled =
-                    false;
-
-
-                /*
-                Final safety:
-                stay at the same position.
-                */
-
-                requestAnimationFrame(
-                    function () {
-
-                        window.scrollTo(
-                            0,
-                            savedScrollY
-                        );
-                    }
-                );
-            }
+            return false;
         }
+
+
+        status.textContent =
+            "Sending...";
+
+
+        const payload =
+            new URLSearchParams();
+
+
+        payload.append(
+            "name",
+            String(
+                formData.get(
+                    "name"
+                ) || ""
+            ).trim()
+        );
+
+
+        payload.append(
+            "email",
+            email
+        );
+
+
+        payload.append(
+            "projectType",
+            String(
+                formData.get(
+                    "projectType"
+                ) || ""
+            ).trim()
+        );
+
+
+        payload.append(
+            "budget",
+            String(
+                formData.get(
+                    "budget"
+                ) || ""
+            ).trim()
+        );
+
+
+        payload.append(
+            "message",
+            String(
+                formData.get(
+                    "message"
+                ) || ""
+            ).trim()
+        );
+
+
+        payload.append(
+            "website",
+            ""
+        );
+
+
+        payload.append(
+            "page",
+            window.location.href
+        );
+
+
+        try {
+
+            await fetch(
+                GOOGLE_SCRIPT_URL,
+                {
+
+                    method:
+                        "POST",
+
+                    mode:
+                        "no-cors",
+
+                    cache:
+                        "no-store",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/x-www-form-urlencoded;charset=UTF-8"
+
+                    },
+
+                    body:
+                        payload.toString()
+                }
+            );
+
+
+            /*
+            Reset without navigation.
+            */
+
+            form.reset();
+
+
+            status.className =
+                "form-status success";
+
+
+            status.textContent =
+                "Thanks — your inquiry has been sent.";
+
+
+            /*
+            Keep visitor exactly in contact area.
+            */
+
+            window.scrollTo({
+                top:
+                    savedScrollY,
+
+                left:
+                    0,
+
+                behavior:
+                    "auto"
+            });
+
+
+            requestAnimationFrame(
+                function () {
+
+                    window.scrollTo({
+                        top:
+                            savedScrollY,
+
+                        left:
+                            0,
+
+                        behavior:
+                            "auto"
+                    });
+                }
+            );
+
+
+            setTimeout(
+                function () {
+
+                    const currentScroll =
+                        window.pageYOffset ||
+                        document.documentElement.scrollTop ||
+                        0;
+
+
+                    if (
+                        Math.abs(
+                            currentScroll -
+                            savedScrollY
+                        ) > 20
+                    ) {
+
+                        window.scrollTo({
+                            top:
+                                savedScrollY,
+
+                            left:
+                                0,
+
+                            behavior:
+                                "auto"
+                        });
+                    }
+
+                },
+                100
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Contact form error:",
+                error
+            );
+
+
+            status.className =
+                "form-status error";
+
+
+            status.textContent =
+                "Could not send your message. Please try again.";
+
+
+        } finally {
+
+            button.disabled =
+                false;
+        }
+
+
+        return false;
+    }
+
+
+    /*
+    Capture mode makes sure our submit
+    handler runs before normal form navigation.
+    */
+
+    form.addEventListener(
+        "submit",
+        submitPortfolioForm,
+        true
+    );
+
+
+    /*
+    Extra protection for SEND button.
+    */
+
+    button.addEventListener(
+        "click",
+        function (event) {
+
+            /*
+            Do NOT manually submit here.
+            Let form submit event handle it.
+            */
+
+            event.stopPropagation();
+
+        },
+        true
     );
 }
 
 
 /* =========================================================
-   SAFE REVEAL
+   REVEAL
 ========================================================= */
 
 function initializeReveal() {
@@ -2043,7 +2006,6 @@ function initializeReveal() {
                                 "visible"
                             );
 
-
                             observer.unobserve(
                                 entry.target
                             );
@@ -2071,7 +2033,7 @@ function initializeReveal() {
 
 
 /* =========================================================
-   SAFE SECTION JUMP
+   SECTION JUMP
 ========================================================= */
 
 function initializeSectionJump() {
@@ -2186,17 +2148,20 @@ function initializeBackToTop() {
 
     button.addEventListener(
         "click",
-        function () {
+        function (event) {
 
-            window.scrollTo(
-                {
-                    top:
-                        0,
+            event.preventDefault();
 
-                    behavior:
-                        "smooth"
-                }
-            );
+
+            window.scrollTo({
+
+                top:
+                    0,
+
+                behavior:
+                    "smooth"
+
+            });
 
 
             history.replaceState(
@@ -2262,7 +2227,7 @@ function setYear() {
 
 
 /* =========================================================
-   EXTRA VISIBILITY SAFETY
+   CONTENT VISIBILITY SAFETY
 ========================================================= */
 
 function enforceContentVisibility() {
@@ -2286,13 +2251,12 @@ function enforceContentVisibility() {
 
 
 /* =========================================================
-   INITIALIZE WEBSITE
+   INITIALIZE
 ========================================================= */
 
 function initializeWebsite() {
 
     forcePageToTop();
-
 
     renderActiveLogos();
 
@@ -2301,7 +2265,6 @@ function initializeWebsite() {
     renderProjects();
 
     renderTestimonials();
-
 
     startLogoLoop();
 
@@ -2319,9 +2282,7 @@ function initializeWebsite() {
 
     setYear();
 
-
     enforceContentVisibility();
-
 
     initializeReveal();
 
@@ -2342,7 +2303,11 @@ if (
 
     document.addEventListener(
         "DOMContentLoaded",
-        initializeWebsite
+        initializeWebsite,
+        {
+            once:
+                true
+        }
     );
 
 } else {
@@ -2352,25 +2317,8 @@ if (
 
 
 /* =========================================================
-   AFTER PAGE LOAD
+   IMPORTANT:
+   NO window "load" scrollTo(0,0) HERE.
+
+   This prevents delayed jumping back to header.
 ========================================================= */
-
-window.addEventListener(
-    "load",
-    function () {
-
-        setTimeout(
-            function () {
-
-                window.scrollTo(
-                    0,
-                    0
-                );
-            },
-            30
-        );
-
-
-        enforceContentVisibility();
-    }
-);
