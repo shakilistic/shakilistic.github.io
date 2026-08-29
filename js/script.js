@@ -14,7 +14,7 @@ const SHEET_NAME = "Website Enquiries";
 
 
 /* =========================================================
-   TEST WEB APP
+   WEB APP TEST
 ========================================================= */
 
 function doGet() {
@@ -31,7 +31,7 @@ function doGet() {
 
 
 /* =========================================================
-   RECEIVE FORM SUBMISSION
+   RECEIVE WEBSITE FORM
 ========================================================= */
 
 function doPost(e) {
@@ -41,21 +41,24 @@ function doPost(e) {
     const p = e.parameter || {};
 
 
-    /*
-    SPAM / HONEYPOT CHECK
-    */
+    /* =====================================================
+       SPAM / HONEYPOT CHECK
+    ===================================================== */
 
     if (p.website) {
 
       return ContentService
-        .createTextOutput("OK");
+        .createTextOutput("OK")
+        .setMimeType(
+          ContentService.MimeType.TEXT
+        );
 
     }
 
 
-    /*
-    GET FORM DATA
-    */
+    /* =====================================================
+       GET FORM DATA
+    ===================================================== */
 
     const name =
       clean(
@@ -99,9 +102,9 @@ function doPost(e) {
       );
 
 
-    /*
-    REQUIRED FIELD CHECK
-    */
+    /* =====================================================
+       REQUIRED FIELD CHECK
+    ===================================================== */
 
     if (
       !name ||
@@ -112,14 +115,17 @@ function doPost(e) {
       return ContentService
         .createTextOutput(
           "ERROR: Missing required fields."
+        )
+        .setMimeType(
+          ContentService.MimeType.TEXT
         );
 
     }
 
 
-    /*
-    EMAIL FORMAT CHECK
-    */
+    /* =====================================================
+       EMAIL FORMAT CHECK
+    ===================================================== */
 
     if (
       !isValidEmail(email)
@@ -128,14 +134,17 @@ function doPost(e) {
       return ContentService
         .createTextOutput(
           "ERROR: Invalid email."
+        )
+        .setMimeType(
+          ContentService.MimeType.TEXT
         );
 
     }
 
 
-    /*
-    GET GOOGLE SHEET
-    */
+    /* =====================================================
+       GET GOOGLE SHEET
+    ===================================================== */
 
     const ss =
       SpreadsheetApp
@@ -151,9 +160,9 @@ function doPost(e) {
     }
 
 
-    /*
-    FIND OR CREATE SHEET TAB
-    */
+    /* =====================================================
+       FIND / CREATE WEBSITE ENQUIRIES TAB
+    ===================================================== */
 
     let sheet =
       ss.getSheetByName(
@@ -170,6 +179,7 @@ function doPost(e) {
 
 
       sheet.appendRow([
+
         "Timestamp",
         "Name",
         "Email",
@@ -177,6 +187,7 @@ function doPost(e) {
         "Budget",
         "Message",
         "Page"
+
       ]);
 
 
@@ -197,9 +208,9 @@ function doPost(e) {
     }
 
 
-    /*
-    SAVE TO GOOGLE SHEET
-    */
+    /* =====================================================
+       SAVE FORM TO GOOGLE SHEET
+    ===================================================== */
 
     sheet.appendRow([
 
@@ -232,9 +243,68 @@ function doPost(e) {
     ]);
 
 
-    /*
-    SEND EMAIL NOTIFICATION
-    */
+    /* =====================================================
+       EMAIL NOTIFICATION
+       THIS GOES TO:
+       tuku.co.bd@gmail.com
+    ===================================================== */
+
+    const emailSubject =
+      "New Portfolio Enquiry — " +
+      name;
+
+
+    const emailBody =
+
+      "You have received a new message from your portfolio website.\n\n" +
+
+      "========================================\n" +
+
+      "NEW PORTFOLIO ENQUIRY\n" +
+
+      "========================================\n\n" +
+
+      "Name:\n" +
+      name +
+      "\n\n" +
+
+      "Email:\n" +
+      email +
+      "\n\n" +
+
+      "Project Type:\n" +
+      (
+        projectType ||
+        "Not selected"
+      ) +
+      "\n\n" +
+
+      "Budget:\n" +
+      (
+        budget ||
+        "Not specified"
+      ) +
+      "\n\n" +
+
+      "Message:\n" +
+      message +
+      "\n\n" +
+
+      "========================================\n\n" +
+
+      "Submitted From:\n" +
+      (
+        page ||
+        "Portfolio Website"
+      ) +
+      "\n\n" +
+
+      "You can reply directly to this email to contact the client.";
+
+
+    /* =====================================================
+       SEND NOTIFICATION
+    ===================================================== */
 
     MailApp.sendEmail({
 
@@ -242,61 +312,38 @@ function doPost(e) {
         OWNER_EMAIL,
 
       subject:
-        "New Portfolio Enquiry — " +
-        name,
+        emailSubject,
 
       body:
-
-        "You have received a new enquiry from your portfolio website.\n\n" +
-
-        "----------------------------------------\n" +
-
-        "Name: " +
-        name +
-        "\n\n" +
-
-        "Email: " +
-        email +
-        "\n\n" +
-
-        "Project Type: " +
-        (
-          projectType ||
-          "Not selected"
-        ) +
-        "\n\n" +
-
-        "Budget: " +
-        (
-          budget ||
-          "Not specified"
-        ) +
-        "\n\n" +
-
-        "Message:\n" +
-        message +
-        "\n\n" +
-
-        "----------------------------------------\n" +
-
-        "Submitted from:\n" +
-        (
-          page ||
-          "Portfolio website"
-        ) +
-        "\n\n" +
-
-        "You can reply directly to this email to contact the client.",
+        emailBody,
 
       replyTo:
-        email
+        email,
+
+      name:
+        "SHAKIL R. Portfolio"
 
     });
 
 
-    /*
-    SUCCESS RESPONSE
-    */
+    /* =====================================================
+       LOG SUCCESS
+    ===================================================== */
+
+    console.log(
+      "Form saved successfully."
+    );
+
+
+    console.log(
+      "Notification sent to: " +
+      OWNER_EMAIL
+    );
+
+
+    /* =====================================================
+       SUCCESS RESPONSE
+    ===================================================== */
 
     return ContentService
       .createTextOutput(
@@ -311,7 +358,13 @@ function doPost(e) {
 
   catch (error) {
 
+
+    /* =====================================================
+       ERROR LOG
+    ===================================================== */
+
     console.error(
+      "Portfolio form error:",
       error
     );
 
@@ -331,7 +384,65 @@ function doPost(e) {
 
 
 /* =========================================================
-   VALIDATE EMAIL
+   DIRECT EMAIL TEST
+
+   IMPORTANT:
+   Run this function manually once from Apps Script.
+
+   Function dropdown:
+   testNotificationEmail
+
+   Then click Run.
+========================================================= */
+
+function testNotificationEmail() {
+
+  const remainingQuota =
+    MailApp.getRemainingDailyQuota();
+
+
+  console.log(
+    "Remaining email quota: " +
+    remainingQuota
+  );
+
+
+  MailApp.sendEmail({
+
+    to:
+      "tuku.co.bd@gmail.com",
+
+    subject:
+      "SHAKIL R. Portfolio — Notification Test",
+
+    body:
+
+      "Hello,\n\n" +
+
+      "This is a test notification from your portfolio Google Apps Script.\n\n" +
+
+      "If you received this email, your email notification system is working correctly.\n\n" +
+
+      "Notification Email:\n" +
+      "tuku.co.bd@gmail.com\n\n" +
+
+      "— SHAKIL R. Portfolio",
+
+    name:
+      "SHAKIL R. Portfolio"
+
+  });
+
+
+  console.log(
+    "Test notification sent successfully."
+  );
+
+}
+
+
+/* =========================================================
+   VALIDATE EMAIL FORMAT
 ========================================================= */
 
 function isValidEmail(
@@ -347,7 +458,7 @@ function isValidEmail(
 
 
 /* =========================================================
-   CLEAN INPUT
+   CLEAN USER INPUT
 ========================================================= */
 
 function clean(
