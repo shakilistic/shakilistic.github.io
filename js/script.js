@@ -1359,7 +1359,7 @@ function createProjectSection(
 
 
         image.loading =
-            "lazy";
+            "eager";
 
 
         image.decoding =
