@@ -1341,7 +1341,7 @@ function createProjectSection(
 
 
         /*
-        IMPORTANT:
+        IMAGE NAMES:
 
         book1.jpg ... book20.jpg
         web1.jpg ... web20.jpg
@@ -1349,9 +1349,6 @@ function createProjectSection(
         logo1.jpg ... logo20.jpg
         print1.jpg ... print20.jpg
         */
-
-        image.src =
-            `./assets/images/${category.key}${i}.jpg`;
 
 
         image.alt =
@@ -1364,6 +1361,17 @@ function createProjectSection(
 
         image.decoding =
             "async";
+
+
+        /*
+        IMPORTANT FIX:
+
+        Load / error listeners are attached
+        BEFORE image.src.
+
+        This prevents fast or cached images
+        from loading before the listener is ready.
+        */
 
 
         image.addEventListener(
@@ -1414,6 +1422,11 @@ function createProjectSection(
         );
 
 
+        /*
+        Add image/card to the page first.
+        */
+
+
         card.appendChild(
             image
         );
@@ -1422,6 +1435,23 @@ function createProjectSection(
         grid.appendChild(
             card
         );
+
+
+        /*
+        IMPORTANT:
+        Set SRC LAST.
+
+        Social section will therefore correctly load:
+
+        social1.jpg
+        social2.jpg
+        social3.jpg
+        etc.
+        */
+
+
+        image.src =
+            `./assets/images/${category.key}${i}.jpg`;
 
     }
 
@@ -1449,6 +1479,12 @@ function createProjectSection(
             getLoadedCards();
 
 
+        /*
+        First 3 images visible.
+        Remaining images hidden until SEE MORE.
+        */
+
+
         cards.forEach(
 
             (
@@ -1468,6 +1504,12 @@ function createProjectSection(
         );
 
 
+        /*
+        Show SEE MORE only when
+        more than 3 valid images exist.
+        */
+
+
         if (
             loadedCount > 3
         ) {
@@ -1481,7 +1523,15 @@ function createProjectSection(
             moreWrap.classList.add(
                 "is-hidden"
             );
+
         }
+
+
+        /*
+        If all 20 image checks are finished
+        and there are 3 or fewer images,
+        SEE MORE remains hidden.
+        */
 
 
         if (
@@ -1492,6 +1542,7 @@ function createProjectSection(
             moreWrap.classList.add(
                 "is-hidden"
             );
+
         }
 
     }
