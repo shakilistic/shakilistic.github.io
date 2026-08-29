@@ -2258,15 +2258,30 @@ function initializeCleanNavigation() {
 
 /* =========================================================
    THEME
+   SYSTEM DETECTION + DARK/LIGHT PILL SWITCH
 ========================================================= */
 
 function initializeTheme() {
+
+    const systemTheme =
+        window.matchMedia(
+            "(prefers-color-scheme: dark)"
+        );
+
 
     const savedTheme =
         localStorage.getItem(
             "portfolio-theme"
         );
 
+
+    /*
+    First visit:
+    Follow visitor's system theme.
+
+    After visitor manually changes it:
+    Remember that choice.
+    */
 
     if (
         savedTheme === "light" ||
@@ -2280,16 +2295,10 @@ function initializeTheme() {
 
     } else {
 
-        const prefersDark =
-            window.matchMedia(
-                "(prefers-color-scheme: dark)"
-            ).matches;
-
-
         document.documentElement
             .dataset
             .theme =
-            prefersDark
+            systemTheme.matches
                 ?
                 "dark"
                 :
@@ -2310,7 +2319,237 @@ function initializeTheme() {
     ];
 
 
-    function toggleTheme() {
+    function styleThemeButton(
+        button
+    ) {
+
+        if (!button) {
+            return;
+        }
+
+
+        const current =
+            document.documentElement
+                .dataset
+                .theme;
+
+
+        /*
+        Current mode is shown
+        inside the button.
+        */
+
+        button.textContent =
+            current === "dark"
+                ?
+                "DARK"
+                :
+                "LIGHT";
+
+
+        button.setAttribute(
+
+            "aria-label",
+
+            current === "dark"
+                ?
+                "Switch to light mode"
+                :
+                "Switch to dark mode"
+
+        );
+
+
+        /*
+        Exact small rounded pill style.
+        No style.css edit required.
+        */
+
+        button.style.setProperty(
+            "display",
+            "inline-flex",
+            "important"
+        );
+
+
+        button.style.setProperty(
+            "align-items",
+            "center",
+            "important"
+        );
+
+
+        button.style.setProperty(
+            "justify-content",
+            "center",
+            "important"
+        );
+
+
+        button.style.setProperty(
+            "width",
+            "48px",
+            "important"
+        );
+
+
+        button.style.setProperty(
+            "height",
+            "20px",
+            "important"
+        );
+
+
+        button.style.setProperty(
+            "min-width",
+            "48px",
+            "important"
+        );
+
+
+        button.style.setProperty(
+            "padding",
+            "0",
+            "important"
+        );
+
+
+        button.style.setProperty(
+            "margin",
+            "0",
+            "important"
+        );
+
+
+        button.style.setProperty(
+            "border-radius",
+            "999px",
+            "important"
+        );
+
+
+        button.style.setProperty(
+            "background",
+            "transparent",
+            "important"
+        );
+
+
+        button.style.setProperty(
+            "box-shadow",
+            "none",
+            "important"
+        );
+
+
+        button.style.setProperty(
+            "font-size",
+            "9px",
+            "important"
+        );
+
+
+        button.style.setProperty(
+            "font-weight",
+            "700",
+            "important"
+        );
+
+
+        button.style.setProperty(
+            "line-height",
+            "1",
+            "important"
+        );
+
+
+        button.style.setProperty(
+            "letter-spacing",
+            "0",
+            "important"
+        );
+
+
+        button.style.setProperty(
+            "cursor",
+            "pointer",
+            "important"
+        );
+
+
+        button.style.setProperty(
+            "transition",
+            "color .2s ease, border-color .2s ease, background-color .2s ease",
+            "important"
+        );
+
+
+        /*
+        DARK MODE:
+        Light text + light border.
+        */
+
+        if (
+            current === "dark"
+        ) {
+
+            button.style.setProperty(
+                "color",
+                "#f5f3ed",
+                "important"
+            );
+
+
+            button.style.setProperty(
+                "border",
+                "1px solid rgba(245,243,237,.78)",
+                "important"
+            );
+
+        } else {
+
+            /*
+            LIGHT MODE:
+            Black text + black border.
+            */
+
+            button.style.setProperty(
+                "color",
+                "#111111",
+                "important"
+            );
+
+
+            button.style.setProperty(
+                "border",
+                "1px solid rgba(17,17,17,.78)",
+                "important"
+            );
+        }
+
+    }
+
+
+    function updateThemeButtons() {
+
+        buttons.forEach(
+            styleThemeButton
+        );
+
+    }
+
+
+    function toggleTheme(
+        event
+    ) {
+
+        if (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+        }
+
 
         const current =
             document.documentElement
@@ -2319,8 +2558,7 @@ function initializeTheme() {
 
 
         const next =
-            current ===
-            "dark"
+            current === "dark"
                 ?
                 "light"
                 :
@@ -2339,6 +2577,9 @@ function initializeTheme() {
         );
 
 
+        updateThemeButtons();
+
+
         closeMobileMenu();
 
     }
@@ -2353,6 +2594,12 @@ function initializeTheme() {
             }
 
 
+            button.setAttribute(
+                "type",
+                "button"
+            );
+
+
             button.addEventListener(
                 "click",
                 toggleTheme
@@ -2363,11 +2610,19 @@ function initializeTheme() {
     );
 
 
-    const systemTheme =
-        window.matchMedia(
-            "(prefers-color-scheme: dark)"
-        );
+    /*
+    Set correct DARK/LIGHT label
+    immediately on page load.
+    */
 
+    updateThemeButtons();
+
+
+    /*
+    If visitor has never manually
+    selected a theme, follow any
+    system-theme change automatically.
+    */
 
     if (
         systemTheme.addEventListener
@@ -2393,6 +2648,9 @@ function initializeTheme() {
                             "dark"
                             :
                             "light";
+
+
+                    updateThemeButtons();
                 }
 
             }
