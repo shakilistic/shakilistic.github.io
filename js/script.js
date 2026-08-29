@@ -1,1943 +1,84 @@
-/* ==========================================================
-   SHAKILSTIC PORTFOLIO
-========================================================== */
+/*
+=============================================================
+SHAKILSTIC PORTFOLIO
+GOOGLE SHEETS CONTACT FORM
+=============================================================
 
+
+SETUP:
+
+1. Create/Open your Google Sheet.
+
+2. Extensions → Apps Script.
+
+3. Paste this complete code.
+
+4. Change OWNER_EMAIL below.
+
+5. Save.
+
+6. Deploy → New deployment.
+
+7. Type:
+   Web app
+
+8. Execute as:
+   Me
+
+9. Who has access:
+   Anyone
+
+10. Deploy.
+
+11. Copy the /exec URL.
+
+12. Paste URL inside website js/script.js:
 
 const GOOGLE_SCRIPT_URL =
-    "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+"https://script.google.com/macros/s/XXXXXXXX/exec";
+
+
+=============================================================
+*/
+
+
+/*
+=============================================================
+YOUR EMAIL
+
+Change only this.
+=============================================================
+*/
+
+const OWNER_EMAIL =
+    "YOUR_EMAIL@example.com";
+
+
+
+/*
+=============================================================
+SHEET TAB NAME
+=============================================================
+*/
+
+const SHEET_NAME =
+    "Website Enquiries";
 
 
 
 /* ==========================================================
-   PROJECT CATEGORIES
+   TEST ENDPOINT
 ========================================================== */
 
-const categories = [
+function doGet() {
 
-    {
 
-        key:
-            "book",
-
-        orange:
-            "Book Cover",
-
-        normal:
-            "Design",
-
-        description:
-            "Your cover gets one chance to make a first impression. I design bold, genre-aware covers that spark curiosity, communicate value instantly, and make the right reader want to pick up your book."
-
-    },
-
-
-    {
-
-        key:
-            "web",
-
-        orange:
-            "Web Design",
-
-        normal:
-            "& Development",
-
-        description:
-            "A good website should look impressive and quietly do the selling for you. I build clean, responsive experiences that guide visitors naturally, strengthen trust, and turn attention into action."
-
-    },
-
-
-    {
-
-        key:
-            "social",
-
-        orange:
-            "Social Media",
-
-        normal:
-            "Design",
-
-        description:
-            "In a crowded feed, you have seconds to be noticed. I create sharp, brand-focused social visuals that stop the scroll, deliver the message fast, and make your business look instantly more credible."
-
-    },
-
-
-    {
-
-        key:
-            "logo",
-
-        orange:
-            "Logo",
-
-        normal:
-            "Design",
-
-        description:
-            "A memorable identity starts with a mark that feels unmistakably yours. I create distinctive, versatile logos built to give brands a confident and recognizable visual presence."
-
-    },
-
-
-    {
-
-        key:
-            "print",
-
-        orange:
-            "Print",
-
-        normal:
-            "Media",
-
-        description:
-            "From T-shirts and food packaging to menus, banners, and promotional materials, I create print-ready designs that carry your brand confidently from the screen into the real world."
-
-    }
-
-];
-
-
-
-/* ==========================================================
-   INLINE PLATFORM LOGOS
-========================================================== */
-
-const platformLogos = {
-
-
-
-    adobe: `
-
-        <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-        >
-
-            <path
-                fill="currentColor"
-                d="
-                M15.1 2H24v20L15.1 2ZM8.9 2H0v20L8.9 2Zm3.1 7.4
-                5.7 12.6h-3.8l-1.7-4.2H8.1L12 9.4Z
-                "
-            />
-
-        </svg>
-
-    `,
-
-
-
-    behance: `
-
-        <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-        >
-
-            <path
-                fill="currentColor"
-                d="
-                M6.5 11.1H3.2V7.4h3.1c1.4 0 2.2.5 2.2 1.8
-                0 1.2-.8 1.9-2 1.9Zm.2 5.4H3.2v-4.1h3.6
-                c1.6 0 2.5.7 2.5 2.1 0 1.5-1 2-2.6 2ZM9.8
-                11.7c1.3-.7 2-1.7 2-3.2 0-2.8-2.1-4.2-5-4.2
-                H0v15.2h7.1c3.4 0 5.5-1.6 5.5-4.7
-                0-1.9-.9-3.2-2.8-4.1Zm9-3.8c-3.6 0-5.9
-                2.5-5.9 6s2.2 6 6 6c2.8 0 4.7-1.2 5.4-3.8
-                h-2.8c-.2.8-1.2 1.3-2.5 1.3-1.8
-                0-2.8-.9-2.9-2.9h8.4c.2-3.5-1.8-6.6-5.7-6.6Zm-2.7
-                4.6c.2-1.5 1-2.3 2.6-2.3 1.4 0 2.4.8
-                2.5 2.3h-5.1ZM15.8 4.8h5.8v1.7h-5.8V4.8Z
-                "
-            />
-
-        </svg>
-
-    `,
-
-
-
-    linkedin: `
-
-        <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-        >
-
-            <path
-                fill="currentColor"
-                d="
-                M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04
-                -1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V8.98h3.41
-                v1.57h.05c.48-.9 1.64-1.85 3.37-1.85
-                3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.32 7.41
-                A2.06 2.06 0 1 1 5.32 3.3a2.06 2.06 0 0 1
-                0 4.12ZM7.1 20.45H3.54V8.98H7.1v11.47Z
-                "
-            />
-
-        </svg>
-
-    `,
-
-
-
-    x: `
-
-        <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-        >
-
-            <path
-                fill="currentColor"
-                d="
-                M18.244 2.25h3.308l-7.227 8.26
-                8.502 11.24h-6.657l-5.214-6.817
-                -5.967 6.817H1.68l7.73-8.835L1.254
-                2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161
-                17.52h1.833L7.084 4.126H5.117L17.083
-                19.77Z
-                "
-            />
-
-        </svg>
-
-    `,
-
-
-
-    pinterest: `
-
-        <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-        >
-
-            <path
-                fill="currentColor"
-                d="
-                M12 0a12 12 0 0 0-4.37 23.17c-.1-1.87-.02-4.12
-                .47-6.18l1.54-6.52s-.39-.78-.39-1.94
-                c0-1.82 1.05-3.18 2.36-3.18 1.11 0
-                1.65.84 1.65 1.84 0 1.12-.71 2.8-1.08
-                4.36-.31 1.3.65 2.36 1.93 2.36
-                2.32 0 4.1-2.45 4.1-5.98 0-3.13-2.25-5.31-5.46-5.31
-                -3.72 0-5.9 2.79-5.9 5.68 0 1.12.43
-                2.33.97 2.99.11.13.12.24.09.37l-.36
-                1.48c-.06.24-.19.29-.44.17-1.64-.76-2.66-3.15-2.66-5.07
-                0-4.13 3-7.92 8.65-7.92 4.54 0 8.07
-                3.24 8.07 7.56 0 4.51-2.84 8.14-6.79
-                8.14-1.33 0-2.57-.69-3-1.5l-.82 3.1
-                c-.29 1.14-1.09 2.57-1.62 3.44A12 12
-                0 1 0 12 0Z
-                "
-            />
-
-        </svg>
-
-    `,
-
-
-
-    github: `
-
-        <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-        >
-
-            <path
-                fill="currentColor"
-                d="
-                M12 .3a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58
-                v-2.24c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39
-                -1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73
-                1.2.09 1.84 1.24 1.84 1.24 1.07 1.84
-                2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61
-                -2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38
-                1.23-3.22-.12-.3-.53-1.53.12-3.18
-                0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6
-                0c2.29-1.55 3.3-1.23 3.3-1.23.65
-                1.65.24 2.88.12 3.18.76.84 1.23
-                1.91 1.23 3.22 0 4.61-2.81 5.62-5.48
-                5.92.43.37.81 1.1.81 2.22v3.29c0
-                .32.22.7.83.58A12 12 0 0 0 12 .3Z
-                "
-            />
-
-        </svg>
-
-    `,
-
-
-
-    dribbble: `
-
-        <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-        >
-
-            <path
-                fill="currentColor"
-                d="
-                M12 0a12 12 0 1 0 0 24 12 12
-                0 0 0 0-24Zm7.94 5.54a10 10
-                0 0 1 2.01 6.15c-.29-.06-3.18-.65-6.1-.28
-                -.24-.58-.5-1.16-.78-1.73 3.22-1.32
-                4.69-3.25 4.87-4.14ZM12 2c2.54 0
-                4.87.95 6.64 2.52-.15.2-1.46
-                1.94-4.46 3.07A50.6 50.6 0 0
-                0 11.01 2.1c.33-.05.66-.08.99-.08ZM8.86
-                2.5a42.8 42.8 0 0 1 3.21
-                5.4c-3.95 1.05-7.44 1.03-7.82
-                1.02A10.05 10.05 0 0 1 8.86
-                2.5ZM2 12v-.3c.2.01 4.3.08
-                9.02-1.24.25.5.49 1 .71
-                1.51-4.25 1.2-6.49 4.49-6.72
-                4.84A9.95 9.95 0 0 1 2 12Zm10
-                10a9.96 9.96 0 0 1-5.5-1.65
-                c.18-.3 1.84-2.93 5.99-4.05
-                1.12 2.91 1.58 5.35 1.69
-                6A10.3 10.3 0 0 1 12 22Zm4.12-1.5
-                c-.08-.48-.5-2.8-1.54-5.59
-                2.75-.44 5.16.28 5.45.37
-                a10.03 10.03 0 0 1-3.91 5.22Z
-                "
-            />
-
-        </svg>
-
-    `
-
-};
-
-
-
-/* ==========================================================
-   ACTIVE PLATFORMS
-========================================================== */
-
-const activePlatforms = [
-
-    {
-        name: "Adobe",
-        key: "adobe"
-    },
-
-    {
-        name: "Behance",
-        key: "behance"
-    },
-
-    {
-        name: "LinkedIn",
-        key: "linkedin"
-    },
-
-    {
-        name: "X",
-        key: "x"
-    },
-
-    {
-        name: "Pinterest",
-        key: "pinterest"
-    },
-
-    {
-        name: "GitHub",
-        key: "github"
-    },
-
-    {
-        name: "Dribbble",
-        key: "dribbble"
-    }
-
-];
-
-
-
-/* ==========================================================
-   SOCIAL LINKS
-========================================================== */
-
-const socialProfiles = [
-
-    {
-        name:
-            "Behance",
-
-        url:
-            "https://www.behance.net/shakilistic",
-
-        key:
-            "behance"
-    },
-
-
-    {
-        name:
-            "X",
-
-        url:
-            "https://x.com/shakilistic",
-
-        key:
-            "x"
-    },
-
-
-    {
-        name:
-            "Pinterest",
-
-        url:
-            "https://www.pinterest.com/shakilistic/",
-
-        key:
-            "pinterest"
-    },
-
-
-    {
-        name:
-            "LinkedIn",
-
-        url:
-            "https://www.linkedin.com/in/shakilistic/",
-
-        key:
-            "linkedin"
-    },
-
-
-    {
-        name:
-            "GitHub",
-
-        url:
-            "https://github.com/shakilistic",
-
-        key:
-            "github"
-    },
-
-
-    {
-        name:
-            "Dribbble",
-
-        url:
-            "https://dribbble.com/shakilistic",
-
-        key:
-            "dribbble"
-    }
-
-];
-
-
-
-/* ==========================================================
-   TESTIMONIALS
-   ALL CLIENT NAMES = ANONYMOUS CLIENT
-========================================================== */
-
-const testimonials = [
-
-    [
-        "★★★★★",
-
-        "Very clean, thoughtful and professional execution. The design feels polished and easy to understand.",
-
-        "ANONYMOUS CLIENT"
-    ],
-
-
-    [
-        "★★★★★",
-
-        "Excellent communication and attention to detail. Revisions were handled carefully and quickly.",
-
-        "ANONYMOUS CLIENT"
-    ],
-
-
-    [
-        "★★★★★",
-
-        "A strong visual direction with a premium finish. Exactly the kind of designer I wanted to work with.",
-
-        "ANONYMOUS CLIENT"
-    ],
-
-
-    [
-        "★★★★★",
-
-        "The final result felt distinctive without being over-designed. Great balance and hierarchy.",
-
-        "ANONYMOUS CLIENT"
-    ],
-
-
-    [
-        "★★★★★",
-
-        "Reliable, responsive and creative from beginning to end. I would gladly collaborate again.",
-
-        "ANONYMOUS CLIENT"
-    ],
-
-
-    [
-        "★★★★★",
-
-        "The work immediately looked more professional. Strong taste, typography and presentation.",
-
-        "ANONYMOUS CLIENT"
-    ]
-
-];
-
-
-
-/* ==========================================================
-   ACTIVE LOGO GROUP
-========================================================== */
-
-function createLogoGroup() {
-
-
-    const group =
-        document.createElement(
-            "div"
-        );
-
-
-    group.className =
-        "logo-group";
-
-
-    activePlatforms.forEach(
-
-        platform => {
-
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-
-            item.className =
-                "active-logo logo-"
-                +
-                platform.key;
-
-
-            item.title =
-                platform.name;
-
-
-            item.setAttribute(
-                "aria-label",
-                platform.name
-            );
-
-
-            item.innerHTML =
-                platformLogos[
-                    platform.key
-                ];
-
-
-            group.appendChild(
-                item
-            );
-
-
-        }
-
-    );
-
-
-    return group;
-
-}
-
-
-
-/* ==========================================================
-   ACTIVE LOGO LOOP
-========================================================== */
-
-let logoLoopOffset =
-    0;
-
-
-let logoLoopPaused =
-    false;
-
-
-
-function renderActiveLogos() {
-
-
-    const track =
-        document.getElementById(
-            "activeLogoTrack"
-        );
-
-
-    track.innerHTML =
-        "";
-
-
-    track.appendChild(
-        createLogoGroup()
-    );
-
-
-    track.appendChild(
-        createLogoGroup()
-    );
-
-
-    track.appendChild(
-        createLogoGroup()
-    );
-
-
-}
-
-
-
-function startLogoLoop() {
-
-
-    const track =
-        document.getElementById(
-            "activeLogoTrack"
-        );
-
-
-    const marquee =
-        document.getElementById(
-            "logoMarquee"
-        );
-
-
-    if (
-        !track ||
-        !marquee
-    ) {
-
-        return;
-
-    }
-
-
-
-    marquee.addEventListener(
-
-        "mouseenter",
-
-        function () {
-
-            logoLoopPaused =
-                true;
-
-        }
-
-    );
-
-
-
-    marquee.addEventListener(
-
-        "mouseleave",
-
-        function () {
-
-            logoLoopPaused =
-                false;
-
-        }
-
-    );
-
-
-
-    function animate() {
-
-
-        const firstGroup =
-            track.querySelector(
-                ".logo-group"
-            );
-
-
-        if (
-            !firstGroup
-        ) {
-
-
-            requestAnimationFrame(
-                animate
-            );
-
-
-            return;
-
-        }
-
-
-
-        const groupWidth =
-            firstGroup.offsetWidth;
-
-
-
-        if (
-            !logoLoopPaused
-        ) {
-
-
-            logoLoopOffset +=
-                0.55;
-
-
-
-            if (
-                logoLoopOffset >=
-                groupWidth
-            ) {
-
-
-                logoLoopOffset -=
-                    groupWidth;
-
-
-            }
-
-
-
-            track.style.transform =
-
-                `translate3d(-${logoLoopOffset}px,0,0)`;
-
-
-        }
-
-
-
-        requestAnimationFrame(
-            animate
-        );
-
-
-    }
-
-
-
-    animate();
-
-
-}
-
-
-
-/* ==========================================================
-   SOCIAL LINKS
-========================================================== */
-
-function createSocialLinks(
-    container
-) {
-
-
-    if (
-        !container
-    ) {
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        "";
-
-
-    socialProfiles.forEach(
-
-        social => {
-
-
-            const link =
-                document.createElement(
-                    "a"
-                );
-
-
-            link.className =
-
-                "social-link social-"
-                +
-                social.key;
-
-
-            link.href =
-                social.url;
-
-
-            link.target =
-                "_blank";
-
-
-            link.rel =
-                "noopener noreferrer";
-
-
-            link.title =
-                social.name;
-
-
-            link.setAttribute(
-
-                "aria-label",
-
-                social.name
-
-            );
-
-
-            link.innerHTML =
-
-                platformLogos[
-                    social.key
-                ];
-
-
-            container.appendChild(
-                link
-            );
-
-
-        }
-
-    );
-
-
-}
-
-
-
-function renderSocialLinks() {
-
-
-    createSocialLinks(
-
-        document.getElementById(
-            "socialLinks"
+    return ContentService
+        .createTextOutput(
+            "Shakilstic portfolio contact endpoint is running."
         )
-
-    );
-
-
-    createSocialLinks(
-
-        document.getElementById(
-            "mobileSocialLinks"
-        )
-
-    );
-
-
-}
-
-
-
-/* ==========================================================
-   PROJECT SECTIONS
-========================================================== */
-
-function createProjectSection(
-    category
-) {
-
-
-    const wrapper =
-        document.getElementById(
-            "projectSections"
-        );
-
-
-    const section =
-        document.createElement(
-            "section"
-        );
-
-
-    section.className =
-        "project-section";
-
-
-    section.innerHTML = `
-
-
-        <div class="project-header">
-
-
-            <h3>
-
-
-                <span class="accent-text">
-
-                    ${category.orange}
-
-                </span>
-
-
-                <span class="normal-text">
-
-                    ${category.normal}
-
-                </span>
-
-
-            </h3>
-
-
-
-            <p class="project-note">
-
-                ${category.description}
-
-            </p>
-
-
-        </div>
-
-
-
-        <div
-            class="project-grid"
-        ></div>
-
-
-
-        <div
-            class="more-wrap is-hidden"
-        >
-
-
-            <button
-                class="more-btn"
-                type="button"
-            >
-
-                SEE MORE
-
-            </button>
-
-
-        </div>
-
-
-    `;
-
-
-    wrapper.appendChild(
-        section
-    );
-
-
-
-    const grid =
-        section.querySelector(
-            ".project-grid"
-        );
-
-
-    const moreWrap =
-        section.querySelector(
-            ".more-wrap"
-        );
-
-
-    const moreButton =
-        section.querySelector(
-            ".more-btn"
-        );
-
-
-
-    let loadedCount =
-        0;
-
-
-    let finishedCount =
-        0;
-
-
-    let expanded =
-        false;
-
-
-
-    for (
-        let i = 1;
-        i <= 20;
-        i++
-    ) {
-
-
-        const card =
-            document.createElement(
-                "article"
-            );
-
-
-        card.className =
-            "project-card";
-
-
-        card.hidden =
-            true;
-
-
-
-        const image =
-            document.createElement(
-                "img"
-            );
-
-
-        image.src =
-
-            `./assets/images/${category.key}${i}.jpg`;
-
-
-        image.alt =
-
-            `${category.orange} ${category.normal} ${i}`;
-
-
-        image.loading =
-            "lazy";
-
-
-
-        image.addEventListener(
-
-            "load",
-
-            function () {
-
-
-                loadedCount++;
-
-
-                finishedCount++;
-
-
-                card.dataset.loaded =
-                    "true";
-
-
-                updateProjectVisibility();
-
-
-            }
-
-        );
-
-
-
-        image.addEventListener(
-
-            "error",
-
-            function () {
-
-
-                finishedCount++;
-
-
-                card.remove();
-
-
-                updateProjectVisibility();
-
-
-            }
-
-        );
-
-
-
-        card.appendChild(
-            image
-        );
-
-
-        grid.appendChild(
-            card
-        );
-
-
-    }
-
-
-
-    function getLoadedCards() {
-
-
-        return Array
-
-            .from(
-                grid.children
-            )
-
-            .filter(
-
-                card =>
-                    card.dataset.loaded
-                    ===
-                    "true"
-
-            );
-
-
-    }
-
-
-
-    function updateProjectVisibility() {
-
-
-        const cards =
-            getLoadedCards();
-
-
-
-        cards.forEach(
-
-            function (
-                card,
-                index
-            ) {
-
-
-                if (
-                    expanded
-                ) {
-
-
-                    card.hidden =
-                        false;
-
-
-                }
-
-
-                else {
-
-
-                    card.hidden =
-                        index >= 3;
-
-
-                }
-
-
-            }
-
-        );
-
-
-
-        if (
-            loadedCount > 3
-        ) {
-
-
-            moreWrap
-                .classList
-                .remove(
-                    "is-hidden"
-                );
-
-
-        }
-
-
-        else {
-
-
-            moreWrap
-                .classList
-                .add(
-                    "is-hidden"
-                );
-
-
-        }
-
-
-
-        if (
-            finishedCount >= 20
-            &&
-            loadedCount <= 3
-        ) {
-
-
-            moreWrap
-                .classList
-                .add(
-                    "is-hidden"
-                );
-
-
-        }
-
-
-    }
-
-
-
-    moreButton.addEventListener(
-
-        "click",
-
-        function () {
-
-
-            expanded =
-                !expanded;
-
-
-
-            moreButton.textContent =
-
-                expanded
-                ?
-                "SHOW LESS"
-                :
-                "SEE MORE";
-
-
-
-            updateProjectVisibility();
-
-
-        }
-
-    );
-
-
-}
-
-
-
-/* ==========================================================
-   PROJECTS
-========================================================== */
-
-function renderProjects() {
-
-
-    categories.forEach(
-
-        createProjectSection
-
-    );
-
-
-}
-
-
-
-/* ==========================================================
-   TESTIMONIAL GROUP
-========================================================== */
-
-function createTestimonialGroup() {
-
-
-    const group =
-        document.createElement(
-            "div"
-        );
-
-
-    group.className =
-        "testimonial-group";
-
-
-    testimonials.forEach(
-
-        testimonial => {
-
-
-            const card =
-                document.createElement(
-                    "article"
-                );
-
-
-            card.className =
-                "review-card";
-
-
-            card.innerHTML = `
-
-
-                <div class="stars">
-
-                    ${testimonial[0]}
-
-                </div>
-
-
-
-                <p>
-
-                    “${testimonial[1]}”
-
-                </p>
-
-
-
-                <strong>
-
-                    ${testimonial[2]}
-
-                </strong>
-
-
-            `;
-
-
-            group.appendChild(
-                card
-            );
-
-
-        }
-
-    );
-
-
-    return group;
-
-}
-
-
-
-/* ==========================================================
-   TESTIMONIAL RENDER
-========================================================== */
-
-function renderTestimonials() {
-
-
-    const track =
-        document.getElementById(
-            "testimonialTrack"
-        );
-
-
-    track.innerHTML =
-        "";
-
-
-    /*
-       3 copies provide enough content
-       for smooth manual dragging + loop.
-    */
-
-    track.appendChild(
-        createTestimonialGroup()
-    );
-
-
-    track.appendChild(
-        createTestimonialGroup()
-    );
-
-
-    track.appendChild(
-        createTestimonialGroup()
-    );
-
-
-}
-
-
-
-/* ==========================================================
-   TESTIMONIAL:
-   AUTO LOOP + HOVER PAUSE + MOUSE DRAG + MOBILE SWIPE
-========================================================== */
-
-function initializeTestimonialControl() {
-
-
-    const marquee =
-        document.getElementById(
-            "testimonialMarquee"
-        );
-
-
-    const track =
-        document.getElementById(
-            "testimonialTrack"
-        );
-
-
-    if (
-        !marquee ||
-        !track
-    ) {
-
-        return;
-
-    }
-
-
-
-    let offset =
-        0;
-
-
-    let paused =
-        false;
-
-
-    let dragging =
-        false;
-
-
-    let startX =
-        0;
-
-
-    let startOffset =
-        0;
-
-
-
-    function getGroupWidth() {
-
-
-        const group =
-            track.querySelector(
-                ".testimonial-group"
-            );
-
-
-        return group
-            ?
-            group.offsetWidth
-            :
-            0;
-
-
-    }
-
-
-
-    function normalizeOffset() {
-
-
-        const groupWidth =
-            getGroupWidth();
-
-
-        if (
-            !groupWidth
-        ) {
-
-            return;
-
-        }
-
-
-
-        while (
-            offset >= groupWidth
-        ) {
-
-
-            offset -=
-                groupWidth;
-
-
-        }
-
-
-
-        while (
-            offset < 0
-        ) {
-
-
-            offset +=
-                groupWidth;
-
-
-        }
-
-
-    }
-
-
-
-    function draw() {
-
-
-        normalizeOffset();
-
-
-        track.style.transform =
-
-            `translate3d(-${offset}px,0,0)`;
-
-
-    }
-
-
-
-    marquee.addEventListener(
-
-        "mouseenter",
-
-        function () {
-
-            paused =
-                true;
-
-        }
-
-    );
-
-
-
-    marquee.addEventListener(
-
-        "mouseleave",
-
-        function () {
-
-
-            if (
-                !dragging
-            ) {
-
-
-                paused =
-                    false;
-
-
-            }
-
-
-        }
-
-    );
-
-
-
-    marquee.addEventListener(
-
-        "pointerdown",
-
-        function (event) {
-
-
-            dragging =
-                true;
-
-
-            paused =
-                true;
-
-
-            startX =
-                event.clientX;
-
-
-            startOffset =
-                offset;
-
-
-            marquee
-                .classList
-                .add(
-                    "dragging"
-                );
-
-
-            marquee.setPointerCapture(
-                event.pointerId
-            );
-
-
-        }
-
-    );
-
-
-
-    marquee.addEventListener(
-
-        "pointermove",
-
-        function (event) {
-
-
-            if (
-                !dragging
-            ) {
-
-                return;
-
-            }
-
-
-
-            const movement =
-                event.clientX
-                -
-                startX;
-
-
-
-            offset =
-                startOffset
-                -
-                movement;
-
-
-
-            draw();
-
-
-        }
-
-    );
-
-
-
-    function stopDragging(
-        event
-    ) {
-
-
-        if (
-            !dragging
-        ) {
-
-            return;
-
-        }
-
-
-        dragging =
-            false;
-
-
-        marquee
-            .classList
-            .remove(
-                "dragging"
-            );
-
-
-        try {
-
-
-            marquee.releasePointerCapture(
-                event.pointerId
-            );
-
-
-        }
-
-        catch (
-            error
-        ) {}
-
-
-        /*
-           Desktop mouse:
-           if pointer remains over section,
-           keep paused.
-
-           Otherwise resume.
-        */
-
-        const rect =
-            marquee
-                .getBoundingClientRect();
-
-
-        const inside =
-            event.clientX >= rect.left
-            &&
-            event.clientX <= rect.right
-            &&
-            event.clientY >= rect.top
-            &&
-            event.clientY <= rect.bottom;
-
-
-        paused =
-            inside;
-
-
-    }
-
-
-
-    marquee.addEventListener(
-
-        "pointerup",
-
-        stopDragging
-
-    );
-
-
-
-    marquee.addEventListener(
-
-        "pointercancel",
-
-        stopDragging
-
-    );
-
-
-
-    /*
-       Mouse wheel horizontal control.
-       Shift + wheel OR trackpad horizontal motion.
-    */
-
-    marquee.addEventListener(
-
-        "wheel",
-
-        function (event) {
-
-
-            const horizontalMovement =
-                Math.abs(event.deltaX)
-                >
-                Math.abs(event.deltaY)
-                ?
-                event.deltaX
-                :
-                (
-                    event.shiftKey
-                    ?
-                    event.deltaY
-                    :
-                    0
-                );
-
-
-            if (
-                horizontalMovement === 0
-            ) {
-
-                return;
-
-            }
-
-
-            event.preventDefault();
-
-
-            paused =
-                true;
-
-
-            offset +=
-                horizontalMovement;
-
-
-            draw();
-
-
-        },
-
-        {
-            passive:
-                false
-        }
-
-    );
-
-
-
-    function animate() {
-
-
-        if (
-            !paused
-            &&
-            !dragging
-        ) {
-
-
-            offset +=
-                0.45;
-
-
-            draw();
-
-
-        }
-
-
-        requestAnimationFrame(
-            animate
-        );
-
-
-    }
-
-
-
-    draw();
-
-    animate();
-
-
-}
-
-
-
-/* ==========================================================
-   CLEAN NAVIGATION
-========================================================== */
-
-function initializeCleanNavigation() {
-
-
-    if (
-        window.location.hash
-    ) {
-
-
-        history.replaceState(
-
-            null,
-
-            "",
-
-            window.location.pathname
-            +
-            window.location.search
-
-        );
-
-
-    }
-
-
-
-    document
-
-        .querySelectorAll(
-            "[data-scroll]"
-        )
-
-        .forEach(
-
-            button => {
-
-
-                button.addEventListener(
-
-                    "click",
-
-                    function () {
-
-
-                        const targetID =
-                            button.dataset.scroll;
-
-
-
-                        const target =
-                            document.getElementById(
-                                targetID
-                            );
-
-
-                        if (
-                            !target
-                        ) {
-
-                            return;
-
-                        }
-
-
-
-                        target.scrollIntoView(
-
-                            {
-
-                                behavior:
-                                    "smooth",
-
-                                block:
-                                    "start"
-
-                            }
-
-                        );
-
-
-
-                        history.replaceState(
-
-                            null,
-
-                            "",
-
-                            window.location.pathname
-                            +
-                            window.location.search
-
-                        );
-
-
-                        closeMobileMenu();
-
-
-                    }
-
-                );
-
-
-            }
-
+        .setMimeType(
+            ContentService.MimeType.TEXT
         );
 
 
@@ -1946,778 +87,486 @@ function initializeCleanNavigation() {
 
 
 /* ==========================================================
-   THEME
+   RECEIVE FORM
 ========================================================== */
 
-function initializeTheme() {
-
-
-    const buttons = [
-
-        document.getElementById(
-            "themeSwitch"
-        ),
-
-        document.getElementById(
-            "mobileThemeSwitch"
-        )
-
-    ];
-
-
-
-    function toggleTheme() {
-
-
-        const current =
-
-            document
-                .documentElement
-                .dataset
-                .theme;
-
-
-        const next =
-
-            current === "dark"
-            ?
-            "light"
-            :
-            "dark";
-
-
-        document
-            .documentElement
-            .dataset
-            .theme =
-            next;
-
-
-        localStorage.setItem(
-
-            "portfolio-theme",
-
-            next
-
-        );
-
-
-    }
-
-
-
-    buttons.forEach(
-
-        button => {
-
-
-            if (
-                button
-            ) {
-
-
-                button.addEventListener(
-
-                    "click",
-
-                    toggleTheme
-
-                );
-
-
-            }
-
-
-        }
-
-    );
-
-
-
-    const systemTheme =
-
-        window.matchMedia(
-            "(prefers-color-scheme: dark)"
-        );
-
-
-
-    systemTheme.addEventListener(
-
-        "change",
-
-        function (event) {
-
-
-            if (
-                !localStorage.getItem(
-                    "portfolio-theme"
-                )
-            ) {
-
-
-                document
-                    .documentElement
-                    .dataset
-                    .theme =
-
-                    event.matches
-                    ?
-                    "dark"
-                    :
-                    "light";
-
-
-            }
-
-
-        }
-
-    );
-
-
-}
-
-
-
-/* ==========================================================
-   MOBILE MENU
-========================================================== */
-
-function initializeMenu() {
-
-
-    const button =
-        document.getElementById(
-            "menuBtn"
-        );
-
-
-    const menu =
-        document.getElementById(
-            "mobileMenu"
-        );
-
-
-    button.addEventListener(
-
-        "click",
-
-        function () {
-
-
-            const open =
-
-                menu
-                    .classList
-                    .toggle(
-                        "open"
-                    );
-
-
-            button.setAttribute(
-
-                "aria-expanded",
-
-                String(open)
-
-            );
-
-
-            menu.setAttribute(
-
-                "aria-hidden",
-
-                String(!open)
-
-            );
-
-
-        }
-
-    );
-
-
-}
-
-
-
-function closeMobileMenu() {
-
-
-    const button =
-        document.getElementById(
-            "menuBtn"
-        );
-
-
-    const menu =
-        document.getElementById(
-            "mobileMenu"
-        );
-
-
-    if (
-        !menu ||
-        !button
-    ) {
-
-        return;
-
-    }
-
-
-    menu
-        .classList
-        .remove(
-            "open"
-        );
-
-
-    button.setAttribute(
-
-        "aria-expanded",
-
-        "false"
-
-    );
-
-
-    menu.setAttribute(
-
-        "aria-hidden",
-
-        "true"
-
-    );
-
-
-}
-
-
-
-/* ==========================================================
-   EMAIL VALIDATION
-========================================================== */
-
-async function emailDomainLooksValid(
-    email
-) {
-
-
-    const domain =
-
-        email
-            .split("@")[1]
-            ?.trim();
-
-
-
-    if (
-        !domain
-    ) {
-
-        return false;
-
-    }
-
+function doPost(e) {
 
 
     try {
 
 
-        const response =
+        const parameters =
+            e.parameter
+            ||
+            {};
 
-            await fetch(
 
-                "https://dns.google/resolve?name="
-                +
-                encodeURIComponent(
-                    domain
-                )
-                +
-                "&type=MX"
+
+        /*
+        =====================================================
+        HONEYPOT SPAM CHECK
+        =====================================================
+        */
+
+        if (
+            parameters.website
+        ) {
+
+
+            return ContentService
+                .createTextOutput(
+                    "OK"
+                );
+
+
+        }
+
+
+
+        /* ==================================================
+           CLEAN DATA
+        ================================================== */
+
+        const name =
+            clean(
+                parameters.name,
+                100
+            );
+
+
+        const email =
+            clean(
+                parameters.email,
+                200
+            );
+
+
+        const projectType =
+            clean(
+                parameters.projectType,
+                200
+            );
+
+
+        const budget =
+            clean(
+                parameters.budget,
+                100
+            );
+
+
+        const message =
+            clean(
+                parameters.message,
+                5000
+            );
+
+
+        const page =
+            clean(
+                parameters.page,
+                500
+            );
+
+
+
+        /* ==================================================
+           BASIC SERVER VALIDATION
+        ================================================== */
+
+        if (
+            !name
+            ||
+            !email
+            ||
+            !message
+        ) {
+
+
+            return ContentService
+                .createTextOutput(
+                    "ERROR: Required information missing."
+                );
+
+
+        }
+
+
+
+        if (
+            !isValidEmail(
+                email
+            )
+        ) {
+
+
+            return ContentService
+                .createTextOutput(
+                    "ERROR: Invalid email."
+                );
+
+
+        }
+
+
+
+        /* ==================================================
+           GET GOOGLE SHEET
+        ================================================== */
+
+        const spreadsheet =
+
+            SpreadsheetApp
+                .getActiveSpreadsheet();
+
+
+
+        let sheet =
+
+            spreadsheet
+                .getSheetByName(
+                    SHEET_NAME
+                );
+
+
+
+        /* ==================================================
+           CREATE TAB IF NOT EXISTS
+        ================================================== */
+
+        if (
+            !sheet
+        ) {
+
+
+            sheet =
+
+                spreadsheet
+                    .insertSheet(
+                        SHEET_NAME
+                    );
+
+
+
+            sheet.appendRow(
+
+                [
+
+                    "Timestamp",
+
+                    "Name",
+
+                    "Email",
+
+                    "Project Type",
+
+                    "Budget",
+
+                    "Message",
+
+                    "Page"
+
+                ]
 
             );
 
 
 
-        const data =
-            await response.json();
+            sheet
+                .getRange(
+                    1,
+                    1,
+                    1,
+                    7
+                )
+                .setFontWeight(
+                    "bold"
+                );
 
 
 
-        return (
+            sheet.setFrozenRows(
+                1
+            );
 
-            Array.isArray(
-                data.Answer
-            )
+
+        }
+
+
+
+        /* ==================================================
+           SAVE ENQUIRY
+        ================================================== */
+
+        sheet.appendRow(
+
+            [
+
+                new Date(),
+
+                safeSheetValue(
+                    name
+                ),
+
+                safeSheetValue(
+                    email
+                ),
+
+                safeSheetValue(
+                    projectType
+                ),
+
+                safeSheetValue(
+                    budget
+                ),
+
+                safeSheetValue(
+                    message
+                ),
+
+                safeSheetValue(
+                    page
+                )
+
+            ]
+
+        );
+
+
+
+        /* ==================================================
+           EMAIL NOTIFICATION
+        ================================================== */
+
+        if (
+
+            OWNER_EMAIL
 
             &&
 
-            data.Answer.length > 0
+            !OWNER_EMAIL.includes(
+                "YOUR_EMAIL"
+            )
 
-        );
-
-
-    }
-
-
-    catch {
+        ) {
 
 
-        return true;
+            const subject =
 
-    }
-
-
-}
-
-
-
-/* ==========================================================
-   CONTACT FORM
-========================================================== */
-
-function initializeForm() {
-
-
-    const form =
-        document.getElementById(
-            "contactForm"
-        );
-
-
-    const status =
-        document.getElementById(
-            "formStatus"
-        );
-
-
-    const button =
-        document.getElementById(
-            "submitBtn"
-        );
-
-
-
-    form.addEventListener(
-
-        "submit",
-
-        async function (event) {
-
-
-            event.preventDefault();
-
-
-
-            status.className =
-                "form-status";
-
-
-            status.textContent =
-                "";
-
-
-
-            if (
-                !form.checkValidity()
-            ) {
-
-
-                form.reportValidity();
-
-                return;
-
-            }
-
-
-
-            const formData =
-                new FormData(
-                    form
+                "New Portfolio Enquiry — "
+                +
+                (
+                    name
+                    ||
+                    "New Client"
                 );
 
 
 
-            if (
-                formData.get(
-                    "website"
-                )
-            ) {
+            const htmlBody = `
 
-                return;
+                <div
+                    style="
+                        font-family:Arial,sans-serif;
+                        max-width:680px;
+                        margin:auto;
+                        color:#222;
+                    "
+                >
 
-            }
+                    <h2
+                        style="
+                            margin-bottom:20px;
+                        "
+                    >
+                        New Shakilstic Portfolio Enquiry
+                    </h2>
 
 
+                    <p>
+                        <strong>Name:</strong><br>
+                        ${escapeHtml(name)}
+                    </p>
 
-            const email =
 
-                String(
+                    <p>
+                        <strong>Email:</strong><br>
+                        ${escapeHtml(email)}
+                    </p>
 
-                    formData.get(
-                        "email"
-                    )
 
-                    || ""
+                    <p>
+                        <strong>Project Type:</strong><br>
+                        ${escapeHtml(projectType)}
+                    </p>
 
-                ).trim();
 
+                    <p>
+                        <strong>Budget:</strong><br>
+                        ${escapeHtml(budget)}
+                    </p>
 
 
-            button.disabled =
-                true;
+                    <p>
+                        <strong>Message:</strong><br><br>
 
-
-            status.textContent =
-                "Checking email...";
-
-
-
-            const valid =
-
-                await emailDomainLooksValid(
-                    email
-                );
-
-
-
-            if (
-                !valid
-            ) {
-
-
-                status.className =
-                    "form-status error";
-
-
-                status.textContent =
-                    "Please enter a valid email address.";
-
-
-                button.disabled =
-                    false;
-
-
-                return;
-
-            }
-
-
-
-            if (
-
-                !GOOGLE_SCRIPT_URL
-
-                ||
-
-                GOOGLE_SCRIPT_URL.includes(
-                    "PASTE_YOUR"
-                )
-
-            ) {
-
-
-                status.className =
-                    "form-status error";
-
-
-                status.textContent =
-                    "Google Sheet connection is not configured yet.";
-
-
-                button.disabled =
-                    false;
-
-
-                return;
-
-            }
-
-
-
-            status.textContent =
-                "Sending...";
-
-
-
-            const payload = {
-
-
-                name:
-                    formData.get(
-                        "name"
-                    ),
-
-
-                email:
-                    email,
-
-
-                projectType:
-                    formData.get(
-                        "projectType"
-                    ),
-
-
-                budget:
-                    formData.get(
-                        "budget"
-                    ),
-
-
-                message:
-                    formData.get(
-                        "message"
-                    )
-
-
-            };
-
-
-
-            try {
-
-
-                await fetch(
-
-                    GOOGLE_SCRIPT_URL,
-
-                    {
-
-
-                        method:
-                            "POST",
-
-
-                        mode:
-                            "no-cors",
-
-
-                        headers: {
-
-                            "Content-Type":
-                                "text/plain;charset=utf-8"
-
-                        },
-
-
-                        body:
-                            JSON.stringify(
-                                payload
+                        ${escapeHtml(message)
+                            .replace(
+                                /\n/g,
+                                "<br>"
                             )
-
-
-                    }
-
-                );
-
-
-
-                form.reset();
-
-
-                status.className =
-                    "form-status success";
-
-
-                status.textContent =
-                    "Thanks — your inquiry has been sent.";
-
-
-            }
-
-
-            catch {
-
-
-                status.className =
-                    "form-status error";
-
-
-                status.textContent =
-                    "Could not send your message. Please try again.";
-
-
-            }
-
-
-            finally {
-
-
-                button.disabled =
-                    false;
-
-
-            }
-
-
-        }
-
-    );
-
-
-}
-
-
-
-/* ==========================================================
-   REVEAL
-========================================================== */
-
-function initializeReveal() {
-
-
-    const observer =
-
-        new IntersectionObserver(
-
-            entries => {
-
-
-                entries.forEach(
-
-                    entry => {
-
-
-                        if (
-                            entry.isIntersecting
-                        ) {
-
-
-                            entry.target
-                                .classList
-                                .add(
-                                    "visible"
-                                );
-
-
-                            observer.unobserve(
-                                entry.target
-                            );
-
-
                         }
 
-
-                    }
-
-                );
+                    </p>
 
 
-            },
-
-            {
-                threshold:
-                    .12
-            }
-
-        );
-
-
-    document
-        .querySelectorAll(
-            ".reveal"
-        )
-        .forEach(
-
-            element => {
+                    <hr
+                        style="
+                            border:0;
+                            border-top:1px solid #ddd;
+                            margin:25px 0;
+                        "
+                    >
 
 
-                observer.observe(
-                    element
-                );
+                    <p
+                        style="
+                            color:#777;
+                            font-size:12px;
+                        "
+                    >
 
+                        Submitted from:
 
-            }
+                        <br>
 
-        );
+                        ${escapeHtml(page)}
 
+                    </p>
 
-}
+                </div>
+
+            `;
 
 
 
-/* ==========================================================
-   BACK TO TOP
-========================================================== */
-
-function initializeBackToTop() {
-
-
-    const button =
-        document.getElementById(
-            "backToTop"
-        );
-
-
-    window.addEventListener(
-
-        "scroll",
-
-        function () {
-
-
-            button.classList.toggle(
-
-                "show",
-
-                window.scrollY > 700
-
-            );
-
-
-        },
-
-        {
-            passive:
-                true
-        }
-
-    );
-
-
-
-    button.addEventListener(
-
-        "click",
-
-        function () {
-
-
-            window.scrollTo(
+            MailApp.sendEmail(
 
                 {
 
-                    top:
-                        0,
+                    to:
+                        OWNER_EMAIL,
 
-                    behavior:
-                        "smooth"
+
+                    subject:
+                        subject,
+
+
+                    htmlBody:
+                        htmlBody,
+
+
+                    body:
+
+                        "New portfolio enquiry\n\n"
+
+                        +
+
+                        "Name: "
+                        +
+                        name
+                        +
+                        "\n"
+
+                        +
+
+                        "Email: "
+                        +
+                        email
+                        +
+                        "\n"
+
+                        +
+
+                        "Project Type: "
+                        +
+                        projectType
+                        +
+                        "\n"
+
+                        +
+
+                        "Budget: "
+                        +
+                        budget
+                        +
+                        "\n\n"
+
+                        +
+
+                        "Message:\n"
+                        +
+                        message,
+
+
+                    replyTo:
+                        email
 
                 }
 
             );
 
 
-            history.replaceState(
+        }
 
-                null,
 
-                "",
 
-                window.location.pathname
-                +
-                window.location.search
+        /* ==================================================
+           SUCCESS
+        ================================================== */
 
+        return ContentService
+
+            .createTextOutput(
+                "OK"
+            )
+
+            .setMimeType(
+                ContentService.MimeType.TEXT
             );
 
 
-        }
+    }
 
-    );
+
+
+    catch (
+        error
+    ) {
+
+
+        console.error(
+            error
+        );
+
+
+        return ContentService
+
+            .createTextOutput(
+
+                "ERROR: "
+                +
+                error.message
+
+            )
+
+            .setMimeType(
+                ContentService.MimeType.TEXT
+            );
+
+
+    }
 
 
 }
@@ -2725,34 +574,47 @@ function initializeBackToTop() {
 
 
 /* ==========================================================
-   PROFILE FALLBACK
+   EMAIL FORMAT
 ========================================================== */
 
-const profileImage =
-
-    document.getElementById(
-        "profileImage"
-    );
-
-
-if (
-    profileImage
+function isValidEmail(
+    email
 ) {
 
 
-    profileImage.addEventListener(
-
-        "error",
-
-        function () {
-
-
-            profileImage.style.display =
-                "none";
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        .test(
+            String(
+                email
+            )
+        );
 
 
-        }
+}
 
+
+
+/* ==========================================================
+   CLEAN STRING
+========================================================== */
+
+function clean(
+    value,
+    maxLength
+) {
+
+
+    return String(
+        value
+        ||
+        ""
+    )
+
+    .trim()
+
+    .slice(
+        0,
+        maxLength
     );
 
 
@@ -2761,42 +623,84 @@ if (
 
 
 /* ==========================================================
-   YEAR
+   PREVENT GOOGLE SHEET FORMULA INJECTION
 ========================================================== */
 
-document.getElementById(
-    "year"
-).textContent =
+function safeSheetValue(
+    value
+) {
 
-    new Date()
-        .getFullYear();
+
+    const text =
+        String(
+            value
+            ||
+            ""
+        );
+
+
+    if (
+        /^[=+\-@]/
+            .test(
+                text
+            )
+    ) {
+
+
+        return "'"
+            +
+            text;
+
+
+    }
+
+
+    return text;
+
+
+}
 
 
 
 /* ==========================================================
-   START
+   ESCAPE HTML FOR EMAIL
 ========================================================== */
 
-renderActiveLogos();
+function escapeHtml(
+    string
+) {
 
-startLogoLoop();
 
-renderSocialLinks();
+    return String(
+        string
+        ||
+        ""
+    )
 
-renderProjects();
+    .replace(
+        /&/g,
+        "&amp;"
+    )
 
-renderTestimonials();
+    .replace(
+        /</g,
+        "&lt;"
+    )
 
-initializeTestimonialControl();
+    .replace(
+        />/g,
+        "&gt;"
+    )
 
-initializeCleanNavigation();
+    .replace(
+        /"/g,
+        "&quot;"
+    )
 
-initializeTheme();
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 
-initializeMenu();
 
-initializeForm();
-
-initializeReveal();
-
-initializeBackToTop();
+}
