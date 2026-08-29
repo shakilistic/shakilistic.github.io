@@ -9,7 +9,7 @@
    - Horizontal image: left → right hover scroll
    - Mobile tap scroll
    - See More / Show Less
-   - Show Less returns to same section
+   - Show Less returns instantly to same section
    - Home always goes to absolute top
    - About goes to Beyond The Pixels
    - Theme switch
@@ -881,10 +881,6 @@ function prepareProjectImage(
         naturalHeight;
 
 
-    /* =====================================================
-       SQUARE
-    ===================================================== */
-
     if (
         Math.abs(
             ratio - 1
@@ -901,11 +897,6 @@ function prepareProjectImage(
         return;
     }
 
-
-    /* =====================================================
-       HORIZONTAL
-       LEFT → RIGHT
-    ===================================================== */
 
     if (
         naturalWidth >
@@ -1128,11 +1119,6 @@ function prepareProjectImage(
 
     }
 
-
-    /* =====================================================
-       VERTICAL
-       TOP → BOTTOM
-    ===================================================== */
 
     image.classList.add(
         "project-scroll-image"
@@ -1717,10 +1703,8 @@ function createProjectSection(
 
     /* =====================================================
        SEE MORE / SHOW LESS
-
-       FIX:
-       When SHOW LESS is clicked,
-       return to THIS SAME SECTION.
+       SHOW LESS = INSTANT RETURN
+       NO SMOOTH ANIMATION
     ===================================================== */
 
     moreButton.addEventListener(
@@ -1748,13 +1732,6 @@ function createProjectSection(
             updateVisibility();
 
 
-            /*
-            SHOW LESS has just been clicked.
-            After cards collapse, scroll back
-            to the top of this SAME project
-            section.
-            */
-
             if (
                 wasExpanded &&
                 !expanded
@@ -1768,10 +1745,33 @@ function createProjectSection(
 
                             function () {
 
-                                scrollToSectionClean(
-                                    section,
-                                    18
-                                );
+                                const sectionTop =
+                                    section
+                                        .getBoundingClientRect()
+                                        .top
+                                    +
+                                    window.scrollY
+                                    -
+                                    getHeaderHeight()
+                                    -
+                                    18;
+
+
+                                window.scrollTo({
+
+                                    top:
+                                        Math.max(
+                                            0,
+                                            sectionTop
+                                        ),
+
+                                    left:
+                                        0,
+
+                                    behavior:
+                                        "auto"
+
+                                });
 
                             }
 
@@ -2412,10 +2412,6 @@ function initializeMenu() {
 
 /* =========================================================
    CLEAN NAVIGATION
-
-   FIXES:
-   HOME  → ABSOLUTE TOP
-   ABOUT → BEYOND THE PIXELS
 ========================================================= */
 
 function initializeCleanNavigation() {
@@ -2469,12 +2465,6 @@ function initializeCleanNavigation() {
                         event.preventDefault();
 
 
-                        /* =================================
-                           HOME FIX
-
-                           Always go to absolute page top.
-                        ================================= */
-
                         if (
                             targetId ===
                             "home"
@@ -2514,12 +2504,6 @@ function initializeCleanNavigation() {
 
                         }
 
-
-                        /* =================================
-                           ABOUT FIX
-
-                           Always show BEYOND THE PIXELS.
-                        ================================= */
 
                         if (
                             targetId ===
@@ -2573,10 +2557,6 @@ function initializeCleanNavigation() {
                         }
 
 
-                        /* =================================
-                           OTHER NAVIGATION
-                        ================================= */
-
                         const target =
                             document.getElementById(
                                 targetId
@@ -2621,10 +2601,6 @@ function initializeCleanNavigation() {
 
         );
 
-
-    /* =====================================================
-       BRAND / LOGO CLICK → ABSOLUTE TOP
-    ===================================================== */
 
     document
         .querySelectorAll(
