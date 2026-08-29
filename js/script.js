@@ -4102,3 +4102,131 @@ window.addEventListener(
     }
 
 );
+/* =========================================================
+   SHOW LESS — FORCE INSTANT SCROLL
+   Removes smooth scrolling ONLY from SHOW LESS
+========================================================= */
+
+(function () {
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            const button =
+                event.target.closest(".more-btn");
+
+            if (!button) {
+                return;
+            }
+
+            const isShowLess =
+                button.textContent
+                    .trim()
+                    .toUpperCase() === "SHOW LESS";
+
+            if (!isShowLess) {
+                return;
+            }
+
+            const html =
+                document.documentElement;
+
+            const body =
+                document.body;
+
+            /*
+             Save existing inline scroll behavior
+            */
+
+            const oldHtmlBehavior =
+                html.style.getPropertyValue(
+                    "scroll-behavior"
+                );
+
+            const oldHtmlPriority =
+                html.style.getPropertyPriority(
+                    "scroll-behavior"
+                );
+
+            const oldBodyBehavior =
+                body.style.getPropertyValue(
+                    "scroll-behavior"
+                );
+
+            const oldBodyPriority =
+                body.style.getPropertyPriority(
+                    "scroll-behavior"
+                );
+
+
+            /*
+             IMPORTANT:
+             Disable smooth scrolling BEFORE
+             the existing SHOW LESS code runs.
+            */
+
+            html.style.setProperty(
+                "scroll-behavior",
+                "auto",
+                "important"
+            );
+
+            body.style.setProperty(
+                "scroll-behavior",
+                "auto",
+                "important"
+            );
+
+
+            /*
+             Keep it disabled long enough for
+             the existing double requestAnimationFrame
+             SHOW LESS positioning to finish.
+            */
+
+            setTimeout(
+                function () {
+
+                    if (oldHtmlBehavior) {
+
+                        html.style.setProperty(
+                            "scroll-behavior",
+                            oldHtmlBehavior,
+                            oldHtmlPriority
+                        );
+
+                    } else {
+
+                        html.style.removeProperty(
+                            "scroll-behavior"
+                        );
+
+                    }
+
+
+                    if (oldBodyBehavior) {
+
+                        body.style.setProperty(
+                            "scroll-behavior",
+                            oldBodyBehavior,
+                            oldBodyPriority
+                        );
+
+                    } else {
+
+                        body.style.removeProperty(
+                            "scroll-behavior"
+                        );
+
+                    }
+
+                },
+                350
+            );
+
+        },
+        true
+    );
+
+})();
