@@ -2342,82 +2342,57 @@ html[data-theme="dark"]
 
 
 /* ======================================================
-   SAFE REVEAL SYSTEM
+   SAFE REVEAL / SUBTLE JUMP SYSTEM
 
    IMPORTANT:
-   EVERYTHING VISIBLE BY DEFAULT.
+   Nothing is ever hidden with opacity.
+   If JavaScript fails, all content still stays visible.
 ====================================================== */
 
 .reveal,
 .scroll-jump,
 .project-section {
 
-    opacity:
-        1;
-
-    transform:
-        translateY(0);
+    opacity: 1 !important;
+    visibility: visible !important;
 
 }
 
 
-
 /*
-Only hide after JS confirms
-animation is ready.
+   A very small movement only.
+   JavaScript adds animate-ready, then visible/section-visible.
 */
 
 .reveal.animate-ready {
 
-    opacity:
-        0;
-
-    transform:
-        translateY(16px);
+    opacity: 1 !important;
+    transform: translateY(10px);
 
     transition:
-        opacity .65s ease,
-        transform .7s
-        cubic-bezier(
-            .2,
-            .8,
-            .2,
-            1
-        );
+        transform .55s
+        cubic-bezier(.2,.8,.2,1);
 
 }
 
 
 .reveal.animate-ready.visible {
 
-    opacity:
-        1;
-
-    transform:
-        translateY(0);
+    opacity: 1 !important;
+    transform: translateY(0);
 
 }
-
 
 
 .scroll-jump.animate-ready,
 .project-section.animate-ready {
 
-    opacity:
-        0;
-
-    transform:
-        translateY(11px);
+    opacity: 1 !important;
+    transform: translateY(10px);
 
     transition:
-        opacity .55s ease,
-        transform .65s
-        cubic-bezier(
-            .2,
-            .8,
-            .2,
-            1
-        );
+        transform .58s
+        cubic-bezier(.2,.8,.2,1);
 
 }
 
@@ -2425,14 +2400,28 @@ animation is ready.
 .scroll-jump.animate-ready.section-visible,
 .project-section.animate-ready.section-visible {
 
-    opacity:
-        1;
-
-    transform:
-        translateY(0);
+    opacity: 1 !important;
+    transform: translateY(0);
 
 }
 
+
+/* Absolute safety: main content can never become invisible. */
+main,
+main section,
+.hero-grid,
+.hero-copy,
+.profile-column,
+.active-section,
+.work-intro,
+.project-section,
+.testimonial-section,
+.beyond-section,
+.contact-section {
+
+    visibility: visible !important;
+
+}
 
 
 /* ======================================================
@@ -2993,17 +2982,16 @@ animation is ready.
 
 
     .reveal,
+    .reveal.animate-ready,
     .scroll-jump,
-    .project-section {
+    .scroll-jump.animate-ready,
+    .project-section,
+    .project-section.animate-ready {
 
-        opacity:
-            1 !important;
-
-        transform:
-            none !important;
-
-        transition:
-            none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        transition: none !important;
 
     }
 
