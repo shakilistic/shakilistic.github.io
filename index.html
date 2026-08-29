@@ -52,10 +52,18 @@
 
     <script>
 
+        /*
+        ========================================================
+        THEME BEFORE PAGE LOADS
+        ========================================================
+        */
+
         (function () {
 
             const savedTheme =
-                localStorage.getItem("portfolio-theme");
+                localStorage.getItem(
+                    "portfolio-theme"
+                );
 
             const systemDark =
                 window.matchMedia(
@@ -63,10 +71,36 @@
                 ).matches;
 
             document.documentElement.dataset.theme =
-                savedTheme ||
-                (systemDark ? "dark" : "light");
+                savedTheme
+                ||
+                (
+                    systemDark
+                    ?
+                    "dark"
+                    :
+                    "light"
+                );
 
         })();
+
+
+        /*
+        ========================================================
+        FORCE FRESH / RELOAD TO TOP
+        ========================================================
+        */
+
+        if ("scrollRestoration" in history) {
+
+            history.scrollRestoration =
+                "manual";
+
+        }
+
+        window.scrollTo(
+            0,
+            0
+        );
 
     </script>
 
@@ -75,6 +109,7 @@
 
 
 <body>
+
 
 
 <!-- ========================================================
@@ -255,12 +290,13 @@
 <main>
 
 
+
 <!-- ========================================================
      HERO
 ========================================================= -->
 
 <section
-    class="hero section-pad"
+    class="hero section-pad scroll-jump"
     id="home"
 >
 
@@ -441,7 +477,9 @@
      WHERE I'M ACTIVE
 ========================================================= -->
 
-<section class="active-section section-pad">
+<section
+    class="active-section section-pad scroll-jump"
+>
 
 
     <div class="section-heading compact">
@@ -450,7 +488,6 @@
         <p class="kicker">
             PLATFORMS
         </p>
-
 
 
         <h2>
@@ -490,7 +527,7 @@
 ========================================================= -->
 
 <section
-    class="work-intro section-pad"
+    class="work-intro section-pad scroll-jump"
     id="work"
 >
 
@@ -515,14 +552,10 @@
         </h2>
 
 
-
-        <p>
-
-            A curated collection of visual design
-            projects presented in a clean,
-            responsive square-based gallery.
-
-        </p>
+        <!--
+            Removed:
+            A curated collection...
+        -->
 
 
     </div>
@@ -541,7 +574,7 @@
 ========================================================= -->
 
 <section
-    class="testimonial-section section-pad"
+    class="testimonial-section section-pad scroll-jump"
     id="testimonials"
 >
 
@@ -591,7 +624,9 @@
      BEYOND THE PIXELS
 ========================================================= -->
 
-<section class="beyond-section section-pad">
+<section
+    class="beyond-section section-pad scroll-jump"
+>
 
 
     <div class="beyond-content">
@@ -672,7 +707,7 @@
 ========================================================= -->
 
 <section
-    class="contact-section section-pad"
+    class="contact-section section-pad scroll-jump"
     id="contact"
 >
 
@@ -715,8 +750,6 @@
 
 
 
-            <!-- DESKTOP SOCIAL -->
-
             <div class="social-block desktop-social-block">
 
 
@@ -738,7 +771,9 @@
 
 
 
-        <!-- FORM -->
+        <!-- =================================================
+             CONTACT FORM
+        ================================================== -->
 
         <div class="form-card">
 
@@ -764,6 +799,7 @@
                             name="name"
                             required
                             minlength="2"
+                            maxlength="100"
                             autocomplete="name"
                             placeholder="Your name"
                         >
@@ -782,6 +818,7 @@
                             type="email"
                             name="email"
                             required
+                            maxlength="200"
                             autocomplete="email"
                             placeholder="you@company.com"
                         >
@@ -881,6 +918,7 @@
                         name="message"
                         required
                         minlength="10"
+                        maxlength="5000"
                         rows="7"
                         placeholder="Tell me about your project..."
                     ></textarea>
@@ -888,6 +926,8 @@
                 </label>
 
 
+
+                <!-- SPAM HONEYPOT -->
 
                 <label class="hp-field">
 
@@ -925,6 +965,8 @@
                 <span
                     class="form-status"
                     id="formStatus"
+                    role="status"
+                    aria-live="polite"
                 ></span>
 
 
@@ -953,7 +995,7 @@
 
 
 
-        <!-- MOBILE SOCIAL - BELOW FORM -->
+        <!-- MOBILE SOCIAL -->
 
         <div class="social-block mobile-social-block">
 
@@ -1019,6 +1061,10 @@
 </footer>
 
 
+
+<!-- ========================================================
+     BACK TO TOP
+========================================================= -->
 
 <button
     class="back-to-top"
