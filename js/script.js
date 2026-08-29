@@ -9,6 +9,9 @@
    - Horizontal image: left → right hover scroll
    - Mobile tap scroll
    - See More / Show Less
+   - Show Less returns to same section
+   - Home always goes to absolute top
+   - About goes to Beyond The Pixels
    - Theme switch
    - Contact form
    - Active platform loop
@@ -315,10 +318,6 @@ function installProjectScrollStyles() {
         }
 
 
-        /* ===========================
-           SQUARE IMAGE
-        =========================== */
-
         .project-card img.project-square-image {
 
             width: 100% !important;
@@ -345,11 +344,6 @@ function installProjectScrollStyles() {
 
         }
 
-
-        /* ===========================
-           VERTICAL LONG IMAGE
-           TOP → BOTTOM
-        =========================== */
 
         .project-card img.project-scroll-image {
 
@@ -380,11 +374,6 @@ function installProjectScrollStyles() {
 
         }
 
-
-        /* ===========================
-           HORIZONTAL LONG IMAGE
-           LEFT → RIGHT
-        =========================== */
 
         .project-card img.project-horizontal-scroll-image {
 
@@ -485,6 +474,74 @@ function forcePageToTop() {
         0,
         0
     );
+
+}
+
+
+/* =========================================================
+   HEADER OFFSET HELPER
+========================================================= */
+
+function getHeaderHeight() {
+
+    const header =
+        document.querySelector(
+            ".site-header"
+        )
+        ||
+        document.querySelector(
+            "header"
+        );
+
+
+    if (!header) {
+
+        return 0;
+
+    }
+
+
+    return Math.ceil(
+        header.getBoundingClientRect().height
+    );
+
+}
+
+
+function scrollToSectionClean(
+    element,
+    extraGap = 12
+) {
+
+    if (!element) {
+
+        return;
+
+    }
+
+
+    const top =
+        element.getBoundingClientRect().top
+        +
+        window.scrollY
+        -
+        getHeaderHeight()
+        -
+        extraGap;
+
+
+    window.scrollTo({
+
+        top:
+            Math.max(
+                0,
+                top
+            ),
+
+        behavior:
+            "smooth"
+
+    });
 
 }
 
@@ -825,7 +882,7 @@ function prepareProjectImage(
 
 
     /* =====================================================
-       SQUARE / NEAR SQUARE
+       SQUARE
     ===================================================== */
 
     if (
@@ -846,7 +903,7 @@ function prepareProjectImage(
 
 
     /* =====================================================
-       HORIZONTAL IMAGE
+       HORIZONTAL
        LEFT → RIGHT
     ===================================================== */
 
@@ -899,13 +956,6 @@ function prepareProjectImage(
             }
 
 
-            /*
-            Image fits square card by HEIGHT.
-
-            Therefore full image width becomes:
-            cardHeight × image aspect ratio.
-            */
-
             const displayedWidth =
                 cardHeight *
                 (
@@ -924,10 +974,6 @@ function prepareProjectImage(
 
                 );
 
-
-            /*
-            Slow smooth scroll.
-            */
 
             scrollDuration =
                 Math.max(
@@ -969,11 +1015,6 @@ function prepareProjectImage(
             requestAnimationFrame(
 
                 function () {
-
-                    /*
-                    Moving image LEFT reveals
-                    the RIGHT side of image.
-                    */
 
                     image.style.transform =
                         `translate3d(-${scrollDistance}px,0,0)`;
@@ -1084,11 +1125,12 @@ function prepareProjectImage(
 
 
         return;
+
     }
 
 
     /* =====================================================
-       VERTICAL IMAGE
+       VERTICAL
        TOP → BOTTOM
     ===================================================== */
 
@@ -1336,6 +1378,10 @@ function createProjectSection(
         "project-section";
 
 
+    section.dataset.projectCategory =
+        category.key;
+
+
     section.innerHTML = `
 
         <div class="project-header">
@@ -1411,14 +1457,6 @@ function createProjectSection(
     let expanded =
         false;
 
-
-    /*
-    Supported file formats.
-
-    First JPG is checked.
-    If JPG does not exist,
-    PNG is checked automatically.
-    */
 
     const supportedExtensions = [
 
@@ -1581,6 +1619,7 @@ function createProjectSection(
 
 
                 return;
+
             }
 
 
@@ -1592,16 +1631,6 @@ function createProjectSection(
 
             extensionIndex++;
 
-
-            /*
-            Examples:
-
-            book1.jpg
-            book1.png
-
-            social1.jpg
-            social1.png
-            */
 
             image.src =
                 `./assets/images/${category.key}${i}${extension}`;
@@ -1681,21 +1710,28 @@ function createProjectSection(
         );
 
 
-        /*
-        Start loading AFTER
-        listeners are ready.
-        */
-
         tryNextExtension();
 
     }
 
+
+    /* =====================================================
+       SEE MORE / SHOW LESS
+
+       FIX:
+       When SHOW LESS is clicked,
+       return to THIS SAME SECTION.
+    ===================================================== */
 
     moreButton.addEventListener(
 
         "click",
 
         function () {
+
+            const wasExpanded =
+                expanded;
+
 
             expanded =
                 !expanded;
@@ -1710,6 +1746,42 @@ function createProjectSection(
 
 
             updateVisibility();
+
+
+            /*
+            SHOW LESS has just been clicked.
+            After cards collapse, scroll back
+            to the top of this SAME project
+            section.
+            */
+
+            if (
+                wasExpanded &&
+                !expanded
+            ) {
+
+                requestAnimationFrame(
+
+                    function () {
+
+                        requestAnimationFrame(
+
+                            function () {
+
+                                scrollToSectionClean(
+                                    section,
+                                    18
+                                );
+
+                            }
+
+                        );
+
+                    }
+
+                );
+
+            }
 
         }
 
@@ -2340,6 +2412,10 @@ function initializeMenu() {
 
 /* =========================================================
    CLEAN NAVIGATION
+
+   FIXES:
+   HOME  → ABSOLUTE TOP
+   ABOUT → BEYOND THE PIXELS
 ========================================================= */
 
 function initializeCleanNavigation() {
@@ -2372,7 +2448,13 @@ function initializeCleanNavigation() {
                     ) {
 
                         const targetId =
-                            button.dataset.scroll;
+                            String(
+                                button.dataset.scroll
+                                ||
+                                ""
+                            )
+                            .trim()
+                            .toLowerCase();
 
 
                         if (
@@ -2383,6 +2465,117 @@ function initializeCleanNavigation() {
 
                         }
 
+
+                        event.preventDefault();
+
+
+                        /* =================================
+                           HOME FIX
+
+                           Always go to absolute page top.
+                        ================================= */
+
+                        if (
+                            targetId ===
+                            "home"
+                        ) {
+
+                            window.scrollTo({
+
+                                top:
+                                    0,
+
+                                left:
+                                    0,
+
+                                behavior:
+                                    "smooth"
+
+                            });
+
+
+                            history.replaceState(
+
+                                null,
+
+                                "",
+
+                                window.location.pathname
+                                +
+                                window.location.search
+
+                            );
+
+
+                            closeMobileMenu();
+
+
+                            return;
+
+                        }
+
+
+                        /* =================================
+                           ABOUT FIX
+
+                           Always show BEYOND THE PIXELS.
+                        ================================= */
+
+                        if (
+                            targetId ===
+                            "about"
+                        ) {
+
+                            const beyondSection =
+                                document.querySelector(
+                                    ".beyond-section"
+                                )
+                                ||
+                                document.getElementById(
+                                    "beyond"
+                                )
+                                ||
+                                document.getElementById(
+                                    "about"
+                                );
+
+
+                            if (
+                                beyondSection
+                            ) {
+
+                                scrollToSectionClean(
+                                    beyondSection,
+                                    18
+                                );
+
+                            }
+
+
+                            history.replaceState(
+
+                                null,
+
+                                "",
+
+                                window.location.pathname
+                                +
+                                window.location.search
+
+                            );
+
+
+                            closeMobileMenu();
+
+
+                            return;
+
+                        }
+
+
+                        /* =================================
+                           OTHER NAVIGATION
+                        ================================= */
 
                         const target =
                             document.getElementById(
@@ -2399,19 +2592,9 @@ function initializeCleanNavigation() {
                         }
 
 
-                        event.preventDefault();
-
-
-                        target.scrollIntoView(
-
-                            {
-                                behavior:
-                                    "smooth",
-
-                                block:
-                                    "start"
-                            }
-
+                        scrollToSectionClean(
+                            target,
+                            12
                         );
 
 
@@ -2439,6 +2622,10 @@ function initializeCleanNavigation() {
         );
 
 
+    /* =====================================================
+       BRAND / LOGO CLICK → ABSOLUTE TOP
+    ===================================================== */
+
     document
         .querySelectorAll(
             ".brand-button"
@@ -2451,17 +2638,42 @@ function initializeCleanNavigation() {
 
                     "click",
 
-                    function () {
+                    function (
+                        event
+                    ) {
 
-                        window.scrollTo(
+                        if (
+                            event
+                        ) {
 
-                            {
-                                top:
-                                    0,
+                            event.preventDefault();
 
-                                behavior:
-                                    "smooth"
-                            }
+                        }
+
+
+                        window.scrollTo({
+
+                            top:
+                                0,
+
+                            left:
+                                0,
+
+                            behavior:
+                                "smooth"
+
+                        });
+
+
+                        history.replaceState(
+
+                            null,
+
+                            "",
+
+                            window.location.pathname
+                            +
+                            window.location.search
 
                         );
 
@@ -2941,11 +3153,6 @@ async function emailDomainLooksValid(
         error
     ) {
 
-        /*
-        DNS lookup failure should not
-        block genuine visitors.
-        */
-
         return true;
 
     }
@@ -3060,10 +3267,6 @@ function initializeForm() {
                 form
             );
 
-
-        /*
-        Honeypot
-        */
 
         if (
             formData.get(
@@ -3268,10 +3471,6 @@ function initializeForm() {
             button.disabled =
                 false;
 
-
-            /*
-            Stay exactly around contact section.
-            */
 
             window.scrollTo(
                 0,
@@ -3631,17 +3830,18 @@ function initializeBackToTop() {
 
         function () {
 
-            window.scrollTo(
+            window.scrollTo({
 
-                {
-                    top:
-                        0,
+                top:
+                    0,
 
-                    behavior:
-                        "smooth"
-                }
+                left:
+                    0,
 
-            );
+                behavior:
+                    "smooth"
+
+            });
 
 
             history.replaceState(
