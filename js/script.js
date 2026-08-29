@@ -7,18 +7,8 @@
    GOOGLE SHEET URL
 ========================================================= */
 
-/*
-Apps Script deploy করার পর URL এখানে বসাবে।
-
-Example:
-
-const GOOGLE_SCRIPT_URL =
-    "https://script.google.com/macros/s/XXXXXXXXXXXX/exec";
-*/
-
 const GOOGLE_SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbw7_durhcn8Hy7BHhZwXTy3Alvm-1C11ywErq3rt5C-I323l2pa3lsf4x8Up6UBC29o/exec";
-
 
 
 /* =========================================================
@@ -68,7 +58,6 @@ const categories = [
     }
 
 ];
-
 
 
 /* =========================================================
@@ -210,7 +199,6 @@ const platformLogos = {
 };
 
 
-
 /* =========================================================
    ACTIVE PLATFORMS
 ========================================================= */
@@ -253,7 +241,6 @@ const activePlatforms = [
     }
 
 ];
-
 
 
 /* =========================================================
@@ -301,7 +288,6 @@ const socialProfiles = [
 ];
 
 
-
 /* =========================================================
    TESTIMONIALS
 ========================================================= */
@@ -347,7 +333,6 @@ const testimonials = [
 ];
 
 
-
 /* =========================================================
    FORCE PAGE TO TOP
 ========================================================= */
@@ -355,33 +340,19 @@ const testimonials = [
 function forcePageToTop() {
 
     if ("scrollRestoration" in history) {
-
-        history.scrollRestoration =
-            "manual";
-
+        history.scrollRestoration = "manual";
     }
 
-
     if (window.location.hash) {
-
         history.replaceState(
             null,
             "",
-            window.location.pathname
-            +
-            window.location.search
+            window.location.pathname + window.location.search
         );
-
     }
 
-
-    window.scrollTo(
-        0,
-        0
-    );
-
+    window.scrollTo(0, 0);
 }
-
 
 
 /* =========================================================
@@ -390,61 +361,31 @@ function forcePageToTop() {
 
 function createLogoGroup() {
 
-    const group =
-        document.createElement(
-            "div"
+    const group = document.createElement("div");
+
+    group.className = "logo-group";
+
+    activePlatforms.forEach(platform => {
+
+        const item = document.createElement("div");
+
+        item.className = "active-logo logo-" + platform.key;
+
+        item.title = platform.name;
+
+        item.setAttribute(
+            "aria-label",
+            platform.name
         );
 
+        item.innerHTML = platformLogos[platform.key];
 
-    group.className =
-        "logo-group";
+        group.appendChild(item);
 
-
-    activePlatforms.forEach(
-
-        platform => {
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-
-            item.className =
-                "active-logo logo-"
-                +
-                platform.key;
-
-
-            item.title =
-                platform.name;
-
-
-            item.setAttribute(
-                "aria-label",
-                platform.name
-            );
-
-
-            item.innerHTML =
-                platformLogos[
-                    platform.key
-                ];
-
-
-            group.appendChild(
-                item
-            );
-
-        }
-
-    );
-
+    });
 
     return group;
-
 }
-
 
 
 /* =========================================================
@@ -453,241 +394,131 @@ function createLogoGroup() {
 
 function renderActiveLogos() {
 
-    const track =
-        document.getElementById(
-            "activeLogoTrack"
-        );
-
+    const track = document.getElementById(
+        "activeLogoTrack"
+    );
 
     if (!track) {
-
         return;
-
     }
 
+    track.innerHTML = "";
 
-    track.innerHTML =
-        "";
-
-
-    track.appendChild(
-        createLogoGroup()
-    );
-
-
-    track.appendChild(
-        createLogoGroup()
-    );
-
-
-    track.appendChild(
-        createLogoGroup()
-    );
-
+    track.appendChild(createLogoGroup());
+    track.appendChild(createLogoGroup());
+    track.appendChild(createLogoGroup());
 }
-
 
 
 /* =========================================================
    ENDLESS LOGO LOOP
 ========================================================= */
 
-let logoLoopOffset =
-    0;
-
-
-let logoLoopPaused =
-    false;
-
-
+let logoLoopOffset = 0;
+let logoLoopPaused = false;
 
 function startLogoLoop() {
 
-    const track =
-        document.getElementById(
-            "activeLogoTrack"
-        );
+    const track = document.getElementById(
+        "activeLogoTrack"
+    );
 
+    const marquee = document.getElementById(
+        "logoMarquee"
+    );
 
-    const marquee =
-        document.getElementById(
-            "logoMarquee"
-        );
-
-
-    if (
-        !track
-        ||
-        !marquee
-    ) {
-
+    if (!track || !marquee) {
         return;
-
     }
 
-
-
     marquee.addEventListener(
-
         "mouseenter",
-
         function () {
-
-            logoLoopPaused =
-                true;
-
+            logoLoopPaused = true;
         }
-
     );
-
-
 
     marquee.addEventListener(
-
         "mouseleave",
-
         function () {
-
-            logoLoopPaused =
-                false;
-
+            logoLoopPaused = false;
         }
-
     );
-
-
 
     function animate() {
 
-        const firstGroup =
-            track.querySelector(
-                ".logo-group"
-            );
-
+        const firstGroup = track.querySelector(
+            ".logo-group"
+        );
 
         if (
-            firstGroup
-            &&
+            firstGroup &&
             !logoLoopPaused
         ) {
 
-            const groupWidth =
-                firstGroup.offsetWidth;
+            const groupWidth = firstGroup.offsetWidth;
 
+            if (groupWidth > 0) {
 
-            if (
-                groupWidth > 0
-            ) {
-
-                logoLoopOffset +=
-                    0.55;
-
+                logoLoopOffset += 0.55;
 
                 if (
-                    logoLoopOffset >=
-                    groupWidth
+                    logoLoopOffset >= groupWidth
                 ) {
-
-                    logoLoopOffset -=
-                        groupWidth;
-
+                    logoLoopOffset -= groupWidth;
                 }
-
 
                 track.style.transform =
                     `translate3d(-${logoLoopOffset}px,0,0)`;
-
             }
-
         }
 
-
-        requestAnimationFrame(
-            animate
-        );
-
+        requestAnimationFrame(animate);
     }
 
-
     animate();
-
 }
-
 
 
 /* =========================================================
    SOCIAL LINKS
 ========================================================= */
 
-function createSocialLinks(
-    container
-) {
+function createSocialLinks(container) {
 
     if (!container) {
-
         return;
-
     }
 
+    container.innerHTML = "";
 
-    container.innerHTML =
-        "";
+    socialProfiles.forEach(social => {
 
+        const link = document.createElement("a");
 
-    socialProfiles.forEach(
+        link.className =
+            "social-link social-" + social.key;
 
-        social => {
+        link.href = social.url;
 
-            const link =
-                document.createElement(
-                    "a"
-                );
+        link.target = "_blank";
 
+        link.rel = "noopener noreferrer";
 
-            link.className =
-                "social-link social-"
-                +
-                social.key;
+        link.title = social.name;
 
+        link.setAttribute(
+            "aria-label",
+            social.name
+        );
 
-            link.href =
-                social.url;
+        link.innerHTML =
+            platformLogos[social.key];
 
+        container.appendChild(link);
 
-            link.target =
-                "_blank";
-
-
-            link.rel =
-                "noopener noreferrer";
-
-
-            link.title =
-                social.name;
-
-
-            link.setAttribute(
-                "aria-label",
-                social.name
-            );
-
-
-            link.innerHTML =
-                platformLogos[
-                    social.key
-                ];
-
-
-            container.appendChild(
-                link
-            );
-
-        }
-
-    );
-
+    });
 }
-
 
 
 function renderSocialLinks() {
@@ -698,47 +529,33 @@ function renderSocialLinks() {
         )
     );
 
-
     createSocialLinks(
         document.getElementById(
             "mobileSocialLinks"
         )
     );
-
 }
-
 
 
 /* =========================================================
    PROJECT SECTION
 ========================================================= */
 
-function createProjectSection(
-    category
-) {
+function createProjectSection(category) {
 
-    const wrapper =
-        document.getElementById(
-            "projectSections"
-        );
-
+    const wrapper = document.getElementById(
+        "projectSections"
+    );
 
     if (!wrapper) {
-
         return;
-
     }
 
-
     const section =
-        document.createElement(
-            "section"
-        );
-
+        document.createElement("section");
 
     section.className =
         "project-section";
-
 
     section.innerHTML = `
 
@@ -756,18 +573,13 @@ function createProjectSection(
 
             </h3>
 
-
             <p class="project-note">
-
                 ${category.description}
-
             </p>
 
         </div>
 
-
         <div class="project-grid"></div>
-
 
         <div class="more-wrap is-hidden">
 
@@ -779,45 +591,28 @@ function createProjectSection(
             </button>
 
         </div>
-
     `;
 
-
-    wrapper.appendChild(
-        section
-    );
-
+    wrapper.appendChild(section);
 
     const grid =
         section.querySelector(
             ".project-grid"
         );
 
-
     const moreWrap =
         section.querySelector(
             ".more-wrap"
         );
-
 
     const moreButton =
         section.querySelector(
             ".more-btn"
         );
 
-
-    let loadedCount =
-        0;
-
-
-    let finishedCount =
-        0;
-
-
-    let expanded =
-        false;
-
-
+    let loadedCount = 0;
+    let finishedCount = 0;
+    let expanded = false;
 
     for (
         let i = 1;
@@ -830,38 +625,26 @@ function createProjectSection(
                 "article"
             );
 
-
         card.className =
             "project-card";
 
-
-        card.hidden =
-            true;
-
+        card.hidden = true;
 
         const image =
             document.createElement(
                 "img"
             );
 
-
         image.src =
             `./assets/images/${category.key}${i}.jpg`;
-
 
         image.alt =
             `${category.orange} ${category.normal} ${i}`;
 
-
-        image.loading =
-            "lazy";
-
-
+        image.loading = "lazy";
 
         image.addEventListener(
-
             "load",
-
             function () {
 
                 loadedCount++;
@@ -872,17 +655,11 @@ function createProjectSection(
                     "true";
 
                 updateVisibility();
-
             }
-
         );
 
-
-
         image.addEventListener(
-
             "error",
-
             function () {
 
                 finishedCount++;
@@ -890,42 +667,25 @@ function createProjectSection(
                 card.remove();
 
                 updateVisibility();
-
             }
-
         );
 
+        card.appendChild(image);
 
-        card.appendChild(
-            image
-        );
-
-
-        grid.appendChild(
-            card
-        );
-
+        grid.appendChild(card);
     }
-
 
 
     function getLoadedCards() {
 
         return Array
-            .from(
-                grid.children
-            )
+            .from(grid.children)
             .filter(
-
                 card =>
-                    card.dataset.loaded
-                    ===
+                    card.dataset.loaded ===
                     "true"
-
             );
-
     }
-
 
 
     function updateVisibility() {
@@ -933,87 +693,56 @@ function createProjectSection(
         const cards =
             getLoadedCards();
 
-
         cards.forEach(
-
-            (
-                card,
-                index
-            ) => {
+            (card, index) => {
 
                 card.hidden =
                     expanded
-                    ?
-                    false
-                    :
-                    index >= 3;
-
+                        ? false
+                        : index >= 3;
             }
-
         );
 
-
-        if (
-            loadedCount > 3
-        ) {
+        if (loadedCount > 3) {
 
             moreWrap.classList.remove(
                 "is-hidden"
             );
 
-        }
-
-        else {
+        } else {
 
             moreWrap.classList.add(
                 "is-hidden"
             );
-
         }
 
-
         if (
-            finishedCount >= 20
-            &&
+            finishedCount >= 20 &&
             loadedCount <= 3
         ) {
 
             moreWrap.classList.add(
                 "is-hidden"
             );
-
         }
-
     }
 
 
-
     moreButton.addEventListener(
-
         "click",
-
         function () {
 
-            expanded =
-                !expanded;
-
+            expanded = !expanded;
 
             moreButton.textContent =
                 expanded
-                    ?
-                    "SHOW LESS"
-                    :
-                    "SEE MORE";
-
+                    ? "SHOW LESS"
+                    : "SEE MORE";
 
             updateVisibility();
-
         }
-
     );
-
 }
-
 
 
 /* =========================================================
@@ -1025,9 +754,7 @@ function renderProjects() {
     categories.forEach(
         createProjectSection
     );
-
 }
-
 
 
 /* =========================================================
@@ -1037,17 +764,12 @@ function renderProjects() {
 function createTestimonialGroup() {
 
     const group =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("div");
 
     group.className =
         "testimonial-group";
 
-
     testimonials.forEach(
-
         testimonial => {
 
             const card =
@@ -1055,49 +777,30 @@ function createTestimonialGroup() {
                     "article"
                 );
 
-
             card.className =
                 "review-card";
-
 
             card.innerHTML = `
 
                 <div class="stars">
-
                     ${testimonial[0]}
-
                 </div>
 
-
                 <p>
-
                     “${testimonial[1]}”
-
                 </p>
 
-
                 <strong>
-
                     ${testimonial[2]}
-
                 </strong>
-
             `;
 
-
-            group.appendChild(
-                card
-            );
-
+            group.appendChild(card);
         }
-
     );
 
-
     return group;
-
 }
-
 
 
 /* =========================================================
@@ -1111,39 +814,28 @@ function renderTestimonials() {
             "testimonialTrack"
         );
 
-
     if (!track) {
-
         return;
-
     }
 
-
-    track.innerHTML =
-        "";
-
+    track.innerHTML = "";
 
     track.appendChild(
         createTestimonialGroup()
     );
 
-
     track.appendChild(
         createTestimonialGroup()
     );
 
-
     track.appendChild(
         createTestimonialGroup()
     );
-
 }
-
 
 
 /* =========================================================
    TESTIMONIAL CONTROL
-   AUTO LOOP + HOVER PAUSE + DRAG + SWIPE
 ========================================================= */
 
 function initializeTestimonialControl() {
@@ -1153,43 +845,20 @@ function initializeTestimonialControl() {
             "testimonialMarquee"
         );
 
-
     const track =
         document.getElementById(
             "testimonialTrack"
         );
 
-
-    if (
-        !marquee
-        ||
-        !track
-    ) {
-
+    if (!marquee || !track) {
         return;
-
     }
 
-
-    let offset =
-        0;
-
-
-    let paused =
-        false;
-
-
-    let dragging =
-        false;
-
-
-    let startX =
-        0;
-
-
-    let startOffset =
-        0;
-
+    let offset = 0;
+    let paused = false;
+    let dragging = false;
+    let startX = 0;
+    let startOffset = 0;
 
 
     function getGroupWidth() {
@@ -1199,15 +868,10 @@ function initializeTestimonialControl() {
                 ".testimonial-group"
             );
 
-
         return group
-            ?
-            group.offsetWidth
-            :
-            0;
-
+            ? group.offsetWidth
+            : 0;
     }
-
 
 
     function normalizeOffset() {
@@ -1215,207 +879,121 @@ function initializeTestimonialControl() {
         const groupWidth =
             getGroupWidth();
 
-
         if (!groupWidth) {
-
             return;
-
         }
-
 
         while (
             offset >= groupWidth
         ) {
-
-            offset -=
-                groupWidth;
-
+            offset -= groupWidth;
         }
-
 
         while (
             offset < 0
         ) {
-
-            offset +=
-                groupWidth;
-
+            offset += groupWidth;
         }
-
     }
-
 
 
     function draw() {
 
         normalizeOffset();
 
-
         track.style.transform =
             `translate3d(-${offset}px,0,0)`;
-
     }
 
 
-
     marquee.addEventListener(
-
         "mouseenter",
-
         function () {
-
-            paused =
-                true;
-
+            paused = true;
         }
-
     );
 
 
-
     marquee.addEventListener(
-
         "mouseleave",
-
         function () {
 
             if (!dragging) {
-
-                paused =
-                    false;
-
+                paused = false;
             }
-
         }
-
     );
 
 
-
     marquee.addEventListener(
-
         "pointerdown",
-
         function (event) {
 
-            dragging =
-                true;
+            dragging = true;
 
+            paused = true;
 
-            paused =
-                true;
+            startX = event.clientX;
 
-
-            startX =
-                event.clientX;
-
-
-            startOffset =
-                offset;
-
+            startOffset = offset;
 
             marquee.classList.add(
                 "dragging"
             );
 
-
             try {
-
                 marquee.setPointerCapture(
                     event.pointerId
                 );
-
-            }
-
-            catch (
-                error
-            ) {}
-
+            } catch (error) {}
         }
-
     );
-
 
 
     marquee.addEventListener(
-
         "pointermove",
-
         function (event) {
 
             if (!dragging) {
-
                 return;
-
             }
 
-
             const movement =
-                event.clientX
-                -
-                startX;
-
+                event.clientX - startX;
 
             offset =
-                startOffset
-                -
-                movement;
-
+                startOffset - movement;
 
             draw();
-
         }
-
     );
 
 
-
-    function stopDrag(
-        event
-    ) {
+    function stopDrag(event) {
 
         if (!dragging) {
-
             return;
-
         }
 
-
-        dragging =
-            false;
-
+        dragging = false;
 
         marquee.classList.remove(
             "dragging"
         );
 
-
         try {
-
             marquee.releasePointerCapture(
                 event.pointerId
             );
-
-        }
-
-        catch (
-            error
-        ) {}
-
+        } catch (error) {}
 
         if (
-            event.pointerType
-            ===
+            event.pointerType ===
             "touch"
         ) {
-
-            paused =
-                false;
-
+            paused = false;
         }
-
     }
-
 
 
     marquee.addEventListener(
@@ -1423,113 +1001,77 @@ function initializeTestimonialControl() {
         stopDrag
     );
 
-
     marquee.addEventListener(
         "pointercancel",
         stopDrag
     );
 
 
-
     marquee.addEventListener(
-
         "wheel",
-
         function (event) {
 
-            let movement =
-                0;
-
+            let movement = 0;
 
             if (
-                Math.abs(
-                    event.deltaX
-                )
-                >
-                Math.abs(
-                    event.deltaY
-                )
+                Math.abs(event.deltaX) >
+                Math.abs(event.deltaY)
             ) {
 
                 movement =
                     event.deltaX;
 
-            }
-
-            else if (
+            } else if (
                 event.shiftKey
             ) {
 
                 movement =
                     event.deltaY;
-
             }
-
 
             if (
                 movement === 0
             ) {
-
                 return;
-
             }
-
 
             event.preventDefault();
 
-
-            offset +=
-                movement;
-
+            offset += movement;
 
             draw();
-
         },
-
         {
-            passive:
-                false
+            passive: false
         }
-
     );
-
 
 
     function animate() {
 
         if (
-            !paused
-            &&
+            !paused &&
             !dragging
         ) {
 
-            offset +=
-                0.45;
-
+            offset += 0.45;
 
             draw();
-
         }
-
 
         requestAnimationFrame(
             animate
         );
-
     }
-
 
     draw();
 
     animate();
-
 }
-
 
 
 /* =========================================================
    CLEAN NAVIGATION
-   NO #HOME / #WORK / ETC
 ========================================================= */
 
 function initializeCleanNavigation() {
@@ -1539,13 +1081,10 @@ function initializeCleanNavigation() {
             "[data-scroll]"
         )
         .forEach(
-
             button => {
 
                 button.addEventListener(
-
                     "click",
-
                     function () {
 
                         const target =
@@ -1553,52 +1092,28 @@ function initializeCleanNavigation() {
                                 button.dataset.scroll
                             );
 
-
                         if (!target) {
-
                             return;
-
                         }
 
-
-                        target.scrollIntoView(
-
-                            {
-                                behavior:
-                                    "smooth",
-
-                                block:
-                                    "start"
-                            }
-
-                        );
-
+                        target.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
 
                         history.replaceState(
-
                             null,
-
                             "",
-
-                            window.location.pathname
-                            +
+                            window.location.pathname +
                             window.location.search
-
                         );
 
-
                         closeMobileMenu();
-
                     }
-
                 );
-
             }
-
         );
-
 }
-
 
 
 /* =========================================================
@@ -1620,7 +1135,6 @@ function initializeTheme() {
     ];
 
 
-
     function toggleTheme() {
 
         const current =
@@ -1628,59 +1142,41 @@ function initializeTheme() {
                 .dataset
                 .theme;
 
-
         const next =
             current === "dark"
-                ?
-                "light"
-                :
-                "dark";
-
+                ? "light"
+                : "dark";
 
         document.documentElement
             .dataset
             .theme =
             next;
 
-
         localStorage.setItem(
             "portfolio-theme",
             next
         );
-
     }
 
 
-
     buttons.forEach(
-
         button => {
 
             if (!button) {
-
                 return;
-
             }
 
-
             button.addEventListener(
-
                 "click",
-
                 function (event) {
 
                     event.stopPropagation();
 
                     toggleTheme();
-
                 }
-
             );
-
         }
-
     );
-
 
 
     const systemTheme =
@@ -1688,15 +1184,12 @@ function initializeTheme() {
             "(prefers-color-scheme: dark)"
         );
 
-
     if (
         systemTheme.addEventListener
     ) {
 
         systemTheme.addEventListener(
-
             "change",
-
             function (event) {
 
                 if (
@@ -1709,21 +1202,13 @@ function initializeTheme() {
                         .dataset
                         .theme =
                         event.matches
-                            ?
-                            "dark"
-                            :
-                            "light";
-
+                            ? "dark"
+                            : "light";
                 }
-
             }
-
         );
-
     }
-
 }
-
 
 
 /* =========================================================
@@ -1737,66 +1222,45 @@ function initializeMenu() {
             "menuBtn"
         );
 
-
     const menu =
         document.getElementById(
             "mobileMenu"
         );
 
-
     if (
-        !button
-        ||
+        !button ||
         !menu
     ) {
-
         return;
-
     }
 
 
-
     button.addEventListener(
-
         "click",
-
         function (event) {
 
             event.stopPropagation();
-
 
             const open =
                 menu.classList.toggle(
                     "open"
                 );
 
-
             button.setAttribute(
                 "aria-expanded",
                 String(open)
             );
 
-
             menu.setAttribute(
                 "aria-hidden",
                 String(!open)
             );
-
         }
-
     );
 
 
-
-    /*
-    Click/touch anywhere outside
-    the menu = close it.
-    */
-
     document.addEventListener(
-
         "pointerdown",
-
         function (event) {
 
             if (
@@ -1804,91 +1268,56 @@ function initializeMenu() {
                     "open"
                 )
             ) {
-
                 return;
-
             }
-
 
             const clickedInsideMenu =
                 menu.contains(
                     event.target
                 );
 
-
             const clickedMenuButton =
                 button.contains(
                     event.target
                 );
 
-
             if (
-                !clickedInsideMenu
-                &&
+                !clickedInsideMenu &&
                 !clickedMenuButton
             ) {
-
                 closeMobileMenu();
-
             }
-
         }
-
     );
 
 
-
-    /*
-    ESC key
-    */
-
     document.addEventListener(
-
         "keydown",
-
         function (event) {
 
             if (
-                event.key
-                ===
+                event.key ===
                 "Escape"
             ) {
-
                 closeMobileMenu();
-
             }
-
         }
-
     );
 
 
-    /*
-    Resize back to desktop
-    */
-
     window.addEventListener(
-
         "resize",
-
         function () {
 
             if (
-                window.innerWidth
-                >
+                window.innerWidth >
                 1050
             ) {
-
                 closeMobileMenu();
-
             }
-
         }
-
     );
-
 }
-
 
 
 function closeMobileMenu() {
@@ -1898,59 +1327,43 @@ function closeMobileMenu() {
             "menuBtn"
         );
 
-
     const menu =
         document.getElementById(
             "mobileMenu"
         );
 
-
     if (
-        !button
-        ||
+        !button ||
         !menu
     ) {
-
         return;
-
     }
-
 
     menu.classList.remove(
         "open"
     );
-
 
     button.setAttribute(
         "aria-expanded",
         "false"
     );
 
-
     menu.setAttribute(
         "aria-hidden",
         "true"
     );
-
 }
-
 
 
 /* =========================================================
    EMAIL FORMAT CHECK
 ========================================================= */
 
-function emailFormatLooksValid(
-    email
-) {
+function emailFormatLooksValid(email) {
 
     return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
-        .test(
-            email
-        );
-
+        .test(email);
 }
-
 
 
 /* =========================================================
@@ -1967,25 +1380,17 @@ async function emailDomainLooksValid(
             ?.trim()
             .toLowerCase();
 
-
     if (!domain) {
-
         return false;
-
     }
-
 
     try {
 
         const response =
             await fetch(
 
-                "https://dns.google/resolve?name="
-                +
-                encodeURIComponent(
-                    domain
-                )
-                +
+                "https://dns.google/resolve?name=" +
+                encodeURIComponent(domain) +
                 "&type=MX",
 
                 {
@@ -1995,47 +1400,25 @@ async function emailDomainLooksValid(
 
             );
 
-
         if (!response.ok) {
-
             return true;
-
         }
-
 
         const result =
             await response.json();
 
-
         return (
-
             Array.isArray(
                 result.Answer
-            )
-
-            &&
-
+            ) &&
             result.Answer.length > 0
-
         );
 
-    }
-
-    catch (
-        error
-    ) {
-
-        /*
-        DNS service failure should not
-        block a genuine visitor.
-        */
+    } catch (error) {
 
         return true;
-
     }
-
 }
-
 
 
 /* =========================================================
@@ -2049,49 +1432,36 @@ function initializeForm() {
             "contactForm"
         );
 
-
     const status =
         document.getElementById(
             "formStatus"
         );
-
 
     const button =
         document.getElementById(
             "submitBtn"
         );
 
-
     if (
-        !form
-        ||
-        !status
-        ||
+        !form ||
+        !status ||
         !button
     ) {
-
         return;
-
     }
 
 
-
     form.addEventListener(
-
         "submit",
-
         async function (event) {
 
             event.preventDefault();
 
-
             status.className =
                 "form-status";
 
-
             status.textContent =
                 "";
-
 
             if (
                 !form.checkValidity()
@@ -2100,14 +1470,10 @@ function initializeForm() {
                 form.reportValidity();
 
                 return;
-
             }
 
-
             const formData =
-                new FormData(
-                    form
-                );
+                new FormData(form);
 
 
             /*
@@ -2119,9 +1485,7 @@ function initializeForm() {
                     "website"
                 )
             ) {
-
                 return;
-
             }
 
 
@@ -2129,9 +1493,7 @@ function initializeForm() {
                 String(
                     formData.get(
                         "email"
-                    )
-                    ||
-                    ""
+                    ) || ""
                 )
                 .trim()
                 .toLowerCase();
@@ -2146,19 +1508,14 @@ function initializeForm() {
                 status.className =
                     "form-status error";
 
-
                 status.textContent =
                     "Please enter a valid email address.";
 
-
                 return;
-
             }
 
 
-            button.disabled =
-                true;
-
+            button.disabled = true;
 
             status.textContent =
                 "Checking email...";
@@ -2177,23 +1534,18 @@ function initializeForm() {
                 status.className =
                     "form-status error";
 
-
                 status.textContent =
                     "That email domain does not appear to accept email.";
-
 
                 button.disabled =
                     false;
 
-
                 return;
-
             }
 
 
             if (
-                !GOOGLE_SCRIPT_URL
-                ||
+                !GOOGLE_SCRIPT_URL ||
                 GOOGLE_SCRIPT_URL.includes(
                     "PASTE_YOUR"
                 )
@@ -2202,17 +1554,13 @@ function initializeForm() {
                 status.className =
                     "form-status error";
 
-
                 status.textContent =
                     "Google Sheet connection is not configured yet.";
-
 
                 button.disabled =
                     false;
 
-
                 return;
-
             }
 
 
@@ -2229,9 +1577,7 @@ function initializeForm() {
                 String(
                     formData.get(
                         "name"
-                    )
-                    ||
-                    ""
+                    ) || ""
                 ).trim()
             );
 
@@ -2247,9 +1593,7 @@ function initializeForm() {
                 String(
                     formData.get(
                         "projectType"
-                    )
-                    ||
-                    ""
+                    ) || ""
                 )
             );
 
@@ -2259,9 +1603,7 @@ function initializeForm() {
                 String(
                     formData.get(
                         "budget"
-                    )
-                    ||
-                    ""
+                    ) || ""
                 )
             );
 
@@ -2271,9 +1613,7 @@ function initializeForm() {
                 String(
                     formData.get(
                         "message"
-                    )
-                    ||
-                    ""
+                    ) || ""
                 ).trim()
             );
 
@@ -2293,9 +1633,7 @@ function initializeForm() {
             try {
 
                 await fetch(
-
                     GOOGLE_SCRIPT_URL,
-
                     {
                         method:
                             "POST",
@@ -2304,16 +1642,13 @@ function initializeForm() {
                             "no-cors",
 
                         headers: {
-
                             "Content-Type":
                                 "application/x-www-form-urlencoded;charset=UTF-8"
-
                         },
 
                         body:
                             payload.toString()
                     }
-
                 );
 
 
@@ -2327,11 +1662,12 @@ function initializeForm() {
                 status.textContent =
                     "Thanks — your inquiry has been sent.";
 
-            }
+            } catch (error) {
 
-            catch (
-                error
-            ) {
+                console.error(
+                    "Form submission error:",
+                    error
+                );
 
                 status.className =
                     "form-status error";
@@ -2340,27 +1676,18 @@ function initializeForm() {
                 status.textContent =
                     "Could not send your message. Please try again.";
 
-            }
-
-            finally {
+            } finally {
 
                 button.disabled =
                     false;
-
             }
-
         }
-
     );
-
 }
-
 
 
 /* =========================================================
    SAFE REVEAL
-   IMPORTANT:
-   THIS DOES NOT HIDE THE WEBSITE.
 ========================================================= */
 
 function initializeReveal() {
@@ -2370,35 +1697,28 @@ function initializeReveal() {
             ".reveal"
         );
 
-
     if (
         !("IntersectionObserver" in window)
     ) {
 
         elements.forEach(
-
             element => {
 
                 element.classList.add(
                     "visible"
                 );
-
             }
-
         );
 
         return;
-
     }
 
 
     const observer =
         new IntersectionObserver(
-
             entries => {
 
                 entries.forEach(
-
                     entry => {
 
                         if (
@@ -2409,53 +1729,33 @@ function initializeReveal() {
                                 "visible"
                             );
 
-
                             observer.unobserve(
                                 entry.target
                             );
-
                         }
-
                     }
-
                 );
-
             },
-
             {
                 threshold:
                     0.05
             }
-
         );
 
 
     elements.forEach(
-
         element => {
-
-            /*
-            Never add a class that
-            makes content disappear.
-
-            CSS remains visible by default.
-            */
 
             observer.observe(
                 element
             );
-
         }
-
     );
-
 }
-
 
 
 /* =========================================================
    SAFE SECTION JUMP
-   NO OPACITY HIDE
 ========================================================= */
 
 function initializeSectionJump() {
@@ -2465,35 +1765,28 @@ function initializeSectionJump() {
             ".scroll-jump, .project-section"
         );
 
-
     if (
         !("IntersectionObserver" in window)
     ) {
 
         sections.forEach(
-
             section => {
 
                 section.classList.add(
                     "section-visible"
                 );
-
             }
-
         );
 
         return;
-
     }
 
 
     const observer =
         new IntersectionObserver(
-
             entries => {
 
                 entries.forEach(
-
                     entry => {
 
                         if (
@@ -2504,19 +1797,13 @@ function initializeSectionJump() {
                                 "section-visible"
                             );
 
-
                             observer.unobserve(
                                 entry.target
                             );
-
                         }
-
                     }
-
                 );
-
             },
-
             {
                 threshold:
                     0.04,
@@ -2524,24 +1811,18 @@ function initializeSectionJump() {
                 rootMargin:
                     "0px 0px -15px 0px"
             }
-
         );
 
 
     sections.forEach(
-
         section => {
 
             observer.observe(
                 section
             );
-
         }
-
     );
-
 }
-
 
 
 /* =========================================================
@@ -2555,38 +1836,27 @@ function initializeBackToTop() {
             "backToTop"
         );
 
-
     if (!button) {
-
         return;
-
     }
 
 
     function updateButton() {
 
         button.classList.toggle(
-
             "show",
-
             window.scrollY > 700
-
         );
-
     }
 
 
     window.addEventListener(
-
         "scroll",
-
         updateButton,
-
         {
             passive:
                 true
         }
-
     );
 
 
@@ -2594,42 +1864,27 @@ function initializeBackToTop() {
 
 
     button.addEventListener(
-
         "click",
-
         function () {
 
-            window.scrollTo(
+            window.scrollTo({
+                top:
+                    0,
 
-                {
-                    top:
-                        0,
-
-                    behavior:
-                        "smooth"
-                }
-
-            );
+                behavior:
+                    "smooth"
+            });
 
 
             history.replaceState(
-
                 null,
-
                 "",
-
-                window.location.pathname
-                +
+                window.location.pathname +
                 window.location.search
-
             );
-
         }
-
     );
-
 }
-
 
 
 /* =========================================================
@@ -2643,29 +1898,20 @@ function initializeProfileImage() {
             "profileImage"
         );
 
-
     if (!image) {
-
         return;
-
     }
 
 
     image.addEventListener(
-
         "error",
-
         function () {
 
             image.style.display =
                 "none";
-
         }
-
     );
-
 }
-
 
 
 /* =========================================================
@@ -2679,20 +1925,13 @@ function setYear() {
             "year"
         );
 
-
     if (!element) {
-
         return;
-
     }
 
-
     element.textContent =
-        new Date()
-            .getFullYear();
-
+        new Date().getFullYear();
 }
-
 
 
 /* =========================================================
@@ -2708,20 +1947,14 @@ function enforceContentVisibility() {
 
         );
 
-
     elements.forEach(
-
         element => {
 
             element.style.visibility =
                 "visible";
-
         }
-
     );
-
 }
-
 
 
 /* =========================================================
@@ -2782,11 +2015,8 @@ function initializeWebsite() {
 
     initializeSectionJump();
 
-
     initializeBackToTop();
-
 }
-
 
 
 /* =========================================================
@@ -2794,27 +2024,19 @@ function initializeWebsite() {
 ========================================================= */
 
 if (
-    document.readyState
-    ===
+    document.readyState ===
     "loading"
 ) {
 
     document.addEventListener(
-
         "DOMContentLoaded",
-
         initializeWebsite
-
     );
 
-}
-
-else {
+} else {
 
     initializeWebsite();
-
 }
-
 
 
 /* =========================================================
@@ -2822,38 +2044,25 @@ else {
 ========================================================= */
 
 window.addEventListener(
-
     "load",
-
     function () {
 
-        /*
-        Refresh করলে browser যেন
-        previous scroll position restore না করে.
-        */
-
         setTimeout(
-
             function () {
 
                 window.scrollTo(
                     0,
                     0
                 );
-
             },
-
             30
-
         );
 
 
         /*
-        Extra safety
+        Extra visibility safety
         */
 
         enforceContentVisibility();
-
     }
-
 );
