@@ -207,7 +207,7 @@ const socialProfiles = [
 
     {
         name: "GitHub",
-        url: "https://github.com/shakilistic",
+        url: "https://github.com",
         key: "github"
     },
 
